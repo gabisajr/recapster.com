@@ -23,13 +23,9 @@ class Faculty extends Model {
     return $this->belongsTo('App\Model\University');
   }
 
-  //todo relation
-  protected $_has_many = [
-    'chairs' => [
-      'model'       => 'Chair',
-      'foreign_key' => 'faculty_id',
-    ],
-  ];
+  public function chairs() {
+    return $this->hasMany('App\Model\Chair', 'faculty_id');
+  }
 
   ////todo validation
   //public function rules() {
