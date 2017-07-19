@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * -------------------- has many: --------------------------
  * @property ORM           $universities
  */
-class Model_City extends Model {
+class City extends Model {
 
   public function country() {
     return $this->belongsTo('App\Model\Country');
