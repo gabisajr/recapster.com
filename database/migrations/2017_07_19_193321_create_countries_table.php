@@ -14,8 +14,8 @@ class CreateCountriesTable extends Migration {
     Schema::create('countries', function (Blueprint $table) {
       $table->increments('id');
       $table->string('title')->unique();
-      $table->string('iso_code', 2)->unique()->comment("ISO 3166-1 alpha-2");
-      $table->unsignedInteger('vk_id')->unique()->comment("id страны ВКонтакте");
+      $table->string('iso_code', 2)->nullable()->unique()->comment("ISO 3166-1 alpha-2");
+      $table->unsignedInteger('vk_id')->nullable()->unique()->comment("id страны ВКонтакте");
       $table->timestamps();
     });
   }
