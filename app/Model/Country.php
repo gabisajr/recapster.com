@@ -25,12 +25,9 @@ class Country extends Model {
     return $this->hasMany('App\Model\Region', 'country_id');
   }
 
-  protected $_has_many = [
-    'cities'  => [
-      'model'       => 'City',
-      'foreign_key' => 'country_id',
-    ],
-  ];
+  public function cities() {
+    return $this->hasMany('App\Model\City', 'country_id');
+  }
 
   public function filters() {
     return [
