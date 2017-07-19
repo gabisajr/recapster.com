@@ -21,13 +21,13 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Country extends Model {
 
+  public function regions() {
+    return $this->hasMany('App\Model\Region', 'country_id');
+  }
+
   protected $_has_many = [
     'cities'  => [
       'model'       => 'City',
-      'foreign_key' => 'country_id',
-    ],
-    'regions' => [
-      'model'       => 'Region',
       'foreign_key' => 'country_id',
     ],
   ];
