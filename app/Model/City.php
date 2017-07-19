@@ -36,6 +36,7 @@ class Model_City extends Model {
     return $this->belongsTo('App\Model\Region');
   }
 
+  //todo relationship
   protected $_has_many = [
     'universities' => [
       'model'       => 'University',
