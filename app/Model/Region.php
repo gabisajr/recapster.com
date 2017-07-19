@@ -22,13 +22,9 @@ class Region extends Model {
     return $this->belongsTo('App\Model\Country');
   }
 
-  //todo relationship
-  protected $_has_many = [
-    'cities' => [
-      'model'       => 'City',
-      'foreign_key' => 'region_id',
-    ],
-  ];
+  public function cities() {
+    return $this->hasMany('App\Model\City', 'region_id');
+  }
 
   //todo form validation
   public function rules() {
