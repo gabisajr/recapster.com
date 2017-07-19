@@ -42,12 +42,6 @@ class City extends Model {
 
   public function filters() {
     return [
-      true    => [
-        ['trim'],
-        [function ($value) {
-          return (!$value) ? null : $value;
-        }],
-      ],
       'alias' => [
         ['trim'],
         ['mb_strtolower'],
