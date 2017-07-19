@@ -36,13 +36,9 @@ class City extends Model {
     return $this->belongsTo('App\Model\Region');
   }
 
-  //todo relationship
-  protected $_has_many = [
-    'universities' => [
-      'model'       => 'University',
-      'foreign_key' => 'city_id',
-    ],
-  ];
+  public function universities() {
+    return $this->hasMany('App\Model\University', 'city_id');
+  }
 
   public function filters() {
     return [
