@@ -27,7 +27,7 @@ class Faculty extends Model {
     return $this->hasMany('App\Model\Chair', 'faculty_id');
   }
 
-  ////todo validation
+  //todo validation
   //public function rules() {
   //  return [
   //    'university_id' => [
