@@ -43,15 +43,11 @@ class University extends Model {
     return $this->belongsTo('App\Model\Image');
   }
 
-  //todo add relation
-  protected $_has_many = [
-    'faculties' => [
-      'model'       => 'Faculty',
-      'foreign_key' => 'university_id',
-    ],
-  ];
+  public function faculties() {
+    return $this->hasMany('App\Model\Faculty', 'university_id');
+  }
 
-  public function rules() {
+  public function rules() { //todo validation
     return [
       'country_id' => [
         ['not_empty'],
