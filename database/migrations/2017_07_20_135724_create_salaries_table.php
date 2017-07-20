@@ -55,8 +55,8 @@ class CreateSalariesTable extends Migration {
       $table->boolean('has_additional_payments')->nullable()->comment('есть ли дополнительные выплаты: 1 - да, 0 - нет, null - не указал');
 
       //ссылка на направление деятельности компании
-      $table->unsignedInteger('industry_id')->nullable()->comment('направление деятельности компании');
-      $table->foreign('industry_id')->references('id')->on("industries")->onDelete('set null')->onUpdate('cascade');
+      $table->unsignedInteger('company_industry_id')->nullable()->comment('направление деятельности компании');
+      $table->foreign('company_industry_id')->references('id')->on("industries")->onDelete('set null')->onUpdate('cascade');
 
       //ссылка на размер компании
       $table->unsignedInteger('company_size_id')->nullable()->comment('размер компании');
