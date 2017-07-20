@@ -11,4 +11,10 @@
 |
 */
 
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+
+  Route::get('/', ['as' => 'admin', 'uses' => 'CompanyController@list']); //todo replace by admin dashboard page
+
+});
+
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
