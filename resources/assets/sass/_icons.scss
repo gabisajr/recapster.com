@@ -1,0 +1,179 @@
+.icon {
+
+  $icons: sprite-map("icon/*.png", $new-position: 100%, $new-spacing: 15px, $new-repeat: no-repeat);
+
+  display: inline-block;
+  vertical-align: middle;
+
+  &.plus {
+    background: sprite($icons, plus);
+    width: 11px;
+    height: 11px;
+  }
+  &.wayup {
+    background: sprite($icons, wayup);
+    width: 13px;
+    height: 13px;
+  }
+  &.direction202 {
+    background: sprite($icons, direction202);
+    width: 10px;
+    height: 16px;
+  }
+  &.direction202-reverse {
+    background: sprite($icons, direction202-reverse);
+    width: 10px;
+    height: 16px;
+  }
+  &.add-image {
+    background: sprite($icons, add-image);
+    width: 42px;
+    height: 36px;
+    &.dark {
+      background: sprite($icons, add-image-000);
+    }
+  }
+  &.modal-close {
+    background: sprite($icons, modal-close);
+    width: 12px;
+    height: 12px;
+  }
+  &.spinner {
+    background: sprite($icons, spinner);
+    width: 16px;
+    height: 16px;
+  }
+  &.user {
+    background: sprite($icons, user);
+    width: 18px;
+    height: 18px;
+  }
+  &.user-green {
+    background: sprite($icons, user-green);
+    width: 18px;
+    height: 18px;
+  }
+  &.bell {
+    background: sprite($icons, bell);
+    width: 18px;
+    height: 18px;
+  }
+  &.bell-green {
+    background: sprite($icons, bell-green);
+    width: 18px;
+    height: 18px;
+  }
+  &.triangle {
+    background: sprite($icons, triangle);
+    width: 8px;
+    height: 8px;
+  }
+  &.check23 {
+    background: sprite($icons, check23);
+    width: 16px;
+    height: 16px;
+  }
+  &.check52 {
+    background: sprite($icons, check52);
+    width: 16px;
+    height: 16px;
+    &.-fff {
+      background: sprite($icons, check52-fff);
+    }
+  }
+  &.complain {
+    background: sprite($icons, complain);
+    width: 12px;
+    height: 14px;
+  }
+  &.prev {
+    background: sprite($icons, prev);
+    width: 10px;
+    height: 16px;
+  }
+  &.prev-link {
+    background: sprite($icons, prev-link);
+    width: 10px;
+    height: 16px;
+  }
+  &.next {
+    background: sprite($icons, next);
+    width: 10px;
+    height: 16px;
+  }
+  &.next-link {
+    background: sprite($icons, next-link);
+    width: 10px;
+    height: 16px;
+  }
+  &.lock {
+    background: sprite($icons, lock);
+    width: 14px;
+    height: 18px;
+  }
+  &.like {
+    background: sprite($icons, like);
+    width: 14px;
+    height: 14px;
+  }
+  &.heart {
+    background: sprite($icons, heart);
+    width: 24px;
+    height: 20px;
+  }
+  &.icon-vk {
+    background: sprite($icons, icon-vk);
+    width: 16px;
+    height: 16px;
+  }
+  &.icon-fb {
+    background: sprite($icons, icon-fb);
+    width: 16px;
+    height: 16px;
+  }
+  &.map-marker {
+    background: sprite($icons, map-marker);
+    width: 16px;
+    height: 16px;
+  }
+  &.arrow-left {
+    background: sprite($icons, arrow-left);
+    width: 24px;
+    height: 24px;
+  }
+  &.arrow-right {
+    background: sprite($icons, arrow-right);
+    width: 24px;
+    height: 24px;
+  }
+  &.closeblock {
+    background: sprite($icons, closeblock);
+    width: 7px;
+    height: 7px;
+  }
+  &.drive {
+    background: sprite($icons, drive);
+    width: 16px;
+    height: 16px;
+  }
+  &.dropbox {
+    background: sprite($icons, dropbox);
+    width: 16px;
+    height: 16px;
+  }
+  &.archive {
+    background: url(/images/icon/archive.gif) no-repeat;
+    width: 14px;
+    height: 14px;
+  }
+  &.unarchive {
+    background: url(/images/icon/unarchive.gif) no-repeat;
+    width: 14px;
+    height: 14px;
+  }
+  &.envelope {
+    background: sprite($icons, envelope);
+    width: 16px;
+    height: 12px;
+  }
+}

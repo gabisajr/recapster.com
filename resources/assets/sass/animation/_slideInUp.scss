@@ -1,0 +1,16 @@
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@mixin animation-slideInUp($duration: 1s) {
+  animation-duration: $duration;
+  animation-fill-mode: both;
+  animation-name: slideInUp;
+}

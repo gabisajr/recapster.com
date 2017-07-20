@@ -1,0 +1,22 @@
+
+
+
+@include keyframes(bounceOutRight) {
+	0% {
+		@include transform(translateX(0));
+	}
+	20% {
+		opacity: 1;
+		@include transform(translateX(-20px));
+	}
+	100% {
+		opacity: 0;
+		@include transform(translateX(2000px));
+	}
+}
+
+@mixin animation-bounceOutRight() {
+	@include animation-duration(1s);
+	@include animation-fill-mode(both);
+	@include animation-name(bounceOutRight);
+}

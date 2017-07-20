@@ -1,0 +1,126 @@
+#weekly-contest {
+
+  .medal {
+    display: block;
+    width: 32px;
+    height: 32px;
+    @media (max-width: 720px) {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .winner {
+    background: rgba(217, 237, 247, 0.35);
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid rgba(49, 112, 143, 0.17);
+    margin-bottom: 15px;
+    .-user {
+      display: table;
+      width: 100%;
+      .user-cell, .review-cell, .count-cell {
+        display: table-cell;
+        vertical-align: top;
+      }
+      .user-cell {
+        padding-right: 20px;
+      }
+      .review-cell, .count-cell {
+        padding: 0 20px;
+        border-left: 2px solid rgba(49, 112, 143, 0.17);
+      }
+      @media (max-width: 720px) {
+        .user-cell {
+          padding-right: 10px;
+        }
+        .review-cell, .count-cell {
+          padding: 0 10px;
+        }
+      }
+      @media (max-width: 500px) {
+        display: block;
+        .user-cell {
+          padding: 0;
+          display: block;
+          margin-bottom: 1em;
+        }
+        .review-cell {
+          padding-left: 0;
+          border-left: 0;
+        }
+        .count-cell {
+          padding-right: 0;
+          vertical-align: middle;
+        }
+        .winner {
+          &-avatar {
+            width: 25px;
+            height: 25px;
+            margin-right: 10px;
+          }
+          &-name {
+            font-weight: bold;
+            br {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    &-title {
+      margin-top: 0;
+      .medal {
+        margin: -7px -10px 0 0;
+        @media (max-width: 500px) {
+          margin: 0;
+        }
+      }
+    }
+    a {
+      color: #45a2c9;
+    }
+    &-name {
+      line-height: 1.3;
+      display: block;
+    }
+    &-user-link {
+      text-decoration: none;
+      &:hover {
+        span {
+          text-decoration: underline;
+        }
+      }
+    }
+    &-avatar {
+      display: block;
+      width: 50px;
+      height: 50px;
+      vertical-align: middle;
+      object-fit: cover;
+      margin: 0 14px 0 0;
+    }
+    .count {
+      text-align: center;
+      color: #31708f;
+      line-height: 1;
+      &-value {
+        font-size: 2em;
+      }
+      &-title {
+        font-family: 'Roboto Condensed', sans-serif;
+        letter-spacing: .5px;
+      }
+    }
+    @media (max-width: 720px) {
+      padding: 1em;
+      &-avatar {
+        width: 40px;
+        height: 40px;
+      }
+      &-title {
+        font-size: 18px;
+      }
+    }
+  }
+}

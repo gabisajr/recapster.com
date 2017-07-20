@@ -1,0 +1,26 @@
+
+
+
+@include keyframes(rubberBand) {
+	0% {
+		@include transform(scale(1));
+	}
+	30% {
+		@include transform(scaleX(1.25) scaleY(0.75));
+	}
+	40% {
+		@include transform(scaleX(0.75) scaleY(1.25));
+	}
+	60% {
+		@include transform(scaleX(1.15) scaleY(0.85));
+	}
+	100% {
+		@include transform(scale(1));
+	}
+}
+
+@mixin animation-rubberBand(){
+	@include animation-duration(1s);
+	@include animation-fill-mode(both);
+	@include animation-name(rubberBand);
+}

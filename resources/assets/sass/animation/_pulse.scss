@@ -1,0 +1,20 @@
+
+
+
+@include keyframes(pulse) {
+	0% {
+		@include transform(scale(1));
+	}
+	50% {
+		@include transform(scale(1.1));
+	}
+	100% {
+		@include transform(scale(1));
+	}
+}
+
+@mixin animation-pulse(){
+	@include animation-duration(1s);
+	@include animation-fill-mode(both);
+	@include animation-name(pulse);
+}

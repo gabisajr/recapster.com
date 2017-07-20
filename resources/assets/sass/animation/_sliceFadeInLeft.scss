@@ -1,0 +1,19 @@
+
+
+
+@include keyframes(sliceFadeInLeft) {
+	0% {
+		opacity: 0;
+		@include transform(translateX(-50px));
+	}
+	100% {
+		opacity: 1;
+		@include transform(translateX(0));
+	}
+}
+
+@mixin animation-sliceFadeInLeft() {
+	@include animation-duration(1s);
+	@include animation-fill-mode(both);
+	@include animation-name(sliceFadeInLeft);
+}

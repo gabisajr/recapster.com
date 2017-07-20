@@ -1,0 +1,21 @@
+
+
+
+@include keyframes(rotateInUpLeft) {
+	0% {
+		@include transform-origin(left bottom);
+		@include transform(rotate(90deg));
+		opacity: 0
+	}
+	100% {
+		@include transform-origin(left bottom);
+		@include transform(rotate(0));
+		opacity: 1
+	}
+}
+
+@mixin animation-rotateInUpLeft(){
+	@include animation-duration(1s);
+	@include animation-fill-mode(both);
+	@include animation-name(rotateInUpLeft);
+}

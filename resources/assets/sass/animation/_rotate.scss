@@ -1,0 +1,18 @@
+@mixin animation-rotate($start: 0) {
+  $keyframes-name: rotate-#{$start};
+
+  @keyframes #{$keyframes-name} {
+    0% {
+      transform-origin: center center;
+      transform: rotate(-360deg + $start);
+    }
+    100% {
+      transform-origin: center center;
+      transform: rotate($start);
+    }
+  }
+
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-name: $keyframes-name;
+}

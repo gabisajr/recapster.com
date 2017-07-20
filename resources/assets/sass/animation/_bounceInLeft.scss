@@ -1,0 +1,25 @@
+
+
+
+@include keyframes(bounceInLeft) {
+	0% {
+		opacity: 0;
+		@include transform(translateX(-2000px));
+	}
+	60% {
+		opacity: 1;
+		@include transform(translateX(30px));
+	}
+	80% {
+		@include transform(translateX(-10px));
+	}
+	100% {
+		@include transform(translateX(0));
+	}
+}
+
+@mixin animation-bounceInLeft(){
+	@include animation-duration(1s);
+	@include animation-fill-mode(both);
+	@include animation-name(bounceInLeft);
+}

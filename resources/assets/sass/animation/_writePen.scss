@@ -1,0 +1,29 @@
+
+
+
+@include keyframes(writePen) {
+	0% {
+		@include transform(rotate(0deg) translateX(0px));
+	}
+	25% {
+
+		@include transform(rotate(-10deg) translateX(2px));
+	}
+	50%{
+		@include transform(rotate(0deg) translateX(3px));
+	}
+	75% {
+		@include transform(rotate(-10deg) translateX(5px));
+	}
+	100% {
+		@include transform(rotate(0deg) translateX(5px));
+	}
+}
+
+@mixin animation-writePen() {
+	@include animation-duration(1000ms);
+	@include animation-iteration-count(infinite);
+	@include animation-fill-mode(both);
+	@include animation-direction(alternate-reverse);
+	@include animation-name(writePen);
+}

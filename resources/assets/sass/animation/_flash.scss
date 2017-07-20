@@ -1,0 +1,16 @@
+
+
+@include keyframes(flash) {
+	0%, 100%, 50% {
+		opacity: 1
+	}
+	25%, 75% {
+		opacity: 0
+	}
+}
+
+@mixin animation-flash(){
+	@include animation-duration(1s);
+	@include animation-fill-mode(both);
+	@include animation-name(flash);
+}

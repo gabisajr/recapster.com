@@ -1,0 +1,15 @@
+.reaction {
+  display: inline-block;
+  vertical-align: middle;
+  background: inline_image('reactions.png') no-repeat;
+  width: 48px;
+  height: 48px;
+  &.angry { background-position: 0 0 }
+  &.confused { background-position: 0 -48px }
+  &.haha { background-position: 0 -96px }
+  &.like { background-position: 0 -144px }
+  &.love { background-position: 0 -192px }
+  &.sad, &.sorry { background-position: 0 -240px }
+  &.wow { background-position: 0 -288px }
+  &.yey { background-position: 0 -336px }
+}

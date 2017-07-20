@@ -1,0 +1,15 @@
+@keyframes zoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(.3);
+  }
+  50% {
+    opacity: 1
+  }
+}
+
+@mixin animation-zoomIn() {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-name: zoomIn;
+}

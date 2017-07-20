@@ -1,0 +1,22 @@
+
+
+
+@include keyframes(bounceOutUp) {
+	0% {
+		@include transform(translateY(0));
+	}
+	20% {
+		opacity: 1;
+		@include transform(translateY(20px));
+	}
+	100% {
+		opacity: 0;
+		@include transform(translateY(-2000px));
+	}
+}
+
+@mixin animation-bounceOutUp(){
+	@include animation-duration(1s);
+	@include animation-fill-mode(both);
+	@include animation-name(bounceOutUp);
+}

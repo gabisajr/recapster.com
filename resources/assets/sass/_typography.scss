@@ -1,0 +1,132 @@
+body {
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  line-height: 1.5;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  line-height: 1.1;
+  -moz-font-feature-settings: "liga", "kern" 1;
+  -webkit-font-feature-settings: "liga", "kern" 1;
+  font-feature-settings: "liga", "kern" 1;
+}
+
+.h1, .h2, .h3, h1, h2, h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.h4, .h5, .h6, h4, h5, h6 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+h1, .h1 {
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+}
+
+h2, .h2 {
+  font-size: 1.5em;
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+  line-height: 1.4;
+}
+
+h3, .h3 {
+  font-size: 1.17em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+h4, .h4 {
+  font-size: 1em;
+  margin-top: 1.33em;
+  margin-bottom: 1.33em;
+}
+
+h5, .h5 {
+  font-size: 0.83em;
+  margin-top: 1.67em;
+  margin-bottom: 1.67em;
+}
+
+h6, .h6 {
+  font-size: 0.67em;
+  margin-top: 2.33em;
+  margin-bottom: 2.33em;
+}
+
+blockquote {
+  font-size: inherit;
+  background: #f9f9f9;
+  border-left: 5px solid #ccc;
+  margin: 1.5em 0;
+  padding: 1em 1.5em;
+  quotes: "\201C""\201D""\2018""\2019";
+  &:before {
+    display: block;
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+  }
+  p {
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  footer {
+    font-size: inherit;
+  }
+}
+
+.html-text {
+  p {
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  ul, ol {
+    padding-left: 1.5em;
+    li {
+      margin-bottom: 2px;
+    }
+  }
+  ul > li {
+    list-style-type: disc;
+    > ul > li {
+      list-style-type: circle;
+    }
+  }
+  ol > li {
+    list-style-type: decimal;
+    > ol > li {
+      list-style-type: lower-latin;
+    }
+  }
+  img {
+    max-width: 100%;
+  }
+  td, th {
+    img {
+      max-width: initial;
+    }
+  }
+  .summary {
+    padding: 0;
+  }
+  .likes-control {
+    padding-left: 0;
+  }
+}

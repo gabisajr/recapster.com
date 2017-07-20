@@ -1,0 +1,16 @@
+
+
+@include keyframes(fadeIn) {
+	0% {
+		opacity: 0
+	}
+	100% {
+		opacity: 1
+	}
+}
+
+@mixin animation-fadeIn(){
+	@include animation-duration(1s);
+	@include animation-fill-mode(both);
+	@include animation-name(fadeIn);
+}

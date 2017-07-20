@@ -1,0 +1,11 @@
+@import "settings";
+
+body {
+  font-size: $base-font-size;
+  line-height: 1.5em;
+  font-family: $base-font-family;
+}
+
+p {
+  margin: 0 0 1em;
+}

@@ -1,0 +1,16 @@
+
+
+@include keyframes(fadeOut) {
+	0% {
+		opacity: 1
+	}
+	100% {
+		opacity: 0
+	}
+}
+
+@mixin animation-fadeOut(){
+	@include animation-duration(1s);
+	@include animation-fill-mode(both);
+	@include animation-name(fadeOut);
+}

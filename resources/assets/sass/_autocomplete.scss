@@ -1,0 +1,73 @@
+.ui-autocomplete {
+  padding-left: 0 !important;
+  font-family: inherit;
+  font-size: $base-font-size;
+  text-align: left;
+  max-width: 100%;
+  .ui-menu-item {
+    display: block;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 1;
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    &.ac-position-item {
+      .fa {
+        float: left;
+        color: #c7c7c7;
+      }
+      .data {
+        margin: 0 0 0 20px;
+      }
+    }
+    &.ac-image-item {
+      $logo-size: 30px;
+      padding: 7px;
+      position: relative;
+      .link {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .logo, .avatar {
+        width: $logo-size;
+        height: $logo-size;
+        float: left;
+        box-sizing: content-box;
+        margin: 0;
+        display: block;
+        object-fit: cover;
+      }
+      .avatar {
+        border-radius: 50%;
+      }
+      .data {
+        line-height: 1.3;
+        margin-left: $logo-size + 10px;
+      }
+      .title {
+      }
+      .subtitle {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+    &.ac-location-item {
+      .icon {
+        float: left;
+        &.map-marker {
+          margin-top: -3px;
+        }
+      }
+      .data {
+        margin-left: 20px;
+      }
+    }
+  }
+}

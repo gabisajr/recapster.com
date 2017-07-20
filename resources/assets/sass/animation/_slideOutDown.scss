@@ -1,0 +1,15 @@
+@keyframes slideOutDown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@mixin animation-slideOutDown($duration: 1s) {
+  animation-duration: $duration;
+  animation-fill-mode: both;
+  animation-name: slideOutDown;
+}

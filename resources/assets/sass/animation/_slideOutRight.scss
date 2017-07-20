@@ -1,0 +1,26 @@
+
+
+
+@include keyframes(slideOutRight) {
+	0% {
+		opacity: 0;
+		@include transform(translateX(350px) translateY(40px) scale(0.5));
+	}
+	80% {
+		opacity: 0.2;
+	}
+	90% {
+		opacity: 1;
+	}
+	100% {
+		@include transform(translateX(0) translateY(0) scale(1));
+	}
+}
+
+@mixin animation-slideOutRight(){
+	@include animation-duration(500ms);
+	@include animation-fill-mode(both);
+	@include animation-name(slideOutRight);
+	@include animation-timing-function(ease-out);
+	@include animation-direction(reverse);
+}

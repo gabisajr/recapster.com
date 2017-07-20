@@ -1,0 +1,112 @@
+input.std, textarea.std, select.std {
+  padding: 7px 7px 6px;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 12px;
+  height: 30px;
+  line-height: 14.4px;
+  color: $base-text-color;
+  background-color: #fff;
+  outline: none;
+  border: 1px solid #ccc;
+  @include box-sizing(border-box);
+  @include box-shadow(inset 0 1px 0 0 #d0d0d0);
+  @include border-radius(2px);
+  @include transition(box-shadow 250ms, border-color 250ms);
+  &:focus {
+    border-color: #2c82c7;
+    @include box-shadow(inset 0 1px 0 0 #d0d0d0, 0 0 1px 1px rgba(44, 130, 199, 0.6));
+  }
+  &.error {
+    border: 1px solid $error-red;
+    &:focus {
+      @include box-shadow(inset 0 1px 0 0 #d0d0d0, 0 0 1px 1px rgba(151, 20, 28, 0.6));
+    }
+  }
+  &:disabled {
+    background-color: #f0f0f0;
+    &.error {
+      border-color: #a0a0a0;
+    }
+  }
+  @include input-placeholder {
+    color: $placeholder-color;
+  }
+}
+
+input.std, select.std {
+  &.med {
+    height: 36px;
+    font-size: 14px;
+    line-height: 16.8px;
+  }
+}
+
+select.std {
+  &.med {
+    padding-top: 7px;
+  }
+  &.not-value {
+    color: $placeholder-color;
+    option {
+      color: $base-text-color;
+    }
+  }
+}
+
+textarea.std {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  resize: none;
+  height: auto;
+  &.med {
+    font-size: 14px;
+    line-height: 16.8px;
+    padding: 11px 7px 10px;
+  }
+}
+
+.tag-editor {
+  line-height: 22px;
+  border: 1px solid #ccc;
+  @include box-shadow(inset 0 1px 0 0 #d0d0d0);
+}
+
+//-----------------------------------------------------------------
+
+//.form-control {
+//  background: #fff;
+//  height: 35px;
+//  font-size: $base-font-size;
+//  font-family: $base-font-family;
+//  border: 1px #ccc solid;
+//  padding-left: 10px;
+//  padding-right: 10px;
+//  border-radius: 2px;
+//  outline: none;
+//  @include transition(border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s);
+//  &:focus {
+//    border-color: #66afe9;
+//    outline: 0;
+//    @include box-shadow(inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6));
+//  }
+//  @include input-placeholder {
+//    color: $placeholder-color;
+//  }
+//  &.not-value {
+//    color: $placeholder-color;
+//    option {
+//      color: $base-text-color;
+//    }
+//  }
+//}
+
+select.form-control {
+  @include appearance(none);
+  &::-ms-expand { /* for IE 11 */
+    display: none;
+  }
+  background: #fff url(/images/drop-down-arrow.svg) no-repeat right 8px center;
+  background-size: 10px 10px;
+}

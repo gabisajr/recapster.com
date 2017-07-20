@@ -1,0 +1,351 @@
+@import "colors";
+@import "settings";
+@import "compass/css3";
+
+header#header {
+  background: #fff;
+  color: $theme-color;
+  text-shadow: none;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14);
+  .links {
+    text-align: left;
+    margin-left: 50px;
+    .links-item {
+      padding-left: 7px;
+      padding-right: 7px;
+      + .links-item {
+        margin: 0;
+      }
+      &:hover {
+        background: 0;
+        color: #7cb228;
+        text-shadow: 0 0 0 #7cb228;
+      }
+      &.active {
+        > span {
+          display: inline-block;
+          padding-left: 10px;
+          padding-right: 10px;
+          background: #7cb228;
+          color: #fff;
+          height: 24px;
+          line-height: 24px;
+          vertical-align: middle;
+          border-radius: 2px;
+        }
+      }
+    }
+  }
+  .auth-links {
+    a {
+      font-size: 12px;
+      color: $base-text-color;
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+}
+
+$left-nav-width: 230px;
+
+#content-aside {
+  margin-left: $left-nav-width + 21px;
+}
+
+.company-menu {
+  li {
+    list-style-type: none;
+  }
+  a {
+    &:hover {
+      color: #000;
+    }
+  }
+
+  > li.menu-item {
+    &:after {
+      opacity: 0.1;
+    }
+    .menu-item {
+      &-title {
+        height: 34px;
+        line-height: 34px;
+        display: block;
+        padding-left: 20px;
+        overflow: hidden;
+        position: relative;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      &-content {
+        display: none;
+        margin: 0 20px;
+        position: relative;
+        z-index: 1;
+      }
+    }
+    &.active {
+      border-top: 1px solid $border-color;
+      border-bottom: 1px solid $border-color;
+      &:first-child {
+        border-top: 0;
+      }
+      &:last-child {
+        border-bottom: 0;
+      }
+      .menu-item {
+        &-title {
+          font-weight: bold;
+        }
+        &-content {
+          display: block;
+        }
+      }
+    }
+  }
+
+  section {
+    margin: 0;
+    padding: 8px 0;
+    border-top: 1px solid #c7c7c7;
+    .section-title {
+      color: #999;
+      font-size: 12px;
+      line-height: 24px;
+      display: block;
+    }
+    a {
+      display: block;
+      font-size: 13px;
+      line-height: 24px;
+      padding-left: 10px;
+      text-decoration: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      &.active {
+        color: #0c9e04;
+        font-weight: bold;
+      }
+    }
+  }
+  .counter {
+    font-size: 11px;
+    color: #fff;
+    background: #0c9e04;
+    display: inline-block;
+    padding-left: 2px;
+    padding-right: 2px;
+    line-height: 15px;
+    border-radius: 2px;
+  }
+}
+
+#signin-employers-form,
+#signup-employers-form {
+  border: 1px $border-color solid;
+  margin: 0 auto;
+  border-radius: 2px;
+  background: #fff;
+  input.std {
+    min-width: 0;
+  }
+}
+
+#signin-employers-form {
+  max-width: 340px;
+}
+
+#signup-employers-form {
+  max-width: 360px;
+  background: rgba(255, 255, 255, 0.9);
+  .contact-us {
+    font-size: 13px;
+  }
+  .select-company-list {
+    border: 0;
+    padding: 0;
+    margin: 0 !important;
+    .add-new {
+      padding-bottom: 0;
+    }
+  }
+}
+
+body.dir-employers.con-signup {
+  .page-content {
+    margin: 0 !important;
+  }
+}
+
+.signup-hero {
+  background: transparent url(/images/employers/b2bhome-hero.jpg) no-repeat top center;
+  background-size: cover;
+  padding: 50px 0;
+}
+
+.my-companies {
+  .company-item {
+    border: 1px solid $border-color;
+  }
+}
+
+form#company-details-form {
+  select.std {
+    max-width: 250px;
+    &.industry {
+      width: 250px;
+    }
+  }
+  section#ceo {
+    .field {
+      width: 250px;
+    }
+  }
+}
+
+.other-logo-sizes {
+  .cell + .cell {
+    padding-left: 80px;
+  }
+}
+
+.logo-change {
+  position: relative;
+  color: #fff;
+  cursor: pointer;
+  z-index: 1;
+  .camera {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
+    text-shadow: 0 0 2px #000;
+  }
+  img#logo-change-preview {
+    display: block;
+  }
+}
+
+.cover-change {
+  cursor: pointer;
+  .cover-change-label {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #fff;
+    text-shadow: 0 0 2px #000;
+    line-height: 1.4;
+    > span {
+      margin-left: 5px;
+      display: inline-block;
+      border-bottom: 1px dashed;
+    }
+  }
+}
+
+.management-reviews-list,
+.management-interviews-list {
+  .btn-complain {
+    display: none;
+  }
+}
+
+.emp-filter-form {
+  input[type="text"].std.med, select.std.med {
+    min-width: 240px;
+  }
+  .filter-checks {
+    user-select: none;
+    > li {
+      display: inline-block;
+      + li {
+        margin-left: 1em;
+      }
+    }
+  }
+}
+
+#tbl-candidates {
+  .open {
+    cursor: pointer;
+  }
+  img.avatar {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+#job-apply-dialog {
+  .avatar {
+    width: 150px;
+    height: 150px;
+  }
+  .message {
+    $fill: #fff7db;
+    $stroke: #e0cb82;
+    background: $fill;
+    font-size: 13px;
+    line-height: 1.46153846;
+    padding: 1.25em;
+    position: relative;
+    border: 1px solid $stroke;
+    border-radius: 5px;
+    .border-triangle {
+      &.-top {
+        top: 0;
+        margin-top: -13px;
+        left: 65px;
+        border-bottom-color: $stroke;
+        &.-outline {
+          border-bottom-color: $fill;
+        }
+      }
+      &.-right {
+        right: 0;
+        bottom: 10px;
+        margin-right: -17px;
+      }
+    }
+    &.-response {
+      max-width: 90%;
+      margin-right: 16px;
+      margin-left: auto;
+    }
+    &.-invite {
+      $fill: #f5fffa;
+      $stroke: green;
+      background: $fill;
+      color: $stroke;
+      border-color: $stroke;
+      .border-triangle {
+        &.-right {
+          border-left-color: $stroke;
+          &.-outline {
+            border-left-color: $fill;
+          }
+        }
+      }
+    }
+    &.-fail {
+      $fill: #f2dede;
+      $stroke: #a94442;
+      background: $fill;
+      color: $stroke;
+      border-color: $stroke;
+      .border-triangle {
+        &.-right {
+          border-left-color: $stroke;
+          &.-outline {
+            border-left-color: $fill;
+          }
+        }
+      }
+    }
+  }
+  .write-message {
+    display: none;
+  }
+}

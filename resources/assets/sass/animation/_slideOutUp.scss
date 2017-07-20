@@ -1,0 +1,15 @@
+@keyframes slideOutUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+}
+
+@mixin animation-slideOutUp() {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-name: slideOutUp;
+}

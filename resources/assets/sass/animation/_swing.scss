@@ -1,0 +1,25 @@
+
+
+
+@include keyframes(swing) {
+	20% {
+		@include transform(rotate(15deg));
+	}
+	40% {
+		@include transform(rotate(-10deg));
+	}
+	60% {
+		@include transform(rotate(5deg));
+	}
+	80% {
+		@include transform(rotate(-5deg));
+	}
+	100% {
+		@include transform(rotate(0deg));
+	}
+}
+
+@mixin animation-swing(){
+	@include transform-origin(top center);
+	@include animation-name(swing);
+}

@@ -1,0 +1,53 @@
+$small: 7px; $normal: 14px; $large: 21px;
+
+/*----------------------- WHAT I THINK ABOUT MARGIN ---------------------------*/
+
+//normal margin
+.marg-lt, .marg-horz, .marg { margin-left: $normal !important }
+.marg-rt, .marg-horz, .marg { margin-right: $normal !important }
+.marg-top, .marg-vert, .marg { margin-top: $normal !important }
+.marg-bot, .marg-vert, .marg { margin-bottom: $normal !important }
+
+//small margin
+.marg-lt-sm, .marg-horz-sm, .marg-sm { margin-left: $small !important }
+.marg-rt-sm, .marg-horz-sm, .marg-sm { margin-right: $small !important }
+.marg-top-sm, .marg-vert-sm, .marg-sm { margin-top: $small !important }
+.marg-bot-sm, .marg-vert-sm, .marg-sm { margin-bottom: $small !important }
+
+//large margin
+.marg-lt-lg, .marg-horz-lg, .marg-lg { margin-left: $large !important }
+.marg-rt-lg, .marg-horz-lg, .marg-lg { margin-right: $large !important }
+.marg-top-lg, .marg-vert-lg, .marg-lg { margin-top: $large !important }
+.marg-bot-lg, .marg-vert-lg, .marg-lg { margin-bottom: $large !important }
+
+//without margin
+.no-marg-lt, .no-marg-horz, .no-marg { margin-left: 0 !important }
+.no-marg-rt, .no-marg-horz, .no-marg { margin-right: 0 !important }
+.no-marg-top, .no-marg-vert, .no-marg { margin-top: 0 !important }
+.no-marg-bot, .no-marg-vert, .no-marg { margin-bottom: 0 !important }
+
+/*--------------------- AND WHAT I THINK ABOUT PADDING ------------------------*/
+
+//normal padding
+.pad-rt, .pad-horz, .pad { padding-right: $normal !important }
+.pad-lt, .pad-horz, .pad { padding-left: $normal !important }
+.pad-top, .pad-vert, .pad { padding-top: $normal !important }
+.pad-bot, .pad-vert, .pad { padding-bottom: $normal !important }
+
+//small padding
+.pad-lt-sm, .pad-horz-sm, .pad-sm { padding-left: $small !important }
+.pad-rt-sm, .pad-horz-sm, .pad-sm { padding-right: $small !important }
+.pad-top-sm, .pad-vert-sm, .pad-sm { padding-top: $small !important }
+.pad-bot-sm, .pad-vert-sm, .pad-sm { padding-bottom: $small !important }
+
+//large padding
+.pad-lt-lg, .pad-horz-lg, .pad-lg { padding-left: $large !important }
+.pad-rt-lg, .pad-horz-lg, .pad-lg { padding-right: $large !important }
+.pad-top-lg, .pad-vert-lg, .pad-lg { padding-top: $large !important }
+.pad-bot-lg, .pad-vert-lg, .pad-lg { padding-bottom: $large !important }
+
+//without padding
+.no-pad-lt, .no-pad-horz, .no-pad { padding-left: 0 !important }
+.no-pad-rt, .no-pad-horz, .no-pad { padding-right: 0 !important }
+.no-pad-top, .no-pad-vert, .no-pad { padding-top: 0 !important }
+.no-pad-bot, .no-pad-vert, .no-pad { padding-bottom: 0 !important }

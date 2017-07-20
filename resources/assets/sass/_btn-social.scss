@@ -1,0 +1,104 @@
+.btn-vk, .btn-fb, .btn-google-plus, .btn-odnoklassniki {
+  color: #fff !important;
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 12px;
+  border: 0;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  padding: 0 10px;
+  border-radius: 2px;
+  text-transform: none;
+  letter-spacing: 0;
+  .fa {
+    font-size: 14px;
+    margin-right: 6px;
+  }
+  &:disabled {
+    color: #fff !important;
+  }
+}
+
+//<editor-fold desc="ВКонтакте">
+.btn-vk, .btn-vk:disabled, .btn-vk:disabled:hover {
+  background-color: #6383a8;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6383A8', endColorstr='#FF4C688C');
+  background: -svg-linear-gradient(top, #6383a8 0%, #4c688c 100%);
+  background: -webkit-linear-gradient(top, #6383a8 0%, #4c688c 100%);
+  background: -moz-linear-gradient(top, #6383a8 0%, #4c688c 100%);
+  -pie-background: -pie-linear-gradient(top, #6383a8 0%, #4c688c 100%);
+  background: linear-gradient(top, #6383a8 0%, #4c688c 100%);
+}
+.btn-vk:hover {
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF4C688C', endColorstr='#FF6383A8');
+  background: -svg-linear-gradient(top, #4c688c 0%, #6383a8 100%);
+  background: -webkit-linear-gradient(top, #4c688c 0%, #6383a8 100%);
+  background: -moz-linear-gradient(top, #4c688c 0%, #6383a8 100%);
+  -pie-background: -pie-linear-gradient(top, #4c688c 0%, #6383a8 100%);
+  background: linear-gradient(top, #4c688c 0%, #6383a8 100%);
+}
+//</editor-fold>
+
+//<editor-fold desc="Facebook">
+.btn-fb, .btn-fb:disabled, .btn-fb:disabled:hover {
+  background-color: #436da6;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF436DA6', endColorstr='#FF3D5B96');
+  background: -svg-linear-gradient(top, #436da6 0%, #3d5b96 100%);
+  background: -webkit-linear-gradient(top, #436da6 0%, #3d5b96 100%);
+  background: -moz-linear-gradient(top, #436da6 0%, #3d5b96 100%);
+  -pie-background: -pie-linear-gradient(top, #436da6 0%, #3d5b96 100%);
+  background: linear-gradient(top, #436da6 0%, #3d5b96 100%);
+}
+.btn-fb:hover  {
+  background-color: #3d5b96;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF3D5B96', endColorstr='#FF436DA6');
+  background: -svg-linear-gradient(top, #3d5b96 0%, #436da6 100%);
+  background: -webkit-linear-gradient(top, #3d5b96 0%, #436da6 100%);
+  background: -moz-linear-gradient(top, #3d5b96 0%, #436da6 100%);
+  -pie-background: -pie-linear-gradient(top, #3d5b96 0%, #436da6 100%);
+  background: linear-gradient(top, #3d5b96 0%, #436da6 100%);
+}
+//</editor-fold>
+
+//<editor-fold desc="Google Plus">
+.btn-google-plus, .btn-google-plus:disabled, .btn-google-plus:disabled:hover {
+  background: #ec3b3e;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFEC3B3E', endColorstr='#FFD23637');
+  background: -svg-linear-gradient(top, #ec3b3e 0%, #d23637 100%);
+  background: -webkit-linear-gradient(top, #ec3b3e 0%, #d23637 100%);
+  background: -moz-linear-gradient(top, #ec3b3e 0%, #d23637 100%);
+  -pie-background: -pie-linear-gradient(top, #ec3b3e 0%, #d23637 100%);
+  background: linear-gradient(top, #ec3b3e 0%, #d23637 100%);
+}
+.btn-google-plus:hover {
+  background-color: #d23637;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFD23637', endColorstr='#FFEC3B3E');
+  background: -svg-linear-gradient(top, #d23637 0%, #ec3b3e 100%);
+  background: -webkit-linear-gradient(top, #d23637 0%, #ec3b3e 100%);
+  background: -moz-linear-gradient(top, #d23637 0%, #ec3b3e 100%);
+  -pie-background: -pie-linear-gradient(top, #d23637 0%, #ec3b3e 100%);
+  background: linear-gradient(top, #d23637 0%, #ec3b3e 100%);
+}
+//</editor-fold>
+
+//<editor-fold desc="Одноклассники">
+.btn-odnoklassniki, .btn-odnoklassniki:disabled, .btn-odnoklassniki:disabled:hover {
+  background: #f59944;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFF59944', endColorstr='#FFFF6E03');
+  background: -svg-linear-gradient(top, #f59944 0%, #ff6e03 100%);
+  background: -webkit-linear-gradient(top, #f59944 0%, #ff6e03 100%);
+  background: -moz-linear-gradient(top, #f59944 0%, #ff6e03 100%);
+  -pie-background: -pie-linear-gradient(top, #f59944 0%, #ff6e03 100%);
+  background: linear-gradient(top, #f59944 0%, #ff6e03 100%);
+}
+.btn-odnoklassniki:hover {
+  background-color: #ff6e03;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFFF6E03', endColorstr='#FFF59944');
+  background: -svg-linear-gradient(top, #ff6e03 0%, #f59944 100%);
+  background: -webkit-linear-gradient(top, #ff6e03 0%, #f59944 100%);
+  background: -moz-linear-gradient(top, #ff6e03 0%, #f59944 100%);
+  -pie-background: -pie-linear-gradient(top, #ff6e03 0%, #f59944 100%);
+  background: linear-gradient(top, #ff6e03 0%, #f59944 100%);
+}
+//</editor-fold>

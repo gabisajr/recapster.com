@@ -1,0 +1,105 @@
+.activity-icon {
+  $icons: sprite-map("icon-activity/*.png", $new-position: 100%, $new-spacing: 15px, $new-repeat: no-repeat);
+  display: inline-block;
+  vertical-align: middle;
+
+  &.benefits {
+    background: sprite($icons, benefits);
+    width: 61px;
+    height: 60px;
+    &.big {
+      width: 88px;
+      height: 87px;
+    }
+  }
+  &.email {
+    background: sprite($icons, email);
+    width: 60px;
+    height: 60px;
+    &.big {
+      width: 87px;
+      height: 87px;
+    }
+  }
+  &.follows {
+    background: sprite($icons, follows);
+    width: 61px;
+    height: 60px;
+    &.big {
+      width: 88px;
+      height: 87px;
+    }
+  }
+  &.interview {
+    background: sprite($icons, interview);
+    width: 61px;
+    height: 60px;
+    &.big {
+      width: 88px;
+      height: 87px;
+    }
+  }
+  &.invitations {
+    background: sprite($icons, invitations);
+    width: 61px;
+    height: 60px;
+    &.big {
+      width: 88px;
+      height: 87px;
+    }
+  }
+  &.photo {
+    background: sprite($icons, photo);
+    width: 61px;
+    height: 60px;
+    &.big {
+      width: 89px;
+      height: 87px;
+    }
+  }
+  &.resume {
+    background: sprite($icons, resume);
+    width: 61px;
+    height: 60px;
+    &.big {
+      width: 88px;
+      height: 87px;
+    }
+  }
+  &.review {
+    background: sprite($icons, review);
+    width: 61px;
+    height: 60px;
+    &.big {
+      width: 88px;
+      height: 87px;
+    }
+  }
+  &.salary {
+    background: sprite($icons, salary);
+    width: 61px;
+    height: 60px;
+    &.big {
+      width: 89px;
+      height: 88px;
+    }
+  }
+  &.saved-jobs {
+    background: sprite($icons, saved-jobs);
+    width: 61px;
+    height: 60px;
+    &.big {
+      width: 88px;
+      height: 87px;
+    }
+  }
+  &.user {
+    background: sprite($icons, user);
+    width: 61px;
+    height: 60px;
+    &.big {
+      width: 88px;
+      height: 87px;
+    }
+  }
+}

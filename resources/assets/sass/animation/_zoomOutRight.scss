@@ -1,0 +1,21 @@
+
+
+
+@include keyframes(zoomOutRight) {
+	40% {
+		opacity: 1;
+		@include transform(scale(.475) translateX(-42px));
+		@include animation-timing-function(linear);
+	}
+	100% {
+		opacity: 0;
+		@include transform(scale(.1) translateX(2000px));
+		@include transform-origin(right center);
+	}
+}
+
+@mixin animation-zoomOutRight(){
+	@include animation-duration(1s);
+	@include animation-fill-mode(both);
+	@include animation-name(zoomOutRight);
+}

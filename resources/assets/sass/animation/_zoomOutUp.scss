@@ -1,0 +1,20 @@
+
+
+
+@include keyframes(zoomOutUp) {
+	40% {
+		opacity: 1;
+		@include transform(scale(.475) translateY(60px));
+		@include animation-timing-function(linear);
+	}
+	100% {
+		opacity: 0;
+		@include transform(scale(.1) translateY(-2000px));
+		@include transform-origin(center top);
+	}
+}
+@mixin animation-zoomOutUp(){
+	@include animation-duration(1s);
+	@include animation-fill-mode(both);
+	@include animation-name(zoomOutUp);
+}

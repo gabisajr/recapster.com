@@ -1,0 +1,34 @@
+/* @see http://fonts4web.ru/proximanova.html */
+
+/* Regular */
+@font-face {
+  font-family: "proxima-nova";
+  src: url("/fonts/proximanova-fonts4web/ProximaNovaRegular/ProximaNovaRegular.eot");
+  src: url("/fonts/proximanova-fonts4web/ProximaNovaRegular/ProximaNovaRegular.eot?#iefix") format("embedded-opentype"),
+  url("/fonts/proximanova-fonts4web/ProximaNovaRegular/ProximaNovaRegular.woff") format("woff"),
+  url("/fonts/proximanova-fonts4web/ProximaNovaRegular/ProximaNovaRegular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* Bold */
+@font-face {
+  font-family: "proxima-nova";
+  src: url("/fonts/proximanova-fonts4web/ProximaNovaBold/ProximaNovaBold.eot");
+  src: url("/fonts/proximanova-fonts4web/ProximaNovaBold/ProximaNovaBold.eot?#iefix") format("embedded-opentype"),
+  url("/fonts/proximanova-fonts4web/ProximaNovaBold/ProximaNovaBold.woff") format("woff"),
+  url("/fonts/proximanova-fonts4web/ProximaNovaBold/ProximaNovaBold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: bold;
+}
+
+/* Black */
+@font-face {
+  font-family: "proxima-nova";
+  src: url("/fonts/proximanova-fonts4web/ProximaNovaBlack/ProximaNovaBlack.eot");
+  src: url("/fonts/proximanova-fonts4web/ProximaNovaBlack/ProximaNovaBlack.eot?#iefix") format("embedded-opentype"),
+  url("/fonts/proximanova-fonts4web/ProximaNovaBlack/ProximaNovaBlack.woff") format("woff"),
+  url("/fonts/proximanova-fonts4web/ProximaNovaBlack/ProximaNovaBlack.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 800;
+}

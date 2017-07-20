@@ -1,0 +1,27 @@
+@mixin max-lines($max-lines, $line-height: none) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $max-lines;
+  @if ($line-height != none) {
+    line-height: $line-height;
+    max-height: $line-height * $max-lines;
+  }
+}
+
+@mixin clear-fix {
+  &:after {
+    display: table;
+    content: " ";
+    clear: both;
+  }
+}
+
+@mixin hover-opacity($opacity: .75) {
+  opacity: 1;
+  transition: opacity .2s;
+  &:hover {
+    opacity: $opacity;
+  }
+}

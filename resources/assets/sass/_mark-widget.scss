@@ -1,0 +1,110 @@
+.mark-widget {
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  .mark-rating {
+    color: $theme-color;
+    font-weight: bold;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 5px;
+    &.no-rating {
+      opacity: .5;
+    }
+  }
+  &-marks {
+    display: inline-block;
+    vertical-align: middle;
+    &:hover {
+      ~ .mark-widget-caption {
+        color: $gray-color;
+      }
+    }
+  }
+  &-error {
+    .mark-widget-caption {
+      color: $error-red;
+    }
+  }
+  &-caption {
+    display: inline-block;
+    color: $gray-color;
+    margin-left: 5px;
+  }
+  .mark {
+    color: #fff;
+    background: #e6e6e6;
+    display: block;
+    float: left;
+    vertical-align: middle;
+    position: relative;
+    border-radius: 3px;
+    &-inner, &-fill, .fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    &-inner {
+      text-align: center;
+      width: 100%;
+      height: 100%;
+      .fa {
+        line-height: inherit;
+      }
+    }
+    &-fill {
+      width: 0;
+      overflow: hidden;
+      > .fill {
+        background: $theme-color;
+        border: 2px rgba(255, 255, 255, 0.51) solid;
+        border-radius: 3px;
+      }
+    }
+  }
+  &-input {
+    display: none;
+  }
+
+  &-control {
+    .mark {
+      cursor: pointer;
+      &.hover, &.active {
+        background: $blue;
+      }
+    }
+  }
+
+  $sizes: 14 22 30;
+  @each $size in $sizes {
+    &-#{$size} {
+      $mark-size: $size * 1px;
+      .mark {
+        width: $mark-size;
+        height: $mark-size;
+        + .mark {
+          margin-left: round($mark-size / 7.5);
+        }
+        &-rating {
+          font-size: 0.766 * $mark-size;
+          line-height: $mark-size;
+        }
+        &-inner {
+          font-size: $mark-size / 1.666;
+          line-height: $mark-size + 1px;
+        }
+        &-fill {
+          height: $mark-size;
+          > .fill {
+            width: $mark-size;
+            height: $mark-size;
+            @if ($mark-size < 22) {
+              border: 0;
+            }
+          }
+        }
+      }
+
+    }
+  }
+}
