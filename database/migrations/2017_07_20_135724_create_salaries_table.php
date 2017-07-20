@@ -45,7 +45,6 @@ class CreateSalariesTable extends Migration {
       //ссылка на город, местоположения офиса
       $table->unsignedInteger('city_id')->nullable()->comment("местоположение офиса");
       $table->foreign('city_id')->references('id')->on("cities")->onDelete('set null')->onUpdate('cascade');
-
       $table->string('city_title')->nullable()->comment("местоположение офиса - строкой");
 
       //ссылка на форму занятости
