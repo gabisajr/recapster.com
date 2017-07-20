@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <link rel="shortcut icon" href="/favicon.ico?v=2" type="image/x-icon">
 <title>@yield('title')</title>
-<link rel="stylesheet" href="{{ asset('css/admin/lukas-admin.min.css') }}" type="text/css">
+<link rel="stylesheet" href="{{ asset('admin-assets/css/lukas-admin.min.css') }}" type="text/css">
 </html>
 <body>
 <main class="d-flex h-100 flex-column">
