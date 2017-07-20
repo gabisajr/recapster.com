@@ -76,13 +76,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Company extends Model {
 
-  //todo relation
-  protected $_has_one = [
-    'ceo' => [
-      'model'       => 'Ceo',
-      'foreign_key' => 'company_id',
-    ],
-  ];
+  public function ceo() {
+    $this->hasOne('App\Model\Ceo', 'company_id');
+  }
 
   //todo relation
   protected $_has_many = [
