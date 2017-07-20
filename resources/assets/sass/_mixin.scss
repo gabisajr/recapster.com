@@ -25,3 +25,32 @@
     opacity: $opacity;
   }
 }
+
+@mixin aspect-ratio($aspect-ratio: 1) {
+  position: relative;
+  &:before {
+    content: '';
+    display: block;
+    padding-top: 100% / $aspect-ratio;
+  }
+}
+
+@mixin aspect-ratio-img($aspect-ratio: 1) {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  background: #ccc url(/images/photo-camera.svg) no-repeat center;
+  background-size: 50px;
+  @include aspect-ratio($aspect-ratio);
+  > img {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    object-fit: cover;
+    object-position: center;
+  }
+}
