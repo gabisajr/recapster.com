@@ -14,6 +14,8 @@ return [
 
   'name' => env('APP_NAME', 'Laravel'),
 
+  'logo_min_size' => 640,
+
   /*
   |--------------------------------------------------------------------------
   | Application Environment
