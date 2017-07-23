@@ -40,38 +40,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property string                $admin_url            - ссылка на компанию в админке
  *
  *-------------------------------- belongs to --------------------------------------------------------
- * @property Model_User            $added_user           - добавивший пользователь
  * @property int                   $added_user_id        - id добавившего пользователя
- *
- * @property Model_User            $last_updated_user    - пользователь послений изменивший
- * @property int                   $last_updated_user_id - id менявшего пользователя
- *
- * @property Model_Image           $logo                 - логотип компании
  * @property int                   $logo_id
- *
- * @property Model_Image           $cover                - обложка профиля
  * @property int                   $cover_id
- *
  * @property int                   $size_id
- *
- * @property Model_Company_Revenue $revenue              - доход компани
  * @property int                   $revenue_id
- *
- * @property Model_City            $hq                   - головной офис
  * @property int                   $hq_city_id
- *
- * ------------------------------- has one -----------------------------------------------------
- * @property Model_Ceo             $ceo                  - руковдитель компании
- *
- * ------------------------------- has many ----------------------------------------------------
- * @property ORM                   $reviews              - отзывы
- * @property ORM                   $salaries             - зарплаты
- * @property ORM                   $interviews           - собеседования
- * @property ORM                   $images               - изображения
- * @property ORM                   $jobs                 - вакансии
- * @property ORM                   $activities           - активность пользователей для компании
- * @property ORM                   $followers            - подписчики компании
- * @property ORM                   $industries           - виды деятельнссти компании
  */
 class Company extends Model {
 
@@ -139,49 +113,6 @@ class Company extends Model {
 
   public function updatedUser() {
     return $this->belongsTo('App\Model\User', 'updated_user_id');
-  }
-
-  public function rules() { //todo validation
-    return [
-      'title'   => [
-        ['not_empty'],
-        [[$this, 'unique'], ['title', ':value']],
-      ],
-      'site'    => [
-        ['not_empty'],
-        [[$this, 'valid_site']],
-      ],
-      'size_id' => [
-        //проверка на существование такого размера
-        [function ($size_id, $field, Validation $validation) {
-          if ($size_id) {
-            $size = ORM::factory('Company_Size', $size_id);
-            if (!$size->loaded()) $validation->error($field, 'invalid_company_size');
-          }
-        }, [':value', ':field', ':validation']],
-      ],
-      'alias'   => [
-        //array('not_empty'),
-        ['max_length', [':value', 32]],
-        ['regex', [':value', Regex::ALIAS]]
-        //[[$this, 'unique'], ['alias', ':value']],
-        //todo чтобы не пересекался со стандартными контроллерами
-      ],
-    ];
-  }
-
-  public function valid_site($value) { //todo camelCase
-
-    //убираем протокол и www, чтобы остался чистый домен
-    $domain = preg_replace('/^(.+:\/\/)?(www\.)?/', '', $value);
-
-    //убираем path
-    $domain = preg_replace('/\/.*$/', '', $domain);
-
-    $valid_domain_expression = '/^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,6}$/';
-
-    return (bool)preg_match($valid_domain_expression, (string)$domain);
-
   }
 
   public function filters() {
