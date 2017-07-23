@@ -50,7 +50,7 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model {
 
   public function ceo() {
-    $this->hasOne('App\Model\Ceo', 'company_id');
+    return $this->hasOne('App\Model\Ceo', 'company_id');
   }
 
   public function industries() {
