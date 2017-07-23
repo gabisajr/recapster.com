@@ -34,7 +34,7 @@ class CreateCompaniesTable extends Migration {
       $table->foreign('cover_id')->references('id')->on('images')->onDelete('set null')->onUpdate('cascade');
 
       $table->string('site')->nullable();
-      $table->text('short_desc')->comment("короткое описание компании");
+      $table->text('short_desc')->nullable()->comment("короткое описание компании");
 
       //ссылка на размер
       $table->unsignedInteger('size_id')->nullable()->comment("размер компании (кол-во сотрудников)");
