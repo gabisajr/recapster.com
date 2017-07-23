@@ -6,5 +6,5 @@ gulp.task('default', function () {
 
   require('./gulp/app')();
   require('./gulp/admin')();
-  require('./gulp/svg-sprite')();
+  // require('./gulp/svg-sprite')();
 });
