@@ -49,7 +49,7 @@ class CreateCompaniesTable extends Migration {
       $table->foreign('hq_city_id')->references('id')->on('cities')->onDelete('set null')->onUpdate('cascade');
 
       $table->unsignedSmallInteger('foundation_year')->nullable()->comment("год основания");
-      $table->string('description', 1000)->comment("описание компании");
+      $table->string('description', 1000)->nullable()->comment("описание компании");
       $table->boolean('confirmed')->default(false)->comment("подтвержденый аккаунт");
       $table->boolean('active')->default(false)->comment("активированая компания");
       $table->unsignedInteger('reviews_count')->default(0)->comment("количество активных отзывов");
