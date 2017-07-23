@@ -19,11 +19,11 @@ class AdminController extends Controller {
     View::share('sidebar_active', null);
   }
 
-  public function uploadImage(Model $model) {
+  public function uploadImage(Model $model, string $fieldName = 'image') {
 
     if (!$model->exists) return;
 
-    $file = request()->file('image');
+    $file = request()->file($fieldName);
     if ($file) {
       $destinationPath = $this->uploadDir;
       $name = uniqid() . '.' . mb_strtolower($file->getClientOriginalExtension());
@@ -35,9 +35,9 @@ class AdminController extends Controller {
       if ($image->save()) {
 
         //delete old image
-        if ($model->image) $model->image->delete();
+        if ($model->{$fieldName}) $model->{$fieldName}->delete();
 
-        $model->image()->associate($image);
+        $model->{$fieldName}()->associate($image);
         $model->save();
       }
     }
