@@ -1,4 +1,4 @@
-@import "../../sass/mixin";
+@import "../../assets/sass/mixin";
 
 .text-muted {
   color: #9c9c9c !important;
@@ -13,7 +13,6 @@ html, body, main {
 }
 
 body {
-
 }
 
 h4 {
@@ -642,7 +641,7 @@ a.dotted {
     height: 100%;
   }
   .play {
-    background: url("/admin-assets/play-button.svg") no-repeat center;
+    background: url("/assets-admin/play-button.svg") no-repeat center;
     background-size: contain;
     width: 64px;
     height: 64px;
@@ -654,7 +653,7 @@ a.dotted {
     transition: transform .1s ease-out;
   }
   .delete {
-    background: url("/admin-assets/clear-button.svg") no-repeat center;
+    background: url("/assets-admin/clear-button.svg") no-repeat center;
     background-size: contain;
     width: 20px;
     height: 20px;
@@ -676,4 +675,8 @@ a.dotted {
 #contact-map {
   background: #ccc;
   height: 400px;
+}
+
+.select2-container .select2-selection--single {
+  height: calc(2.25rem + 2px);
 }
