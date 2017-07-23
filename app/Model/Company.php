@@ -52,7 +52,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property Model_Image           $cover                - обложка профиля
  * @property int                   $cover_id
  *
- * @property Model_Company_Size    $size                 - размер компании (кол-во сотрудников)
  * @property int                   $size_id
  *
  * @property Model_Company_Revenue $revenue              - доход компани
@@ -80,45 +79,37 @@ class Company extends Model {
     $this->hasOne('App\Model\Ceo', 'company_id');
   }
 
+  public function industries() {
+    return $this->belongsToMany('App\Model\Industry', 'company_industries');
+  }
+
+  public function reviews() {
+    return $this->hasMany('App\Model\Review', 'company_id');
+  }
+
+  public function salaries() {
+    return $this->hasMany('App\Model\Salary', 'company_id');
+  }
+
+  public function interviews() {
+    return $this->hasMany('App\Model\Interview', 'company_id');
+  }
+
+  public function images() {
+    return $this->belongsToMany('App\Model\Image', 'company_images'); //todo create table
+  }
+
+  public function jobs() {
+    return $this->hasMany('App\Model\Job', 'company_id');
+  }
+
   //todo relation
   protected $_has_many = [
-    'reviews'    => [
-      'model'       => 'Review',
-      'foreign_key' => 'company_id',
-    ],
-    'salaries'   => [
-      'model'       => 'Salary',
-      'foreign_key' => 'company_id',
-    ],
-    'interviews' => [
-      'model'       => 'Interview',
-      'foreign_key' => 'company_id',
-    ],
-    'images'     => [
-      'model'       => 'Image',
-      'foreign_key' => 'company_id',
-      'far_key'     => 'img_id',
-      'through'     => 'company_images',
-    ],
-    'jobs'       => [
-      'model'       => 'Job',
-      'foreign_key' => 'company_id',
-    ],
-    'activities' => [
-      'model'       => 'Activity',
-      'foreign_key' => 'company_id',
-    ],
     'followers'  => [
       'model'       => 'User',
       'foreign_key' => 'company_id',
       'far_key'     => 'user_id',
       'through'     => 'subscriptions',
-    ],
-    'industries' => [
-      'model'       => 'Industry',
-      'foreign_key' => 'company_id',
-      'far_key'     => 'industry_id',
-      'through'     => 'company_industries',
     ],
   ];
 
