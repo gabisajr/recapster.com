@@ -7,45 +7,44 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Company
  *
- * @property int                   $id
- * @property string                $alias                - никнейм
- * @property string                $title                - название компании
- * @property string                $tel                  - телефон компании
- * @property string                $added                - дата добавления
- * @property string                $last_updated         - дата посленего изменения
- * @property float                 $rating               - рейтинг компании
- * @property string                $site                 - сайт
- * @property string                $site_title           - сайт фильтрованный
- * @property string                $short_desc           - коротко о компании
- * @property int                   $foundation_year      - год основания
- * @property string                $description          - описание компании
- * @property bool                  $active               - активный аккаунт
- * @property bool                  $confirmed            - подвержденый аккаунт
- * @property int                   $reviews_count        - кол-во активных отзывов
- * @property int                   $salaries_count       - кол-во активных зарплат
- * @property int                   $interviews_count     - кол-во активных собеседований
- * @property int                   $jobs_count           - кол-во вакансий
- * @property int                   $internship_count     - кол-во стажировок
- * @property int                   $benefits_count       - кол-во активных приемуществ
- * @property int                   $images_count         - кол-во активных фотографий
- * @property int                   $followers_count      - кол-во подписчиков
- * @property int                   $vk_group_id          - id группы ВКонтакте
+ * @property int    $id
+ * @property string $alias                - никнейм
+ * @property string $title                - название компании
+ * @property string $tel                  - телефон компании
+ * @property string $added                - дата добавления
+ * @property string $last_updated         - дата посленего изменения
+ * @property float  $rating               - рейтинг компании
+ * @property string $site                 - сайт
+ * @property string $site_title           - сайт фильтрованный
+ * @property string $short_desc           - коротко о компании
+ * @property int    $foundation_year      - год основания
+ * @property string $description          - описание компании
+ * @property bool   $active               - активный аккаунт
+ * @property bool   $confirmed            - подвержденый аккаунт
+ * @property int    $reviews_count        - кол-во активных отзывов
+ * @property int    $salaries_count       - кол-во активных зарплат
+ * @property int    $interviews_count     - кол-во активных собеседований
+ * @property int    $jobs_count           - кол-во вакансий
+ * @property int    $internship_count     - кол-во стажировок
+ * @property int    $benefits_count       - кол-во активных приемуществ
+ * @property int    $images_count         - кол-во активных фотографий
+ * @property int    $followers_count      - кол-во подписчиков
+ * @property int    $vk_group_id          - id группы ВКонтакте
  *
  * ------------------------------- virtual -------------------------------------------------------
- * @property string                $of_company           - родительный падеж названия компании
- * @property string                $for_company          - родительный падеж названия компании
- * @property string                $about_company        - предложный падеж названия компании
- * @property string                $in_company           - местный падеж
- * @property string                $url                  - ссылка на профиль копании
- * @property string                $admin_url            - ссылка на компанию в админке
+ * @property string $of_company           - родительный падеж названия компании
+ * @property string $for_company          - родительный падеж названия компании
+ * @property string $about_company        - предложный падеж названия компании
+ * @property string $in_company           - местный падеж
+ * @property string $admin_url            - ссылка на компанию в админке
  *
  *-------------------------------- belongs to --------------------------------------------------------
- * @property int                   $added_user_id        - id добавившего пользователя
- * @property int                   $logo_id
- * @property int                   $cover_id
- * @property int                   $size_id
- * @property int                   $revenue_id
- * @property int                   $hq_city_id
+ * @property int    $added_user_id        - id добавившего пользователя
+ * @property int    $logo_id
+ * @property int    $cover_id
+ * @property int    $size_id
+ * @property int    $revenue_id
+ * @property int    $hq_city_id
  */
 class Company extends Model {
 
@@ -77,16 +76,6 @@ class Company extends Model {
     return $this->hasMany('App\Model\Job', 'company_id');
   }
 
-  //todo relation
-  protected $_has_many = [
-    'followers'  => [
-      'model'       => 'User',
-      'foreign_key' => 'company_id',
-      'far_key'     => 'user_id',
-      'through'     => 'subscriptions',
-    ],
-  ];
-
   public function logo() {
     return $this->belongsTo('App\Model\Image');
   }
@@ -114,6 +103,25 @@ class Company extends Model {
   public function updatedUser() {
     return $this->belongsTo('App\Model\User', 'updated_user_id');
   }
+
+  public function scopeCity($query, $cityId) {
+    return $query->where('hq_city_id', '=', $cityId);
+  }
+
+  public function scopeIndustry($query) {
+    //todo ..industry param
+    //todo join
+  }
+
+  //todo relation
+  protected $_has_many = [
+    'followers' => [
+      'model'       => 'User',
+      'foreign_key' => 'company_id',
+      'far_key'     => 'user_id',
+      'through'     => 'subscriptions',
+    ],
+  ];
 
   public function filters() {
     return [
@@ -246,9 +254,9 @@ class Company extends Model {
   //  return parent::get($column);
   //}
 
-  public function section_url($section = "profile") {
+  public function url(string $section = "profile") {
     if (!$this->active) return '#';
-    $url = "http://$_SERVER[HTTP_HOST]/{$this->alias}/";
+    $url = url("/{$this->alias}/");
     $section = mb_strtolower($section);
     if ($section && $section != 'profile') $url .= "{$section}/";
     return $url;
