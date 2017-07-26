@@ -69,7 +69,7 @@ class Company extends Model {
   }
 
   public function images() {
-    return $this->belongsToMany('App\Model\Image', 'company_images'); //todo create table
+    return $this->belongsToMany('App\Model\Image', 'company_images');
   }
 
   public function jobs() {
