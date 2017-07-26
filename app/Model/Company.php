@@ -280,9 +280,9 @@ class Company extends Model {
     return $url;
   }
 
-  public function add_photo_url() {
-    if (!$this->loaded()) return '#';
-    $url = "http://$_SERVER[HTTP_HOST]/company/uploadImages/{$this->id}";
+  public function addPhotoUrl() {
+    if (!$this->exists) return '#';
+    $url = url("/company/uploadImages/{$this->id}"); //todo route
     return $url;
   }
 
