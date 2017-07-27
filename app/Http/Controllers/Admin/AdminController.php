@@ -16,7 +16,7 @@ class AdminController extends Controller {
   public function __construct() {
     $this->middleware('auth:admin');
 
-    View::share('sidebar_active', null);
+    View::share('sidebarActive', null);
   }
 
   public function uploadImage(Model $model, string $fieldName = 'image') {
