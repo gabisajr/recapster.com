@@ -128,12 +128,8 @@ function status($status_code = null, $gender = 'm') {
       $status_caption = $gender == 'm' ? __('одобрен') : ($gender == 'f' ? __('одобрена') : __('одобрено'));
       break;
 
-    case \App\Status::REMOVED:
+    case \App\Status::REJECTED:
       $status_caption = $gender == 'm' ? __('отклонен') : ($gender == 'f' ? __('отклонена') : __('отклонено'));
-      break;
-
-    case \App\Status::ARCHIVED:
-      $status_caption = $gender == 'm' ? __('архвирован') : ($gender == 'f' ? __('архвирована') : __('архвировано'));
       break;
 
     case \App\Status::DRAFT:
