@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use App;
 
 /**
  * Class Company
@@ -30,13 +31,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int    $images_count         - кол-во активных фотографий
  * @property int    $followers_count      - кол-во подписчиков
  * @property int    $vk_group_id          - id группы ВКонтакте
- *
- * ------------------------------- virtual -------------------------------------------------------
- * @property string $of_company           - родительный падеж названия компании
- * @property string $for_company          - родительный падеж названия компании
- * @property string $about_company        - предложный падеж названия компании
- * @property string $in_company           - местный падеж
- * @property string $admin_url            - ссылка на компанию в админке
  *
  *-------------------------------- belongs to --------------------------------------------------------
  * @property int    $added_user_id        - id добавившего пользователя
@@ -229,30 +223,28 @@ class Company extends Model {
   //  return parent::delete();
   //
   //}
-  //
-  //public function get($column) {
-  //  switch ($column) {
-  //    case "url":
-  //      return $this->section_url("profile");
-  //      break;
-  //    case 'admin_url':
-  //      return $this->admin_url();
-  //      break;
-  //    case 'of_company':
-  //      return I18n::$lang == 'ru' ? Morpher::inflect($this->title, 'Р') : $this->title;
-  //      break;
-  //    case 'for_company':
-  //      return $this->of_company;
-  //      break;
-  //    case 'about_company':
-  //      return I18n::$lang == 'ru' ? Morpher::inflect($this->title, 'П') : $this->title;
-  //      break;
-  //    case 'in_company':
-  //      return I18n::$lang == 'ru' ? Morpher::inflect($this->title, 'П') : $this->title;
-  //      break;
-  //  }
-  //  return parent::get($column);
-  //}
+
+  public function ofCompany() {
+    if (App::isLocale('ru')) {
+      Morpher::inflect($this->title, 'Р');
+    }
+    return $this->title;
+  }
+
+  public function forCompany() {
+    return $this->ofCompany();
+  }
+
+  public function aboutCompany() {
+    if (App::isLocale('ru')) {
+      return Morpher::inflect($this->title, 'П');
+    }
+    return $this->title;
+  }
+
+  public function inCompany(){
+    return $this->aboutCompany();
+  }
 
   public function url(string $section = "profile") {
     if (!$this->active) return '#';
@@ -260,6 +252,11 @@ class Company extends Model {
     $section = mb_strtolower($section);
     if ($section && $section != 'profile') $url .= "{$section}/";
     return $url;
+  }
+
+  public function adminUrl() {
+    if (!$this->exists) return "#";
+    return route('admin.company.edit', ['id' => $this->id]);
   }
 
   public function add_review_url() {
@@ -518,11 +515,6 @@ class Company extends Model {
     }
 
     return null;
-  }
-
-  public function admin_url() {
-    if (!$this->loaded()) return "#";
-    return "http://$_SERVER[HTTP_HOST]/admin/company/item/$this->id";
   }
 
   /**
