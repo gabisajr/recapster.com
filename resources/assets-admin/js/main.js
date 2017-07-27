@@ -2,6 +2,13 @@ define(['jquery', 'ckfinder', 'ckeditor', 'i18n', 'alert-message', 'confirm-moda
 
   $.notify.defaults({position: 'top center'});
 
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': window.app.csrfToken
+    }
+  });
+
+
   CKFinder.setupCKEditor(null, '/ckfinder/');
   $('textarea[data-ckeditor]').each(function () {
     var textarea_id = $(this).attr('id');
