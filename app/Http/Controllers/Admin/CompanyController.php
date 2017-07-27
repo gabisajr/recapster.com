@@ -145,7 +145,8 @@ class CompanyController extends AdminController {
     }
 
     return view('admin.company.edit', [
-      'company' => $company,
+      'company'   => $company,
+      'activeTab' => 'main',
     ]);
   }
 
@@ -230,18 +231,42 @@ class CompanyController extends AdminController {
 
     $title = __('Фотографии компании') . " " . $company->ofCompany();
 
-    return view("admin/company/images", [
-      'title'      => $title,
-      'company'    => $company,
-      'images'     => $images,
+    return view("admin.company.images", [
+      'title'     => $title,
+      'company'   => $company,
+      'images'    => $images,
+      'activeTab' => 'images'
       //'total'      => $total,
       //'pagination' => $this->get_pagination($total),
     ]);
 
-    $this->title = $title;
-    $this->template->content = $view;
-    $this->main_js = '/js/admin/image/list.js';
+    $this->main_js = '/js/admin/image/list.js'; //todo
 
+  }
+
+  //добавить фотографию для компании
+  public function addImages(Request $request) {
+
+    /** @var Company $company */
+    $company = Company::find($request->input('company'));
+
+    if (!$company) {
+      Session::put('message_error', __('Компания не найдена'));
+      return redirect(route('admin.company.list'));
+    }
+
+    $this->uploadImages($company);
+
+    //if ($added_images_count) { //todo session success message
+    //  Session::instance()->set('message_success', __('Для компании :for_company :added :count :images', [
+    //    ':for_company' => $company->for_company,
+    //    ':added'       => $added_images_count == 1 ? __('добавлена') : __('добавлено'),
+    //    ':count'       => $added_images_count,
+    //    ':images'      => Text::getNumEnding($added_images_count, [__('фотография'), __('фотографии'), __('фотографий')]),
+    //  ]));
+    //}
+
+    return redirect(route('admin.company.images', $company));
   }
 
 
@@ -339,29 +364,6 @@ class CompanyController extends AdminController {
     /** @var Model_Company $company */
     $company = ORM::factory('Company', Arr::get($_POST, 'company'));
     if ($company->loaded() && $company->ceo->loaded()) $company->ceo->delete();
-  }
-
-  //добавить фотографию для компании
-  public function action_addImages() {
-    /** @var Model_Company $company */
-    $company = ORM::factory('Company', $this->request->param('id'));
-    if (!$company->loaded()) {
-      Session::instance()->set('message_error', __('Компания не найдена'));
-      HTTP::redirect("/admin/{$this->lower_object_name}/list");
-    }
-
-    $added_images_count = $this->add_images($company);
-
-    if ($added_images_count) {
-      Session::instance()->set('message_success', __('Для компании :for_company :added :count :images', [
-        ':for_company' => $company->for_company,
-        ':added'       => $added_images_count == 1 ? __('добавлена') : __('добавлено'),
-        ':count'       => $added_images_count,
-        ':images'      => Text::getNumEnding($added_images_count, [__('фотография'), __('фотографии'), __('фотографий')]),
-      ]));
-    }
-
-    HTTP::redirect("/admin/{$this->lower_object_name}/images/{$company->id}");
   }
 
 }
