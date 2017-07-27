@@ -21,6 +21,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
   Route::get('company/edit/{id}', ['as' => 'admin.company.edit', 'uses' => 'CompanyController@edit']);
   Route::post('company/store', ['as' => 'admin.company.store', 'uses' => 'CompanyController@store']);
   Route::get("company/images/{id}", ['as' => 'admin.company.images', 'uses' => 'CompanyController@images']);
+  Route::post('company/addImages', ['as' => 'admin.company.addImages', 'uses' => 'CompanyController@addImages']);
+
+  //image
+  Route::post('image/delete', ['as' => 'admin.image.delete', 'uses' => 'ImageController@delete']);
 
   //admin auth
   Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
