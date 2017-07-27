@@ -109,3 +109,41 @@ function visibility($object) {
   }
   return $html;
 }
+
+/**
+ * получить надпись о статусе по код стутуса
+ *
+ * @param null   $status_code
+ * @param string $gender род: m, f, n - мужской, женский, средний
+ * @return string
+ */
+function status($status_code = null, $gender = 'm') {
+
+  switch ($status_code) {
+    case Status::PENDING:
+      $status_caption = __('в ожидании');
+      break;
+
+    case Status::APPROVED:
+      $status_caption = $gender == 'm' ? __('одобрен') : ($gender == 'f' ? __('одобрена') : __('одобрено'));
+      break;
+
+    case Status::REMOVED:
+      $status_caption = $gender == 'm' ? __('отклонен') : ($gender == 'f' ? __('отклонена') : __('отклонено'));
+      break;
+
+    case Status::ARCHIVED:
+      $status_caption = $gender == 'm' ? __('архвирован') : ($gender == 'f' ? __('архвирована') : __('архвировано'));
+      break;
+
+    case Status::DRAFT:
+      $status_caption = __('черновик');
+      break;
+
+    default:
+      $status_caption = __('неизвестный');
+      break;
+  }
+
+  return $status_caption;
+}
