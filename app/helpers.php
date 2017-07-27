@@ -98,3 +98,14 @@ function html_attributes(array $attributes = []) {
 
   return $attrs;
 }
+
+function visibility($object) {
+  if ($object->anonym) {
+    $text = __('Анонимно');
+    $html = "<i class='fa fa-fw fa-lock text-muted' aria-hidden='true' title='{$text}'></i>";
+  } else {
+    $text = __('Публично');
+    $html = "<i class='fa fa-fw fa-globe' style='color: #16abf5' aria-hidden='true' title='{$text}'></i>";
+  }
+  return $html;
+}
