@@ -24,11 +24,13 @@
     <li class="<? if ($sidebarActive == 'interview') echo ' active' ?>">
       <a href="/admin/interview/list"><i class="fa fa-fw fa-exchange" aria-hidden="true"></i> <?=__('Собеседования')?></a>
     </li>
+    */?>
 
     <li class="<? if ($sidebarActive == 'job') echo ' active' ?>">
       <a href="/admin/job/list"><i class="fa fa-fw fa-shopping-bag" aria-hidden="true"></i> <?=__('Вакансии')?></a>
     </li>
 
+    <?/*
     <li class="<? if ($sidebarActive == 'claim') echo ' active' ?>">
       <a href="/admin/claim/list"><i class="fa fa-fw fa-flag-o" aria-hidden="true"></i> <?=__('Жалобы')?></a>
     </li>
