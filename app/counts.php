@@ -36,6 +36,10 @@ function industries_count($count) {
   return $text;
 }
 
+function photos_count($count) {
+  return getNumEnding($count, [__('фотография'), __('фотографии'), __('фотографий')]);
+}
+
 //"Найдено 10 компаний"
 function found_companies($count) {
 
