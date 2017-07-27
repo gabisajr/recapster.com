@@ -1,0 +1,1 @@
+define(["jquery","bootstrap"],function(o){var n=o("#confirm-modal"),d=n.find('button[name="ok"]');window.confirmModal=function(o,i){n.find(".modal-body").html(o),n.modal(),i&&(d.off(),d.click(function(){i(),n.modal("hide")}))}});
