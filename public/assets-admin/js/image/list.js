@@ -1,0 +1,1 @@
+define(["jquery","i18n","entity-list"],function(t,e){t("table#images-list").entityList({removeUrl:"/admin/image/delete",sortable:!1,removeQuestion:e("Вы действительно хотите удалить фото :title с сайта",{":title":'<strong class="text-nowrap">"{title}"</strong>'})})});
