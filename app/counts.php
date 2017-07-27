@@ -37,7 +37,10 @@ function industries_count($count) {
 }
 
 function photos_count($count) {
-  return getNumEnding($count, [__('фотография'), __('фотографии'), __('фотографий')]);
+  if ($count) {
+    return $count . ' ' . getNumEnding($count, [__('фотография'), __('фотографии'), __('фотографий')]);
+  }
+  return __("нет фотографий");
 }
 
 //"Найдено 10 компаний"
