@@ -1,4 +1,4 @@
-define(['jquery'], function ($) {
+define(['jquery', 'notify'], function ($) {
 
   $.fn.entityList = function (params) {
     params = params || {};
@@ -44,8 +44,7 @@ define(['jquery'], function ($) {
             });
           },
           error: function (jqXHR) {
-            var message = jqXHR.status == 404 ? 'Error 404: URL not found' : jqXHR.responseText;
-            window.alertMessage(message, 'error');
+            $.notify(jqXHR.responseText, 'error');
           }
         });
       });
@@ -78,7 +77,7 @@ define(['jquery'], function ($) {
           $sort_btn.find('.fa').hide();
         },
         error: function (jqXHR) {
-          var message = jqXHR.status == 404 ? 'Error 404: URL not found' : jqXHR.responseText;
+          var message = jqXHR.status === 404 ? 'Error 404: URL not found' : jqXHR.responseText;
           window.alertMessage(message, 'error');
         },
         success: function () {
