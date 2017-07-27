@@ -6,4 +6,5 @@ class Status {
   const APPROVED = 'approved';
   const PENDING = 'pending';
   const REJECTED = 'rejected';
+  const DRAFT = 'draft';
 }
