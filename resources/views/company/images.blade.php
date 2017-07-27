@@ -25,7 +25,7 @@ $images_json = $images->toJson();
 
 <section class="panel company-profile-images">
   <header class="panel-header no-border">
-    <span class="hidden-xs">{{ __('Фотографии :of_company', [':of_company' => $company->of_company]) }}</span>
+    <span class="hidden-xs">{{ __('Фотографии') . " ". $company->ofCompany() }}</span>
     <span class="visible-xs-inline">{{ __('Фотографии') }}</span>
     @if ($company->images_count)
       <small>{{ $company->images_count }}</small>
@@ -36,9 +36,9 @@ $images_json = $images->toJson();
     <div class="gallery-row profile-images">
       <script type="application/json" class="gallery-json">{!! $images_json !!}</script>
       <div class="row">
-        @foreach($images as $i => $image)
+        @foreach($images as $index => $image)
           <div class='col-xs-4'>
-{{--            @include('company.images-item')--}}
+            @include('company.images-item')
           </div>
         @endforeach
       </div>
