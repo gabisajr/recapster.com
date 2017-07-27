@@ -120,23 +120,23 @@ function visibility($object) {
 function status($status_code = null, $gender = 'm') {
 
   switch ($status_code) {
-    case Status::PENDING:
+    case \App\Status::PENDING:
       $status_caption = __('в ожидании');
       break;
 
-    case Status::APPROVED:
+    case \App\Status::APPROVED:
       $status_caption = $gender == 'm' ? __('одобрен') : ($gender == 'f' ? __('одобрена') : __('одобрено'));
       break;
 
-    case Status::REMOVED:
+    case \App\Status::REMOVED:
       $status_caption = $gender == 'm' ? __('отклонен') : ($gender == 'f' ? __('отклонена') : __('отклонено'));
       break;
 
-    case Status::ARCHIVED:
+    case \App\Status::ARCHIVED:
       $status_caption = $gender == 'm' ? __('архвирован') : ($gender == 'f' ? __('архвирована') : __('архвировано'));
       break;
 
-    case Status::DRAFT:
+    case \App\Status::DRAFT:
       $status_caption = __('черновик');
       break;
 
