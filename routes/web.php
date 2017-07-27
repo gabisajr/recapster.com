@@ -15,6 +15,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
   Route::get('/', ['as' => 'admin', 'uses' => 'CompanyController@list']); //todo replace by admin dashboard page
 
+  //company
+  Route::get('companies', ['as' => 'admin.company.list', 'uses' => 'CompanyController@list']);
+  Route::get('company/create', ['as' => 'admin.company.create', 'uses' => 'CompanyController@create']);
+  Route::get('company/edit/{id}', ['as' => 'admin.company.edit', 'uses' => 'CompanyController@edit']);
+  Route::post('company/store', ['as' => 'admin.company.store', 'uses' => 'CompanyController@store']);
+  Route::get("company/images/{id}", ['as' => 'admin.company.images', 'uses' => 'CompanyController@images']);
 
   //admin auth
   Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
@@ -30,3 +36,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 });
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+Route::get('companies', ['as' => 'companies', 'uses' => 'CompaniesController@index']);
+
+
+//company
+Route::group(['namespace' => 'Company', 'middleware' => 'load.company'], function () {
+
+  Route::get('{company}', ['as' => 'company.profile', 'uses' => 'ProfileController@index']);
+
+});
