@@ -87,6 +87,10 @@ class Job extends Model {
     return $this->morphToMany('App\Model\Tag', 'taggable');
   }
 
+  public function cities() {
+    return $this->belongsToMany('App\Model\City', 'jobs_cities');
+  }
+
   //todo relations
   protected $_has_many = [
     'industries'   => [
@@ -94,12 +98,6 @@ class Job extends Model {
       'foreign_key' => 'job_id',
       'far_key'     => 'industry_id',
       'through'     => 'jobs_industries',
-    ],
-    'cities'       => [
-      'model'       => 'City',
-      'foreign_key' => 'job_id',
-      'far_key'     => 'city_id',
-      'through'     => 'jobs_cities',
     ],
     'applications' => [
       'model'       => 'Job_Application',
