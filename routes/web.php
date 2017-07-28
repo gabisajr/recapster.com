@@ -23,6 +23,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
   Route::get("company/images/{id}", ['as' => 'admin.company.images', 'uses' => 'CompanyController@images']);
   Route::post('company/addImages', ['as' => 'admin.company.addImages', 'uses' => 'CompanyController@addImages']);
 
+  //job
+  Route::get('jobs', ['as' => 'admin.job.list', 'uses' => 'JobController@list']);
+
   //image
   Route::post('image/delete', ['as' => 'admin.image.delete', 'uses' => 'ImageController@delete']);
 
