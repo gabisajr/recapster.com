@@ -109,6 +109,23 @@ class Job extends Model {
     ],
   ];
 
+  /**
+   * Scope a query to only jobs of specific company
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @param  int|Company|string                   $company
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeCompany($query, $company) {
+    if (is_numeric($company)) {
+      return $query->where('company_id', '=', $company);
+    } elseif ($company instanceof Company) {
+      return $query->where('company_id', '=', $company->id);
+    }
+    //todo join for company title like query
+    return $query;
+  }
+
   public function filters() {
     return [
       'description' => [
