@@ -126,6 +126,17 @@ class Job extends Model {
     return $query;
   }
 
+  /**
+   * Scope a query to only jobs with specific status
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @param string                                $status
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeStatus($query, $status) {
+    return $query->where('status', '=', $status);
+  }
+
   public function filters() {
     return [
       'description' => [
