@@ -16,7 +16,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
   Route::get('/', ['as' => 'admin', 'uses' => 'CompanyController@list']); //todo replace by admin dashboard page
 
   //company
-  Route::get('companies', ['as' => 'admin.company.list', 'uses' => 'CompanyController@list']);
+  Route::get('companies', ['as' => 'admin.companies', 'uses' => 'CompanyController@list']);
   Route::get('company/create', ['as' => 'admin.company.create', 'uses' => 'CompanyController@create']);
   Route::get('company/edit/{id}', ['as' => 'admin.company.edit', 'uses' => 'CompanyController@edit']);
   Route::post('company/store', ['as' => 'admin.company.store', 'uses' => 'CompanyController@store']);
@@ -24,7 +24,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
   Route::post('company/addImages', ['as' => 'admin.company.addImages', 'uses' => 'CompanyController@addImages']);
 
   //job
-  Route::get('jobs', ['as' => 'admin.job.list', 'uses' => 'JobController@list']);
+  Route::get('jobs', ['as' => 'admin.jobs', 'uses' => 'JobController@list']);
 
   //image
   Route::post('image/delete', ['as' => 'admin.image.delete', 'uses' => 'ImageController@delete']);
