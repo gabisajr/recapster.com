@@ -7,51 +7,37 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Model_Job Вакансия
  *
- * @property int              $id
- * @property string           $title                   - заголовок вакансии
- * @property int              $salary_min              - мин зарплата
- * @property int              $salary_max              - макс зарплата
- * @property boolean          $has_additional_payments - есть ли дополнительные выплаты
- * @property string           $description             - описание
- * @property string           $added                   - дата добавления вакансии
- * @property string           $status                  - статус
- * @property boolean          $is_internship           - является ли стажировкой
- * @property boolean          $hot                     - горячая вакансия
- * @property string           $apply_type              - тип отклика: переход по внешней по ссылке, показать контакты, внутренняя
- * @property string           $external_url            - внешней url
- * @property string           $contacts                - контактные данные
+ * @property int     $id
+ * @property string  $title                   - заголовок вакансии
+ * @property int     $salary_min              - мин зарплата
+ * @property int     $salary_max              - макс зарплата
+ * @property boolean $has_additional_payments - есть ли дополнительные выплаты
+ * @property string  $description             - описание
+ * @property string  $added                   - дата добавления вакансии
+ * @property string  $status                  - статус
+ * @property boolean $is_internship           - является ли стажировкой
+ * @property boolean $hot                     - горячая вакансия
+ * @property string  $apply_type              - тип отклика: переход по внешней по ссылке, показать контакты, внутренняя
+ * @property string  $external_url            - внешней url
+ * @property string  $contacts                - контактные данные
+ * @property string  $employment_form_alias   - альяс формы занятости
+ * @property int     $stage_id                - стаж работы
+ * @property int     $position_id             - должность
+ * @property string  $currency_code           - валюта зарпаты
+ * @property int     $company_id              - компания
+ * @property int     $user_id                 - пользователь создавший вакансию
  *
  * ------------------------------- virtual -------------------------------------------
  *
- * @property string           $url                     - ссылка на страницу вакансии
- * @property string           $similar_url             - ссылка на страницу похожих вакансий
- *
- * ------------------------------- belongs to -------------------------------------------
- *
- * @property Model_Position   $position                - должность
- * @property int              $position_id
- *
- * @property Model_Employment $employment              - форма занятости
- * @property string           $employment_alias
- *
- * @property Model_Stage      $stage                   - стаж работы
- * @property int              $stage_id
- *
- * @property Model_Currency   $currency                - валюта зарпаты
- * @property string           $currency_code
- *
- * @property Model_Company    $company                 - компания
- * @property int              $company_id
- *
- * @property Model_User       $user                    - пользователь создавший вакансию
- * @property int              $user_id
+ * @property string  $url                     - ссылка на страницу вакансии
+ * @property string  $similar_url             - ссылка на страницу похожих вакансий
  *
  * ------------------------------- has many -------------------------------
  *
- * @property ORM              $industries              - направления деятельности
- * @property ORM              $tags                    - теги
- * @property ORM              $cities                  - города
- * @property ORM              $applications            - заявки
+ * @property ORM     $industries              - направления деятельности
+ * @property ORM     $tags                    - теги
+ * @property ORM     $cities                  - города
+ * @property ORM     $applications            - заявки
  */
 class Job extends Model {
 
