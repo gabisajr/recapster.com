@@ -98,7 +98,7 @@ class Company extends Model {
     return $this->belongsTo('App\Model\User', 'updated_user_id');
   }
 
-  public function scopeCity($query, $cityId) {
+  public function scopeCity($query, $cityId) { //todo replace $cityId by $city, and make it mixed
     return $query->where('hq_city_id', '=', $cityId);
   }
 
