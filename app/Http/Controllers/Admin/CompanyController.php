@@ -118,10 +118,11 @@ class CompanyController extends AdminController {
     //  ->find_all();
 
 
-    return view("admin.company.list", [
+    return view("admin.company.companies", [
       'title'     => $title,
       'companies' => $companies,
       'total'     => $total,
+      'activeTab' => 'all' //todo filter
       //'pagination' => $this->get_pagination($total),
     ]);
 
@@ -141,7 +142,7 @@ class CompanyController extends AdminController {
     $company = Company::find($id);
     if (!$company) {
       session('message_error', "Компания не найдена");
-      return redirect(route('admin.company.list'));
+      return redirect(route('admin.companies'));
     }
 
     return view('admin.company.edit', [
@@ -214,7 +215,7 @@ class CompanyController extends AdminController {
 
     if (!$company) {
       Session::put('message_error', __('Компания не найдена'));
-      return redirect(route('admin.company.list'));
+      return redirect(route('admin.companies'));
     }
 
     $page = $request->query('page', 1);
@@ -252,7 +253,7 @@ class CompanyController extends AdminController {
 
     if (!$company) {
       Session::put('message_error', __('Компания не найдена'));
-      return redirect(route('admin.company.list'));
+      return redirect(route('admin.companies'));
     }
 
     $this->uploadImages($company);
