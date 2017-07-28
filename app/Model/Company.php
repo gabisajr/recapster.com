@@ -107,6 +107,16 @@ class Company extends Model {
     //todo join
   }
 
+  /**
+   * Scope a query to only include active companies.
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeActive($query) {
+    return $query->where('active', '=', true);
+  }
+
   //todo relation
   protected $_has_many = [
     'followers' => [
@@ -242,7 +252,7 @@ class Company extends Model {
     return $this->title;
   }
 
-  public function inCompany(){
+  public function inCompany() {
     return $this->aboutCompany();
   }
 
