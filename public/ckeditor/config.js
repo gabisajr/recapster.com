@@ -10,8 +10,8 @@ CKEDITOR.editorConfig = function (config) {
 
   config.contentsCss = [
     CKEDITOR.basePath + 'contents.css',
-    '/lib/bootstrap-4.0.0-alpha.6/css/bootstrap-grid.css',
-    '/css/admin/ckeditor.min.css'
+    '/lib/bootstrap-4.0.0-alpha.6/css/bootstrap-grid.css'
+    //, '/css/admin/ckeditor.min.css'
   ];
 
   config.height = 500;
