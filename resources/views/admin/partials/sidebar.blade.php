@@ -8,7 +8,7 @@
       <i class="fa fa-fw fa-newspaper-o"></i> {{ __('Все посты') }}
     </a>
 
-    <a href="{{ route('admin.company.list') }}" class="aside-menu-item{{ $sidebarActive == 'company' ? ' active' : '' }}">
+    <a href="{{ route('admin.companies') }}" class="aside-menu-item{{ $sidebarActive == 'company' ? ' active' : '' }}">
       <i class="fa fa-fw fa-building"></i> {{ __('Компании') }}
     </a>
 
@@ -26,9 +26,9 @@
     </li>
     */?>
 
-    <li class="{{ $sidebarActive == 'job' ? ' active' : '' }}">
-      <a href="{{ route('admin.job.list') }}"><i class="fa fa-fw fa-shopping-bag" aria-hidden="true"></i> {{ __('Вакансии') }}</a>
-    </li>
+    <a href="{{ route('admin.jobs') }}" class="aside-menu-item{{ $sidebarActive == 'job' ? ' active' : '' }}">
+      <i class="fa fa-fw fa-shopping-bag"></i> {{ __('Вакансии') }}
+    </a>
 
     <?/*
     <li class="<? if ($sidebarActive == 'claim') echo ' active' ?>">
