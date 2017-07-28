@@ -505,6 +505,10 @@ input.date {
   max-width: 200px;
 }
 
+img.logo {
+  object-fit: cover;
+}
+
 .avatar {
   @include aspect-ratio-img;
   background: #ccc url(/images/avatar.svg) no-repeat bottom;
@@ -679,4 +683,10 @@ a.dotted {
 
 .select2-container .select2-selection--single {
   height: calc(2.25rem + 2px);
+}
+
+.has-danger {
+  .form-control-label {
+    color: inherit;
+  }
 }
