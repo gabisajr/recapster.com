@@ -43,6 +43,13 @@ function photos_count($count) {
   return __("нет фотографий");
 }
 
+function jobs_count($count) {
+  if ($count) {
+    return $count . ' ' . getNumEnding($count, [__('вакансия'), __('вакансии'), __('вакансий')]);
+  }
+  return __("нет вакансий");
+}
+
 //"Найдено 10 компаний"
 function found_companies($count) {
 
