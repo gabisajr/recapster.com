@@ -26,8 +26,8 @@
     </li>
     */?>
 
-    <li class="<? if ($sidebarActive == 'job') echo ' active' ?>">
-      <a href="/admin/job/list"><i class="fa fa-fw fa-shopping-bag" aria-hidden="true"></i> <?=__('Вакансии')?></a>
+    <li class="{{ $sidebarActive == 'job' ? ' active' : '' }}">
+      <a href="{{ route('admin.job.list') }}"><i class="fa fa-fw fa-shopping-bag" aria-hidden="true"></i> {{ __('Вакансии') }}</a>
     </li>
 
     <?/*
