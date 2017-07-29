@@ -133,6 +133,11 @@ class Company extends Model {
     return $query->where('active', '=', true);
   }
 
+  public function scopeSearch($query, $search) {
+    return $query->where('title', 'LIKE', "%$search%")
+      ->orWhere('alias', 'LIKE', "%$search%");
+  }
+
   //todo relation
   protected $_has_many = [
     'followers' => [
