@@ -20,8 +20,8 @@ class CreateJobsTable extends Migration {
       $table->foreign('position_id')->references('id')->on("positions")->onDelete('set null')->onUpdate('cascade');
 
       //ссылка на форму занятости
-      $table->string('employment_form_alias')->nullable()->comment("форма занятости");
-      $table->foreign('employment_form_alias')->references('alias')->on("employment_forms")->onDelete('set null')->onUpdate('cascade');
+      $table->string('employment_form_id')->nullable()->comment("форма занятости");
+      $table->foreign('employment_form_id')->references('id')->on("employment_forms")->onDelete('set null')->onUpdate('cascade');
 
       //ссылка на стаж работы
       $table->unsignedInteger('stage_id')->nullable()->comment("опыт работы");
