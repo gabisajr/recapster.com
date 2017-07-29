@@ -143,3 +143,7 @@ function status($status_code = null, $gender = 'm') {
 
   return $status_caption;
 }
+
+function employments() {
+  return \App\Model\EmploymentForm::orderBy('sort')->orderBy('title')->get();
+}
