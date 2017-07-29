@@ -16,7 +16,8 @@ requirejs.config({
     select2: '/lib/select2/js/select2.min',
     tagEditor: '/lib/jquery-tag-editor/jquery.tag-editor.min',
     'jquery-caret': '/lib/jquery-tag-editor/jquery.caret.min',
-    notify: '/lib/notify.min'
+    notify: '/lib/notify.min',
+    autosize: '/lib/autosize.min'
   },
   shim: {
     'jquery-ui': {
