@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Status;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -169,9 +170,6 @@ class Job extends Model {
 
   //public function get($column) {
   //  switch ($column) {
-  //    case 'url':
-  //      return $this->get_url();
-  //      break;
   //    case 'similar_url':
   //      return $this->url . '/similar';
   //      break;
@@ -179,11 +177,15 @@ class Job extends Model {
   //  return parent::get($column);
   //}
 
-  public function get_url() {
-    if ($this->status != Status::APPROVED || !$this->company->active) return '#';
-    $url = "http://$_SERVER[HTTP_HOST]/{$this->company->alias}/job/{$this->id}";
-    if ($this->position->loaded()) $url .= "/{$this->position->alias}";
-    return $url;
+  public function url() {
+    if ($this->status != Status::APPROVED) return '#';
+    if (!$this->company) return "#";
+    if (!$this->company->active) return "#";
+
+    $url = "/{$this->company->alias}/job/";
+    if ($this->position) $url .= "/{$this->position->alias}";
+    $url .= "/{$this->id}";
+    return url($url);
   }
 
   public function get_no_html_description() {
