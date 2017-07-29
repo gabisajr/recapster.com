@@ -12,8 +12,8 @@ class CreateEmploymentFormsTable extends Migration {
    */
   public function up() {
     Schema::create('employment_forms', function (Blueprint $table) {
+      $table->increments('id');
       $table->string('alias')->unique();
-      $table->primary('alias');
       $table->string('title')->unique();
       $table->unsignedInteger('sort')->default(0);
       $table->timestamps();
