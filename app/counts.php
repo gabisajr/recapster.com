@@ -50,6 +50,13 @@ function jobs_count($count) {
   return __("нет вакансий");
 }
 
+function positions_count($count) {
+  if ($count) {
+    return $count . ' ' . getNumEnding($count, [__('профессия'), __('профессии'), __('профессий')]);
+  }
+  return __("нет профессий");
+}
+
 //"Найдено 10 компаний"
 function found_companies($count) {
 
