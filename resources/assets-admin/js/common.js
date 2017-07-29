@@ -43,3 +43,12 @@ requirejs.config({
   }
 
 });
+
+define('caretEnd', ['jquery'], function ($) {
+  return function () {
+    var input = $(this)
+      , val = input.val();
+    input.val('');
+    input.val(val);
+  }
+});
