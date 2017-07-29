@@ -98,8 +98,24 @@ class Company extends Model {
     return $this->belongsTo('App\Model\User', 'updated_user_id');
   }
 
-  public function scopeCity($query, $cityId) { //todo replace $cityId by $city, and make it mixed
-    return $query->where('hq_city_id', '=', $cityId);
+  /**
+   * Scope a query to only include active companies.
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @param int|City                              $city
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeCity($query, $city) {
+    $cityId = null;
+    if ($city instanceof City) {
+      $cityId = $city->id;
+    } elseif (is_numeric($city)) {
+      $cityId = $city;
+    }
+    if ($cityId) {
+      return $query->where('hq_city_id', '=', $cityId);
+    }
+    return $query;
   }
 
   public function scopeIndustry($query) {
@@ -402,7 +418,7 @@ class Company extends Model {
     /**
      * подсчет только среди обобренных отзывов
      *
-     * @var $votes_count - Общее количество голосов: "Да", "Нет", не голосовавших - не учитываем
+     * @var $votes_count    - Общее количество голосов: "Да", "Нет", не голосовавших - не учитываем
      * @var $positive_count - Количество голосов "Да"
      */
 
@@ -437,7 +453,7 @@ class Company extends Model {
     /**
      * подсчет только среди обобренных отзывов
      *
-     * @var $votes_count - Общее количество голосов: "За", "Против", "Нейтралы", не голосовавших - не учитываем
+     * @var $votes_count    - Общее количество голосов: "За", "Против", "Нейтралы", не голосовавших - не учитываем
      * @var $positive_count - Количество голосов "За"
      */
 
