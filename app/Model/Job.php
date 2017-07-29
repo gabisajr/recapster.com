@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string  $employment_form_id      - id формы занятости
  * @property int     $stage_id                - стаж работы
  * @property int     $position_id             - должность
- * @property string  $currency_code           - валюта зарпаты
+ * @property string  $currency_id             - валюта зарпаты
  * @property int     $company_id              - компания
  * @property int     $user_id                 - пользователь создавший вакансию
  *
@@ -58,7 +58,7 @@ class Job extends Model {
   }
 
   public function currency() {
-    return $this->belongsTo('App\Model\Currency', 'currency_code');
+    return $this->belongsTo('App\Model\Currency');
   }
 
   public function company() {
