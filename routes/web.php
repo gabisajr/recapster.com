@@ -28,6 +28,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
   Route::get('job/create', ['as' => 'admin.job.create', 'uses' => 'JobController@create']);
   Route::get('job/edit/{id}', ['as' => 'admin.job.edit', 'uses' => 'JobController@edit']);
   Route::post('job/store', ['as' => 'admin.job.store', 'uses' => 'JobController@store']);
+  Route::post('job/delete', ['as' => 'admin.job.delete', 'uses' => 'JobController@delete']);
 
   //image
   Route::post('image/delete', ['as' => 'admin.image.delete', 'uses' => 'ImageController@delete']);
