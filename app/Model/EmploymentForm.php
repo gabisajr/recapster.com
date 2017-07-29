@@ -40,8 +40,4 @@ class EmploymentForm extends Model {
     ],
   ];
 
-  //public static function exists($alias) {
-  //  return ORM::factory('Employment', $alias)->loaded();
-  //}
-
 }
