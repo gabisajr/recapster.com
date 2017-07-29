@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Currency
  *
+ * @property int    $id
  * @property string $code
  * @property string $title
  * @property string $symbol - символ волюты
