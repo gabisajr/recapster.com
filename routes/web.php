@@ -31,6 +31,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
   //image
   Route::post('image/delete', ['as' => 'admin.image.delete', 'uses' => 'ImageController@delete']);
 
+  //vocabularies
+  Route::get('vocabularies', ['as' => 'admin.vocabularies', 'uses' => 'VocabulariesController@list']);
+
   //admin auth
   Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::get('login', ['as' => 'admin.login', 'uses' => 'LoginController@showLoginForm']);
