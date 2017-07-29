@@ -46,6 +46,18 @@ class Position extends Model {
     ],
   ];
 
+  /**
+   * Scope a query to only include positions whose title or alias likes as $search
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @param  string                               $search
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeSearch($query, $search) {
+    return $query->where('title', 'LIKE', "%$search%")
+      ->orWhere('alias', 'LIKE', "%$search%");
+  }
+
   //public function get($column) {
   //  switch ($column) {
   //    case 'of_position':
