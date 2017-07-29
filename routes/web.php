@@ -58,8 +58,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::get('companies', ['as' => 'companies', 'uses' => 'CompaniesController@index']);
 
-//position
+//fast search
 Route::get('position/search', ['as' => 'position.search', 'uses' => 'PositionController@search']);
+Route::get('company/search', ['as' => 'company.search', 'uses' => 'CompaniesController@search']);
 
 //company
 Route::group(['namespace' => 'Company', 'middleware' => 'load.company'], function () {
