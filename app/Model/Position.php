@@ -57,12 +57,8 @@ class Position extends Model {
 
   public function filters() {
     return [
-      'title' => [
-        ['trim'],
-      ],
       'alias' => [
-        ['trim'],
-        ['mb_strtolower'],
+        ['mb_strtolower'], //todo filter
       ],
     ];
   }
