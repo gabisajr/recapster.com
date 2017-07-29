@@ -46,19 +46,6 @@ class Position extends Model {
     ],
   ];
 
-  public function rules() { //todo validation
-    return [
-      'title' => [
-        ['not_empty'],
-        [[$this, 'unique'], ['title', ':value']],
-      ],
-      'alias' => [
-        ['not_empty'],
-        [[$this, 'unique'], ['alias', ':value']],
-      ],
-    ];
-  }
-
   //public function get($column) {
   //  switch ($column) {
   //    case 'of_position':
