@@ -4,15 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Model\Position;
 use Illuminate\Http\Request;
+use View;
 
 class PositionsController extends AdminController {
 
   protected $object_name = 'Position';
 
-  //public function before() {
-  //  parent::before();
-  //  View::set_global('sidebar_active', 'vocabulary');
-  //}
+  public function __construct() {
+    parent::__construct();
+    View::share('sidebarActive', 'vocabulary');
+  }
 
   //list of positions
   public function list(Request $request) {
