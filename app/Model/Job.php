@@ -46,7 +46,7 @@ class Job extends Model {
   }
 
   public function employmentForm() {
-    return $this->belongsTo('App\Model\EmploymentForm', 'employment_form_alias');
+    return $this->belongsTo('App\Model\EmploymentForm', 'employment_form_id');
   }
 
   public function stage() {
