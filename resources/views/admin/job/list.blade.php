@@ -1,5 +1,4 @@
 @php
-  //todo stop here
   /**
    * @var Model_Job[] $jobs
    * @var boolean     $company_col
