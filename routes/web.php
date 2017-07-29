@@ -34,6 +34,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
   //vocabularies
   Route::get('vocabularies', ['as' => 'admin.vocabularies', 'uses' => 'VocabulariesController@list']);
 
+  //positions vocabulary
+  Route::get('positions', ['as' => 'admin.positions', 'uses' => 'PositionsController@list']);
+
   //admin auth
   Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::get('login', ['as' => 'admin.login', 'uses' => 'LoginController@showLoginForm']);
