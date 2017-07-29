@@ -57,6 +57,13 @@ function positions_count($count) {
   return __("нет профессий");
 }
 
+function cities_count($count) {
+  if ($count) {
+    return $count . ' ' . getNumEnding($count, [__('город'), __('города'), __('городов')]);
+  }
+  return __("нет городов");
+}
+
 //"Найдено 10 компаний"
 function found_companies($count) {
 
