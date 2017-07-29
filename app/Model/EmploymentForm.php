@@ -31,8 +31,6 @@ class EmploymentForm extends Model {
     self::WATCH,
   ];
 
-  protected $primaryKey = "alias";
-
   //todo relation
   protected $_has_many = [
     'reviews' => [
