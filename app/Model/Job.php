@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string  $apply_type              - тип отклика: переход по внешней по ссылке, показать контакты, внутренняя
  * @property string  $external_url            - внешней url
  * @property string  $contacts                - контактные данные
- * @property string  $employment_form_alias   - альяс формы занятости
+ * @property string  $employment_form_id      - id формы занятости
  * @property int     $stage_id                - стаж работы
  * @property int     $position_id             - должность
  * @property string  $currency_code           - валюта зарпаты
@@ -129,41 +129,6 @@ class Job extends Model {
 
   public function rules() { //todo validation
     return [
-      'title'        => [
-        ['not_empty'],
-      ],
-      'company_id'   => [
-        ['not_empty'],
-      ],
-      'description'  => [
-        ['not_empty'],
-      ],
-      'salary_min'   => [
-        ['Valid::numeric'],
-      ],
-      'salary_max'   => [
-        ['Valid::numeric'],
-        //макс не меньше мин
-        [function ($salary_max, $field, Validation $validation) {
-
-          $salary_min = $validation['salary_min'];
-          if ($salary_max && $salary_min && $salary_max < $salary_min) {
-            $validation->error($field, 'less_than_min');
-          }
-
-        }, [':value', ':field', ':validation']],
-      ],
-      'external_url' => [
-        // external_url must be not empty if is external job
-        [function ($external_url, Validation $validation, $field) {
-          if ($this->apply_type == 'external' && !$external_url) {
-            $validation->error($field, 'not_empty');
-          }
-        }, [':value', ':validation', ':field']],
-        ['Valid::url'],
-        [[$this, 'unique'], ['external_url', ':value']],
-      ],
-
       'contacts' => [
         // contacts must be not empty if is job's apply type = 'contacts'
         [function ($contacts, Validation $validation, $field) {
