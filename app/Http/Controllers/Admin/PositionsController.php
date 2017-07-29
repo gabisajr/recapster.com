@@ -49,8 +49,6 @@ class PositionsController extends AdminController {
       'positions'      => $positions,
       'q'              => $search,
     ]);
-
-    //$this->main_js = '/js/admin/position/list.js'; //todo add js
   }
 
 
@@ -130,6 +128,11 @@ class PositionsController extends AdminController {
     }
 
     HTTP::redirect($_SERVER['HTTP_REFERER']);
+  }
+
+  public function delete(Request $request) {
+    $position = Position::find($request->input('id'));
+    if ($position) $position->delete();
   }
 
 }
