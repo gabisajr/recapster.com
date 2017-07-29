@@ -36,6 +36,9 @@ define(['jquery', 'notify'], function ($) {
           beforeSend: function () {
             $btn.prop('disabled', true);
           },
+          complete: function () {
+            $btn.prop('disabled', false);
+          },
           success: function () {
             window.alertMessage('Успешное удаление', 'success');
             $tr.fadeOut(function () {
