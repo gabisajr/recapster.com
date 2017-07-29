@@ -18,7 +18,7 @@ class PositionsController extends AdminController {
   //list of positions
   public function list(Request $request) {
 
-    $q = $request->input('q');
+    $search = $request->input('q');
 
     $orderBy = $request->query('order', 'title');
     if (empty($orderBy) || !in_array($orderBy, ['title', 'reviews_count', 'salaries_count', 'interviews_count', 'jobs_count'])) {
@@ -32,27 +32,22 @@ class PositionsController extends AdminController {
       $orderDirection = 'ASC';
     }
 
-    $positions = Position::query()
-      //  ->select([DB::expr('(salaries_count + reviews_count + interviews_count + jobs_count)'), 'total_contributions_count'])
-      //  ->order_by($order_by, $order_direction)
-      ->paginate(100);
-    //
-    //$total = ORM::factory($this->object_name);
-    //
-    //if ($qp) {
-    //  $positions->where('title', 'LIKE', "%$qp%")->or_where('alias', 'LIKE', "%$qp%");
-    //  $total->where('title', 'LIKE', "%$qp%")->or_where('alias', 'LIKE', "%$qp%");
-    //}
-    //
-    //$positions = $positions->find_all();
-    //$total = $total->count_all();
+    $query = Position::query();
+
+    //  ->select([DB::expr('(salaries_count + reviews_count + interviews_count + jobs_count)'), 'total_contributions_count'])
+    //  ->order_by($order_by, $order_direction)
+
+    //фильтр по строке поиска
+    if ($search) $query->search($search);
+
+    $positions = $query->paginate(100);
 
     return view("admin.position.list", [
       'title'          => __('Словарь профессий'),
       'orderBy'        => $orderBy,
       'orderDirection' => $orderDirection,
       'positions'      => $positions,
-      'q'              => $q,
+      'q'              => $search,
     ]);
 
     //$this->main_js = '/js/admin/position/list.js'; //todo add js
