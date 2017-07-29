@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Model_Employment форма занятости работника
  *
+ * @property int            $id
  * @property string         $alias
  * @property string         $title
  * @property int            $sort
