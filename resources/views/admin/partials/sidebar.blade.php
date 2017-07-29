@@ -42,11 +42,13 @@
     <li class="<? if ($sidebarActive == 'user') echo 'active' ?>">
       <a href="/admin/user/list"><i class="fa fa-fw fa-users" aria-hidden="true"></i> <?=__('Пользователи')?></a>
     </li>
+    */?>
 
-    <li class="<? if ($sidebarActive == 'vocabulary') echo 'active' ?>">
-      <a href="/admin/vocabulary"><i class="fa fa-fw fa-book" aria-hidden="true"></i> <?=__('Словари')?></a>
-    </li>
+    <a href="{{ route('admin.vocabularies') }}" class="aside-menu-item{{ $sidebarActive == 'vocabulary' ? ' active' : '' }}">
+      <i class="fa fa-fw fa-book"></i> {{ __('Словари') }}
+    </a>
 
+    <?/*
     <li class="<? if ($sidebarActive == 'delivery') echo 'active' ?>">
       <a href="/admin/delivery"><i class="fa fa-fw fa-envelope" aria-hidden="true"></i> <?=__('Email-рассылка')?></a>
     </li>
