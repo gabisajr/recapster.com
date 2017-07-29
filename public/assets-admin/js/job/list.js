@@ -1,0 +1,1 @@
+define(["jquery","i18n","entity-list"],function(t,e){t("#jobs-list").entityList({removeUrl:"/admin/job/delete",sortable:!1,removeQuestion:e("Вы действительно хотите удалить вакансию :title с сайта",{":title":'<strong class="text-nowrap">"{title}"</strong>'})})});
