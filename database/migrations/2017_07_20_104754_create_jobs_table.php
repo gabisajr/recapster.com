@@ -20,7 +20,7 @@ class CreateJobsTable extends Migration {
       $table->foreign('position_id')->references('id')->on("positions")->onDelete('set null')->onUpdate('cascade');
 
       //ссылка на форму занятости
-      $table->string('employment_form_id')->nullable()->comment("форма занятости");
+      $table->unsignedInteger('employment_form_id')->nullable()->comment("форма занятости");
       $table->foreign('employment_form_id')->references('id')->on("employment_forms")->onDelete('set null')->onUpdate('cascade');
 
       //ссылка на стаж работы
@@ -34,8 +34,8 @@ class CreateJobsTable extends Migration {
       $table->boolean('has_additional_payments')->default(false)->comment("есть ли дополнительные выплаты");
 
       //ссылка на валюту
-      $table->string('currency_code', 3)->nullable()->comment("валюта зарплаты");
-      $table->foreign('currency_code')->references('code')->on("currencies")->onDelete('set null')->onUpdate('cascade');
+      $table->unsignedInteger('currency_id')->nullable()->comment("валюта зарплаты");
+      $table->foreign('currency_id')->references('id')->on("currencies")->onDelete('set null')->onUpdate('cascade');
 
       $table->string('description')->nullable()->comment("описание");
 
