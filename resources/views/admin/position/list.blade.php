@@ -114,7 +114,7 @@
                   {!! $position->total_contributions_count ? $position->total_contributions_count : "<small class='text-muted'><em>(" . __('нет') . ")</em></small>" !!}
                 </td>
                 <td class="text-nowrap">
-                  <button class="btn btn-sm btn-default" name="remove" type="button" title="{{ __('удалить') }}"><i class="fa fa-trash"></i></button>
+                  <button class="btn btn-sm btn-secondary" name="remove" type="button" title="{{ __('удалить') }}"><i class="fa fa-trash"></i></button>
                 </td>
               </tr>
             @endforeach
