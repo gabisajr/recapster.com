@@ -37,6 +37,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
   //positions vocabulary
   Route::get('positions', ['as' => 'admin.positions', 'uses' => 'PositionsController@list']);
   Route::get('position/create', ['as' => 'admin.position.create', 'uses' => 'PositionsController@create']);
+  Route::get('position/edit/{id}', ['as' => 'admin.position.edit', 'uses' => 'PositionsController@edit']);
+  Route::post('position/store', ['as' => 'admin.position.store', 'uses' => 'PositionsController@store']);
+  Route::post('position/delete', ['as' => 'admin.position.delete', 'uses' => 'PositionsController@delete']);
 
   //admin auth
   Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
