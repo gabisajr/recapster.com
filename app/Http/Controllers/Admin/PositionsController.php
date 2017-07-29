@@ -51,11 +51,18 @@ class PositionsController extends AdminController {
     ]);
   }
 
-
   //create new position
   public function create() {
     return view('admin.position.create', [
       'position' => new Position(),
+    ]);
+  }
+
+  public function edit(Request $request) {
+    /** @var Position $position */
+    $position = Position::findOrFail($request->route('id'));
+    return view('admin.position.edit', [
+      'position' => $position,
     ]);
   }
 
