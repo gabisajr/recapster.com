@@ -188,7 +188,7 @@ class Job extends Model {
     return url($url);
   }
 
-  public function get_no_html_description() {
+  public function noHtmlDescription() {
 
     $desc = $this->description;
 
@@ -316,7 +316,7 @@ class Job extends Model {
       ->setUrl($this->url)
       ->setType('article')
       ->setTitle($this->title)
-      ->setDescription($this->get_no_html_description())
+      ->setDescription($this->noHtmlDescription())
       ->setImage($image);
 
     return $page_meta;
