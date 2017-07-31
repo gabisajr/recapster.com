@@ -4,6 +4,7 @@
 @endphp
 <form method="post" role="form" id="job-form" action="{{ route('admin.job.store') }}">
 
+  <input type="hidden" name="id" value="{{ $job->id }}">
   {{ csrf_field() }}
 
   <div class="row">
