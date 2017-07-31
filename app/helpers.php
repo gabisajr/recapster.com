@@ -147,3 +147,35 @@ function status($status_code = null, $gender = 'm') {
 function employments() {
   return \App\Model\EmploymentForm::orderBy('sort')->orderBy('title')->get();
 }
+
+/**
+ * @param \App\Model\Job|Model_Job_Preferences $object //todo replace Model_Job_Preferences
+ * @return string
+ */
+function salary_range($object) {
+  $res = "";
+
+  $thin = \App\HTMLMnemonics::THIN_NON_BREAKING_SPACE;
+
+  if ($object->salary_min || $object->salary_max) {
+    // min and max
+    if ($object->salary_min && $object->salary_max) {
+
+      $res .= number_format($object->salary_min, 0, '.', $thin);
+      $res .= ' - ';
+      $res .= number_format($object->salary_max, 0, '.', $thin);
+
+    } elseif ($object->salary_min) {
+      // only min
+      $res .= __('от') . " " . number_format($object->salary_min, 0, '.', $thin);
+    } else {
+      // only max
+      $res .= __('до') . " " . number_format($object->salary_max, 0, '.', $thin);
+    }
+
+    $res .= ' ' . $object->currency->short;
+
+  }
+
+  return $res;
+}
