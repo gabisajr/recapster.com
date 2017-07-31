@@ -50,7 +50,13 @@ class Handler extends ExceptionHandler {
       || $exception instanceof ModelNotFoundException
       || $exception instanceof MethodNotAllowedHttpException
     ) {
-      $message = __("Страница не найдена");
+
+      if ($exception instanceof NotFoundHttpException) {
+        $message = $exception->getMessage();
+      } else {
+        $message = __("Страница не найдена");
+      }
+
       $code = 404;
       if ($request->ajax()) {
         return response($message, $code, ['Content-Type' => 'text/plain']);
