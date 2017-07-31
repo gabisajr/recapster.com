@@ -182,7 +182,7 @@ class Job extends Model {
     if (!$this->company) return "#";
     if (!$this->company->active) return "#";
 
-    $url = "/{$this->company->alias}/job/";
+    $url = "/{$this->company->alias}/job";
     if ($this->position) $url .= "/{$this->position->alias}";
     $url .= "/{$this->id}";
     return url($url);
