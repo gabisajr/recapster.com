@@ -68,4 +68,8 @@ Route::group(['namespace' => 'Company', 'middleware' => 'load.company'], functio
 
   Route::get('{company}', ['as' => 'company.profile', 'uses' => 'ProfileController@index']);
 
+  //job page
+  Route::get('{company}/job/{position}/{id}', ['as' => 'job', 'uses' => 'JobController@showJobPage']);
+  Route::get('{company}/job/{id}', ['as' => 'job', 'uses' => 'JobController@showJobPage']);
+
 });
