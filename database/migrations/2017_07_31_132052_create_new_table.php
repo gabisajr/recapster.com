@@ -17,6 +17,7 @@ class CreateNewTable extends Migration
             $table->increments('id');
 
             $table->float('cost')->nullable()->comment('цена');
+            $table->float('cost_2')->nullable()->comment('цена 2');
 
             $table->timestamps();
         });
