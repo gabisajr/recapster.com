@@ -99,7 +99,7 @@ class Job extends Model {
    * @param  int|Company|string                   $company
    * @return \Illuminate\Database\Eloquent\Builder
    */
-  public function scopeCompany($query, $company) {
+  public function scopeOfCompany($query, $company) {
     if (is_numeric($company)) {
       return $query->where('company_id', '=', $company);
     } elseif ($company instanceof Company) {
