@@ -43,24 +43,17 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-lg-4">
-      <nav>
-        <ul class="nav nav-tabs">
-          {{--todo routes--}}
-          <li class="nav-item {{ $activeTab == 'all' ? ' active' : '' }} {{ !isset($_GET['noactive']) && !isset($_GET['noconfirmed']) ? ' active' : '' }}">
-            <a class="nav-link" href="{{ route('admin.companies') }}">{{ __('Все компании') }}</a>
-          </li>
-          <li class="nav-item {{ $activeTab == 'new' ? ' active' : '' }} {{ isset($_GET['noactive']) ? ' active' : '' }}">
-            <a class="nav-link" href="{{ "/admin/company/list?noactive" }}">{{ __('Новые') }}</a>
-          </li>
-          <li class="nav-item {{ $activeTab == 'unconfirmed' ? ' active' : '' }} {{ isset($_GET['noconfirmed']) ? ' active' : '' }}">
-            <a class="nav-link" href="{{ "/admin/company/list?noconfirmed" }}">{{ __('Не подтвержденные') }}</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link{{ $activeTab == 'all' ? ' active' : '' }}" href="{{ route('admin.companies') }}">{{ __('Все компании') }}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link{{ $activeTab == 'notActive' ? ' active' : '' }}" href="{{ route('admin.companies', ['notActive' => 1]) }}">{{ __('Новые') }}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link{{ $activeTab == 'unconfirmed' ? ' active' : '' }}" href="{{ route('admin.companies', ['unconfirmed' => 1]) }}">{{ __('Не подтвержденные') }}</a>
+    </li>
+  </ul>
 
   <div class="row top-buffer">
     <div class="col-lg-12">
