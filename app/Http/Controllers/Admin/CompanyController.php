@@ -242,6 +242,24 @@ class CompanyController extends AdminController {
 
   }
 
+  //вакансии компании
+  public function jobs(Request $request) {
+
+    /** @var Company $company */
+    $company = Company::find($request->route('id'));
+
+    $title = __('Вакансии компании') . " " . $company->ofCompany();
+
+    $jobs = $company->jobs()->get();
+
+    return view("admin.company.jobs", [
+      'title'     => $title,
+      'company'   => $company,
+      'activeTab' => 'jobs',
+      'jobs'      => $jobs,
+    ]);
+  }
+
   //добавить фотографию для компании
   public function addImages(Request $request) {
 
@@ -266,7 +284,6 @@ class CompanyController extends AdminController {
 
     return redirect(route('admin.company.images', $company));
   }
-
 
   //add, edit company
   public function action_item() {
