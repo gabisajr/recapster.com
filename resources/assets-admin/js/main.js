@@ -51,6 +51,14 @@ define(['jquery', 'ckfinder', 'ckeditor', 'i18n', 'alert-message', 'confirm-moda
     });
   })();
 
+  //textarea autosize
+  (function () {
+    var $ta = $('textarea.autosize');
+    if ($ta.length) requirejs(['autosize'], function (autosize) {
+      autosize($ta);
+    });
+  })();
+
 
   // $('input[name="video[url]"]').videoAttachment();
 
