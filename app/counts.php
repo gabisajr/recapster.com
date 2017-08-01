@@ -87,7 +87,7 @@ function found_jobs($count) {
     $text = __(':found :count :jobs', [
       ':found' => $count > 1 ? __('Найдено') : __('Найдена'),
       ':count' => $count,
-      ':jobs'  => Text::getNumEnding($count, [__('вакансия'), __('вакансии'), __('вакансий')]),
+      ':jobs'  => getNumEnding($count, [__('вакансия'), __('вакансии'), __('вакансий')]),
     ]);
   } else {
     $text = __('Ничего не найдено');
