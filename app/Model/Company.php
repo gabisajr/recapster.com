@@ -155,6 +155,26 @@ class Company extends Model {
       ->orWhere('alias', 'LIKE', "%$search%");
   }
 
+  /**
+   * Scope a query to only include confirmed companies.
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeConfirmed($query) {
+    return $query->where('confirmed', '=', true);
+  }
+
+  /**
+   * Scope a query to only include unconfirmed companies.
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeUnconfirmed($query) {
+    return $query->where('confirmed', '=', false);
+  }
+
   //todo relation
   protected $_has_many = [
     'followers' => [
