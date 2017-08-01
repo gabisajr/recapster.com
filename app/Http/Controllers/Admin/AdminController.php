@@ -53,7 +53,8 @@ class AdminController extends Controller {
       $maxSort = 0;
     }
 
-    $files = request()->file('images');
+    $uploadedCount = 0;
+    $files = request()->file('images', []);
     if ($files) {
       foreach ($files as $i => $file) {
         $destinationPath = $this->uploadDir;
@@ -65,9 +66,12 @@ class AdminController extends Controller {
         $image->path = "/" . $destinationPath . "/" . $name;
         if ($image->save()) {
           $model->images()->save($image, ['sort' => $maxSort + $i]);
+          $uploadedCount++;
         }
       }
     }
+
+    return $uploadedCount;
   }
 
   public function attachFiles(Model $model) {
