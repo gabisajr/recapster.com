@@ -40,6 +40,10 @@ class City extends Model {
     return $this->hasMany('App\Model\University', 'city_id');
   }
 
+  public function companies() {
+    return $this->hasMany('App\Model\Company', 'hq_city_id');
+  }
+
   public function filters() {
     return [
       'alias' => [
