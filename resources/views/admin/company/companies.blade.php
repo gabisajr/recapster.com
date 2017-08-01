@@ -1,7 +1,7 @@
 @php
   /**
+   * @var string               $search
    * @var string               $title
-   * @var int                  $total
    * @var \App\Model\Company[] $companies
    * @var Pagination           $pagination
    */
@@ -13,16 +13,7 @@
 
 @section('content')
   <h1 class="h5 mb-4">{{ $title }}
-    <small>
-      @if ($total)
-        {{ __('Найдено :total :companies', [
-          ':total'     => $total,
-          ':companies' => Text::getNumEnding($total, [__('компания'), __('компании'), __('компаний')]),
-        ]) }}
-      @else
-        {{ __('Пока нет компаний') }}
-      @endif
-    </small>
+    <small>{{ companies_count($companies->total()) }}</small>
   </h1>
 
   <div class="row">
@@ -30,7 +21,7 @@
       <form role="form" id="search-form">
         <div class="form-group">
           <div class="input-group">
-            <input name="q" value="{{ array_get($_GET, 'q') }}" type="search" class="form-control" placeholder="{{ __('Поиск компании') }}" autocomplete="off">
+            <input name="search" value="{{ $search }}" type="search" class="form-control" placeholder="{{ __('Поиск компании') }}" autocomplete="off">
             <div class="input-group-btn">
               <button class="btn btn-primary" type="submit">{{ __('Найти') }}</button>
             </div>
@@ -222,3 +213,5 @@
     </div>
   </div>
 @endsection
+
+@section('page_js', 'company/list')
