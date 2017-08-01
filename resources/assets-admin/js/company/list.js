@@ -5,7 +5,7 @@ define(['jquery', 'i18n', 'entity-list', 'highlight'], function ($, __) {
   $list.entityList({
     removeUrl: '/admin/company/delete',
     sortable: false,
-    removeQuestion: __('Вы действительно хотите удалить компанию1 :title с сайта', {
+    removeQuestion: __('Вы действительно хотите удалить компанию :title с сайта', {
       ':title': '<strong class="text-nowrap">"{title}"</strong>'
     })
   });
