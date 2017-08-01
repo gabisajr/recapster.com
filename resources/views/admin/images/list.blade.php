@@ -89,3 +89,5 @@
     </tbody>
   </table>
 </div>
+
+{!! $images->links() !!}
