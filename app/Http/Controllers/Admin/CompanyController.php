@@ -25,13 +25,11 @@ class CompanyController extends AdminController {
   public function list(Request $request) {
 
     $title = __('Все компании');
-    $total = 0;
-
     $activeTab = 'all';
     $query = Company::query();
 
-    //$q = Arr::get($_GET, 'q');
-    //
+    $search = $request->input('search');
+
     //$page = Arr::get($_GET, 'page', 1);
     //$offset = ($page - 1) * $this->item_per_page;
     //
@@ -86,15 +84,11 @@ class CompanyController extends AdminController {
     //    DB::expr("(SELECT COUNT(DISTINCT uc.user_id) FROM users_companies uc WHERE uc.company_id = company.id)"),
     //    'employers_count',
     //  ]);
-    //
-    ////фильтр по поисковой строке
-    //if (!empty($q)) {
-    //  $query
-    //    ->and_where_open()
-    //    ->or_where('company.title', 'LIKE', "%$q%")
-    //    ->or_where('company.alias', 'LIKE', "%$q%")
-    //    ->and_where_close();
-    //}
+
+    //фильтр по поисковой строке
+    if (!empty($search)) {
+      $query->search($search);
+    }
 
     //фильтр "Новые компании"
     if ($request->input('notActive')) {
@@ -121,18 +115,15 @@ class CompanyController extends AdminController {
     //  ->offset($offset)
     //  ->find_all();
 
-    $companies = $query->get(); //todo paginate
+    $companies = $query->paginate($this->itemsPerPage);
 
 
     return view("admin.company.companies", [
       'title'     => $title,
+      'search'    => $search,
       'companies' => $companies,
-      'total'     => $total,
-      'activeTab' => $activeTab
-      //'pagination' => $this->get_pagination($total),
+      'activeTab' => $activeTab,
     ]);
-
-    //$this->main_js = '/js/admin/company/list.js';
   }
 
   public function create() {
@@ -371,6 +362,11 @@ class CompanyController extends AdminController {
     /** @var Model_Company $company */
     $company = ORM::factory('Company', Arr::get($_POST, 'company'));
     if ($company->loaded() && $company->ceo->loaded()) $company->ceo->delete();
+  }
+
+  public function delete(Request $request) {
+    $company = Company::find($request->input('id'));
+    if ($company) $company->delete();
   }
 
 }
