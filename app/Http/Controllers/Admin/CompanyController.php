@@ -266,16 +266,15 @@ class CompanyController extends AdminController {
       return redirect(route('admin.companies'));
     }
 
-    $this->uploadImages($company);
+    //загрузка фотографий
+    $uploadedImagesCount = $this->uploadImages($company);
 
-    //if ($added_images_count) { //todo session success message
-    //  Session::instance()->set('message_success', __('Для компании :for_company :added :count :images', [
-    //    ':for_company' => $company->for_company,
-    //    ':added'       => $added_images_count == 1 ? __('добавлена') : __('добавлено'),
-    //    ':count'       => $added_images_count,
-    //    ':images'      => Text::getNumEnding($added_images_count, [__('фотография'), __('фотографии'), __('фотографий')]),
-    //  ]));
-    //}
+    if ($uploadedImagesCount) {
+      $message = __("Для компании") . " " . $company->forCompany() . " ";
+      $message .= $uploadedImagesCount == 1 ? __('добавлена') : __('добавлено');
+      $message .= " " . photos_count($uploadedImagesCount);
+      session(['message_success' => $message]);
+    }
 
     return redirect(route('admin.company.images', $company));
   }
