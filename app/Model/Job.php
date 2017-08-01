@@ -120,6 +120,16 @@ class Job extends Model {
     return $query->where('status', '=', $status);
   }
 
+  /**
+   * Scope a query to only approved jobs
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeApproved($query) {
+    return $query->status(Status::APPROVED);
+  }
+
   public function filters() {
     return [
       'description' => [
