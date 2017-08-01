@@ -44,6 +44,32 @@ class City extends Model {
     return $this->hasMany('App\Model\Company', 'hq_city_id');
   }
 
+  /**
+   * Scope a query to only cities, which are has active companies
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeHasActiveCompanies($query) {
+    return $query->whereHas('companies', function ($query) {
+      $query->active();
+    });
+  }
+
+  /**
+   * Scope a query to only cities, which are has active companies, set active_companies_count attribute
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeWithActiveCompaniesCount($query) {
+    return $query->withCount([
+      'companies as active_companies' => function ($query) {
+        $query->active();
+      },
+    ]);
+  }
+
   public function filters() {
     return [
       'alias' => [
