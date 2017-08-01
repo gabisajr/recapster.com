@@ -20,6 +20,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
   Route::get('company/create', ['as' => 'admin.company.create', 'uses' => 'CompanyController@create']);
   Route::get('company/edit/{id}', ['as' => 'admin.company.edit', 'uses' => 'CompanyController@edit']);
   Route::post('company/store', ['as' => 'admin.company.store', 'uses' => 'CompanyController@store']);
+  Route::post('company/delete', ['as' => 'admin.company.delete', 'uses' => 'CompanyController@delete']);
   Route::get("company/images/{id}", ['as' => 'admin.company.images', 'uses' => 'CompanyController@images']);
   Route::post('company/addImages', ['as' => 'admin.company.addImages', 'uses' => 'CompanyController@addImages']);
 
@@ -57,7 +58,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 });
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
-Route::get('companies', ['as' => 'companies', 'uses' => 'CompaniesController@index']);
+
+//search
+Route::group(['namespace' => 'Search'], function () {
+  Route::get('companies', ['as' => 'companies', 'uses' => 'CompaniesController@index']);
+  Route::get('jobs', ['as' => 'jobs', 'uses' => 'JobsController@index']);
+});
 
 //fast search
 Route::get('position/search', ['as' => 'position.search', 'uses' => 'PositionController@search']);
