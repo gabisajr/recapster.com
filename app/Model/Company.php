@@ -143,6 +143,13 @@ class Company extends Model {
     return $query->where('active', '=', false)->orWhere('active', '=', null);
   }
 
+  /**
+   * Scope a query to only companies, which title or alias like $search string.
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @param  string                               $search
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
   public function scopeSearch($query, $search) {
     return $query->where('title', 'LIKE', "%$search%")
       ->orWhere('alias', 'LIKE', "%$search%");
