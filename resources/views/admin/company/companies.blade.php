@@ -207,9 +207,7 @@
           </table>
         </div>
       @endif
-      @php
-        // todo $pagination
-      @endphp
+      {!! $companies->links() !!}
     </div>
   </div>
 @endsection
