@@ -105,7 +105,7 @@ class City extends Model {
    * Если я живу в той же стране что и город - тогда мне пойдет:
    * "Астана", а если я в другой стране, тогда "Астана, Казахстан"
    */
-  public function title_regard_to_me() { //todo camelCase
+  public function titleRegardToMe() { //todo camelCase
 
     if (!$this->loaded()) return "<em class='text-muted'>(" . __('нет') . ")</em>";
 
