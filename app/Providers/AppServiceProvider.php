@@ -6,6 +6,7 @@ use App\Model\Image;
 use App\Observers\ImageObserver;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class AppServiceProvider extends ServiceProvider {
   /**
@@ -19,6 +20,9 @@ class AppServiceProvider extends ServiceProvider {
 
     //custom validation functions
     $this->defineGreaterThanValidationRule();
+
+    //set default pagination view
+    LengthAwarePaginator::defaultView('pagination.bootstrap-4');
   }
 
   private function defineGreaterThanValidationRule() {
