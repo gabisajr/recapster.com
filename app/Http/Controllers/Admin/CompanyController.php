@@ -235,9 +235,6 @@ class CompanyController extends AdminController {
       //'total'      => $total,
       //'pagination' => $this->get_pagination($total),
     ]);
-
-    $this->main_js = '/js/admin/image/list.js'; //todo
-
   }
 
   //вакансии компании
