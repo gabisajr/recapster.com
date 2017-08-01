@@ -79,3 +79,19 @@ function found_companies($count) {
 
   return $text;
 }
+
+//"Найдено 10 вакансий"
+function found_jobs($count) {
+
+  if ($count) {
+    $text = __(':found :count :jobs', [
+      ':found' => $count > 1 ? __('Найдено') : __('Найдена'),
+      ':count' => $count,
+      ':jobs'  => Text::getNumEnding($count, [__('вакансия'), __('вакансии'), __('вакансий')]),
+    ]);
+  } else {
+    $text = __('Ничего не найдено');
+  }
+
+  return $text;
+}
