@@ -50,7 +50,7 @@
 
           @if ($job->is_internship)
             <span class="separator"></span>
-            <a href="/search?type=jobs&job_type=internship">{{ __('Стажировка') }}</a>
+            <a href="{{ route('jobs', ['internship' => true]) }}">{{ __('Стажировка') }}</a>
           @endif
 
           @if ($salary_range = salary_range($job))
@@ -67,7 +67,7 @@
         @if ($job_tags->count())
           <p class="tags">
             @foreach ($job_tags as $tag)
-              <a class="post-tag" href="{{ "/search?q={$tag->title}&type=jobs" }}">{{ $tag->title }}</a>
+              <a class="post-tag" href="{{ route('jobs', ['search' => $tag->title]) }}">{{ $tag->title }}</a>
             @endforeach
           </p>
         @endif
