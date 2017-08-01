@@ -110,6 +110,18 @@ class Job extends Model {
   }
 
   /**
+   * Scope a query to only jobs of active companies
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeOfActiveCompanies($query) {
+    return $query->leftJoin('companies', function ($join) {
+      $join->on('jobs.company_id', '=', 'companies.id')->where('companies.active', '=', true);
+    })->select('jobs.*');
+  }
+
+  /**
    * Scope a query to only jobs with specific status
    *
    * @param \Illuminate\Database\Eloquent\Builder $query
