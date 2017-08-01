@@ -116,7 +116,7 @@ class Job extends Model {
    * @return \Illuminate\Database\Eloquent\Builder
    */
   public function scopeOfActiveCompanies($query) {
-    return $query->leftJoin('companies', function ($join) {
+    return $query->rightJoin('companies', function ($join) {
       $join->on('jobs.company_id', '=', 'companies.id')->where('companies.active', '=', true);
     })->select('jobs.*');
   }
