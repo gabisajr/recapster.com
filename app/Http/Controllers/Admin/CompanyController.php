@@ -163,8 +163,6 @@ class CompanyController extends AdminController {
 
     $is_new = !$company->exists;
 
-    //todo stop here: save company city
-
     //сохраняем данные
     $company->title = $request->input('title');
     $company->active = $request->input('active') ? true : false;
