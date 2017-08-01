@@ -32,7 +32,7 @@ class Industry extends Model {
    * @return \Illuminate\Database\Eloquent\Builder
    */
   public function scopeApproved($query) {
-    return $query->where('industry.approved', '=', true);
+    return $query->where('approved', '=', true);
   }
 
   public function rules() { //todo validation
