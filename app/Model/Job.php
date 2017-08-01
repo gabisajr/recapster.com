@@ -136,9 +136,19 @@ class Job extends Model {
    * @param \Illuminate\Database\Eloquent\Builder $query
    * @return \Illuminate\Database\Eloquent\Builder
    */
-  public function scopeNotInternship($query) {
+  public function scopeNotInternships($query) {
     return $query->where('is_internship', 'is', null)
       ->orWhere('is_internship', '=', false);
+  }
+
+  /**
+   * Scope a query to only jobs, which are internships
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeInternships($query) {
+    return $query->where('is_internship', '=', true);
   }
 
   public function filters() {
