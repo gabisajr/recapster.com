@@ -133,6 +133,16 @@ class Company extends Model {
     return $query->where('active', '=', true);
   }
 
+  /**
+   * Scope a query to only include not active companies.
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeNotActive($query) {
+    return $query->where('active', '=', false)->orWhere('active', '=', null);
+  }
+
   public function scopeSearch($query, $search) {
     return $query->where('title', 'LIKE', "%$search%")
       ->orWhere('alias', 'LIKE', "%$search%");
