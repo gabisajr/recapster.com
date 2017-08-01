@@ -22,11 +22,13 @@ class CompanyController extends AdminController {
   protected $sort_direction = 'DESC';
 
   //list of companies
-  public function list() {
+  public function list(Request $request) {
 
     $title = __('Все компании');
     $total = 0;
-    $companies = Company::all();
+
+    $activeTab = 'all';
+    $query = Company::query();
 
     //$q = Arr::get($_GET, 'q');
     //
@@ -93,19 +95,21 @@ class CompanyController extends AdminController {
     //    ->or_where('company.alias', 'LIKE', "%$q%")
     //    ->and_where_close();
     //}
-    //
-    ////фильтр "Новые компании"
-    //if (isset($_GET['noactive'])) {
-    //  $title = __('Новые компании');
-    //  $query->and_where('active', '=', false);
-    //}
-    //
-    ////фильтр "Не подтвержденные"
-    //if (isset($_GET['noconfirmed'])) {
-    //  $title = __('Не подтвержденные компании');
-    //  $query->and_where('confirmed', '=', false);
-    //}
-    //
+
+    //фильтр "Новые компании"
+    if ($request->input('notActive')) {
+      $title = __('Новые компании');
+      $activeTab = 'notActive';
+      $query->notActive();
+    }
+
+    //фильтр "Не подтвержденные"
+    if ($request->input('unconfirmed')) {
+      $title = __('Не подтвержденные компании');
+      $activeTab = 'unconfirmed';
+      $query->unconfirmed();
+    }
+
     //$total = $query->reset(false)->count_all();
     //$companies = $query
     //  ->order_by('pending_reviews_count', 'DESC')
@@ -117,12 +121,14 @@ class CompanyController extends AdminController {
     //  ->offset($offset)
     //  ->find_all();
 
+    $companies = $query->get(); //todo paginate
+
 
     return view("admin.company.companies", [
       'title'     => $title,
       'companies' => $companies,
       'total'     => $total,
-      'activeTab' => 'all' //todo filter
+      'activeTab' => $activeTab
       //'pagination' => $this->get_pagination($total),
     ]);
 
