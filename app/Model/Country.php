@@ -29,20 +29,6 @@ class Country extends Model {
     return $this->hasMany('App\Model\City', 'country_id');
   }
 
-  public function filters() {
-    return [
-      true    => [
-        ['trim'],
-        [function ($value) {
-          return (!$value) ? null : $value;
-        }],
-      ],
-      'title' => [
-        ['trim'],
-      ],
-    ];
-  }
-
   public function rules() {
     return [
       'title'    => [
