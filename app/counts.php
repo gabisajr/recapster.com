@@ -64,6 +64,13 @@ function cities_count($count) {
   return __("нет городов");
 }
 
+function companies_count($count) {
+  if ($count) {
+    return $count . ' ' . getNumEnding($count, [__('компания'), __('компании'), __('компаний')]);
+  }
+  return __("нет компаний");
+}
+
 //"Найдено 10 компаний"
 function found_companies($count) {
 
