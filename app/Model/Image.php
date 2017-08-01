@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\ImageManager;
+use App\Status;
 use Illuminate\Database\Eloquent\Model;
 use Exception;
 use ImageOptimizer\OptimizerFactory;
@@ -194,6 +195,10 @@ class Image extends Model {
     }
 
     return $this;
+  }
+
+  public function isPending() {
+    return $this->status == Status::PENDING;
   }
 
 }
