@@ -130,6 +130,17 @@ class Job extends Model {
     return $query->status(Status::APPROVED);
   }
 
+  /**
+   * Scope a query to only jobs, which are not internships
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeNotInternship($query) {
+    return $query->where('is_internship', 'is', null)
+      ->orWhere('is_internship', '=', false);
+  }
+
   public function filters() {
     return [
       'description' => [
