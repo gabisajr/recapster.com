@@ -25,6 +25,16 @@ class Industry extends Model {
     ],
   ];
 
+  /**
+   * Scope a query to only approved industries
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeApproved($query) {
+    return $query->where('industry.approved', '=', true);
+  }
+
   public function rules() { //todo validation
     return [
       'title' => [
