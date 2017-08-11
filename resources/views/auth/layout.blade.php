@@ -21,13 +21,17 @@
 </head>
 <body>
 <div class="container no-pad-xs">
-  <div class="auth">
-    <a href="{{ route('home') }}" class="hidden-xs"><img src="{{ asset('images/logo-black.png') }}" class="auth-logo"></a>
-    @yield('content')
-    @if (isset($bot_text) && $bot_text)
-      <div class="auth-bot-text text-center marg-top">{{ $bot_text }}</div>
-    @endif
-    <footer class="auth-footer">© {{ date('Y') }} {{ config('app.name') }}</footer>
+  <div class="row justify-content-center">
+    <div class="col col-auto">
+      <div class="auth">
+        <a href="{{ route('home') }}" class="hidden-xs"><img src="{{ asset('images/logo-black.png') }}" class="auth-logo"></a>
+        @yield('content')
+        @if (isset($bot_text) && $bot_text)
+          <div class="auth-bot-text text-center marg-top">{{ $bot_text }}</div>
+        @endif
+        <footer class="auth-footer">© {{ date('Y') }} {{ config('app.name') }}</footer>
+      </div>
+    </div>
   </div>
 </div>
 @if (isset($main_js))
