@@ -40,6 +40,9 @@ requirejs.config({
     },
     notify: {
       deps: ['jquery']
+    },
+    bootstrap: {
+      deps: ['jquery']
     }
   }
 
