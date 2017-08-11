@@ -83,6 +83,12 @@ Route::group(['namespace' => 'Auth'], function () {
 
   //выход
   Route::post('signout', ['as' => 'signout', 'uses' => 'LoginController@logout']);
+
+  //восстановление доступа
+  Route::get('restore', ['as' => 'restore', 'uses' => 'ForgotPasswordController@showLinkRequestForm']);
+  Route::post('restore', ['as' => 'restore', 'uses' => 'ForgotPasswordController@sendResetLinkEmail']);
+  Route::get('password/reset/{token}', ['as' => 'password.reset', 'uses' => 'ResetPasswordController@showResetForm']);
+
 });
 
 //company
