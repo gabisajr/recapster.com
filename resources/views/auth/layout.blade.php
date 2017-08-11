@@ -31,7 +31,7 @@
   </div>
 </div>
 @if (isset($main_js))
-  <script src="/vendor/require.js"></script>
+  <script src="{{ asset('/lib/require.js') }}"></script>
   <script>requirejs(['/js/common.js'], function () { requirejs(['{{ $main_js }}']) })</script>
 @endif
 </body>
