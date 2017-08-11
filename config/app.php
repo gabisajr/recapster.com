@@ -14,6 +14,8 @@ return [
 
   'name' => env('APP_NAME', 'Laravel'),
 
+  'desc' => env('APP_DESC'),
+
   'logo_min_size' => 640,
 
   /*
