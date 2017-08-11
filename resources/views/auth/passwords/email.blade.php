@@ -22,9 +22,9 @@
         </div>
 
         @if ($useRecaptcha)
-          <div class="form-group">
-            <div class="text-danger">{{ $errors->first('g-recaptcha-response') }}</div>
+          <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-danger' : '' }}">
             <div class="g-recaptcha" data-sitekey="{{ config('google-recaptcha.sitekey') }}"></div>
+            <div class="form-control-feedback text-center">{{ $errors->first('g-recaptcha-response') }}</div>
           </div>
         @endif
 
