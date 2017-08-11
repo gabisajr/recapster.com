@@ -1,0 +1,3 @@
+define(function () {
+  requirejs(['recaptcha']);
+});
