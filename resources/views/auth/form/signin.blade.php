@@ -42,9 +42,7 @@
 
     <div class="text-muted">
       <a href="{{ route('restore') }}">{{ __('Забыли пароль?') }}</a>
-      @if (isset($show_signup_link) && $show_signup_link)
-        <a href="{{ route('signup') }}" class="pull-right">{{ __('Регистрация') }}</a>
-      @endif
+      <a href="{{ route('signup') }}" class="pull-right">{{ __('Регистрация') }}</a>
     </div>
 
   </div>
