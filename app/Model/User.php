@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Notifications\PasswordResetNotification;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -47,6 +48,18 @@ class User extends Authenticatable {
 
   public function url($section = null) {
     return url("/$this->username/$section");
+  }
+
+
+  /**
+   * Send the password reset notification.
+   *
+   * @param  string $token
+   * @return void
+   */
+  public function sendPasswordResetNotification($token) {
+    $notification = new PasswordResetNotification($token);
+    $this->notify($notification);
   }
 
 }
