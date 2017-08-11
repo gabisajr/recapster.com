@@ -9,6 +9,8 @@
 
 @extends('company.layout.job')
 
+@section('title'){{ $job->title }}@endsection
+
 @section('center')
   <div class="panel">
     <div class="panel-body page-post">
@@ -32,7 +34,7 @@
         <p class="page-post-pre">
           <time datetime="{{ $job->created_at->format('Y-m-d H:i') }}">
             {{ $job->created_at->format('j M Y') }}
-            {{--          {{ mb_strtolower(Date::rus_date('j M Y', $time)) }}--}}
+            {{-- {{ mb_strtolower(Date::rus_date('j M Y', $time)) }}--}}
           </time>
 
 
@@ -111,5 +113,6 @@
 @endsection
 
 @section('right')
-  {{--todo stop here: right from D:\OpenServer\domains\www.recapster.local\modules\company\classes\Layout\Company\Job.php--}}
+  @include('company.aside')
+  {!! $share !!}
 @endsection
