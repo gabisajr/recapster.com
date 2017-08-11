@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Http\Request;
 
 class ForgotPasswordController extends Controller {
   /*
@@ -29,7 +30,27 @@ class ForgotPasswordController extends Controller {
   }
 
   public function showLinkRequestForm() {
-    return view('auth.restore');
+    return view('auth.passwords.email', [
+      'title'        => __('Восстановление пароля'),
+      'main_js'      => 'restore',
+      //'useRecaptcha' => config('app.env') == 'production',
+      'useRecaptcha' => true, //todo only for production env
+    ]);
+  }
+
+  /**
+   * Validate the email for the given request.
+   *
+   * @param \Illuminate\Http\Request $request
+   * @return void
+   */
+  protected function validateEmail(Request $request) {
+    $this->validate($request, [
+      'email' => 'required|email',
+      //todo validate google recaptcha
+    ], [
+      'email.required' => 'Введите Email, указанный при регистрации'
+    ]);
   }
 
 }
