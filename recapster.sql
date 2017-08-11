@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июл 26 2017 г., 22:49
+-- Время создания: Авг 11 2017 г., 16:24
 -- Версия сервера: 5.5.53
 -- Версия PHP: 7.0.14
 
@@ -247,7 +247,8 @@ CREATE TABLE `companies` (
 --
 
 INSERT INTO `companies` (`id`, `alias`, `title`, `rating`, `created_user_id`, `updated_user_id`, `logo_id`, `cover_id`, `site`, `short_desc`, `size_id`, `revenue_id`, `hq_city_id`, `foundation_year`, `description`, `confirmed`, `active`, `reviews_count`, `salaries_count`, `interviews_count`, `jobs_count`, `internship_count`, `benefits_count`, `images_count`, `followers_count`, `tel`, `vk_group_id`, `created_at`, `updated_at`) VALUES
-(1, 'recapster', 'recapster', 0.00, NULL, NULL, 2, 3, 'http://recapster.com/', NULL, 1, NULL, 2, 2015, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, '2017-07-23 03:51:15', '2017-07-23 07:31:51');
+(1, 'recapster', 'Recapster', 0.00, NULL, NULL, 2, 3, 'http://recapster.com/', NULL, 1, NULL, 2, 2015, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, '2017-07-23 03:51:15', '2017-08-01 11:40:28'),
+(2, 'epam-kazakhstan', 'Epam Kazakhstan', 0.00, NULL, NULL, 48, NULL, 'https://www.epam.com/', NULL, NULL, NULL, NULL, NULL, 'EPAM Systems один из лидеров ИТ рынка, надежный партнер для сложных и масштабных проектов\r\nОснованная в 1993 году, сегодня ЕРАМ Systems входит в число крупнейших ИТ-компаний мира.\r\nСегодня это офисы в 25-ти странах мира, 25 000 + сотрудников, из них 18 000+ разработчиков.\r\nEPAM Systems является признанным лидером в таких областях, как: Разработка, тестирование, сопровождение и поддержка заказного программного обеспечения и бизнес-приложений. Интеграция приложений, интеграция систем на базе продуктов SAP, Oracle, IBM, Microsoft. Создание выделенных центров разработки (центров компетенции), центров тестирования и контроля качества программного обеспечения ИТ-консалтинг с учетом отраслевой специфики бизнеса.\r\nВ Казахстане EPAM Systems  работает с 2008 года. Мы ведем проекты в городах Астана, Караганда, Атырау и Алматы.', 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, '2017-08-01 02:40:21', '2017-08-01 12:20:29');
 
 -- --------------------------------------------------------
 
@@ -260,6 +261,26 @@ CREATE TABLE `company_images` (
   `image_id` int(10) UNSIGNED NOT NULL,
   `sort` int(10) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `company_images`
+--
+
+INSERT INTO `company_images` (`company_id`, `image_id`, `sort`) VALUES
+(1, 17, 0),
+(1, 18, 1),
+(1, 19, 2),
+(1, 20, 3),
+(1, 21, 4),
+(1, 22, 5),
+(1, 23, 6),
+(1, 24, 7),
+(1, 25, 8),
+(1, 26, 9),
+(1, 27, 10),
+(1, 28, 11),
+(1, 29, 12),
+(1, 30, 13);
 
 -- --------------------------------------------------------
 
@@ -609,7 +630,8 @@ INSERT INTO `countries` (`id`, `title`, `iso_code`, `vk_id`, `created_at`, `upda
 --
 
 CREATE TABLE `currencies` (
-  `code` varchar(3) NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `code` varchar(3) DEFAULT NULL,
   `title` varchar(255) NOT NULL,
   `symbol` varchar(1) DEFAULT NULL COMMENT 'символ волюты',
   `short` varchar(5) DEFAULT NULL COMMENT 'сокращеное название (тг, руб)',
@@ -621,164 +643,164 @@ CREATE TABLE `currencies` (
 -- Дамп данных таблицы `currencies`
 --
 
-INSERT INTO `currencies` (`code`, `title`, `symbol`, `short`, `created_at`, `updated_at`) VALUES
-('AED', 'Дирхам ОАЭ', NULL, NULL, NULL, NULL),
-('AFN', 'Афгани', NULL, NULL, NULL, NULL),
-('ALL', 'Лек', NULL, NULL, NULL, NULL),
-('AMD', 'Армянский драм', NULL, NULL, NULL, NULL),
-('ANG', 'нидерландский антильский гульден', NULL, NULL, NULL, NULL),
-('AOA', 'Кванза', NULL, NULL, NULL, NULL),
-('ARS', 'Аргентинское песо', NULL, NULL, NULL, NULL),
-('AUD', 'Австралийский доллар', NULL, NULL, NULL, NULL),
-('AWG', 'Арубанский флорин', NULL, NULL, NULL, NULL),
-('AZN', 'Азербайджанский манат', NULL, NULL, NULL, NULL),
-('BAM', 'Конвертируемая марка', NULL, NULL, NULL, NULL),
-('BBD', 'Барбадосский доллар', NULL, NULL, NULL, NULL),
-('BDT', 'Така', NULL, NULL, NULL, NULL),
-('BGN', 'Болгарский лев', NULL, NULL, NULL, NULL),
-('BHD', 'Бахрейнский динар', NULL, NULL, NULL, NULL),
-('BIF', 'Бурундийский франк', NULL, NULL, NULL, NULL),
-('BMD', 'Бермудский доллар', NULL, NULL, NULL, NULL),
-('BND', 'Брунейский доллар', NULL, NULL, NULL, NULL),
-('BOB', 'Боливиано', NULL, NULL, NULL, NULL),
-('BRL', 'Бразильский реал', NULL, NULL, NULL, NULL),
-('BSD', 'Багамский доллар', NULL, NULL, NULL, NULL),
-('BTN', 'Нгултрум', NULL, NULL, NULL, NULL),
-('BWP', 'Пула', NULL, NULL, NULL, NULL),
-('BYR', 'Белорусский рубль', NULL, NULL, NULL, NULL),
-('BZD', 'Белизский доллар', NULL, NULL, NULL, NULL),
-('CAD', 'Канадский доллар', NULL, NULL, NULL, NULL),
-('CDF', 'Конголезский франк', NULL, NULL, NULL, NULL),
-('CHF', 'Швейцарский франк', NULL, NULL, NULL, NULL),
-('CLP', 'Чилийское песо', NULL, NULL, NULL, NULL),
-('CNY', 'Юань', NULL, NULL, NULL, NULL),
-('COP', 'Колумбийское песо', NULL, NULL, NULL, NULL),
-('CRC', 'Коста-риканский колон', NULL, NULL, NULL, NULL),
-('CUP', 'Кубинское песо', NULL, NULL, NULL, NULL),
-('CVE', 'Эскудо Кабо-Верде', NULL, NULL, NULL, NULL),
-('CZK', 'Чешская крона', NULL, NULL, NULL, NULL),
-('DJF', 'Франк Джибути', NULL, NULL, NULL, NULL),
-('DKK', 'Датская крона', NULL, NULL, NULL, NULL),
-('DOP', 'Доминиканское песо', NULL, NULL, NULL, NULL),
-('DZD', 'Алжирский динар', NULL, NULL, NULL, NULL),
-('EGP', 'Египетский фунт', NULL, NULL, NULL, NULL),
-('ERN', 'Накфа', NULL, NULL, NULL, NULL),
-('ETB', 'Эфиопский быр', NULL, NULL, NULL, NULL),
-('EUR', 'Евро', NULL, 'eur', NULL, NULL),
-('FJD', 'Доллар Фиджи', NULL, NULL, NULL, NULL),
-('FKP', 'Фунт Фолклендских островов', NULL, NULL, NULL, NULL),
-('GBP', 'Фунт стерлингов', NULL, NULL, NULL, NULL),
-('GEL', 'Лари', NULL, NULL, NULL, NULL),
-('GHS', 'Ганский седи', NULL, NULL, NULL, NULL),
-('GIP', 'Гибралтарский фунт', NULL, NULL, NULL, NULL),
-('GMD', 'Даласи', NULL, NULL, NULL, NULL),
-('GNF', 'Гвинейский франк', NULL, NULL, NULL, NULL),
-('GTQ', 'Кетсаль', NULL, NULL, NULL, NULL),
-('GYD', 'Гайанский доллар', NULL, NULL, NULL, NULL),
-('HKD', 'Гонконгский доллар', NULL, NULL, NULL, NULL),
-('HNL', 'Лемпира', NULL, NULL, NULL, NULL),
-('HRK', 'Хорватская куна', NULL, NULL, NULL, NULL),
-('HTG', 'Гурд', NULL, NULL, NULL, NULL),
-('HUF', 'Форинт', NULL, NULL, NULL, NULL),
-('IDR', 'Рупия', NULL, NULL, NULL, NULL),
-('ILS', 'Новый израильский шекель', NULL, NULL, NULL, NULL),
-('INR', 'Индийская рупия', NULL, NULL, NULL, NULL),
-('IQD', 'Иракский динар', NULL, NULL, NULL, NULL),
-('IRR', 'Иранский риал', NULL, NULL, NULL, NULL),
-('ISK', 'Исландская крона', NULL, NULL, NULL, NULL),
-('JMD', 'Ямайский доллар', NULL, NULL, NULL, NULL),
-('JOD', 'Иорданский динар', NULL, NULL, NULL, NULL),
-('JPY', 'Иена', NULL, NULL, NULL, NULL),
-('KES', 'Кенийский шиллинг', NULL, NULL, NULL, NULL),
-('KGS', 'Сом', NULL, NULL, NULL, NULL),
-('KHR', 'Риель', NULL, NULL, NULL, NULL),
-('KMF', 'Франк Комор', NULL, NULL, NULL, NULL),
-('KPW', 'Северокорейская вона', NULL, NULL, NULL, NULL),
-('KRW', 'Вона', NULL, NULL, NULL, NULL),
-('KWD', 'Кувейтский динар', NULL, NULL, NULL, NULL),
-('KYD', 'Доллар Островов Кайман', NULL, NULL, NULL, NULL),
-('KZT', 'Тенге', '₸', 'тг', NULL, NULL),
-('LAK', 'Кип', NULL, NULL, NULL, NULL),
-('LBP', 'Ливанский фунт', NULL, NULL, NULL, NULL),
-('LKR', 'Шри-ланкийская рупия', NULL, NULL, NULL, NULL),
-('LRD', 'Либерийский доллар', NULL, NULL, NULL, NULL),
-('LSL', 'Лоти', NULL, NULL, NULL, NULL),
-('LYD', 'Ливийский динар', NULL, NULL, NULL, NULL),
-('MAD', 'Марокканский дирхам', NULL, NULL, NULL, NULL),
-('MDL', 'Молдавский лей', NULL, NULL, NULL, NULL),
-('MGA', 'Малагасийский ариари', NULL, NULL, NULL, NULL),
-('MKD', 'Денар', NULL, NULL, NULL, NULL),
-('MMK', 'Кьят', NULL, NULL, NULL, NULL),
-('MNT', 'Тугрик', NULL, NULL, NULL, NULL),
-('MOP', 'Патака', NULL, NULL, NULL, NULL),
-('MRO', 'Угия', NULL, NULL, NULL, NULL),
-('MUR', 'Маврикийская рупия', NULL, NULL, NULL, NULL),
-('MVR', 'Руфия', NULL, NULL, NULL, NULL),
-('MWK', 'Квача', NULL, NULL, NULL, NULL),
-('MXN', 'Мексиканское песо', NULL, NULL, NULL, NULL),
-('MYR', 'Малайзийский ринггит', NULL, NULL, NULL, NULL),
-('MZN', 'Мозамбикский метикал', NULL, NULL, NULL, NULL),
-('NAD', 'Доллар Намибии', NULL, NULL, NULL, NULL),
-('NGN', 'Найра', NULL, NULL, NULL, NULL),
-('NIO', 'Золотая кордоба', NULL, NULL, NULL, NULL),
-('NOK', 'Норвежская крона', NULL, NULL, NULL, NULL),
-('NPR', 'Непальская рупия', NULL, NULL, NULL, NULL),
-('NZD', 'Новозеландский доллар', NULL, NULL, NULL, NULL),
-('OMR', 'Оманский риал', NULL, NULL, NULL, NULL),
-('PAB', 'Бальбоа', NULL, NULL, NULL, NULL),
-('PEN', 'Новый соль', NULL, NULL, NULL, NULL),
-('PGK', 'Кина', NULL, NULL, NULL, NULL),
-('PHP', 'Филиппинское песо', NULL, NULL, NULL, NULL),
-('PKR', 'Пакистанская рупия', NULL, NULL, NULL, NULL),
-('PLN', 'Злотый', NULL, NULL, NULL, NULL),
-('PRB', 'Приднестровский рубль', NULL, NULL, NULL, NULL),
-('PYG', 'Гуарани', NULL, NULL, NULL, NULL),
-('QAR', 'Катарский риал', NULL, NULL, NULL, NULL),
-('RON', 'Новый румынский лей', NULL, NULL, NULL, NULL),
-('RSD', 'Сербский динар', NULL, NULL, NULL, NULL),
-('RUB', 'Российский рубль', NULL, 'руб', NULL, NULL),
-('RWF', 'Франк Руанды', NULL, NULL, NULL, NULL),
-('SAR', 'Саудовский риял', NULL, NULL, NULL, NULL),
-('SBD', 'Доллар Соломоновых Островов', NULL, NULL, NULL, NULL),
-('SCR', 'Сейшельская рупия', NULL, NULL, NULL, NULL),
-('SDG', 'Суданский фунт', NULL, NULL, NULL, NULL),
-('SEK', 'Шведская крона', NULL, NULL, NULL, NULL),
-('SGD', 'Сингапурский доллар', NULL, NULL, NULL, NULL),
-('SHP', 'Фунт Святой Елены', NULL, NULL, NULL, NULL),
-('SLL', 'Леоне', NULL, NULL, NULL, NULL),
-('SOS', 'Сомалийский шиллинг', NULL, NULL, NULL, NULL),
-('SRD', 'Суринамский доллар', NULL, NULL, NULL, NULL),
-('SSP', 'Южносуданский фунт', NULL, NULL, NULL, NULL),
-('STD', 'Добра', NULL, NULL, NULL, NULL),
-('SVC', 'Сальвадорский колон', NULL, NULL, NULL, NULL),
-('SYP', 'Сирийский фунт', NULL, NULL, NULL, NULL),
-('SZL', 'Лилангени', NULL, NULL, NULL, NULL),
-('THB', 'Бат', NULL, NULL, NULL, NULL),
-('TJS', 'Сомони', NULL, NULL, NULL, NULL),
-('TMT', 'Новый туркменский манат', NULL, NULL, NULL, NULL),
-('TND', 'Тунисский динар', NULL, NULL, NULL, NULL),
-('TOP', 'Паанга', NULL, NULL, NULL, NULL),
-('TRY', 'Турецкая лира', NULL, NULL, NULL, NULL),
-('TTD', 'Доллар Тринидада и Тобаго', NULL, NULL, NULL, NULL),
-('TWD', 'Новый тайваньский доллар', NULL, NULL, NULL, NULL),
-('TZS', 'Танзанийский шиллинг', NULL, NULL, NULL, NULL),
-('UAH', 'Гривна', NULL, 'грн', NULL, NULL),
-('UGX', 'Угандийский шиллинг', NULL, NULL, NULL, NULL),
-('USD', 'Доллар США', NULL, 'usd', NULL, NULL),
-('UYU', 'Уругвайское песо', NULL, NULL, NULL, NULL),
-('UZS', 'Узбекский сум', NULL, NULL, NULL, NULL),
-('VEF', 'Боливар фуэрте', NULL, NULL, NULL, NULL),
-('VND', 'Донг', NULL, NULL, NULL, NULL),
-('VUV', 'Вату', NULL, NULL, NULL, NULL),
-('WST', 'Тала', NULL, NULL, NULL, NULL),
-('XAF', 'Франк КФА BEAC', NULL, NULL, NULL, NULL),
-('XCD', 'Восточно-карибский доллар', NULL, NULL, NULL, NULL),
-('XOF', 'Франк КФА BCEAO', NULL, NULL, NULL, NULL),
-('XPF', 'Франк КФП', NULL, NULL, NULL, NULL),
-('YER', 'Йеменский риал', NULL, NULL, NULL, NULL),
-('ZAR', 'Рэнд', NULL, NULL, NULL, NULL),
-('ZMW', 'Замбийская квача', NULL, NULL, NULL, NULL),
-('ZWL', 'Доллар Зимбабве', NULL, NULL, NULL, NULL);
+INSERT INTO `currencies` (`id`, `code`, `title`, `symbol`, `short`, `created_at`, `updated_at`) VALUES
+(1, 'AUD', 'Австралийский доллар', NULL, NULL, NULL, NULL),
+(2, 'AZN', 'Азербайджанский манат', NULL, NULL, NULL, NULL),
+(3, 'DZD', 'Алжирский динар', NULL, NULL, NULL, NULL),
+(4, 'ARS', 'Аргентинское песо', NULL, NULL, NULL, NULL),
+(5, 'AMD', 'Армянский драм', NULL, NULL, NULL, NULL),
+(6, 'AWG', 'Арубанский флорин', NULL, NULL, NULL, NULL),
+(7, 'AFN', 'Афгани', NULL, NULL, NULL, NULL),
+(8, 'BSD', 'Багамский доллар', NULL, NULL, NULL, NULL),
+(9, 'PAB', 'Бальбоа', NULL, NULL, NULL, NULL),
+(10, 'BBD', 'Барбадосский доллар', NULL, NULL, NULL, NULL),
+(11, 'THB', 'Бат', NULL, NULL, NULL, NULL),
+(12, 'BHD', 'Бахрейнский динар', NULL, NULL, NULL, NULL),
+(13, 'BZD', 'Белизский доллар', NULL, NULL, NULL, NULL),
+(14, 'BYR', 'Белорусский рубль', NULL, NULL, NULL, NULL),
+(15, 'BMD', 'Бермудский доллар', NULL, NULL, NULL, NULL),
+(16, 'BGN', 'Болгарский лев', NULL, NULL, NULL, NULL),
+(17, 'VEF', 'Боливар фуэрте', NULL, NULL, NULL, NULL),
+(18, 'BOB', 'Боливиано', NULL, NULL, NULL, NULL),
+(19, 'BRL', 'Бразильский реал', NULL, NULL, NULL, NULL),
+(20, 'BND', 'Брунейский доллар', NULL, NULL, NULL, NULL),
+(21, 'BIF', 'Бурундийский франк', NULL, NULL, NULL, NULL),
+(22, 'VUV', 'Вату', NULL, NULL, NULL, NULL),
+(23, 'KRW', 'Вона', NULL, NULL, NULL, NULL),
+(24, 'XCD', 'Восточно-карибский доллар', NULL, NULL, NULL, NULL),
+(25, 'GYD', 'Гайанский доллар', NULL, NULL, NULL, NULL),
+(26, 'GHS', 'Ганский седи', NULL, NULL, NULL, NULL),
+(27, 'GNF', 'Гвинейский франк', NULL, NULL, NULL, NULL),
+(28, 'GIP', 'Гибралтарский фунт', NULL, NULL, NULL, NULL),
+(29, 'HKD', 'Гонконгский доллар', NULL, NULL, NULL, NULL),
+(30, 'UAH', 'Гривна', NULL, 'грн', NULL, NULL),
+(31, 'PYG', 'Гуарани', NULL, NULL, NULL, NULL),
+(32, 'HTG', 'Гурд', NULL, NULL, NULL, NULL),
+(33, 'GMD', 'Даласи', NULL, NULL, NULL, NULL),
+(34, 'DKK', 'Датская крона', NULL, NULL, NULL, NULL),
+(35, 'MKD', 'Денар', NULL, NULL, NULL, NULL),
+(36, 'AED', 'Дирхам ОАЭ', NULL, NULL, NULL, NULL),
+(37, 'STD', 'Добра', NULL, NULL, NULL, NULL),
+(38, 'ZWL', 'Доллар Зимбабве', NULL, NULL, NULL, NULL),
+(39, 'NAD', 'Доллар Намибии', NULL, NULL, NULL, NULL),
+(40, 'KYD', 'Доллар Островов Кайман', NULL, NULL, NULL, NULL),
+(41, 'SBD', 'Доллар Соломоновых Островов', NULL, NULL, NULL, NULL),
+(42, 'USD', 'Доллар США', NULL, 'usd', NULL, NULL),
+(43, 'TTD', 'Доллар Тринидада и Тобаго', NULL, NULL, NULL, NULL),
+(44, 'FJD', 'Доллар Фиджи', NULL, NULL, NULL, NULL),
+(45, 'DOP', 'Доминиканское песо', NULL, NULL, NULL, NULL),
+(46, 'VND', 'Донг', NULL, NULL, NULL, NULL),
+(47, 'EUR', 'Евро', NULL, 'eur', NULL, NULL),
+(48, 'EGP', 'Египетский фунт', NULL, NULL, NULL, NULL),
+(49, 'ZMW', 'Замбийская квача', NULL, NULL, NULL, NULL),
+(50, 'PLN', 'Злотый', NULL, NULL, NULL, NULL),
+(51, 'NIO', 'Золотая кордоба', NULL, NULL, NULL, NULL),
+(52, 'JPY', 'Иена', NULL, NULL, NULL, NULL),
+(53, 'INR', 'Индийская рупия', NULL, NULL, NULL, NULL),
+(54, 'JOD', 'Иорданский динар', NULL, NULL, NULL, NULL),
+(55, 'IQD', 'Иракский динар', NULL, NULL, NULL, NULL),
+(56, 'IRR', 'Иранский риал', NULL, NULL, NULL, NULL),
+(57, 'ISK', 'Исландская крона', NULL, NULL, NULL, NULL),
+(58, 'YER', 'Йеменский риал', NULL, NULL, NULL, NULL),
+(59, 'CAD', 'Канадский доллар', NULL, NULL, NULL, NULL),
+(60, 'QAR', 'Катарский риал', NULL, NULL, NULL, NULL),
+(61, 'AOA', 'Кванза', NULL, NULL, NULL, NULL),
+(62, 'MWK', 'Квача', NULL, NULL, NULL, NULL),
+(63, 'KES', 'Кенийский шиллинг', NULL, NULL, NULL, NULL),
+(64, 'GTQ', 'Кетсаль', NULL, NULL, NULL, NULL),
+(65, 'PGK', 'Кина', NULL, NULL, NULL, NULL),
+(66, 'LAK', 'Кип', NULL, NULL, NULL, NULL),
+(67, 'COP', 'Колумбийское песо', NULL, NULL, NULL, NULL),
+(68, 'BAM', 'Конвертируемая марка', NULL, NULL, NULL, NULL),
+(69, 'CDF', 'Конголезский франк', NULL, NULL, NULL, NULL),
+(70, 'CRC', 'Коста-риканский колон', NULL, NULL, NULL, NULL),
+(71, 'CUP', 'Кубинское песо', NULL, NULL, NULL, NULL),
+(72, 'KWD', 'Кувейтский динар', NULL, NULL, NULL, NULL),
+(73, 'MMK', 'Кьят', NULL, NULL, NULL, NULL),
+(74, 'GEL', 'Лари', NULL, NULL, NULL, NULL),
+(75, 'ALL', 'Лек', NULL, NULL, NULL, NULL),
+(76, 'HNL', 'Лемпира', NULL, NULL, NULL, NULL),
+(77, 'SLL', 'Леоне', NULL, NULL, NULL, NULL),
+(78, 'LRD', 'Либерийский доллар', NULL, NULL, NULL, NULL),
+(79, 'LBP', 'Ливанский фунт', NULL, NULL, NULL, NULL),
+(80, 'LYD', 'Ливийский динар', NULL, NULL, NULL, NULL),
+(81, 'SZL', 'Лилангени', NULL, NULL, NULL, NULL),
+(82, 'LSL', 'Лоти', NULL, NULL, NULL, NULL),
+(83, 'MUR', 'Маврикийская рупия', NULL, NULL, NULL, NULL),
+(84, 'MGA', 'Малагасийский ариари', NULL, NULL, NULL, NULL),
+(85, 'MYR', 'Малайзийский ринггит', NULL, NULL, NULL, NULL),
+(86, 'MAD', 'Марокканский дирхам', NULL, NULL, NULL, NULL),
+(87, 'MXN', 'Мексиканское песо', NULL, NULL, NULL, NULL),
+(88, 'MZN', 'Мозамбикский метикал', NULL, NULL, NULL, NULL),
+(89, 'MDL', 'Молдавский лей', NULL, NULL, NULL, NULL),
+(90, 'NGN', 'Найра', NULL, NULL, NULL, NULL),
+(91, 'ERN', 'Накфа', NULL, NULL, NULL, NULL),
+(92, 'BTN', 'Нгултрум', NULL, NULL, NULL, NULL),
+(93, 'NPR', 'Непальская рупия', NULL, NULL, NULL, NULL),
+(94, 'ANG', 'нидерландский антильский гульден', NULL, NULL, NULL, NULL),
+(95, 'NZD', 'Новозеландский доллар', NULL, NULL, NULL, NULL),
+(96, 'ILS', 'Новый израильский шекель', NULL, NULL, NULL, NULL),
+(97, 'RON', 'Новый румынский лей', NULL, NULL, NULL, NULL),
+(98, 'PEN', 'Новый соль', NULL, NULL, NULL, NULL),
+(99, 'TWD', 'Новый тайваньский доллар', NULL, NULL, NULL, NULL),
+(100, 'TMT', 'Новый туркменский манат', NULL, NULL, NULL, NULL),
+(101, 'NOK', 'Норвежская крона', NULL, NULL, NULL, NULL),
+(102, 'OMR', 'Оманский риал', NULL, NULL, NULL, NULL),
+(103, 'TOP', 'Паанга', NULL, NULL, NULL, NULL),
+(104, 'PKR', 'Пакистанская рупия', NULL, NULL, NULL, NULL),
+(105, 'MOP', 'Патака', NULL, NULL, NULL, NULL),
+(106, 'PRB', 'Приднестровский рубль', NULL, NULL, NULL, NULL),
+(107, 'BWP', 'Пула', NULL, NULL, NULL, NULL),
+(108, 'KHR', 'Риель', NULL, NULL, NULL, NULL),
+(109, 'RUB', 'Российский рубль', NULL, 'руб', NULL, NULL),
+(110, 'IDR', 'Рупия', NULL, NULL, NULL, NULL),
+(111, 'MVR', 'Руфия', NULL, NULL, NULL, NULL),
+(112, 'ZAR', 'Рэнд', NULL, NULL, NULL, NULL),
+(113, 'SVC', 'Сальвадорский колон', NULL, NULL, NULL, NULL),
+(114, 'SAR', 'Саудовский риял', NULL, NULL, NULL, NULL),
+(115, 'KPW', 'Северокорейская вона', NULL, NULL, NULL, NULL),
+(116, 'SCR', 'Сейшельская рупия', NULL, NULL, NULL, NULL),
+(117, 'RSD', 'Сербский динар', NULL, NULL, NULL, NULL),
+(118, 'SGD', 'Сингапурский доллар', NULL, NULL, NULL, NULL),
+(119, 'SYP', 'Сирийский фунт', NULL, NULL, NULL, NULL),
+(120, 'KGS', 'Сом', NULL, NULL, NULL, NULL),
+(121, 'SOS', 'Сомалийский шиллинг', NULL, NULL, NULL, NULL),
+(122, 'TJS', 'Сомони', NULL, NULL, NULL, NULL),
+(123, 'SDG', 'Суданский фунт', NULL, NULL, NULL, NULL),
+(124, 'SRD', 'Суринамский доллар', NULL, NULL, NULL, NULL),
+(125, 'BDT', 'Така', NULL, NULL, NULL, NULL),
+(126, 'WST', 'Тала', NULL, NULL, NULL, NULL),
+(127, 'TZS', 'Танзанийский шиллинг', NULL, NULL, NULL, NULL),
+(128, 'KZT', 'Тенге', '₸', 'тг', NULL, NULL),
+(129, 'MNT', 'Тугрик', NULL, NULL, NULL, NULL),
+(130, 'TND', 'Тунисский динар', NULL, NULL, NULL, NULL),
+(131, 'TRY', 'Турецкая лира', NULL, NULL, NULL, NULL),
+(132, 'UGX', 'Угандийский шиллинг', NULL, NULL, NULL, NULL),
+(133, 'MRO', 'Угия', NULL, NULL, NULL, NULL),
+(134, 'UZS', 'Узбекский сум', NULL, NULL, NULL, NULL),
+(135, 'UYU', 'Уругвайское песо', NULL, NULL, NULL, NULL),
+(136, 'PHP', 'Филиппинское песо', NULL, NULL, NULL, NULL),
+(137, 'HUF', 'Форинт', NULL, NULL, NULL, NULL),
+(138, 'DJF', 'Франк Джибути', NULL, NULL, NULL, NULL),
+(139, 'KMF', 'Франк Комор', NULL, NULL, NULL, NULL),
+(140, 'XOF', 'Франк КФА BCEAO', NULL, NULL, NULL, NULL),
+(141, 'XAF', 'Франк КФА BEAC', NULL, NULL, NULL, NULL),
+(142, 'XPF', 'Франк КФП', NULL, NULL, NULL, NULL),
+(143, 'RWF', 'Франк Руанды', NULL, NULL, NULL, NULL),
+(144, 'SHP', 'Фунт Святой Елены', NULL, NULL, NULL, NULL),
+(145, 'GBP', 'Фунт стерлингов', NULL, NULL, NULL, NULL),
+(146, 'FKP', 'Фунт Фолклендских островов', NULL, NULL, NULL, NULL),
+(147, 'HRK', 'Хорватская куна', NULL, NULL, NULL, NULL),
+(148, 'CZK', 'Чешская крона', NULL, NULL, NULL, NULL),
+(149, 'CLP', 'Чилийское песо', NULL, NULL, NULL, NULL),
+(150, 'SEK', 'Шведская крона', NULL, NULL, NULL, NULL),
+(151, 'CHF', 'Швейцарский франк', NULL, NULL, NULL, NULL),
+(152, 'LKR', 'Шри-ланкийская рупия', NULL, NULL, NULL, NULL),
+(153, 'CVE', 'Эскудо Кабо-Верде', NULL, NULL, NULL, NULL),
+(154, 'ETB', 'Эфиопский быр', NULL, NULL, NULL, NULL),
+(155, 'CNY', 'Юань', NULL, NULL, NULL, NULL),
+(156, 'SSP', 'Южносуданский фунт', NULL, NULL, NULL, NULL),
+(157, 'JMD', 'Ямайский доллар', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -849,7 +871,8 @@ INSERT INTO `education_statuses` (`id`, `title`, `sort`, `created_at`, `updated_
 --
 
 CREATE TABLE `employment_forms` (
-  `alias` varchar(255) NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `alias` varchar(255) DEFAULT NULL,
   `title` varchar(255) NOT NULL,
   `sort` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
@@ -860,13 +883,13 @@ CREATE TABLE `employment_forms` (
 -- Дамп данных таблицы `employment_forms`
 --
 
-INSERT INTO `employment_forms` (`alias`, `title`, `sort`, `created_at`, `updated_at`) VALUES
-('full', 'Полная занятость', 1, NULL, NULL),
-('part', 'Частичная занятость', 2, NULL, NULL),
-('project', 'Проектная / Временная работа', 3, NULL, NULL),
-('remote', 'Удаленная работа', 0, NULL, NULL),
-('volunteer', 'Волонтерство', 4, NULL, NULL),
-('watch', 'Вахтовый метод', 5, NULL, NULL);
+INSERT INTO `employment_forms` (`id`, `alias`, `title`, `sort`, `created_at`, `updated_at`) VALUES
+(1, 'watch', 'Вахтовый метод', 5, NULL, NULL),
+(2, 'volunteer', 'Волонтерство', 4, NULL, NULL),
+(3, 'full', 'Полная занятость', 1, NULL, NULL),
+(4, 'project', 'Проектная / Временная работа', 3, NULL, NULL),
+(5, 'remote', 'Удаленная работа', 0, NULL, NULL),
+(6, 'part', 'Частичная занятость', 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -926,7 +949,48 @@ INSERT INTO `images` (`id`, `path`, `width`, `height`, `parent_id`, `optimised`,
 (4, '/uploads/5974a52ac75a2-r50x50.jpg', 50, 50, 2, 1, 'r50x50', '2017-07-23 07:33:18', '2017-07-23 07:33:18'),
 (5, '/uploads/5974a52ac75a2-r250x250.jpg', 250, 250, 2, 1, 'r250x250', '2017-07-23 08:20:35', '2017-07-23 08:20:35'),
 (6, '/uploads/5974a54743451-r970x291.jpg', 788, 291, 3, 1, 'r970x291', '2017-07-23 09:28:09', '2017-07-23 09:28:09'),
-(7, '/uploads/5974a52ac75a2-r640x640.jpg', 600, 600, 2, 1, 'r640x640', '2017-07-26 13:12:28', '2017-07-26 13:12:29');
+(7, '/uploads/5974a52ac75a2-r640x640.jpg', 600, 600, 2, 1, 'r640x640', '2017-07-26 13:12:28', '2017-07-26 13:12:29'),
+(9, '/uploads/597a45dc42875-r50x50.jpg', 50, 28, 8, 1, 'r50x50', '2017-07-27 14:00:52', '2017-07-27 14:00:52'),
+(10, '/uploads/597a45dc42875-f50x50.jpg', 50, 50, 8, 1, 'f50x50', '2017-07-27 14:14:25', '2017-07-27 14:14:25'),
+(11, '/uploads/597a45dc42875-r200x200.jpg', 200, 111, 8, 1, 'r200x200', '2017-07-27 14:25:25', '2017-07-27 14:25:25'),
+(12, '/uploads/597a45dc42875-f200x200.jpg', 200, 200, 8, 1, 'f200x200', '2017-07-27 14:27:17', '2017-07-27 14:27:17'),
+(14, '/uploads/597a532ca266f-f50x50.jpg', 50, 50, 13, 1, 'f50x50', '2017-07-27 14:55:08', '2017-07-27 14:55:08'),
+(17, '/uploads/597a5437a2981.jpg', 628, 350, NULL, 1, NULL, '2017-07-27 14:59:35', '2017-07-27 14:59:35'),
+(18, '/uploads/597a5437a30a0.jpg', 750, 1125, NULL, 1, NULL, '2017-07-27 14:59:35', '2017-07-27 14:59:36'),
+(19, '/uploads/597a5437a3609.jpg', 1920, 1080, NULL, 1, NULL, '2017-07-27 14:59:35', '2017-07-27 14:59:36'),
+(20, '/uploads/597a5437a3ba7.jpg', 736, 490, NULL, 1, NULL, '2017-07-27 14:59:35', '2017-07-27 14:59:36'),
+(21, '/uploads/597a5437a41e5.jpg', 1366, 768, NULL, 1, NULL, '2017-07-27 14:59:35', '2017-07-27 14:59:36'),
+(22, '/uploads/597a5437a476f.jpg', 1366, 768, NULL, 1, NULL, '2017-07-27 14:59:35', '2017-07-27 14:59:36'),
+(23, '/uploads/597a5437a4cce.jpg', 1920, 1080, NULL, 1, NULL, '2017-07-27 14:59:35', '2017-07-27 14:59:37'),
+(24, '/uploads/597a5437a51fb.jpg', 1366, 768, NULL, 1, NULL, '2017-07-27 14:59:35', '2017-07-27 14:59:37'),
+(25, '/uploads/597a5437a5716.jpg', 1366, 768, NULL, 1, NULL, '2017-07-27 14:59:35', '2017-07-27 14:59:37'),
+(26, '/uploads/597a5437a5c8e.jpg', 1366, 768, NULL, 1, NULL, '2017-07-27 14:59:35', '2017-07-27 14:59:37'),
+(27, '/uploads/597a5437a61e4.jpg', 1366, 768, NULL, 1, NULL, '2017-07-27 14:59:35', '2017-07-27 14:59:38'),
+(28, '/uploads/597a5437a673d.jpg', 1366, 768, NULL, 1, NULL, '2017-07-27 14:59:35', '2017-07-27 14:59:38'),
+(29, '/uploads/597a5437a6d0d.jpg', 1366, 768, NULL, 1, NULL, '2017-07-27 14:59:35', '2017-07-27 14:59:38'),
+(30, '/uploads/597a5437a721d.jpg', 1920, 1080, NULL, 1, NULL, '2017-07-27 14:59:35', '2017-07-27 14:59:38'),
+(31, '/uploads/597a5437a2981-f50x50.jpg', 50, 50, 17, 1, 'f50x50', '2017-07-27 14:59:35', '2017-07-27 14:59:35'),
+(32, '/uploads/597a5437a30a0-f50x50.jpg', 50, 50, 18, 1, 'f50x50', '2017-07-27 14:59:36', '2017-07-27 14:59:36'),
+(33, '/uploads/597a5437a3609-f50x50.jpg', 50, 50, 19, 1, 'f50x50', '2017-07-27 14:59:36', '2017-07-27 14:59:36'),
+(34, '/uploads/597a5437a3ba7-f50x50.jpg', 50, 50, 20, 1, 'f50x50', '2017-07-27 14:59:36', '2017-07-27 14:59:36'),
+(35, '/uploads/597a5437a41e5-f50x50.jpg', 50, 50, 21, 1, 'f50x50', '2017-07-27 14:59:36', '2017-07-27 14:59:36'),
+(36, '/uploads/597a5437a476f-f50x50.jpg', 50, 50, 22, 1, 'f50x50', '2017-07-27 14:59:36', '2017-07-27 14:59:37'),
+(37, '/uploads/597a5437a4cce-f50x50.jpg', 50, 50, 23, 1, 'f50x50', '2017-07-27 14:59:37', '2017-07-27 14:59:37'),
+(38, '/uploads/597a5437a51fb-f50x50.jpg', 50, 50, 24, 1, 'f50x50', '2017-07-27 14:59:37', '2017-07-27 14:59:37'),
+(39, '/uploads/597a5437a5716-f50x50.jpg', 50, 50, 25, 1, 'f50x50', '2017-07-27 14:59:37', '2017-07-27 14:59:37'),
+(40, '/uploads/597a5437a5c8e-f50x50.jpg', 50, 50, 26, 1, 'f50x50', '2017-07-27 14:59:37', '2017-07-27 14:59:37'),
+(41, '/uploads/597a5437a61e4-f50x50.jpg', 50, 50, 27, 1, 'f50x50', '2017-07-27 14:59:38', '2017-07-27 14:59:38'),
+(42, '/uploads/597a5437a673d-f50x50.jpg', 50, 50, 28, 1, 'f50x50', '2017-07-27 14:59:38', '2017-07-27 14:59:38'),
+(43, '/uploads/597a5437a6d0d-f50x50.jpg', 50, 50, 29, 1, 'f50x50', '2017-07-27 14:59:38', '2017-07-27 14:59:38'),
+(44, '/uploads/597a5437a721d-f50x50.jpg', 50, 50, 30, 1, 'f50x50', '2017-07-27 14:59:38', '2017-07-27 14:59:38'),
+(45, '/uploads/597a5437a2981-f200x200.jpg', 200, 200, 17, 1, 'f200x200', '2017-07-27 14:59:57', '2017-07-27 14:59:57'),
+(46, '/uploads/597a5437a30a0-f200x200.jpg', 200, 200, 18, 1, 'f200x200', '2017-07-27 14:59:57', '2017-07-27 14:59:57'),
+(47, '/uploads/597a5437a3609-f200x200.jpg', 200, 200, 19, 1, 'f200x200', '2017-07-27 14:59:57', '2017-07-27 14:59:57'),
+(48, '/uploads/59803eef89f7b.jpg', 1260, 1260, NULL, 1, NULL, '2017-08-01 02:42:23', '2017-08-01 02:43:31'),
+(49, '/uploads/59803eef89f7b-r640x640.jpg', 640, 640, 48, 1, 'r640x640', '2017-08-01 02:43:31', '2017-08-01 02:43:31'),
+(50, '/uploads/59803eef89f7b-r50x50.jpg', 50, 50, 48, 1, 'r50x50', '2017-08-01 02:47:23', '2017-08-01 02:47:23'),
+(51, '/uploads/59803eef89f7b-r250x250.jpg', 250, 250, 48, 1, 'r250x250', '2017-08-01 07:53:20', '2017-08-01 07:53:21'),
+(52, '/uploads/59803eef89f7b-r200x200.jpg', 200, 200, 48, 1, 'r200x200', '2017-08-11 06:35:21', '2017-08-11 06:35:21');
 
 -- --------------------------------------------------------
 
@@ -1154,12 +1218,12 @@ CREATE TABLE `jobs` (
   `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(255) NOT NULL COMMENT 'заголовок',
   `position_id` int(10) UNSIGNED DEFAULT NULL COMMENT 'должность',
-  `employment_form_alias` varchar(255) DEFAULT NULL COMMENT 'форма занятости',
+  `employment_form_id` int(10) UNSIGNED DEFAULT NULL COMMENT 'форма занятости',
   `stage_id` int(10) UNSIGNED DEFAULT NULL COMMENT 'опыт работы',
   `salary_min` double(8,2) DEFAULT NULL COMMENT 'мин зарплата',
   `salary_max` double(8,2) DEFAULT NULL COMMENT 'макс зарплата',
   `has_additional_payments` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'есть ли дополнительные выплаты',
-  `currency_code` varchar(3) DEFAULT NULL COMMENT 'валюта зарплаты',
+  `currency_id` int(10) UNSIGNED DEFAULT NULL COMMENT 'валюта зарплаты',
   `description` varchar(255) DEFAULT NULL COMMENT 'описание',
   `company_id` int(10) UNSIGNED NOT NULL COMMENT 'компания',
   `user_id` int(10) UNSIGNED DEFAULT NULL COMMENT 'пользователь создавший вакансию',
@@ -1171,6 +1235,26 @@ CREATE TABLE `jobs` (
   `contacts` text COMMENT 'контактные данные',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `jobs`
+--
+
+INSERT INTO `jobs` (`id`, `title`, `position_id`, `employment_form_id`, `stage_id`, `salary_min`, `salary_max`, `has_additional_payments`, `currency_id`, `description`, `company_id`, `user_id`, `status`, `is_internship`, `hot`, `external_url`, `apply_type`, `contacts`, `created_at`, `updated_at`) VALUES
+(3, 'Требуется программист', 9, NULL, NULL, 0.00, 0.00, 0, NULL, '<p>123</p>', 1, NULL, 'approved', 0, 0, NULL, 'internal', NULL, '2017-07-29 15:51:38', '2017-07-31 12:34:57'),
+(7, 'Программист-стажер Java', 495, NULL, NULL, 0.00, 0.00, 0, NULL, '<p>Компания EPAM Systems &mdash; ведущий разработчик заказного программного обеспечения и один из ведущих игроков в области консалтинга в Казахстане, Центральной и Восточной Европе, на настоящий момент она имеет филиалы в 25+ странах мира и продолжает ста', 2, NULL, 'approved', 1, 0, NULL, 'internal', NULL, '2017-08-01 02:48:35', '2017-08-01 02:48:35');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `jobs_cities`
+--
+
+CREATE TABLE `jobs_cities` (
+  `job_id` int(10) UNSIGNED NOT NULL COMMENT 'вакансия',
+  `city_id` int(10) UNSIGNED NOT NULL COMMENT 'город',
+  `sort` int(10) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1223,7 +1307,175 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (33, '2017_03_18_100758_create_admins_table', 29),
 (35, '2017_07_20_231823_drop_admins_job_title', 30),
 (36, '2017_07_21_083026_create_company_industries_table', 31),
-(38, '2017_07_23_150428_create_company_images_table', 32);
+(38, '2017_07_23_150428_create_company_images_table', 32),
+(39, '2017_07_26_201713_create_morpher_table', 33),
+(40, '2017_07_28_065906_create_taggables_table', 34),
+(41, '2017_07_28_071736_create_jobs_cities_table', 35);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `morpher`
+--
+
+CREATE TABLE `morpher` (
+  `И` varchar(255) NOT NULL COMMENT 'именительный',
+  `Р` varchar(255) DEFAULT NULL COMMENT 'родительный',
+  `Д` varchar(255) DEFAULT NULL COMMENT 'дательный',
+  `В` varchar(255) DEFAULT NULL COMMENT 'винительный',
+  `Т` varchar(255) DEFAULT NULL COMMENT 'творительный',
+  `П` varchar(255) DEFAULT NULL COMMENT 'предложный',
+  `МИ` varchar(255) DEFAULT NULL COMMENT '(множественное) именительный',
+  `МР` varchar(255) DEFAULT NULL COMMENT '(множественное) родительный',
+  `МД` varchar(255) DEFAULT NULL COMMENT '(множественное) дательный',
+  `МВ` varchar(255) DEFAULT NULL COMMENT '(множественное) винительный',
+  `МТ` varchar(255) DEFAULT NULL COMMENT '(множественное) творительный',
+  `МП` varchar(255) DEFAULT NULL COMMENT '(множественное) предложный',
+  `approved` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'одобрен ли',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `morpher`
+--
+
+INSERT INTO `morpher` (`И`, `Р`, `Д`, `В`, `Т`, `П`, `МИ`, `МР`, `МД`, `МВ`, `МТ`, `МП`, `approved`, `created_at`, `updated_at`) VALUES
+('4DClick Internet Agency', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Air Astana', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Alser Computers', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Apple', '', '', '', '', '', '', '', '', '', '', '', 0, NULL, NULL),
+('BI Group', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Black and White', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Chegg', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Chocofamily', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Creatida', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Epam Kazakhstan', '', '', '', '', '', '', '', '', '', '', '', 0, '2017-08-01 02:43:29', '2017-08-01 02:43:29'),
+('EPAM Systems', 'ЕРАМА Systems', 'ЕРАМУ Systems', 'ЕРАМА Systems', 'ЕРАМОМ Systems', 'ЕРАМЕ Systems', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('ERP-Service KazTransCom', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Facebook', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Fidelity Investments', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Flight.kz', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Flip.kz', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('ForteBank', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('GOOD!', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('GR менеджер', 'GR менеджера', 'GR менеджеру', 'GR менеджера', 'GR менеджером', 'GR менеджере', 'GR менеджеры', 'GR менеджеров', 'GR менеджерам', 'GR менеджеров', 'GR менеджерами', 'GR менеджерах', 0, NULL, NULL),
+('HomeAway', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Hoster.KZ', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('HTML-верстальщик', 'HTML-верстальщика', 'HTML-верстальщику', 'HTML-верстальщика', 'HTML-верстальщиком', 'HTML-верстальщике', 'HTML-верстальщики', 'HTML-верстальщиков', 'HTML-верстальщикам', 'HTML-верстальщиков', 'HTML-верстальщиками', 'HTML-верстальщиках', 0, NULL, NULL),
+('iBEC Systems Ltd', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Ino Group', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Kaspi Bank', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Kassa Nova', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('kaznetmedia', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('KEGOC', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Lamoda.kz', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Lives', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor i', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip еха еа commodo consequat. Duis aute irure dolor ', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip еху еа commodo consequat. Duis aute irure dolor ', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip еха еа commodo consequat. Duis aute irure dolor ', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ехом еа commodo consequat. Duis aute irure dolor', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ехе еа commodo consequat. Duis aute irure dolor ', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ехи еа commodo consequat. Duis aute irure dolor ', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ехов еа commodo consequat. Duis aute irure dolor', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ехам еа commodo consequat. Duis aute irure dolor', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ехов еа commodo consequat. Duis aute irure dolor', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ехами еа commodo consequat. Duis aute irure dolo', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ехах еа commodo consequat. Duis aute irure dolor', 0, NULL, NULL),
+('Lukas', '', '', '', '', '', '', '', '', '', '', '', 0, NULL, NULL),
+('Lukas Pierce', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Lukas Pierce (Admin)', '', '', '', '', '', '', '', '', '', '', '', 0, NULL, NULL),
+('MARS', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Microsoft Казахстан', 'Microsoft Казахстана', 'Microsoft Казахстану', 'Microsoft Казахстан', 'Microsoft Казахстаном', 'Microsoft Казахстане', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Newinttech', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Orange Point Agency', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Reason', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Recapster', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Rocket Firm', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('sad', '', '', '', '', '', '', '', '', '', '', '', 0, NULL, NULL),
+('SibiTron', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Sulpak', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('super.com', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Tengrinews', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Union Space', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('up', '', '', '', '', '', '', '', '', '', '', '', 0, NULL, NULL),
+('Upse', '', '', '', '', '', '', '', '', '', '', '', 0, NULL, NULL),
+('Upsell', '', '', '', '', '', '', '', '', '', '', '', 0, NULL, NULL),
+('Upsell.kz', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('VMware', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Web-master', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Web-master.kz', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Web-дизайнер', 'Web-дизайнера', 'Web-дизайнеру', 'Web-дизайнера', 'Web-дизайнером', 'Web-дизайнере', 'Web-дизайнеры', 'Web-дизайнеров', 'Web-дизайнерам', 'Web-дизайнеров', 'Web-дизайнерами', 'Web-дизайнерах', 0, NULL, NULL),
+('Web-программист', 'Web-программиста', 'Web-программисту', 'Web-программиста', 'Web-программистом', 'Web-программисте', 'Web-программисты', 'Web-программистов', 'Web-программистам', 'Web-программистов', 'Web-программистами', 'Web-программистах', 0, NULL, NULL),
+('Авиакассир', 'Авиакассира', 'Авиакассиру', 'Авиакассира', 'Авиакассиром', 'Авиакассире', 'Авиакассиры', 'Авиакассиров', 'Авиакассирам', 'Авиакассиров', 'Авиакассирами', 'Авиакассирах', 0, NULL, NULL),
+('Автослесарь', 'Автослесаря', 'Автослесарю', 'Автослесаря', 'Автослесарем', 'Автослесаре', 'Автослесари', 'Автослесарей', 'Автослесарям', 'Автослесарей', 'Автослесарями', 'Автослесарях', 0, NULL, NULL),
+('Администратор предприятия торговли', 'Администратора предприятия торговли', 'Администратору предприятия торговли', 'Администратора предприятия торговли', 'Администратором предприятия торговли', 'Администраторе предприятия торговли', 'Администраторы предприятия торговли', 'Администраторов предприятия торговли', 'Администраторам предприятия торговли', 'Администраторов предприятия торговли', 'Администраторами предприятия торговли', 'Администраторах предприятия торговли', 0, NULL, NULL),
+('Албания', 'Албании', 'Албании', 'Албанию', 'Албанией', 'Албании', '', '', '', '', '', '', 0, NULL, NULL),
+('Алматы', 'Алматы', 'Алматы', 'Алматы', 'Алматы', 'Алматы', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Андрей', 'Андрея', 'Андрею', 'Андрея', 'Андреем', 'Андрее', '', '', '', '', '', '', 0, NULL, NULL),
+('Андрей Сарафанников', 'Андрея Сарафанникова', 'Андрею Сарафанникову', 'Андрея Сарафанникова', 'Андреем Сарафанниковым', 'Андрее Сарафанникове', '', '', '', '', '', '', 0, NULL, NULL),
+('АО «Казкоммерцбанк»', 'АО «Казкоммерцбанк»', 'АО «Казкоммерцбанк»', 'АО «Казкоммерцбанк»', 'АО «Казкоммерцбанк»', 'АО «Казкоммерцбанк»', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Аппаратчик-оператор', 'Аппаратчика-оператора', 'Аппаратчику-оператору', 'Аппаратчика-оператора', 'Аппаратчиком-оператором', 'Аппаратчике-операторе', 'Аппаратчики-операторы', 'Аппаратчиков-операторов', 'Аппаратчикам-операторам', 'Аппаратчиков-операторов', 'Аппаратчиками-операторами', 'Аппаратчиках-операторах', 0, NULL, NULL),
+('Архивариус', 'Архивариуса', 'Архивариусу', 'Архивариуса', 'Архивариусом', 'Архивариусе', 'Архивариусы', 'Архивариусов', 'Архивариусам', 'Архивариусов', 'Архивариусами', 'Архивариусах', 0, NULL, NULL),
+('Ассистент менеджера по продажам', 'Ассистента менеджера по продажам', 'Ассистенту менеджера по продажам', 'Ассистента менеджера по продажам', 'Ассистентом менеджера по продажам', 'Ассистенте менеджера по продажам', 'Ассистенты менеджера по продажам', 'Ассистентов менеджера по продажам', 'Ассистентам менеджера по продажам', 'Ассистентов менеджера по продажам', 'Ассистентами менеджера по продажам', 'Ассистентах менеджера по продажам', 0, NULL, NULL),
+('Астана', 'Астаны', 'Астане', 'Астану', 'Астаной', 'Астане', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('АТФ Банк', 'АТФ Банк', 'АТФ Банк', 'АТФ Банк', 'АТФ Банк', 'АТФ Банк', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Банк ЦентрКредит', 'Банка ЦентрКредит', 'Банку ЦентрКредит', 'Банк ЦентрКредит', 'Банком ЦентрКредит', 'Банке ЦентрКредит', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Банковский кассир-операционист', 'Банковского кассира-операциониста', 'Банковскому кассиру-операционисту', 'Банковского кассира-операциониста', 'Банковским кассиром-операционистом', 'Банковском кассире-операционисте', 'Банковские кассиры-операционисты', 'Банковских кассиров-операционистов', 'Банковским кассирам-операционистам', 'Банковских кассиров-операционистов', 'Банковскими кассирами-операционистами', 'Банковских кассирах-операционистах', 0, NULL, NULL),
+('Белый Ветер KZ', 'Белого Ветра KZ', 'Белому Ветру KZ', 'Белый Ветер KZ', 'Белым Ветром KZ', 'Белом Ветре KZ', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Водолаз', 'Водолаза', 'Водолазу', 'Водолаза', 'Водолазом', 'Водолазе', 'Водолазы', 'Водолазов', 'Водолазам', 'Водолазов', 'Водолазами', 'Водолазах', 0, NULL, NULL),
+('Дворник', 'Дворника', 'Дворнику', 'Дворника', 'Дворником', 'Дворнике', 'Дворники', 'Дворников', 'Дворникам', 'Дворников', 'Дворниками', 'Дворниках', 0, NULL, NULL),
+('дизайнер', 'дизайнера', 'дизайнеру', 'дизайнера', 'дизайнером', 'дизайнере', 'дизайнеры', 'дизайнеров', 'дизайнерам', 'дизайнеров', 'дизайнерами', 'дизайнерах', 0, NULL, NULL),
+('Диспетчер', 'Диспетчера', 'Диспетчеру', 'Диспетчера', 'Диспетчером', 'Диспетчере', 'Диспетчеры', 'Диспетчеров', 'Диспетчерам', 'Диспетчеров', 'Диспетчерами', 'Диспетчерах', 0, NULL, NULL),
+('Евразийский Банк', 'Евразийского Банка', 'Евразийскому Банку', 'Евразийский Банк', 'Евразийским Банком', 'Евразийском Банке', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Жираф', 'Жирафа', 'Жирафу', 'Жирафа', 'Жирафом', 'Жирафе', 'Жирафы', 'Жирафов', 'Жирафам', 'Жирафов', 'Жирафами', 'Жирафах', 0, NULL, NULL),
+('Зайсан', 'Зайсана', 'Зайсан', 'Зайсан', 'Зайсан', 'Зайсан', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Интернет-компания PS', 'Интернет-компании PS', 'Интернет-компании PS', 'Интернет-компанию PS', 'Интернет-компанией PS', 'Интернет-компании PS', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Казалинск', 'Казалинска', 'Казалинску', 'Казалинск', 'Казалинском', 'Казалинске', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Казахстан', 'Казахстана', 'Казахстану', 'Казахстан', 'Казахстаном', 'Казахстане', 'Казахстаны', 'Казахстанов', 'Казахстанам', 'Казахстаны', 'Казахстанами', 'Казахстанах', 0, NULL, NULL),
+('Казахстан Темир Жолы (КТЖ)', 'Казахстана Темир Жолы (КТЖ)', 'Казахстану Темир Жолы (КТЖ)', 'Казахстан Темир Жолы (КТЖ)', 'Казахстаном Темир Жолы (КТЖ)', 'Казахстане Темир Жолы (КТЖ)', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Казахтелеком', 'Казахтелекома', 'Казахтелекому', 'Казахтелеком', 'Казахтелекомом', 'Казахтелекоме', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Казкоммерцбанк', 'Казкоммерцбанка', 'Казкоммерцбанку', 'Казкоммерцбанк', 'Казкоммерцбанком', 'Казкоммерцбанке', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('КазМедиа Проект', 'КазМедиа Проект', 'КазМедиа Проект', 'КазМедиа Проект', 'КазМедиа Проект', 'КазМедиа Проект', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('КазМунайГаз – переработка и маркетинг', 'КазМунайГаза – переработка и маркетинг', 'КазМунайГазу – переработка и маркетинг', 'КазМунайГаз – переработка и маркетинг', 'КазМунайГазе – переработка и маркетинг', 'КазМунайГазе – переработка и маркетинг', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Казпочта', 'Казпочты', 'Казпочте', 'Казпочту', 'Казпочтой', 'Казпочте', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Караганда', 'Караганды', 'Караганде', 'Караганду', 'Карагандой', 'Караганде', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Карагандинский государственный технический университет', 'Карагандинского государственного технического университета', 'Карагандинскому государственному техническому университету', 'Карагандинский государственный технический университет', 'Карагандинским государственным техническим университетом', 'Карагандинском государственном техническом университете', 'Карагандинские государственные технические университеты', 'Карагандинских государственных технических университетов', 'Карагандинским государственным техническим университетам', 'Карагандинские государственные технические университеты', 'Карагандинскими государственными техническими университетами', 'Карагандинских государственных технических университетах', 0, NULL, NULL),
+('Каратау', 'Каратау', 'Каратау', 'Каратау', 'Каратау', 'Каратау', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Каркаралинск', 'Каркаралинска', 'Каркаралинску', 'Каркаралинск', 'Каркаралинском', 'Каркаралинске', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Кассир', 'Кассира', 'Кассиру', 'Кассира', 'Кассиром', 'Кассире', 'Кассиры', 'Кассиров', 'Кассирам', 'Кассиров', 'Кассирами', 'Кассирах', 0, NULL, NULL),
+('Колёса, Крыша, Маркет', 'Колёсы, Крыши, Маркет', 'Колёсе, Крыше, Маркет', 'Колёсу, Крышу, Маркет', 'Колёсой, Крышей, Маркет', 'Колёсе, Крыше, Маркет', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Ландшафтный дизайнер', 'Ландшафтного дизайнера', 'Ландшафтному дизайнеру', 'Ландшафтного дизайнера', 'Ландшафтным дизайнером', 'Ландшафтном дизайнере', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Ливия', 'Ливии', 'Ливии', 'Ливию', 'Ливией', 'Ливии', 'Ливии', 'Ливий', 'Ливиям', 'Ливии', 'Ливиями', 'Ливиях', 0, NULL, NULL),
+('Люксембург', 'Люксембурга', 'Люксембургу', 'Люксембург', 'Люксембургом', 'Люксембурге', 'Люксембурги', 'Люксембургов', 'Люксембургам', 'Люксембурги', 'Люксембургами', 'Люксембургах', 0, NULL, NULL),
+('Март', 'Марта', 'Марту', 'Марта', 'Мартом', 'Марте', '', '', '', '', '', '', 0, NULL, NULL),
+('Меломан', 'Меломана', 'Меломану', 'Меломана', 'Меломаном', 'Меломане', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Менеджер', 'Менеджера', 'Менеджеру', 'Менеджера', 'Менеджером', 'Менеджере', 'Менеджеры', 'Менеджеров', 'Менеджерам', 'Менеджеров', 'Менеджерами', 'Менеджерах', 0, NULL, NULL),
+('Менеджер активных продаж', 'Менеджера активных продаж', 'Менеджеру активных продаж', 'Менеджера активных продаж', 'Менеджером активных продаж', 'Менеджере активных продаж', 'Менеджеры активных продаж', 'Менеджеров активных продаж', 'Менеджерам активных продаж', 'Менеджеров активных продаж', 'Менеджерами активных продаж', 'Менеджерах активных продаж', 0, NULL, NULL),
+('Менеджер по работе с клиентами', 'Менеджера по работе с клиентами', 'Менеджеру по работе с клиентами', 'Менеджера по работе с клиентами', 'Менеджером по работе с клиентами', 'Менеджере по работе с клиентами', 'Менеджеры по работе с клиентами', 'Менеджеров по работе с клиентами', 'Менеджерам по работе с клиентами', 'Менеджеров по работе с клиентами', 'Менеджерами по работе с клиентами', 'Менеджерах по работе с клиентами', 0, NULL, NULL),
+('Менеджер по управлению товарными запасами', 'Менеджера по управлению товарными запасами', 'Менеджеру по управлению товарными запасами', 'Менеджера по управлению товарными запасами', 'Менеджером по управлению товарными запасами', 'Менеджере по управлению товарными запасами', 'Менеджеры по управлению товарными запасами', 'Менеджеров по управлению товарными запасами', 'Менеджерам по управлению товарными запасами', 'Менеджеров по управлению товарными запасами', 'Менеджерами по управлению товарными запасами', 'Менеджерах по управлению товарными запасами', 0, NULL, NULL),
+('Мечта Маркет', 'Мечты Маркет', 'Мечте Маркет', 'Мечту Маркет', 'Мечтой Маркет', 'Мечте Маркет', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Москва', 'Москвы', 'Москве', 'Москву', 'Москвой', 'Москве', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Народный Банк Казахстана', 'Народного Банка Казахстана', 'Народному Банку Казахстана', 'Народного Банка Казахстана', 'Народным Банком Казахстана', 'Народном Банке Казахстана', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('новая компания', 'новой компании', 'новой компании', 'новую компанию', 'новой компанией', 'новой компании', 'новые компании', 'новых компаний', 'новым компаниям', 'новые компании', 'новыми компаниями', 'новых компаниях', 0, NULL, NULL),
+('новая компания 1', 'новой компании 1', 'новой компании 1', 'новую компанию 1', 'новой компанией 1', 'новой компании 1', 'новые компании 1', 'новых компаний 1', 'новым компаниям 1', 'новые компании 1', 'новыми компаниями 1', 'новых компаниях 1', 0, NULL, NULL),
+('новая компания 666', 'новой компании 666', 'новой компании 666', 'новую компанию 666', 'новой компанией 666', 'новой компании 666', 'новые компании 666', 'новых компаний 666', 'новым компаниям 666', 'новые компании 666', 'новыми компаниями 666', 'новых компаниях 666', 0, NULL, NULL),
+('ОАЭ', 'ОАЭ', 'ОАЭ', 'ОАЭ', 'ОАЭ', 'ОАЭ', 'ОАЭ', 'ОАЭ', 'ОАЭ', 'ОАЭ', 'ОАЭ', 'ОАЭ', 0, NULL, NULL),
+('ОГО Интеройл', 'ОГО Интеройл', 'ОГО Интеройл', 'ОГО Интеройл', 'ОГО Интеройл', 'ОГО Интеройл', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Октябрь', 'Октября', 'Октябрю', 'Октябрь', 'Октябрём', 'Октябре', 'Октябри', 'Октябрей', 'Октябрям', 'Октябри', 'Октябрями', 'Октябрях', 0, NULL, NULL),
+('Офис-менеджер', 'Офис-менеджера', 'Офис-менеджеру', 'Офис-менеджера', 'Офис-менеджером', 'Офис-менеджере', 'Офис-менеджеры', 'Офис-менеджеров', 'Офис-менеджерам', 'Офис-менеджеров', 'Офис-менеджерами', 'Офис-менеджерах', 0, NULL, NULL),
+('Павлодар', 'Павлодара', 'Павлодару', 'Павлодара', 'Павлодаром', 'Павлодаре', 'Павлодары', 'Павлодаров', 'Павлодарам', 'Павлодаров', 'Павлодарами', 'Павлодарах', 0, NULL, NULL),
+('Петропавловск', 'Петропавловска', 'Петропавловску', 'Петропавловск', 'Петропавловском', 'Петропавловске', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Программист', 'Программиста', 'Программисту', 'Программиста', 'Программистом', 'Программисте', 'Программисты', 'Программистов', 'Программистам', 'Программистов', 'Программистами', 'Программистах', 0, NULL, NULL),
+('Программист Java', 'Программиста Java', 'Программисту Java', 'Программиста Java', 'Программистом Java', 'Программисте Java', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Программист PHP', 'Программиста РНР', 'Программисту РНР', 'Программиста РНР', 'Программистом РНР', 'Программисте РНР', 'Программисты РНР', 'Программистов РНР', 'Программистам РНР', 'Программистов РНР', 'Программистами РНР', 'Программистах РНР', 0, NULL, NULL),
+('Программист Python', 'Программиста Python', 'Программисту Python', 'Программиста Python', 'Программистом Python', 'Программисте Python', 'Программисты Python', 'Программистов Python', 'Программистам Python', 'Программистов Python', 'Программистами Python', 'Программистах Python', 0, NULL, NULL),
+('Продкорпорация', 'Продкорпорации', 'Продкорпорации', 'Продкорпорацию', 'Продкорпорацией', 'Продкорпорации', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Рамазан', 'Рамазана', 'Рамазану', 'Рамазана', 'Рамазаном', 'Рамазане', '', '', '', '', '', '', 0, NULL, NULL),
+('Рамазан Койшыбаев', 'Рамазана Койшыбаева', 'Рамазану Койшыбаеву', 'Рамазана Койшыбаева', 'Рамазаном Койшыбаевым', 'Рамазане Койшыбаеве', '', '', '', '', '', '', 0, NULL, NULL),
+('Россия', 'России', 'России', 'Россию', 'Россией', 'России', '', '', '', '', '', '', 0, NULL, NULL),
+('Самрук-Казына', 'Самрука-Казыны', 'Самруку-Казыне', 'Самрука-Казыну', 'Самруком-Казыной', 'Самруке-Казыне', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Сбербанк', 'Сбербанка', 'Сбербанку', 'Сбербанк', 'Сбербанком', 'Сбербанке', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('США', 'США', 'США', 'США', 'США', 'США', '', '', '', '', '', '', 0, NULL, NULL),
+('ТД Арсенал Азия', 'ТД Арсенала Азии', 'ТД Арсеналу Азии', 'ТД Арсенала Азию', 'ТД Арсеналом Азией', 'ТД Арсенале Азии', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Темиртау', 'Темиртау', 'Темиртау', 'Темиртау', 'Темиртау', 'Темиртау', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Тенгизшевройл', 'Тенгизшевройла', 'Тенгизшевройлу', 'Тенгизшевройла', 'Тенгизшевройлом', 'Тенгизшевройле', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Технодом', 'Технодома', 'Технодому', 'Технодом', 'Технодомом', 'Технодоме', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Украина', 'Украины', 'Украине', 'Украину', 'Украиной', 'Украине', 'Украины', 'Украин', 'Украинам', 'Украины', 'Украинами', 'Украинах', 0, NULL, NULL),
+('ФудМастер', 'ФудМастера', 'ФудМастеру', 'ФудМастера', 'ФудМастером', 'ФудМастере', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Цеснабанк', 'Цеснабанка', 'Цеснабанку', 'Цеснабанк', 'Цеснабанком', 'Цеснабанке', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+('Экибастуз', 'Экибастуза', 'Экибастузу', 'Экибастуз', 'Экибастузом', 'Экибастузе', 'Экибастузы', 'Экибастузов', 'Экибастузам', 'Экибастузы', 'Экибастузами', 'Экибастузах', 0, NULL, NULL),
+('ҚазМұнайГаз Өнімдері', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1979,6 +2231,19 @@ INSERT INTO `stages` (`id`, `title`, `sort`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `taggables`
+--
+
+CREATE TABLE `taggables` (
+  `tag_id` int(10) UNSIGNED NOT NULL COMMENT 'тег',
+  `taggable_id` int(10) UNSIGNED NOT NULL COMMENT 'объект',
+  `taggable_type` varchar(255) NOT NULL COMMENT 'тип объекта',
+  `sort` int(10) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `tags`
 --
 
@@ -2170,9 +2435,9 @@ ALTER TABLE `countries`
 -- Индексы таблицы `currencies`
 --
 ALTER TABLE `currencies`
-  ADD PRIMARY KEY (`code`),
-  ADD UNIQUE KEY `currencies_code_unique` (`code`),
-  ADD UNIQUE KEY `currencies_title_unique` (`title`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `currencies_title_unique` (`title`),
+  ADD UNIQUE KEY `currencies_code_unique` (`code`);
 
 --
 -- Индексы таблицы `education_forms`
@@ -2193,9 +2458,9 @@ ALTER TABLE `education_statuses`
 -- Индексы таблицы `employment_forms`
 --
 ALTER TABLE `employment_forms`
-  ADD PRIMARY KEY (`alias`),
-  ADD UNIQUE KEY `employment_forms_alias_unique` (`alias`),
-  ADD UNIQUE KEY `employment_forms_title_unique` (`title`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `employment_forms_title_unique` (`title`),
+  ADD UNIQUE KEY `employment_forms_alias_unique` (`alias`);
 
 --
 -- Индексы таблицы `faculties`
@@ -2244,17 +2509,30 @@ ALTER TABLE `interview_sources`
 ALTER TABLE `jobs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `jobs_position_id_foreign` (`position_id`),
-  ADD KEY `jobs_employment_form_alias_foreign` (`employment_form_alias`),
   ADD KEY `jobs_stage_id_foreign` (`stage_id`),
-  ADD KEY `jobs_currency_code_foreign` (`currency_code`),
   ADD KEY `jobs_company_id_foreign` (`company_id`),
-  ADD KEY `jobs_user_id_foreign` (`user_id`);
+  ADD KEY `jobs_user_id_foreign` (`user_id`),
+  ADD KEY `employment_form_id_foreign` (`employment_form_id`),
+  ADD KEY `currency_id_foreign` (`currency_id`);
+
+--
+-- Индексы таблицы `jobs_cities`
+--
+ALTER TABLE `jobs_cities`
+  ADD UNIQUE KEY `jobs_cities_job_id_city_id_unique` (`job_id`,`city_id`),
+  ADD KEY `jobs_cities_city_id_foreign` (`city_id`);
 
 --
 -- Индексы таблицы `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `morpher`
+--
+ALTER TABLE `morpher`
+  ADD PRIMARY KEY (`И`);
 
 --
 -- Индексы таблицы `password_resets`
@@ -2333,6 +2611,12 @@ ALTER TABLE `stages`
   ADD UNIQUE KEY `stages_title_unique` (`title`);
 
 --
+-- Индексы таблицы `taggables`
+--
+ALTER TABLE `taggables`
+  ADD UNIQUE KEY `taggables_tag_id_taggable_id_taggable_type_unique` (`tag_id`,`taggable_id`,`taggable_type`);
+
+--
 -- Индексы таблицы `tags`
 --
 ALTER TABLE `tags`
@@ -2398,7 +2682,7 @@ ALTER TABLE `cities`
 -- AUTO_INCREMENT для таблицы `companies`
 --
 ALTER TABLE `companies`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT для таблицы `company_revenues`
 --
@@ -2415,6 +2699,11 @@ ALTER TABLE `company_sizes`
 ALTER TABLE `countries`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=254;
 --
+-- AUTO_INCREMENT для таблицы `currencies`
+--
+ALTER TABLE `currencies`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
+--
 -- AUTO_INCREMENT для таблицы `education_forms`
 --
 ALTER TABLE `education_forms`
@@ -2425,6 +2714,11 @@ ALTER TABLE `education_forms`
 ALTER TABLE `education_statuses`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
+-- AUTO_INCREMENT для таблицы `employment_forms`
+--
+ALTER TABLE `employment_forms`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
 -- AUTO_INCREMENT для таблицы `faculties`
 --
 ALTER TABLE `faculties`
@@ -2433,7 +2727,7 @@ ALTER TABLE `faculties`
 -- AUTO_INCREMENT для таблицы `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 --
 -- AUTO_INCREMENT для таблицы `industries`
 --
@@ -2453,12 +2747,12 @@ ALTER TABLE `interview_sources`
 -- AUTO_INCREMENT для таблицы `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT для таблицы `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
 -- AUTO_INCREMENT для таблицы `positions`
 --
@@ -2559,8 +2853,8 @@ ALTER TABLE `companies`
 -- Ограничения внешнего ключа таблицы `company_images`
 --
 ALTER TABLE `company_images`
-  ADD CONSTRAINT `company_images_image_id_foreign` FOREIGN KEY (`image_id`) REFERENCES `images` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `company_images_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `company_images_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `company_images_image_id_foreign` FOREIGN KEY (`image_id`) REFERENCES `images` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `company_industries`
@@ -2589,12 +2883,19 @@ ALTER TABLE `interviews`
 -- Ограничения внешнего ключа таблицы `jobs`
 --
 ALTER TABLE `jobs`
+  ADD CONSTRAINT `currency_id_foreign` FOREIGN KEY (`currency_id`) REFERENCES `currencies` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `employment_form_id_foreign` FOREIGN KEY (`employment_form_id`) REFERENCES `employment_forms` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `jobs_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `jobs_currency_code_foreign` FOREIGN KEY (`currency_code`) REFERENCES `currencies` (`code`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `jobs_employment_form_alias_foreign` FOREIGN KEY (`employment_form_alias`) REFERENCES `employment_forms` (`alias`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `jobs_position_id_foreign` FOREIGN KEY (`position_id`) REFERENCES `positions` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `jobs_stage_id_foreign` FOREIGN KEY (`stage_id`) REFERENCES `stages` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `jobs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `jobs_cities`
+--
+ALTER TABLE `jobs_cities`
+  ADD CONSTRAINT `jobs_cities_city_id_foreign` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `jobs_cities_job_id_foreign` FOREIGN KEY (`job_id`) REFERENCES `jobs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `regions`
@@ -2633,6 +2934,12 @@ ALTER TABLE `salaries`
 ALTER TABLE `salary_additional_payments`
   ADD CONSTRAINT `salary_additional_payments_salary_id_foreign` FOREIGN KEY (`salary_id`) REFERENCES `salaries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `salary_additional_payments_type_id_foreign` FOREIGN KEY (`type_id`) REFERENCES `salary_additional_payments_types` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `taggables`
+--
+ALTER TABLE `taggables`
+  ADD CONSTRAINT `taggables_tag_id_foreign` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `universities`
