@@ -51,9 +51,15 @@ class PasswordResetNotification extends Notification {
 
   protected function getActionUrl($notifiable) {
     if ($notifiable instanceof Admin) {
-      return route('admin.password.reset', $this->token);
+      return route('admin.password.reset', [
+        'token' => $this->token,
+        'email' => $notifiable->email,
+      ]);
     }
 
-    return route('password.reset', $this->token);
+    return route('password.reset', [
+      'token' => $this->token,
+      'email' => $notifiable->email,
+    ]);
   }
 }
