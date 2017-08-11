@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Notifications\Admin;
+namespace App\Notifications;
 
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class ResetPassword extends Notification {
+class PasswordResetNotification extends Notification {
   /**
    * The password reset token.
    *
