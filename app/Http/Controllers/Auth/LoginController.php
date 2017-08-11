@@ -36,7 +36,9 @@ class LoginController extends Controller {
   }
 
   public function showLoginForm() {
-    return view('auth.signin');
+    return view('auth.signin', [
+      'title' => __('Вход') . " — " . config('app.name'),
+    ]);
   }
 
 }
