@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $name
  * @property string $lastname
  * @property string $email
+ * @property string $username
  * @property string $password (hashed)
  * @property int    $avatar_id
  * @property string $remember_token
@@ -43,5 +44,9 @@ class User extends Authenticatable {
   protected $hidden = [
     'password', 'remember_token',
   ];
+
+  public function url($section = null) {
+    return url("/$this->username/$section");
+  }
 
 }
