@@ -46,10 +46,12 @@ class ForgotPasswordController extends Controller {
    */
   protected function validateEmail(Request $request) {
     $this->validate($request, [
-      'email' => 'required|email',
-      //todo validate google recaptcha
+      'email'                => 'required|email',
+      'g-recaptcha-response' => 'required|recaptcha',
     ], [
-      'email.required' => 'Введите Email, указанный при регистрации'
+      'email.required'                 => 'Введите Email, указанный при регистрации',
+      'g-recaptcha-response.required'  => 'Поставьте флажок "Я не робот"',
+      'g-recaptcha-response.recaptcha' => 'Неудачная попытка пройти защиту от роботов',
     ]);
   }
 
