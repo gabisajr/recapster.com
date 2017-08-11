@@ -85,7 +85,7 @@ class RegisterController extends Controller {
     $email = array_get($socialInfo, 'email');
     $employer = $request->query('employer');
 
-    $title = __('Регистрация — ') . config('app.name');
+    $title = __('Регистрация') . " — " . config('app.name');
 
     return view('auth.signup', [
       'socialInfo' => $socialInfo,
