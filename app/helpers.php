@@ -56,11 +56,15 @@ function svgIcon($iconName) {
 }
 
 function logo(\App\Model\Company $company, $size = 50) {
-  return $company->logo ? $company->logo->resize($size, $size)->path : '/images/empty-logo.svg';
+  return $company->logo ? $company->logo->resize($size, $size)->path : asset('/images/empty-logo.svg');
 }
 
 function logo_big(\App\Model\Company $company, $size = 210) {
-  return $company->logo ? $company->logo->resize($size, $size)->path : '/images/empty-logo-big.svg';
+  return $company->logo ? $company->logo->resize($size, $size)->path : asset('/images/empty-logo-big.svg');
+}
+
+function avatar(\App\Model\User $user, $size = 50) {
+  return $user->avatar ? $user->avatar->resize($size, $size)->path : asset('/images/avatar.svg');
 }
 
 //иконка подтвержденной компании
