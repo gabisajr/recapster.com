@@ -70,6 +70,13 @@ Route::group(['namespace' => 'Search'], function () {
 Route::get('position/search', ['as' => 'position.search', 'uses' => 'PositionController@search']);
 Route::get('company/search', ['as' => 'company.search', 'uses' => 'CompaniesController@search']);
 
+//user auth
+Route::group(['namespace' => 'Auth'], function () {
+  Route::get('signup', ['as' => 'signup', 'uses' => 'RegisterController@showRegistrationForm']);
+  Route::post('signup', ['as' => 'signup', 'uses' => 'RegisterController@register']);
+  Route::post('signout', ['as' => 'signout', 'uses' => 'LoginController@logout']);
+});
+
 //company
 Route::group(['namespace' => 'Company', 'middleware' => 'load.company'], function () {
 
