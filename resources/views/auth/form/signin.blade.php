@@ -43,9 +43,9 @@
     <div class="text-muted">
       {{--todo route--}}
       <a href="/restore">{{ __('Забыли пароль?') }}</a>
-      <? if (isset($show_signup_link) && $show_signup_link) { ?>
-      <a href="{{ route('signup') }}" class="pull-right">{{ __('Регистрация') }}</a>
-      <? } ?>
+      @if (isset($show_signup_link) && $show_signup_link)
+        <a href="{{ route('signup') }}" class="pull-right">{{ __('Регистрация') }}</a>
+      @endif
     </div>
 
   </div>
