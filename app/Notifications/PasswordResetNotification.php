@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Model\Admin;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
 
@@ -44,7 +45,15 @@ class PasswordResetNotification extends Notification {
       ->subject("Сброс пароля")
       ->markdown('notifications.email')
       ->line('Вы получили это письмо, потому что мы получили запрос на сброс пароля для вашей учетной записи.')
-      ->action('Сбросить Пароль', route('admin.password.reset', $this->token))
+      ->action('Сбросить Пароль', $this->getActionUrl($notifiable))
       ->line('Если вы не запрашивали сброс пароля, никаких дальнейших действий не требуется.');
+  }
+
+  protected function getActionUrl($notifiable) {
+    if ($notifiable instanceof Admin) {
+      return route('admin.password.reset', $this->token);
+    }
+
+    return route('password.reset', $this->token);
   }
 }
