@@ -51,7 +51,7 @@ class Username {
     //todo generate as facebook alias
 
     //имя в транслите
-    $transFirstname = Text::transliterate(mb_strtolower(trim($user->firstname)));
+    $transFirstname = transliterate(mb_strtolower(trim($user->firstname)));
 
     //пробуем на основании имени и года рождения
     if (!$username && $transFirstname && $user->birth_year) {
