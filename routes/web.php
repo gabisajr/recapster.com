@@ -72,8 +72,16 @@ Route::get('company/search', ['as' => 'company.search', 'uses' => 'CompaniesCont
 
 //user auth
 Route::group(['namespace' => 'Auth'], function () {
+
+  //регистрация
   Route::get('signup', ['as' => 'signup', 'uses' => 'RegisterController@showRegistrationForm']);
   Route::post('signup', ['as' => 'signup', 'uses' => 'RegisterController@register']);
+
+  //вход
+  Route::get('signin', ['as' => 'signin', 'uses' => 'LoginController@showLoginForm']);
+  Route::post('signin', ['as' => 'signin', 'uses' => 'LoginController@login']);
+
+  //выход
   Route::post('signout', ['as' => 'signout', 'uses' => 'LoginController@logout']);
 });
 
