@@ -185,7 +185,6 @@ function salary_range($object) {
 }
 
 function get_client_ip() {
-  $ipaddress = '';
   if (getenv('HTTP_CLIENT_IP'))
     $ipaddress = getenv('HTTP_CLIENT_IP');
   elseif (getenv('HTTP_X_FORWARDED_FOR'))
