@@ -11,7 +11,7 @@ use DateTime;
  * Class User
  * @package App\Model
  * @property int    $id
- * @property string $name
+ * @property string $firstname
  * @property string $lastname
  * @property string $email
  * @property string $username
@@ -64,9 +64,9 @@ class User extends Authenticatable {
   }
 
   public function fullname() {
-    if ($this->name || $this->lastname) {
+    if ($this->firstname || $this->lastname) {
       $parts = [];
-      if ($this->name) $parts[] = $this->name;
+      if ($this->firstname) $parts[] = $this->firstname;
       if ($this->lastname) $parts[] = $this->lastname;
       return implode(' ', $parts);
     }
@@ -75,9 +75,9 @@ class User extends Authenticatable {
 
   public function age() {
     //todo create db fields
-    $birthYear = (int) $this->birth_year;
-    $birthDay = (int) $this->birth_day;
-    $birthMonth = (int) $this->birth_month;
+    $birthYear = (int)$this->birth_year;
+    $birthDay = (int)$this->birth_day;
+    $birthMonth = (int)$this->birth_month;
 
     if (!$birthYear) return null;
 
