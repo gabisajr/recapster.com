@@ -33,8 +33,7 @@ class ForgotPasswordController extends Controller {
     return view('auth.passwords.email', [
       'title'        => __('Восстановление пароля'),
       'main_js'      => 'restore',
-      //'useRecaptcha' => config('app.env') == 'production',
-      'useRecaptcha' => true, //todo only for production env
+      'useRecaptcha' => true,
     ]);
   }
 
