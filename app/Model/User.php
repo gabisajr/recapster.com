@@ -5,6 +5,7 @@ namespace App\Model;
 use App\Notifications\PasswordResetNotification;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use DateTime;
 
 /**
  * Class User
@@ -70,6 +71,21 @@ class User extends Authenticatable {
       return implode(' ', $parts);
     }
     return null;
+  }
+
+  public function age() {
+    //todo create db fields
+    $birthYear = (int) $this->birth_year;
+    $birthDay = (int) $this->birth_day;
+    $birthMonth = (int) $this->birth_month;
+
+    if (!$birthYear) return null;
+
+    if (!$birthDay) $birthDay = 1;
+    if (!$birthMonth) $birthMonth = 1;
+
+    $date = "{$birthYear}-{$birthMonth}-{$birthDay}";
+    return DateTime::createFromFormat('Y-m-d', $date)->diff(new DateTime('now'))->y;
   }
 
 }
