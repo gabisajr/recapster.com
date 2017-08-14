@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Авг 11 2017 г., 16:24
+-- Время создания: Авг 14 2017 г., 21:32
 -- Версия сервера: 5.5.53
 -- Версия PHP: 7.0.14
 
@@ -990,7 +990,8 @@ INSERT INTO `images` (`id`, `path`, `width`, `height`, `parent_id`, `optimised`,
 (49, '/uploads/59803eef89f7b-r640x640.jpg', 640, 640, 48, 1, 'r640x640', '2017-08-01 02:43:31', '2017-08-01 02:43:31'),
 (50, '/uploads/59803eef89f7b-r50x50.jpg', 50, 50, 48, 1, 'r50x50', '2017-08-01 02:47:23', '2017-08-01 02:47:23'),
 (51, '/uploads/59803eef89f7b-r250x250.jpg', 250, 250, 48, 1, 'r250x250', '2017-08-01 07:53:20', '2017-08-01 07:53:21'),
-(52, '/uploads/59803eef89f7b-r200x200.jpg', 200, 200, 48, 1, 'r200x200', '2017-08-11 06:35:21', '2017-08-11 06:35:21');
+(52, '/uploads/59803eef89f7b-r200x200.jpg', 200, 200, 48, 1, 'r200x200', '2017-08-11 06:35:21', '2017-08-11 06:35:21'),
+(53, '/uploads/5974a52ac75a2-r200x200.jpg', 200, 200, 2, 1, 'r200x200', '2017-08-11 07:31:36', '2017-08-11 07:31:36');
 
 -- --------------------------------------------------------
 
@@ -1488,6 +1489,13 @@ CREATE TABLE `password_resets` (
   `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+('lukas.pierce@recapster.com', '$2y$10$dd9DkuYS2dRu7wS6lqHJnOo3P2dTGbSPfaHv8IQfVWwHJLX1VUo/e', '2017-08-11 11:50:08');
 
 -- --------------------------------------------------------
 
@@ -2313,11 +2321,19 @@ CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `username`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(5, '', 'kosha.industry@gmail.com', 'kosha.industry', '$2y$10$Jj.TcXYUmUpdtq/qDpmSYuVK0YAYz2BMokFqTeT.xltI2YjVJCASG', 'aY8l3NslmVH9Hka1f3vgUqShUdZYqWuebt6CWIWbN955PGzZSY73xeIVKUL8', '2017-08-11 10:11:35', '2017-08-11 13:15:11');
 
 -- --------------------------------------------------------
 
@@ -2640,7 +2656,8 @@ ALTER TABLE `universities`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
+  ADD UNIQUE KEY `users_email_unique` (`email`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Индексы таблицы `user_educations`
@@ -2727,7 +2744,7 @@ ALTER TABLE `faculties`
 -- AUTO_INCREMENT для таблицы `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 --
 -- AUTO_INCREMENT для таблицы `industries`
 --
@@ -2807,7 +2824,7 @@ ALTER TABLE `universities`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT для таблицы `user_educations`
 --
