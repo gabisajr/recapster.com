@@ -201,3 +201,11 @@ function get_client_ip() {
     $ipaddress = 'UNKNOWN';
   return $ipaddress;
 }
+
+function age($years) {
+  if (is_int($years)) {
+    return $years . " " . getNumEnding($years, [__('год'), __('года'), __('лет')]);
+  }
+
+  return __('не указано');
+}
