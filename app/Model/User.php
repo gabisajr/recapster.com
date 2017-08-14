@@ -55,32 +55,37 @@ class User extends Authenticatable {
    * @return \Illuminate\Database\Eloquent\Builder
    */
   public function scopeSearch($query, $search) {
-    return $query->where('user.id', '=', $search)
 
-      //todo create tables and another scopes for search by socials accounts
-      //->join('facebook_accounts', 'LEFT')->on('user.fb_user_id', '=', 'facebook_accounts.fb_user_id')
-      //->join('vk_accounts', 'LEFT')->on('user.vk_user_id', '=', 'vk_accounts.vk_user_id')
+    if (is_numeric($search)) {
+      $query->where('id', '=', $search);
+    }
 
-      ->orWhere(function ($query) use ($search) {
+    //todo create tables and another scopes for search by socials accounts
+    //->join('facebook_accounts', 'LEFT')->on('user.fb_user_id', '=', 'facebook_accounts.fb_user_id')
+    //->join('vk_accounts', 'LEFT')->on('user.vk_user_id', '=', 'vk_accounts.vk_user_id')
 
-        $query
-          //по имени
-          ->orWhere('user.firstname', 'LIKE', "%$search%")
-          //по фамилии
-          ->orWhere('user.lastname', 'LIKE', "%$search%")
-          //по логину
-          ->orWhere('user.username', 'LIKE', "%$search%")
-          //по email-у
-          ->orWhere('user.email', 'LIKE', "%$search%")
+    $query->orWhere(function ($query) use ($search) {
 
-          //по имени-фамилии facebook
-          //->orWhere('facebook_accounts.firstname', 'LIKE', "%$search%")->orWhere('facebook_accounts.lastname', 'LIKE', "%$search%")
+      $query
+        //по имени
+        ->orWhere('firstname', 'LIKE', "%$search%")
+        //по фамилии
+        ->orWhere('lastname', 'LIKE', "%$search%")
+        //по логину
+        ->orWhere('username', 'LIKE', "%$search%")
+        //по email-у
+        ->orWhere('email', 'LIKE', "%$search%")
 
-          //по имени-фамилии vk
-          //->orWhere('vk_accounts.firstname', 'LIKE', "%$search%")->orWhere('vk_accounts.lastname', 'LIKE', "%$search%")
-        ;
+        //по имени-фамилии facebook
+        //->orWhere('facebook_accounts.firstname', 'LIKE', "%$search%")->orWhere('facebook_accounts.lastname', 'LIKE', "%$search%")
 
-      });
+        //по имени-фамилии vk
+        //->orWhere('vk_accounts.firstname', 'LIKE', "%$search%")->orWhere('vk_accounts.lastname', 'LIKE', "%$search%")
+      ;
+
+    });
+
+    return $query;
   }
 
   public function url($section = null) {
