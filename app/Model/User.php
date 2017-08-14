@@ -47,6 +47,42 @@ class User extends Authenticatable {
     'password', 'remember_token',
   ];
 
+  /**
+   * Scope a query to search users by string
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @param  string                               $search
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeSearch($query, $search) {
+    return $query->where('user.id', '=', $search)
+
+      //todo create tables and another scopes for search by socials accounts
+      //->join('facebook_accounts', 'LEFT')->on('user.fb_user_id', '=', 'facebook_accounts.fb_user_id')
+      //->join('vk_accounts', 'LEFT')->on('user.vk_user_id', '=', 'vk_accounts.vk_user_id')
+
+      ->orWhere(function ($query) use ($search) {
+
+        $query
+          //по имени
+          ->orWhere('user.firstname', 'LIKE', "%$search%")
+          //по фамилии
+          ->orWhere('user.lastname', 'LIKE', "%$search%")
+          //по логину
+          ->orWhere('user.username', 'LIKE', "%$search%")
+          //по email-у
+          ->or_where('user.email', 'LIKE', "%$search%")
+
+          //по имени-фамилии facebook
+          //->or_where('facebook_accounts.firstname', 'LIKE', "%$search%")->or_where('facebook_accounts.lastname', 'LIKE', "%$search%")
+
+          //по имени-фамилии vk
+          //->or_where('vk_accounts.firstname', 'LIKE', "%$search%")->or_where('vk_accounts.lastname', 'LIKE', "%$search%")
+        ;
+
+      });
+  }
+
   public function url($section = null) {
     return url("/$this->username/$section");
   }
