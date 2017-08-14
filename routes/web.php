@@ -45,6 +45,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
   Route::post('position/store', ['as' => 'admin.position.store', 'uses' => 'PositionsController@store']);
   Route::post('position/delete', ['as' => 'admin.position.delete', 'uses' => 'PositionsController@delete']);
 
+  //users
+  Route::get('users', ['as' => 'admin.users', 'uses' => 'UsersController@list']);
+
   //admin auth
   Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::get('login', ['as' => 'admin.login', 'uses' => 'LoginController@showLoginForm']);
