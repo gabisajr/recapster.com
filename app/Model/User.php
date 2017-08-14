@@ -71,13 +71,13 @@ class User extends Authenticatable {
           //по логину
           ->orWhere('user.username', 'LIKE', "%$search%")
           //по email-у
-          ->or_where('user.email', 'LIKE', "%$search%")
+          ->orWhere('user.email', 'LIKE', "%$search%")
 
           //по имени-фамилии facebook
-          //->or_where('facebook_accounts.firstname', 'LIKE', "%$search%")->or_where('facebook_accounts.lastname', 'LIKE', "%$search%")
+          //->orWhere('facebook_accounts.firstname', 'LIKE', "%$search%")->orWhere('facebook_accounts.lastname', 'LIKE', "%$search%")
 
           //по имени-фамилии vk
-          //->or_where('vk_accounts.firstname', 'LIKE', "%$search%")->or_where('vk_accounts.lastname', 'LIKE', "%$search%")
+          //->orWhere('vk_accounts.firstname', 'LIKE', "%$search%")->orWhere('vk_accounts.lastname', 'LIKE', "%$search%")
         ;
 
       });
