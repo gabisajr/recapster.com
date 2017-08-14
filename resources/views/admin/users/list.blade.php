@@ -23,7 +23,7 @@
       <form role="form" id="search-users-form">
         <div class="form-group">
           <div class="input-group">
-            <input name="qu" value="{{ $search }}" type="search" class="form-control"
+            <input name="search" value="{{ $search }}" type="search" class="form-control"
                    placeholder="{{ __('Поиск пользователей: id, Email, Имя, Фамилия') }}" autocomplete="off">
             <div class="input-group-btn">
               <button class="btn btn-primary" type="submit">{{ __('Найти') }}</button>
