@@ -62,4 +62,14 @@ class User extends Authenticatable {
     $this->notify($notification);
   }
 
+  public function fullname() {
+    if ($this->name || $this->lastname) {
+      $parts = [];
+      if ($this->name) $parts[] = $this->name;
+      if ($this->lastname) $parts[] = $this->lastname;
+      return implode(' ', $parts);
+    }
+    return null;
+  }
+
 }
