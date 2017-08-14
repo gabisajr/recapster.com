@@ -75,7 +75,7 @@ class UsersController extends AdminController {
     $users = $query->latest()->paginate(1000);
 
     return view("admin.users.list", [
-      'title' => __('Пользователи'),
+      'title'  => __('Пользователи'),
       'search' => $search,
       'users'  => $users,
     ]);
@@ -508,6 +508,11 @@ class UsersController extends AdminController {
     Session::instance()->set('message_success', __('Импорт успешно выполнен'));
     HTTP::redirect(URL::get_redirect_url("/admin/user/accounts/{$user->id}"));
 
+  }
+
+  public function delete(Request $request) {
+    $user = User::find($request->input('id'));
+    if ($user) $user->delete();
   }
 
 }
