@@ -39,10 +39,11 @@
       <a href="/admin/ceo/list"><i class="fa fa-fw fa-user" aria-hidden="true"></i> <?=__('CEO')?></a>
     </li>
 
-    <li class="<? if ($sidebarActive == 'user') echo 'active' ?>">
-      <a href="/admin/user/list"><i class="fa fa-fw fa-users" aria-hidden="true"></i> <?=__('Пользователи')?></a>
-    </li>
     */?>
+
+    <a href="{{ route('admin.users') }}" class="aside-menu-item{{ $sidebarActive == 'users' ? ' active' : '' }}">
+      <i class="fa fa-fw fa-users"></i> {{ __('Пользователи') }}
+    </a>
 
     <a href="{{ route('admin.vocabularies') }}" class="aside-menu-item{{ $sidebarActive == 'vocabulary' ? ' active' : '' }}">
       <i class="fa fa-fw fa-book"></i> {{ __('Словари') }}
