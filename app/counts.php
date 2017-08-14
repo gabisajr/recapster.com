@@ -71,6 +71,13 @@ function companies_count($count) {
   return __("нет компаний");
 }
 
+function users_count($count) {
+  if ($count) {
+    return $count . ' ' . getNumEnding($count, [__('пользователь'), __('пользователя'), __('пользователей')]);
+  }
+  return __("нет пользователей");
+}
+
 //"Найдено 10 компаний"
 function found_companies($count) {
 
