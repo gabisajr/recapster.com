@@ -47,6 +47,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
   //users
   Route::get('users', ['as' => 'admin.users', 'uses' => 'UsersController@list']);
+  Route::get('user/accounts/{id}', ['as' => 'admin.user.accounts', 'uses' => 'UsersController@accounts']);
+  Route::post('user/delete', ['as' => 'admin.user.delete', 'uses' => 'UsersController@delete']);
 
   //admin auth
   Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
