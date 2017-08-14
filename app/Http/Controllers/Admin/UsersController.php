@@ -49,27 +49,8 @@ class UsersController extends AdminController {
       //->group_by('user.id')
     ;
 
-    //todo фильтр по поисковой фразе (search scope in user model)
     if ($search = $request->query('search')) {
-      $query
-        ->and_where_open()//добавляем к предыдущему условию
-        ->where('user.id', '=', $search)
-        ->join('facebook_accounts', 'LEFT')->on('user.fb_user_id', '=', 'facebook_accounts.fb_user_id')
-        ->join('vk_accounts', 'LEFT')->on('user.vk_user_id', '=', 'vk_accounts.vk_user_id')
-        ->or_where_open()
-        //по имени-фамилии
-        ->or_where('user.firstname', 'LIKE', "%$search%")->or_where('user.lastname', 'LIKE', "%$search%")
-        //поиск по логину
-        ->or_where('user.username', 'LIKE', "%$search%")
-        //по имени-фамилии facebook
-        ->or_where('facebook_accounts.firstname', 'LIKE', "%$search%")->or_where('facebook_accounts.lastname', 'LIKE', "%$search%")
-        //по имени-фамилии vk
-        ->or_where('vk_accounts.firstname', 'LIKE', "%$search%")->or_where('vk_accounts.lastname', 'LIKE', "%$search%")
-        //по Email-у
-        ->or_where('user.email', 'LIKE', "%$search%")
-        ->or_where_close()
-        ->and_where_close();
-
+      $query->search($search);
     }
 
     $users = $query->latest()->paginate(1000);
