@@ -30,6 +30,10 @@ class User extends Authenticatable {
     return $this->belongsTo('App\Model\Image');
   }
 
+  public function experiences() {
+    return $this->hasMany('App\Model\UserExperience', 'user_id');
+  }
+
   /**
    * The attributes that are mass assignable.
    *
