@@ -6,6 +6,7 @@ use App\Notifications\PasswordResetNotification;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use DateTime;
+use Auth;
 
 /**
  * Class User
@@ -127,6 +128,12 @@ class User extends Authenticatable {
 
     $date = "{$birthYear}-{$birthMonth}-{$birthDay}";
     return DateTime::createFromFormat('Y-m-d', $date)->diff(new DateTime('now'))->y;
+  }
+
+  /** @return boolean - returns true if the user instance is current auth user */
+  public function isMe() {
+    $currUser = Auth::getUser();
+    return $currUser && $currUser->id == $this->id;
   }
 
 }
