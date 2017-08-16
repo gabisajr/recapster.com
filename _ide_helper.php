@@ -1852,7 +1852,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Return the currently cached user.
          *
-         * @return \App\User|null 
+         * @return \App\Model\User|null
          * @static 
          */ 
         public static function getUser()
