@@ -114,30 +114,30 @@ class UserExperience extends Model {
     }
   }
 
-  public function save(Validation $validation = null) {
-
-    if ($this->is_current) {
-      $this->end_month = null;
-      $this->end_year = null;
-    }
-
-    if ($this->company_title && (!$this->company->loaded() || ($this->company->title != $this->company_title))) {
-      $company = ORM::factory('Company')->where('company.title', 'LIKE', $this->company_title)->find();
-      $this->company = $company;
-    }
-
-    if ($this->position_title && (!$this->position->loaded() || ($this->position->title != $this->position_title))) {
-      $position = ORM::factory('Position')->where('position.title', 'LIKE', $this->position_title)->find();
-      $this->position = $position;
-    }
-
-    if ($this->city_title && (!$this->city->loaded() || ($this->city->title != $this->city_title))) {
-      $city = ORM::factory('City')->where('city.title', 'LIKE', $this->city_title)->find();
-      $this->city = $city;
-    }
-
-    return parent::save($validation);
-  }
+  //public function save(Validation $validation = null) {
+  //
+  //  if ($this->is_current) {
+  //    $this->end_month = null;
+  //    $this->end_year = null;
+  //  }
+  //
+  //  if ($this->company_title && (!$this->company->loaded() || ($this->company->title != $this->company_title))) {
+  //    $company = ORM::factory('Company')->where('company.title', 'LIKE', $this->company_title)->find();
+  //    $this->company = $company;
+  //  }
+  //
+  //  if ($this->position_title && (!$this->position->loaded() || ($this->position->title != $this->position_title))) {
+  //    $position = ORM::factory('Position')->where('position.title', 'LIKE', $this->position_title)->find();
+  //    $this->position = $position;
+  //  }
+  //
+  //  if ($this->city_title && (!$this->city->loaded() || ($this->city->title != $this->city_title))) {
+  //    $city = ORM::factory('City')->where('city.title', 'LIKE', $this->city_title)->find();
+  //    $this->city = $city;
+  //  }
+  //
+  //  return parent::save($validation);
+  //}
 
   /** @return Model_Review */
   public function get_review() {
