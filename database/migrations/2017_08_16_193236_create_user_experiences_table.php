@@ -44,6 +44,7 @@ class CreateUserExperiencesTable extends Migration {
       //пользователь
       $table->unsignedInteger('user_id')->comment("id пользователя");
       $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+
       $table->timestamps();
     });
   }
