@@ -45,6 +45,7 @@ use Mockery\Exception;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job notInternships()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job ofActiveCompanies()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job ofCompany($company)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job selectHasSalary()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job selectIsGoodCity($city, $readyMove = false, $readyRemote = false)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job selectIsGoodPosition($position)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job status($status)
@@ -167,6 +168,18 @@ class Job extends Model {
     $query->select(DB::expr("if($ifExpression, true, false) as is_good_city"));
 
     return $query;
+  }
+
+  /**
+   * добавить к выборке поле has_salary
+   * зарплата считается указанной если указано хотябы одно поле из: salary_min или salary_max
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeSelectHasSalary($query) {
+    return $query->select(DB::raw("if(jobs.salary_min or jobs.salary_max, true, false) as has_salary"));
   }
 
   /**
