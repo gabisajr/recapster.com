@@ -344,25 +344,29 @@ class Job extends Model {
     return null;
   }
 
-  public function share_email() {
+  public function shareEmailParams() {
     $subject = __(':job', [':job' => $this->title, ':for_company' => $this->company->for_company]);
-    $text = __('Я нашел интересную вакансию для тебя:') . " {$subject} ➜ {$this->url}";
+    $text = __('Я нашел интересную вакансию для тебя:') . " {$subject} ➜ {$this->url()}";
     return ['subject' => $subject, 'text' => $text];
   }
 
-  public function page_meta() {
+  public function metaImage(){
+    return $this->company->logo ? $this->company->logo->resize(200, 200)->path : null;
+  }
 
-    $image = $this->company->logo->loaded() ? $this->company->logo->resize(200, 200)->path : null;
+  public function meta() {
 
-    $page_meta = new PageMeta();
-    $page_meta
+    $image = $this->metaImage();
+
+    $meta = new PageMeta();
+    $meta
       ->setUrl($this->url)
       ->setType('article')
       ->setTitle($this->title)
       ->setDescription($this->noHtmlDescription())
       ->setImage($image);
 
-    return $page_meta;
+    return $meta;
 
   }
 
