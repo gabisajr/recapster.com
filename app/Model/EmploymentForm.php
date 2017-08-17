@@ -5,13 +5,21 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Model_Employment форма занятости работника
+ * App\Model\EmploymentForm - форма занятости работника
  *
- * @property int            $id
- * @property string         $alias
- * @property string         $title
- * @property int            $sort
- * @property Model_Review[] $reviews - отзывы с такой формой занятости
+ * @property int $id
+ * @property string|null $alias
+ * @property string $title
+ * @property int $sort
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EmploymentForm whereAlias($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EmploymentForm whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EmploymentForm whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EmploymentForm whereSort($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EmploymentForm whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EmploymentForm whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class EmploymentForm extends Model {
 
