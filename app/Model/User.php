@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Notifications\PasswordResetNotification;
+use App\Recommend;
 use App\UserJobStatus;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -219,6 +220,11 @@ class User extends Authenticatable {
   public function jobStatusTitle() {
     $status = $this->status ? $this->job_status : UserJobStatus::NOT_SEARCH;
     return array_get(UserJobStatus::getStatuses(), $status);
+  }
+
+  public function recommendJobs($limit, array $exceptIds = []) {
+    $recommend = new Recommend($this);
+    return $recommend->jobs($limit, $exceptIds);
   }
 
 }
