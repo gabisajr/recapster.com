@@ -68,10 +68,10 @@ function avatar(\App\Model\User $user, $size = 50) {
 }
 
 //иконка подтвержденной компании
-function icon_confirmed_company(\App\Model\Company $company, $powertip_placement = "e") {
+function icon_confirmed_company(\App\Model\Company $company, $powertipPlacement = "e") {
   if ($company->confirmed) {
     $title = __('Подтвержденый');
-    return "<i class='icon-confirmed powertip' title='{$title}' data-powertip-placement='{$powertip_placement}'></i>";
+    return "<i class='icon-confirmed powertip' title='{$title}' data-powertip-placement='{$powertipPlacement}'></i>";
   }
   return null;
 }
