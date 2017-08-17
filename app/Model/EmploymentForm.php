@@ -18,6 +18,7 @@ class EmploymentForm extends Model {
   const FULL = 'full';            # Постоянная занятость
   const PART = 'part';            # Частичная занятость
   const PROBATION = 'probation';  # Стажировка
+  const REMOTE = 'remote';        # Удаленная работа
   const PROJECT = 'project';      # Проектная/Временная работа
   const VOLUNTEER = 'volunteer';  # Волонтерство
   const WATCH = 'watch';          # Вахтовый метод
@@ -26,6 +27,7 @@ class EmploymentForm extends Model {
     self::FULL,
     self::PART,
     self::PROBATION,
+    self::REMOTE,
     self::PROJECT,
     self::VOLUNTEER,
     self::WATCH,
