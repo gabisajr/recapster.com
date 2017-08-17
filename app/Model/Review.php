@@ -55,6 +55,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Review extends Model {
 
+  use Approvable;
+
   public $index = 0;
 
   public function company() {
@@ -88,27 +90,6 @@ class Review extends Model {
       'foreign_key' => 'for_id',
     ],
   ];
-
-  /**
-   * Scope a query to only reviews with specific status
-   *
-   * @param \Illuminate\Database\Eloquent\Builder $query
-   * @param string $status
-   * @return \Illuminate\Database\Eloquent\Builder
-   */
-  public function scopeStatus($query, $status) {
-    return $query->where('status', '=', $status);
-  }
-
-  /**
-   * Scope a query to only approved reviews
-   *
-   * @param \Illuminate\Database\Eloquent\Builder $query
-   * @return \Illuminate\Database\Eloquent\Builder
-   */
-  public function scopeApproved($query) {
-    return $query->status(Status::APPROVED);
-  }
 
   public function rules() { //todo validation
     return [
@@ -146,24 +127,9 @@ class Review extends Model {
     ];
   }
 
-  //public function create(Validation $validation = null) {
-  //  if (!$this->added) $this->added = date("Y-m-d H:i:s");
-  //  $this->user = Auth::instance()->get_user();
-  //  return parent::create($validation);
-  //}
-  //
-  //public function update(Validation $validation = null) {
-  //  $user = Auth::instance()->get_user();
-  //  if ($user) $this->last_updated_user = $user;
-  //  return parent::update($validation);
-  //}
-  //
   //public function get($column) {
   //  switch ($column) {
-  //    case 'url':
-  //      return $this->get_url();
-  //      break;
-  //    case 'activity':
+  //    case 'activity': //todo add activity relation
   //      return $this->get_activity();
   //      break;
   //  }
@@ -172,7 +138,7 @@ class Review extends Model {
   //}
 
 
-  public function get_url() {
+  public function url() {
     if (!$this->company->active) return '#';
     return "http://$_SERVER[HTTP_HOST]/{$this->company->alias}/review/{$this->id}";
   }
@@ -327,11 +293,11 @@ class Review extends Model {
     return floor($datediff / (60 * 60 * 24));
   }
 
-  /**
-   * @param Validation|null $validation
-   * @return Model_Review
-   * @throws Kohana_Exception
-   */
+  ///**
+  // * @param Validation|null $validation
+  // * @return Model_Review
+  // * @throws Kohana_Exception
+  // */
   //public function save(Validation $validation = null) {
   //
   //  if ($this->position_title && (!$this->position->loaded() || ($this->position->title != $this->position_title))) {
