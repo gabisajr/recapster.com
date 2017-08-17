@@ -53,6 +53,8 @@ use Auth;
  * @property int|null $country_id id страны
  * @property-read \App\Model\Country|null $country
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereCountryId($value)
+ * @property string|null $job_status статус - готовность к работе
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereJobStatus($value)
  */
 class User extends Authenticatable {
 
