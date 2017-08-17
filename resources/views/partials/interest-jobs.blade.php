@@ -1,15 +1,12 @@
 @php
   /**
    * @var \App\Model\User|null $currUser - global
-   * @var array $excludeIds
+   * @var array $exceptIds
    */
 
-  $excludeIds = isset($excludeIds) ? $excludeIds : [];
-
-  $jobs = (new \App\Recommend($currUser))->jobs(10, $excludeIds);
-
+  $exceptIds = isset($exceptIds) ? $exceptIds : [];
+  $jobs = recommend_jobs($currUser, 10, $exceptIds);
   if (!count($jobs)) return;
-
   $showDebug = false;
 @endphp
 
@@ -25,7 +22,7 @@
           {{ 'is_good_position: ' . $job->is_good_position }}<br>
           {{ 'is_good_city: ' . $job->is_good_city }}<br>
           {{ 'is_good_salary: ' . $job->is_good_salary }}<br>
-          {{ 'is_good_employment: ' . $job->is_good_employment }}<br>
+          {{ 'is_good_employment_form: ' . $job->is_good_employment_form }}<br>
         </samp>
       @endif
 
