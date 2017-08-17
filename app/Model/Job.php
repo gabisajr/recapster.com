@@ -8,7 +8,6 @@ use DB;
 use Mockery\Exception;
 
 
-
 /**
  * App\Model\Job
  *
@@ -51,6 +50,7 @@ use Mockery\Exception;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job selectIsGoodEmploymentForm($employmentForms)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job selectIsGoodPosition($position)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job selectIsGoodSalary($salary)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job selectTotalComfort($jobPreferences)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job status($status)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereApplyType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereCompanyId($value)
@@ -207,7 +207,7 @@ class Job extends Model {
   }
 
   /**
-   * добавить к выборке поле is_good_employment
+   * добавить к выборке поле is_good_employment_form
    * форма занятости считается хорошей если она входит массив id-шников $employmentForms
    *
    * @param \Illuminate\Database\Eloquent\Builder $query
@@ -217,12 +217,39 @@ class Job extends Model {
   public function scopeSelectIsGoodEmploymentForm($query, $employmentForms) {
     if ($employmentForms->count()) {
       $employmentFormsIds = $employmentForms->implode('id', ',');
-      $query->select(DB::raw("if(find_in_set(jobs.employment_form_id, {$employmentFormsIds}), true, false) as is_good_employment"));
+      //todo если у работы не указана форма занятости - то тоже хорошая
+      //todo если пустой массив $employmentForms - то тоже любая форма будет считаться хорошей
+      $query->select(DB::raw("if(find_in_set(jobs.employment_form_id, {$employmentFormsIds}), true, false) as is_good_employment_form"));
     } else {
-      $query->select(DB::raw('false as is_good_employment'));
+      $query->select(DB::raw('false as is_good_employment_form'));
     }
 
     return $query;
+  }
+
+  /**
+   * добавить к выборке поле total_comfort
+   * общий уровень комфорта высчитывается согласно предпочтениям
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @param \App\Model\JobPreferences $jobPreferences
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeSelectTotalComfort($query, $jobPreferences) {
+
+    //подходящая ли должность?
+    $query->selectIsGoodPosition($jobPreferences->position);
+
+    //подходящая ли форма занятости?
+    $query->selectIsGoodEmploymentForm($jobPreferences->employmentForms);
+
+    //подходящая ли зарплата?
+    $query->selectIsGoodSalary($jobPreferences->salary);
+
+    //подходящий ли город?
+    $query->selectIsGoodCity($jobPreferences->city, $jobPreferences->ready_move, $jobPreferences->readyRemote());
+
+    return $query->select(DB::raw("(is_good_position + is_good_employment_form + is_good_salary + is_good_city) as total_comfort"));
   }
 
   /**
