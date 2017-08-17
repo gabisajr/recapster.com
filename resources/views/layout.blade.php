@@ -10,8 +10,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="language" content="Russian">
 <link rel="shortcut icon" href="{{ asset('/favicon.ico?v=3') }}"/>
-<title>@yield('title')</title>
-<meta name="title" content="@yield('title')">
+<title>{{ $title }}</title>
+<meta name="title" content="{{ $title }}">
 <meta name="msapplication-tap-highlight" content="no"/>
 @yield('page_meta')
 <?
