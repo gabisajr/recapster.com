@@ -10,19 +10,34 @@ use ImageOptimizer\OptimizerFactory;
 use Intervention\Image\Image as InterventionImage;
 
 /**
- * Class Image
- * @package App\Model
- * @property int     $id
- * @property string  $path
- * @property int     $width
- * @property int     $height
- * @property int     $parent_id
- * @property boolean $optimised
- * @property string  $modifier
- * @property int     $created_at
- * @property int     $updated_at
+ * App\Model\Image
+ *
+ * @property int $id
+ * @property string $path
+ * @property int|null $width
+ * @property int|null $height
+ * @property int|null $parent_id
+ * @property int $optimised картинка оптимизирована
+ * @property string|null $modifier модификатор
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Image[] $childs
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image approved()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image status($status)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image whereHeight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image whereModifier($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image whereOptimised($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image whereParentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image wherePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image whereWidth($value)
+ * @mixin \Eloquent
  */
 class Image extends Model {
+
+  use Approvable;
 
   public function childs() {
     return $this->hasMany('App\Model\Image', 'parent_id');
