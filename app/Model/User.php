@@ -42,6 +42,11 @@ use Auth;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereUsername($value)
  * @mixin \Eloquent
+ * @property int|null $position_id должность или профессия пользователя
+ * @property string|null $position_title должность или профессия пользователя (без привязки)
+ * @property-read \App\Model\Position|null $position
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User wherePositionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User wherePositionTitle($value)
  */
 class User extends Authenticatable {
 
@@ -77,6 +82,10 @@ class User extends Authenticatable {
 
   public function subscribers() {
     return $this->morphMany('App\Model\Subscription', 'subscriptions');
+  }
+
+  public function position() {
+    return $this->belongsTo('App\Model\Position');
   }
 
   /**
