@@ -220,3 +220,14 @@ function recommend_jobs($user, $limit, $exceptIds) {
   $recommend = new \App\Recommend($user);
   return $recommend->jobs($limit, $exceptIds);
 }
+
+/**
+ * @param \App\Model\User|null $user
+ * @param int $limit
+ * @param int[] $exceptIds
+ * @return \App\Model\Company[]|\Illuminate\Database\Eloquent\Collection
+ */
+function recommend_companies($user, $limit, $exceptIds) {
+  $recommend = new \App\Recommend($user);
+  return $recommend->companies($limit, $exceptIds);
+}
