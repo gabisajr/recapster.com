@@ -47,6 +47,9 @@ use Auth;
  * @property-read \App\Model\Position|null $position
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User wherePositionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User wherePositionTitle($value)
+ * @property int|null $city_id id города
+ * @property-read \App\Model\City|null $city
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereCityId($value)
  */
 class User extends Authenticatable {
 
@@ -86,6 +89,10 @@ class User extends Authenticatable {
 
   public function position() {
     return $this->belongsTo('App\Model\Position');
+  }
+
+  public function city() {
+    return $this->belongsTo('App\Model\City');
   }
 
   /**
