@@ -88,7 +88,7 @@ class User extends Authenticatable {
   }
 
   public function subscriptions() {
-    return $this->hasMany('App\Model\Subscription', 'user_id');
+    return $this->morphMany('App\Model\Subscription', 'object');
   }
 
   public function subscribers() {
@@ -193,7 +193,7 @@ class User extends Authenticatable {
       if ($this->lastname) $parts[] = $this->lastname;
       return implode(' ', $parts);
     }
-    return null;
+    return "@" . $this->username;
   }
 
   public function age() {
