@@ -16,10 +16,8 @@ class LoadCurrUser {
    */
   public function handle($request, Closure $next) {
 
-    if (Auth::check()) {
-      $currUser = Auth::getUser();
-      View::share("currUser", $currUser);
-    }
+    $currUser = Auth::getUser();
+    View::share("currUser", $currUser);
 
     return $next($request);
   }
