@@ -9,18 +9,39 @@ use DateTime;
 use Auth;
 
 /**
- * Class User
- * @package App\Model
- * @property int    $id
+ * App\Model\User
+ *
+ * @property int $id
  * @property string $firstname
- * @property string $lastname
+ * @property string|null $lastname
  * @property string $email
- * @property string $username
- * @property string $password (hashed)
- * @property int    $avatar_id
- * @property string $remember_token
- * @property string $created_at
- * @property string $updated_at
+ * @property string|null $username
+ * @property string $password
+ * @property int $sex пол
+ * @property string|null $remember_token
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Model\Image $avatar
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\UserEducation[] $educations
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\UserExam[] $exams
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\UserExperience[] $experiences
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Lang[] $langs
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Skill[] $skills
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Subscription[] $subscribers
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Subscription[] $subscriptions
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User search($search)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereFirstname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereLastname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereSex($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereUsername($value)
+ * @mixin \Eloquent
  */
 class User extends Authenticatable {
 
@@ -80,7 +101,7 @@ class User extends Authenticatable {
    * Scope a query to search users by string
    *
    * @param \Illuminate\Database\Eloquent\Builder $query
-   * @param  string                               $search
+   * @param  string $search
    * @return \Illuminate\Database\Eloquent\Builder
    */
   public function scopeSearch($query, $search) {
