@@ -5,55 +5,64 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Interview
+ * App\Model\Interview
  *
- * @property int                    id
- * @property string                 title                    - названеи собеседование (virtual)
- * @property string                 subtitle                 - подзаголовок собеседование (virtual)
- * @property string                 url                      - ссылка на собеседование (virtual)
- * @property string                 alias
- * @property string                 status                   - код статуса собеседования @see modules/enums/classes/Status.php
- * @property int                    process_experience       - впечатление от собеседования @see modules/enums/classes/Opinion.php
- * @property string                 $description             - описание процесса собеседования
- * @property int                    difficulty               - сложность от 1 до 5
- * @property int                    interview_outcome        - результат собеседования: 1 - да; 2 - да, но отказался; 3 - нет
- * @property int                    $duration_number         - длительность процесса величина
- * @property string                 $duration_unit           - длительность процесса, ед измер ('day','week','month')
- * @property int                    month                    - когда было: месяц
- * @property int                    year                     - когда было: год
- * @property int                    we_help                  - как наш сервис помог
- * @property string                 added                    - дата добавления
- * @property string                 last_updated             - дата последних изменений
- * @property string                 $step_other              - дополнительный шаг собеседования
- *
- * @property Model_Company          company                  - компания
- * @property int                    company_id
- *
- * @property Model_Interview_Source source                   - источник собеседования
- * @property int                    source_id
- * @property string                 source_specify           - уточнение источника собеседования (дополнительне поле)
- *
- * @property Model_User             user                     - кто добавил
- * @property int                    user_id
- *
- * @property Model_User             last_updated_user        - кем были сделаны последние изменения
- * @property int                    last_updated_user_id
- *
- * @property Model_Position         position                 - на какую должность проходило собеседование
- * @property int                    position_id
- * @property string                 position_title           - запасное поле
- *
- * @property Model_City             city                     - где проходило собеседование
- * @property int                    city_id
- * @property string                 city_title               - черновое поле
- *
- *------------------------------ СОДЕРЖИТ МНОЖЕСТВА --------------------------------------------
- * @property ORM                    questions                - вопросы собеседования
- * @property ORM                    steps                    - проделанные шаги собеседования
- * @property ORM                    comments                 - комментарии к собеседованию (ответы)
- *
+ * @property int $id
+ * @property string $alias для url
+ * @property int $company_id компания
+ * @property string $status
+ * @property int|null $process_experience впечатление от собеседования: 1 - позитивное, 2 - нейтральное, 3 - негативное
+ * @property string|null $description описание процесса собеседования
+ * @property int|null $difficulty сложность 1-5
+ * @property int|null $interview_outcome результат собеседования: 1 - да; 2 - да, но отказался; 3 - нет
+ * @property string|null $duration_unit длительность процесса, ед измер
+ * @property int|null $duration_value длительность процесса, значение
+ * @property int|null $month когда было, месяц
+ * @property int|null $year когда было, год
+ * @property int|null $we_help помог ли наш сервис
+ * @property int|null $user_id пользователь оставивший собеседование
+ * @property int|null $source_id источник собеседования
+ * @property string|null $source_specify уточнение источника собеседования
+ * @property int|null $position_id на какую должность проходило собеседование
+ * @property string|null $position_title должность респондента - строкой
+ * @property int|null $city_id где проходило собеседование
+ * @property string|null $city_title местоположение офиса - строкой
+ * @property string|null $step_other другой шаг
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Model\City|null $city
+ * @property-read \App\Model\Company $company
+ * @property-read \App\Model\Position|null $position
+ * @property-read \App\Model\InterviewSource|null $source
+ * @property-read \App\Model\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview approved()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview status($status)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview whereAlias($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview whereCityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview whereCityTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview whereDifficulty($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview whereDurationUnit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview whereDurationValue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview whereInterviewOutcome($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview wherePositionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview wherePositionTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview whereProcessExperience($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview whereSourceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview whereSourceSpecify($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview whereStepOther($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Interview whereWeHelp($value)
+ * @mixin \Eloquent
  */
 class Interview extends Model {
+
+  use Approvable;
 
   public function company() {
     return $this->belongsTo('App\Model\Company');
