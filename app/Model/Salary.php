@@ -4,56 +4,62 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 /**
- * Class Salary - Зарплата
+ * App\Model\Salary
  *
- * @property int                id
- * @property int                base_pay                  - основная сумма
- * @property string             added                     - дата добавления
- * @property string             last_updated              - время последнего обновления
- * @property string             period                    - период оплаты
- * @property int                has_additional_payments   - есть ли дополнительные выплаты: Bit::YES, Bit::NO
- * @property string             status                    - статус зарплаты @see modules/enums/classes/Status.php
- * @property int                active_employee           - действующий работник: Bit::YES, Bit::NO
- * @property int                last_year                 - последний год работы, для бывшего работника
- * @property boolean            hidden_employer           - скрытый работодатель
- *
- * @property string             url                       - ссылка на зарплату (virtual)
- *
- * @property Model_Currency     currency                  - валюта зарпаты
- * @property string             currency_code
- *
- * @property Model_Company      company                   - компания
- * @property int                company_id
- *
- * @property Model_Position     position                  - должность
- * @property int                position_id
- * @property string             position_title            - черновое поле
- *
- * @property Model_User         user                      - пользователь оставивший зарплату
- * @property int                user_id
- *
- * @property Model_User         last_updated_user         - пользователь послений изменивший
- * @property int                last_updated_user_id
- *
- * @property Model_Employment   $employment               - форма занятости
- * @property string             $employment_alias
- *
- * @property Model_Stage        stage                     - стаж работы
- * @property int                stage_id
- *
- * @property Model_City         city                      - место положение офиса
- * @property int                city_id
- * @property string             city_title                - черновое поле
- *
- * @property Model_Industry     industry                  - направление деятельности компании
- * @property int                industry_id
- *
- * @property Model_Company_Size company_size              - размер компании
- * @property int                company_size_id
- *
- * @property ORM                additional_payments       - дополнительные платежи
- *
+ * @property int $id
+ * @property int $base_pay основная сумма
+ * @property string|null $currency_code валюта зарплаты
+ * @property int $company_id компания
+ * @property string|null $employee_status статус работника: active - действующий, former - бывший
+ * @property int|null $last_year последний год работы для бывшего работника
+ * @property string $status
+ * @property int|null $position_id должность респондента
+ * @property string|null $position_title должность респондента - строкой
+ * @property int|null $user_id пользователь оставивший данные о зарплате
+ * @property string|null $period
+ * @property int|null $stage_id стаж работы
+ * @property int|null $city_id местоположение офиса
+ * @property string|null $city_title местоположение офиса - строкой
+ * @property string|null $employment_form_alias форма занятости
+ * @property int|null $has_additional_payments есть ли дополнительные выплаты: 1 - да, 0 - нет, null - не указал
+ * @property int|null $company_industry_id направление деятельности компании
+ * @property int|null $company_size_id размер компании
+ * @property int|null $hidden_employer флаг скрытый работодатель
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Model\City|null $city
+ * @property-read \App\Model\Company $company
+ * @property-read \App\Model\Industry|null $companyIndustry
+ * @property-read \App\Model\CompanySize|null $companySize
+ * @property-read \App\Model\Currency|null $currency
+ * @property-read \App\Model\EmploymentForm|null $employmentForm
+ * @property-read \App\Model\Position|null $position
+ * @property-read \App\Model\Stage|null $stage
+ * @property-read \App\Model\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereBasePay($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereCityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereCityTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereCompanyIndustryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereCompanySizeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereCurrencyCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereEmployeeStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereEmploymentFormAlias($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereHasAdditionalPayments($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereHiddenEmployer($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereLastYear($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary wherePeriod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary wherePositionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary wherePositionTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereStageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereUserId($value)
+ * @mixin \Eloquent
  */
 class Salary extends Model {
 
