@@ -25,7 +25,7 @@ class Recommend {
    * @param array $exceptIds
    * @return Company[]|\Illuminate\Database\Eloquent\Collection
    */
-  public function companies(int $limit = 6, array $exceptIds = []) {
+  public function companies(int $limit = 10, array $exceptIds = []) {
 
     /** @var Company $query */
     $query = Company::query();
