@@ -2,9 +2,10 @@
 
 namespace App;
 
-use App\Model\EmploymentForm;
+use App\Model\Company;
 use App\Model\Job;
 use App\Model\User;
+use DB;
 
 class Recommend {
 
@@ -19,35 +20,48 @@ class Recommend {
   }
 
   /**
+   * возвращает рекомендуемые компании для пользователя
    * @param int $limit
-   * @return Model_Company[]
-   * @throws Kohana_Exception
+   * @param array $exceptIds
+   * @return Company[]|\Illuminate\Database\Eloquent\Collection
    */
-  public function get_companies($limit = 6) {
-    return ORM::factory('Company')
-      ->where('active', '=', true)
-      ->and_where('logo_id', 'IS NOT', null)
-      ->and_where('rating', '<>', 0)
-      ->and_where_open()
-      ->or_where('reviews_count', '>', 0)
-      ->or_where('salaries_count', '>', 0)
-      ->or_where('interviews_count', '>', 0)
-      ->or_where('jobs_count', '>', 0)
-      ->or_where('internship_count', '>', 0)
-      ->or_where('images_count', '>', 0)
-      ->or_where('followers_count', '>', 0)
-      ->and_where_close()
+  public function companies(int $limit = 6, array $exceptIds = []) {
+
+    /** @var Company $query */
+    $query = Company::query();
+
+    # убарть исключаемые id
+    if (isset($exceptIds) && is_array($exceptIds) && count($exceptIds)) {
+      $query->andWhereNotIn('companies.id', $exceptIds);
+    }
+
+    $companies = $query
+      ->active()
+      ->andWhere('logo_id', 'IS NOT', null)
+      ->andWhere('rating', '<>', 0)
+      ->andWhere(function ($query) {
+        $query->where('reviews_count', '>', 0)
+          ->orWhere('salaries_count', '>', 0)
+          ->orWhere('interviews_count', '>', 0)
+          ->orWhere('jobs_count', '>', 0)
+          ->orWhere('internship_count', '>', 0)
+          ->orWhere('images_count', '>', 0)
+          ->orWhere('followers_count', '>', 0);
+      })
       ->limit($limit)
-      ->order_by(DB::expr('RAND()'))
-      ->find_all();
+      ->order_by(DB::raw('RAND()'))
+      ->get();
+
+    return $companies;
   }
 
   /**
+   * возвращает рекомендуемые вакансии для пользователя
    * @param int $limit
-   * @param array $excludeIds
+   * @param array $exceptIds
    * @return \Illuminate\Database\Eloquent\Collection|\App\Model\Job[]
    */
-  public function jobs(int $limit = 10, array $excludeIds = []) {
+  public function jobs(int $limit = 10, array $exceptIds = []) {
 
     /** @var Job $query */
     $query = Job::query()
@@ -56,8 +70,8 @@ class Recommend {
 
 
     # убарть исключаемые id
-    if (isset($excludeIds) && is_array($excludeIds) && count($excludeIds)) {
-      $query->andWhereNotIn('jobs.id', $excludeIds);
+    if (isset($exceptIds) && is_array($exceptIds) && count($exceptIds)) {
+      $query->andWhereNotIn('jobs.id', $exceptIds);
     }
 
     # предпочтения пользователя
