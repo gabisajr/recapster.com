@@ -98,12 +98,21 @@ Route::group(['namespace' => 'Auth'], function () {
 });
 
 //company
-Route::group(['namespace' => 'Company', 'middleware' => 'load.company'], function () {
+Route::group(['prefix' => 'company', 'namespace' => 'Company', 'middleware' => 'load.company'], function () {
 
+  //company profile page
   Route::get('{company}', ['as' => 'company.profile', 'uses' => 'ProfileController@index']);
 
   //job page
   Route::get('{company}/job/{position}/{id}', ['as' => 'job', 'uses' => 'JobController@showJobPage']);
   Route::get('{company}/job/{id}', ['as' => 'job', 'uses' => 'JobController@showJobPage']);
+
+});
+
+//user
+Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => 'load.user'], function () {
+
+  //user profile page
+  Route::get('{username}', ['as' => 'user.profile', 'uses' => 'ProfileController@index']);
 
 });
