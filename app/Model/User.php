@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Notifications\PasswordResetNotification;
+use App\UserJobStatus;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use DateTime;
@@ -208,6 +209,11 @@ class User extends Authenticatable {
   public function isMe() {
     $currUser = Auth::getUser();
     return $currUser && $currUser->id == $this->id;
+  }
+
+  public function jobStatusTitle() {
+    $status = $this->status ? $this->job_status : UserJobStatus::NOT_SEARCH;
+    return array_get(UserJobStatus::getStatuses(), $status);
   }
 
 }
