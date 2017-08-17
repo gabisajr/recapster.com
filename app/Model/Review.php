@@ -5,51 +5,53 @@ namespace App\Model;
 use App\Status;
 use Illuminate\Database\Eloquent\Model;
 
+
 /**
- * Class Model_Review Отзыв о компании
+ * App\Model\Review - Отзыв о работе в компании
  *
- * @property int              $id
- * @property boolean          $anonym                    - является ли анонимным
- * @property string           $text                      - текст отзыва
- * @property boolean          $active_employee           - респондент работает к компании
- * @property string           $added                     - дата добавления
- * @property string           $last_updated              - дата последнего изменения
- * @property string           $status                    - статус отзыва @see modules/enums/classes/Status.php
- * @property int              $rating                    - рейтинг
- * @property boolean          $recommend                 - рекомендую друзьям
- *
- * -------------------------------- virtual --------------------------------------------
- * @property string           $url                       - ссылка на отзыв
- * @property Model_Activity   $activity                  - активность отзыва
- *
- * -------------------------------- has many --------------------------------------------
- *
- * @property ORM              $comments                  - комментарии к отзыву (ответы)
- *
- * -------------------------------- belongs to --------------------------------------------
- *
- * @property Model_Employment $employment                - форма занятости
- * @property string           $employment_alias
- *
- * @property Model_City       $city                      - место положение офиса
- * @property int              $city_id
- * @property string           $city_title                - черновое поле
- *
- * @property Model_Stage      $stage                     - стаж работы
- * @property int              $stage_id
- *
- * @property Model_Position   $position                  - должность респондента
- * @property int              $position_id
- * @property string           $position_title            - черновое поле
- *
- * @property Model_User       $user                      - пользователь оставивший отзыв
- * @property int              $user_id
- *
- * @property Model_User       $last_updated_user         - кем были сделаны последние изменения
- * @property int              $last_updated_user_id
- *
- * @property Model_Company    $company                   - компания
- * @property int              $company_id
+ * @property int $id
+ * @property int $company_id для какой компании отзыв
+ * @property string $text текст отзыва
+ * @property int $active_employee отзыв от действующего сотрудника
+ * @property int|null $rating общая оценка компании от респондента
+ * @property int|null $position_id должность респондента
+ * @property string|null $position_title должность респондента - строкой
+ * @property string $status статус отзыва: approved - одобрен, pending - в ожинании, rejected - отконен
+ * @property string|null $employment_form_alias форма занятости
+ * @property int|null $recommend рекомендую ли работать
+ * @property int|null $stage_id стаж работы
+ * @property int|null $city_id местоположение офиса
+ * @property string|null $city_title местоположение офиса - строкой
+ * @property int|null $user_id пользователь оставивший отзыв
+ * @property int $anonym отзыв является анонимным
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Model\City|null $city
+ * @property-read \App\Model\Company $company
+ * @property-read \App\Model\EmploymentForm|null $employmentForm
+ * @property-read \App\Model\Position|null $position
+ * @property-read \App\Model\Stage|null $stage
+ * @property-read \App\Model\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review approved()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review status($status)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review whereActiveEmployee($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review whereAnonym($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review whereCityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review whereCityTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review whereEmploymentFormAlias($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review wherePositionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review wherePositionTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review whereRating($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review whereRecommend($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review whereStageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review whereText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review whereUserId($value)
+ * @mixin \Eloquent
  */
 class Review extends Model {
 
