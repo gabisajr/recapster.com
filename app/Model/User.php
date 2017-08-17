@@ -50,6 +50,14 @@ class User extends Authenticatable {
     return $this->belongsToMany('App\Model\Lang', 'users_langs');
   }
 
+  public function subscriptions() {
+    return $this->hasMany('App\Model\Subscription', 'user_id');
+  }
+
+  public function subscribers() {
+    return $this->morphMany('App\Model\Subscription', 'subscriptions');
+  }
+
   /**
    * The attributes that are mass assignable.
    *
