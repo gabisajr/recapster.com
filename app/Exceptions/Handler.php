@@ -51,7 +51,7 @@ class Handler extends ExceptionHandler {
       || $exception instanceof MethodNotAllowedHttpException
     ) {
 
-      if ($exception instanceof NotFoundHttpException) {
+      if ($exception instanceof ModelNotFoundException) {
         $message = $exception->getMessage();
       } else {
         $message = __("Страница не найдена");
