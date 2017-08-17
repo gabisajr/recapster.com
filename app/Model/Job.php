@@ -108,6 +108,20 @@ class Job extends Model {
     return $this->belongsToMany('App\Model\City', 'jobs_cities');
   }
 
+  //todo relations
+  protected $_has_many = [
+    'industries'   => [
+      'model'       => 'Industry',
+      'foreign_key' => 'job_id',
+      'far_key'     => 'industry_id',
+      'through'     => 'jobs_industries',
+    ],
+    'applications' => [
+      'model'       => 'Job_Application',
+      'foreign_key' => 'job_id',
+    ],
+  ];
+
   /**
    * добавить к выборке поле is_good_position
    *
@@ -154,20 +168,6 @@ class Job extends Model {
 
     return $query;
   }
-
-  //todo relations
-  protected $_has_many = [
-    'industries'   => [
-      'model'       => 'Industry',
-      'foreign_key' => 'job_id',
-      'far_key'     => 'industry_id',
-      'through'     => 'jobs_industries',
-    ],
-    'applications' => [
-      'model'       => 'Job_Application',
-      'foreign_key' => 'job_id',
-    ],
-  ];
 
   /**
    * Scope a query to only jobs of specific company
