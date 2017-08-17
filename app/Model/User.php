@@ -46,6 +46,10 @@ class User extends Authenticatable {
     return $this->belongsToMany('App\Model\Skill', 'users_skills');
   }
 
+  public function langs() {
+    return $this->belongsToMany('App\Model\Lang', 'users_langs');
+  }
+
   /**
    * The attributes that are mass assignable.
    *
