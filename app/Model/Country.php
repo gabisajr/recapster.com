@@ -29,7 +29,7 @@ class Country extends Model {
     return $this->hasMany('App\Model\City', 'country_id');
   }
 
-  public function rules() {
+  public function rules() { //todo validation
     return [
       'title'    => [
         ['not_empty'],
