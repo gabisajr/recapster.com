@@ -5,6 +5,7 @@ namespace App\Model;
 use App\Status;
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Mockery\Exception;
 
 
 /**
@@ -44,6 +45,7 @@ use DB;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job notInternships()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job ofActiveCompanies()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job ofCompany($company)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job selectIsGoodCity($city, $readyMove = false, $readyRemote = false)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job selectIsGoodPosition($position)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job status($status)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereApplyType($value)
@@ -107,7 +109,7 @@ class Job extends Model {
   }
 
   /**
-   * Scope a query to only include active companies.
+   * добавить к выборке поле is_good_position
    *
    * @param \Illuminate\Database\Eloquent\Builder $query
    * @param Position|null $position
@@ -119,6 +121,35 @@ class Job extends Model {
     } else {
       $query->select(DB::raw('false as is_good_position'));
     }
+
+    return $query;
+  }
+
+  /**
+   * добавить к выборке поле is_good_position
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @param City|null $city
+   * @param bool $readyMove
+   * @param bool $readyRemote
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeSelectIsGoodCity($query, $city, $readyMove = false, $readyRemote = false) {
+
+    /** @var EmploymentForm $remoteEmploymentForm */
+    $remoteEmploymentForm = EmploymentForm::where('alias', '=', EmploymentForm::REMOTE)->first();
+    if (!$remoteEmploymentForm) throw new Exception("remote employment form not found");
+
+    $orConditions = [
+      "$readyMove",
+      "($readyRemote and jobs.employment_form_id = '{$remoteEmploymentForm->id}')",
+    ];
+
+    if ($city) $orConditions[] = "(jobs_cities.city_id = $city->id)";
+
+    $ifExpression = join(' or ', $orConditions);
+
+    $query->select(DB::expr("if($ifExpression, true, false) as is_good_city"));
 
     return $query;
   }
