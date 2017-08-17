@@ -53,7 +53,7 @@ define(['jquery', 'getImgRealSize', 'keyCodes', 'jquery.easing', 'jquery.transfo
       if (arguments.length <= 2) {
         gallery = [];
         params = arguments[1] || {};
-      } else if (arguments.length == 3) {
+      } else if (arguments.length === 3) {
         gallery = arguments[1] || [];
         params = arguments[2] || {};
       }
