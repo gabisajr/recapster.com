@@ -84,4 +84,18 @@ class JobPreferences extends Model {
     return $this->position ? $this->position->title : $this->position_title;
   }
 
+  /**
+   * проверка, готов ли пользователь к удаленной работе
+   * вернет true, если среди указанных типов занятости будет remote (удаленная работа)
+   * @return bool
+   */
+  public function readyRemote() {
+    $containsRemote = $this->employmentForms->contains(function ($employmentForm) {
+      /** @var EmploymentForm $employmentForm */
+      return $employmentForm->alias == EmploymentForm::REMOTE;
+    });
+
+    return $containsRemote;
+  }
+
 }
