@@ -1,0 +1,1 @@
+define(["jquery","tplModalClose","fancybox"],function(e,o){e(".open-profile-more-modal").fancybox({padding:0,fitToView:!0,href:"#profile-more-modal",helpers:{overlay:{locked:!1}},closeBtn:!1})});

@@ -1,0 +1,1 @@
+define(["jquery","tplModalClose","fancybox"],function(e,o){e(".open-remove-account-modal").fancybox({padding:0,fitToView:!1,href:"#remove-account-modal",helpers:{overlay:{locked:!1}},tpl:{closeBtn:o}})});

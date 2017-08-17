@@ -1,0 +1,1 @@
+require(["jquery","modal","fancybox"],function(o,e){function n(n){n.preventDefault&&n.preventDefault(),n.stopPropagation&&n.stopPropagation(),o(window).width()>770?o.fancybox.open({type:"ajax",padding:0,fitToView:!1,href:"/tmpl/modal/signup",helpers:{overlay:{locked:!1}},tpl:{closeBtn:e.close}}):window.location.href="/signup"}return o(".open-signup-modal").click(n),n});
