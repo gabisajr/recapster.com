@@ -126,7 +126,8 @@ class Job extends Model {
   }
 
   /**
-   * добавить к выборке поле is_good_position
+   * добавить к выборке поле is_good_city
+   * город считать подходящим: если я готов к переезду или вакансия в нужном городе или если вакансия удаленная и я готов к удаленной работе
    *
    * @param \Illuminate\Database\Eloquent\Builder $query
    * @param City|null $city
