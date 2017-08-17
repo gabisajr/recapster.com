@@ -50,6 +50,13 @@ function jobs_count($count) {
   return __("нет вакансий");
 }
 
+function reviews_count($count) {
+  if ($count) {
+    return $count . ' ' . getNumEnding($count, [__('отзыв'), __('отзыва'), __('отзывов')]);
+  }
+  return __("нет отзывов");
+}
+
 function positions_count($count) {
   if ($count) {
     return $count . ' ' . getNumEnding($count, [__('профессия'), __('профессии'), __('профессий')]);
