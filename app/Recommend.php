@@ -37,9 +37,9 @@ class Recommend {
 
     $companies = $query
       ->active()
-      ->andWhere('logo_id', 'IS NOT', null)
-      ->andWhere('rating', '<>', 0)
-      ->andWhere(function ($query) {
+      ->where('logo_id', 'IS NOT', null)
+      ->where('rating', '<>', 0)
+      ->where(function ($query) {
         $query->where('reviews_count', '>', 0)
           ->orWhere('salaries_count', '>', 0)
           ->orWhere('interviews_count', '>', 0)
@@ -49,7 +49,7 @@ class Recommend {
           ->orWhere('followers_count', '>', 0);
       })
       ->limit($limit)
-      ->order_by(DB::raw('RAND()'))
+      ->orderBy(DB::raw('RAND()'))
       ->get();
 
     return $companies;
