@@ -5,40 +5,91 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use App;
 
+
 /**
- * Class Company
+ * App\Model\Company
  *
- * @property int    $id
- * @property string $alias                - никнейм
- * @property string $title                - название компании
- * @property string $tel                  - телефон компании
- * @property string $added                - дата добавления
- * @property string $last_updated         - дата посленего изменения
- * @property float  $rating               - рейтинг компании
- * @property string $site                 - сайт
- * @property string $site_title           - сайт фильтрованный
- * @property string $short_desc           - коротко о компании
- * @property int    $foundation_year      - год основания
- * @property string $description          - описание компании
- * @property bool   $active               - активный аккаунт
- * @property bool   $confirmed            - подвержденый аккаунт
- * @property int    $reviews_count        - кол-во активных отзывов
- * @property int    $salaries_count       - кол-во активных зарплат
- * @property int    $interviews_count     - кол-во активных собеседований
- * @property int    $jobs_count           - кол-во вакансий
- * @property int    $internship_count     - кол-во стажировок
- * @property int    $benefits_count       - кол-во активных приемуществ
- * @property int    $images_count         - кол-во активных фотографий
- * @property int    $followers_count      - кол-во подписчиков
- * @property int    $vk_group_id          - id группы ВКонтакте
- *
- *-------------------------------- belongs to --------------------------------------------------------
- * @property int    $added_user_id        - id добавившего пользователя
- * @property int    $logo_id
- * @property int    $cover_id
- * @property int    $size_id
- * @property int    $revenue_id
- * @property int    $hq_city_id
+ * @property int $id
+ * @property string $alias
+ * @property string $title
+ * @property float $rating
+ * @property int|null $created_user_id
+ * @property int|null $updated_user_id
+ * @property int|null $logo_id
+ * @property int|null $cover_id
+ * @property string|null $site
+ * @property string|null $short_desc короткое описание компании
+ * @property int|null $size_id размер компании (кол-во сотрудников)
+ * @property int|null $revenue_id доход компании
+ * @property int|null $hq_city_id город где находится головной офис
+ * @property int|null $foundation_year год основания
+ * @property string|null $description описание компании
+ * @property int $confirmed подтвержденый аккаунт
+ * @property int $active активированая компания
+ * @property int $reviews_count количество активных отзывов
+ * @property int $salaries_count количество активных зарплат
+ * @property int $interviews_count количество активных собеседований
+ * @property int $jobs_count количество вакансий
+ * @property int $internship_count количество стажировок
+ * @property int $benefits_count количество активных приемуществ
+ * @property int $images_count количество активных фотографий
+ * @property int $followers_count количество подписчиков
+ * @property string|null $tel телефон
+ * @property int|null $vk_group_id id группы ВКонтакте
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Model\User $addedUser
+ * @property-read \App\Model\Ceo $ceo
+ * @property-read \App\Model\Image|null $cover
+ * @property-read \App\Model\City|null $hqCity
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Image[] $images
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Industry[] $industries
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Interview[] $interviews
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Job[] $jobs
+ * @property-read \App\Model\Image|null $logo
+ * @property-read \App\Model\CompanyRevenue|null $revenue
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Review[] $reviews
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Salary[] $salaries
+ * @property-read \App\Model\CompanySize|null $size
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Subscription[] $subscribers
+ * @property-read \App\Model\User|null $updatedUser
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company active()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company city($city)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company confirmed()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company industry()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company notActive()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company search($search)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company unconfirmed()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereAlias($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereBenefitsCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereConfirmed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereCoverId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereCreatedUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereFollowersCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereFoundationYear($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereHqCityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereImagesCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereInternshipCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereInterviewsCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereJobsCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereLogoId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereRating($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereRevenueId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereReviewsCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereSalariesCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereShortDesc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereSite($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereSizeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereTel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereUpdatedUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereVkGroupId($value)
+ * @mixin \Eloquent
  */
 class Company extends Model {
 
