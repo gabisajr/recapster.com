@@ -232,24 +232,29 @@ class Job extends Model {
    * общий уровень комфорта высчитывается согласно предпочтениям
    *
    * @param \Illuminate\Database\Eloquent\Builder $query
-   * @param \App\Model\JobPreferences $jobPreferences
+   * @param \App\Model\JobPreferences|null $jobPreferences
    * @return \Illuminate\Database\Eloquent\Builder
    */
   public function scopeSelectTotalComfort($query, $jobPreferences) {
 
-    //подходящая ли должность?
-    $query->selectIsGoodPosition($jobPreferences->position);
+    if ($jobPreferences) {
+      //подходящая ли должность?
+      $query->selectIsGoodPosition($jobPreferences->position);
 
-    //подходящая ли форма занятости?
-    $query->selectIsGoodEmploymentForm($jobPreferences->employmentForms);
+      //подходящая ли форма занятости?
+      $query->selectIsGoodEmploymentForm($jobPreferences->employmentForms);
 
-    //подходящая ли зарплата?
-    $query->selectIsGoodSalary($jobPreferences->salary);
+      //подходящая ли зарплата?
+      $query->selectIsGoodSalary($jobPreferences->salary);
 
-    //подходящий ли город?
-    $query->selectIsGoodCity($jobPreferences->city, $jobPreferences->ready_move, $jobPreferences->readyRemote());
+      //подходящий ли город?
+      $query->selectIsGoodCity($jobPreferences->city, $jobPreferences->ready_move, $jobPreferences->readyRemote());
 
-    return $query->select(DB::raw("(is_good_position + is_good_employment_form + is_good_salary + is_good_city) as total_comfort"));
+      return $query->select(DB::raw("(is_good_position + is_good_employment_form + is_good_salary + is_good_city) as total_comfort"));
+
+    } else {
+      return $query->select(DB::raw("0 as total_comfort"));
+    }
   }
 
   /**
