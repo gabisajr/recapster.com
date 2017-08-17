@@ -117,7 +117,7 @@ function visibility($object) {
 /**
  * получить надпись о статусе по код стутуса
  *
- * @param null   $status_code
+ * @param null $status_code
  * @param string $gender род: m, f, n - мужской, женский, средний
  * @return string
  */
@@ -208,4 +208,15 @@ function age($years) {
   }
 
   return __('не указано');
+}
+
+/**
+ * @param \App\Model\User|null $user
+ * @param int $limit
+ * @param int[] $exceptIds
+ * @return \App\Model\Job[]|\Illuminate\Database\Eloquent\Collection
+ */
+function recommend_jobs($user, $limit, $exceptIds) {
+  $recommend = new \App\Recommend($user);
+  return $recommend->jobs($limit, $exceptIds);
 }
