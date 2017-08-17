@@ -74,7 +74,7 @@ class City extends Model {
     return [
       'alias' => [
         ['trim'],
-        ['mb_strtolower'],
+        ['mb_strtolower'], //todo filter
         [function ($value) {
           return (!$value) ? null : $value;
         }],
@@ -82,7 +82,7 @@ class City extends Model {
     ];
   }
 
-  public function rules() {
+  public function rules() { //todo validation
     return [
       'title'      => [
         ['not_empty'],
