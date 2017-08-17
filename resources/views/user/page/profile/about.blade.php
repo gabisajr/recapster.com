@@ -13,5 +13,5 @@
     <div>{{ $user->about }}</div> {{--todo auto paragraphs, share on github--}}
   </section>
 @elseif ($user->isMe())
-  @include('user/gag/about-user')
+  @include('user.gag.about-user')
 @endif
