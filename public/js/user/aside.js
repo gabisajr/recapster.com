@@ -1,0 +1,1 @@
+define(["jquery","modal/media-viewer","subscribe"],function(e,i){var a=e(".user-aside").find(".edit-status");a.length&&requirejs(["editable"],function(){a.editable()}),e(".profile-aside.user-aside img.avatar").click(function(){i.open(this,{duration:500,avatar:!0})})});
