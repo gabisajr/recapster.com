@@ -4,41 +4,69 @@ namespace App\Model;
 
 use App\Status;
 use Illuminate\Database\Eloquent\Model;
+use DB;
+
 
 /**
- * Class Model_Job Вакансия
+ * App\Model\Job
  *
- * @property int     $id
- * @property string  $title                   - заголовок вакансии
- * @property int     $salary_min              - мин зарплата
- * @property int     $salary_max              - макс зарплата
- * @property boolean $has_additional_payments - есть ли дополнительные выплаты
- * @property string  $description             - описание
- * @property string  $added                   - дата добавления вакансии
- * @property string  $status                  - статус
- * @property boolean $is_internship           - является ли стажировкой
- * @property boolean $hot                     - горячая вакансия
- * @property string  $apply_type              - тип отклика: переход по внешней по ссылке, показать контакты, внутренняя
- * @property string  $external_url            - внешней url
- * @property string  $contacts                - контактные данные
- * @property string  $employment_form_id      - id формы занятости
- * @property int     $stage_id                - стаж работы
- * @property int     $position_id             - должность
- * @property string  $currency_id             - валюта зарпаты
- * @property int     $company_id              - компания
- * @property int     $user_id                 - пользователь создавший вакансию
- *
- * ------------------------------- virtual -------------------------------------------
- *
- * @property string  $url                     - ссылка на страницу вакансии
- * @property string  $similar_url             - ссылка на страницу похожих вакансий
- *
- * ------------------------------- has many -------------------------------
- *
- * @property ORM     $industries              - направления деятельности
- * @property ORM     $tags                    - теги
- * @property ORM     $cities                  - города
- * @property ORM     $applications            - заявки
+ * @property int $id
+ * @property string $title заголовок
+ * @property int|null $position_id должность
+ * @property int|null $employment_form_id форма занятости
+ * @property int|null $stage_id опыт работы
+ * @property float|null $salary_min мин зарплата
+ * @property float|null $salary_max макс зарплата
+ * @property int $has_additional_payments есть ли дополнительные выплаты
+ * @property int|null $currency_id валюта зарплаты
+ * @property string|null $description описание
+ * @property int $company_id компания
+ * @property int|null $user_id пользователь создавший вакансию
+ * @property string $status статус вакансии: approved - одобрена, pending - в ожинании, rejected - отконена, draft - черновик
+ * @property int $is_internship является ли стажировкой
+ * @property int $hot горячая вакансия
+ * @property string|null $external_url внешняя ссылка на вакансию
+ * @property string|null $apply_type тип отклика: переход по внешней по ссылке, показать контакты, внутренняя
+ * @property string|null $contacts контактные данные
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\City[] $cities
+ * @property-read \App\Model\City $city
+ * @property-read \App\Model\Company $company
+ * @property-read \App\Model\Currency $currency
+ * @property-read \App\Model\EmploymentForm|null $employmentForm
+ * @property-read \App\Model\Position|null $position
+ * @property-read \App\Model\Stage|null $stage
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Tag[] $tags
+ * @property-read \App\Model\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job approved()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job internships()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job notInternships()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job ofActiveCompanies()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job ofCompany($company)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job selectIsGoodPosition($position)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job status($status)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereApplyType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereContacts($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereCurrencyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereEmploymentFormId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereExternalUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereHasAdditionalPayments($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereHot($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereIsInternship($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job wherePositionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereSalaryMax($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereSalaryMin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereStageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereUserId($value)
+ * @mixin \Eloquent
  */
 class Job extends Model {
 
@@ -78,6 +106,23 @@ class Job extends Model {
     return $this->belongsToMany('App\Model\City', 'jobs_cities');
   }
 
+  /**
+   * Scope a query to only include active companies.
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @param Position|null $position
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeSelectIsGoodPosition($query, $position) {
+    if ($position) {
+      $query->select(DB::raw("if(jobs.position_id = {$position->id}, true, false) as is_good_position"));
+    } else {
+      $query->select(DB::raw('false as is_good_position'));
+    }
+
+    return $query;
+  }
+
   //todo relations
   protected $_has_many = [
     'industries'   => [
@@ -96,7 +141,7 @@ class Job extends Model {
    * Scope a query to only jobs of specific company
    *
    * @param \Illuminate\Database\Eloquent\Builder $query
-   * @param  int|Company|string                   $company
+   * @param  int|Company|string $company
    * @return \Illuminate\Database\Eloquent\Builder
    */
   public function scopeOfCompany($query, $company) {
@@ -125,7 +170,7 @@ class Job extends Model {
    * Scope a query to only jobs with specific status
    *
    * @param \Illuminate\Database\Eloquent\Builder $query
-   * @param string                                $status
+   * @param string $status
    * @return \Illuminate\Database\Eloquent\Builder
    */
   public function scopeStatus($query, $status) {
@@ -350,7 +395,7 @@ class Job extends Model {
     return ['subject' => $subject, 'text' => $text];
   }
 
-  public function metaImage(){
+  public function metaImage() {
     return $this->company->logo ? $this->company->logo->resize(200, 200)->path : null;
   }
 
