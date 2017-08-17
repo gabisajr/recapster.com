@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Model\Image;
 use App\Observers\ImageObserver;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -16,6 +17,8 @@ class AppServiceProvider extends ServiceProvider {
    * @return void
    */
   public function boot() {
+    Schema::defaultStringLength(200);
+
     //observers
     Image::observe(ImageObserver::class);
 
