@@ -4,9 +4,8 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-
 /**
- * App\Model\Salary
+ * App\Model\Salary - Зарплата
  *
  * @property int $id
  * @property int $base_pay основная сумма
@@ -38,6 +37,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Model\Position|null $position
  * @property-read \App\Model\Stage|null $stage
  * @property-read \App\Model\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary approved()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary status($status)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereBasePay($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereCityId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Salary whereCityTitle($value)
@@ -62,6 +63,8 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  */
 class Salary extends Model {
+
+  use Approvable;
 
   public function company() {
     return $this->belongsTo('App\Model\Company');
@@ -106,48 +109,6 @@ class Salary extends Model {
       'foreign_key' => 'salary_id',
     ],
   ];
-
-  //public function create(Validation $validation = null) {
-  //  $this->added = date("Y-m-d H:i:s");
-  //  return parent::create($validation);
-  //}
-  //
-  //public function update(Validation $validation = null) {
-  //  $user = Auth::instance()->get_user();
-  //  if ($user) $this->last_updated_user = $user;
-  //  return parent::update($validation);
-  //}
-  //
-  //public function delete() {
-  //
-  //  $salary_position = $this->position;
-  //  $salary_company = $this->company;
-  //
-  //  //при удалении пересчитать количество активных зарплат у професии и компании
-  //  $need_recount_salaries_at_position = ($this->status == Status::APPROVED) && $this->position->loaded();
-  //  $need_recount_salaries_at_company = ($this->status == Status::APPROVED) && $this->company->loaded();
-  //
-  //  //remove additional payments
-  //  foreach ($this->additional_payments->find_all() as $payment) $payment->delete();
-  //
-  //  $res = parent::delete();
-  //
-  //  //recount
-  //  if ($need_recount_salaries_at_position) $salary_position->recount_salaries();
-  //  if ($need_recount_salaries_at_company) $salary_company->recount_salaries();
-  //
-  //  return $res;
-  //}
-  //
-  //public function get($column) {
-  //  switch ($column) {
-  //    case 'url':
-  //      return $this->get_url();
-  //      break;
-  //  }
-  //
-  //  return parent::get($column);
-  //}
 
   /**
    * /kazcom/salary/web-developer
@@ -326,9 +287,9 @@ class Salary extends Model {
     return floor($datediff / (60 * 60 * 24));
   }
 
-  public function admin_url() {
+  public function admin_url() { //todo camel case
     if (!$this->loaded()) return "#";
-    return "http://$_SERVER[HTTP_HOST]/admin/salary/item/$this->id";
+    return "http://$_SERVER[HTTP_HOST]/admin/salary/item/$this->id"; //todo route
   }
 
 }
