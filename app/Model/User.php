@@ -171,7 +171,7 @@ class User extends Authenticatable {
   }
 
   public function url($section = null) {
-    return url("/$this->username/$section");
+    return url("/user/$this->username/$section");
   }
 
 
