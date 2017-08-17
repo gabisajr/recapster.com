@@ -155,6 +155,9 @@ class Job extends Model {
    */
   public function scopeSelectIsGoodCity($query, $city, $readyMove = false, $readyRemote = false) {
 
+    //подключить города
+    $query->leftJoin('jobs_cities', 'jobs_cities.job_id', '=', 'jobs.id');
+
     $orConditions = [];
 
     if ($readyRemote) {
