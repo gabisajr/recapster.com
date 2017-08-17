@@ -1,5 +1,6 @@
 @import "media-queries";
-@import "upsell";
+@import "mixin";
+//@import "upsell";
 //@import "icons"; //todo gulp sprite
 //@import "icons-activity"; //todo gulp sprite
 @import "reactions";
@@ -24,6 +25,10 @@
 @import "typography";
 @import "post";
 @import "media-viewer";
+
+html {
+  font-size: 14px;
+}
 
 body {
   color: $base-text-color;
@@ -371,10 +376,14 @@ body[data-logged="1"] {
 }
 
 .panel {
+  background-color: #fff;
   box-shadow: 0 1px 0 0 $border-color, 0 0 0 1px $border-color;
   border: 0;
   position: relative;
   border-radius: 2px;
+  &-body {
+    padding: 15px;
+  }
   &:empty {
     margin: 0;
     box-shadow: none;
