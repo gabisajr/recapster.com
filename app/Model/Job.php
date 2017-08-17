@@ -237,19 +237,21 @@ class Job extends Model {
    */
   public function scopeSelectTotalComfort($query, $jobPreferences) {
 
+    //подходящая ли должность?
+    $query->selectIsGoodPosition($jobPreferences->position);
+
+    //подходящая ли форма занятости?
+    $query->selectIsGoodEmploymentForm($jobPreferences->employmentForms);
+
+    //подходящая ли зарплата?
+    $query->selectIsGoodSalary($jobPreferences->salary);
+
+    //подходящий ли город?
+    $query->selectIsGoodCity($jobPreferences->city, $jobPreferences->ready_move, $jobPreferences->readyRemote());
+
     if ($jobPreferences) {
-      //подходящая ли должность?
-      $query->selectIsGoodPosition($jobPreferences->position);
 
-      //подходящая ли форма занятости?
-      $query->selectIsGoodEmploymentForm($jobPreferences->employmentForms);
-
-      //подходящая ли зарплата?
-      $query->selectIsGoodSalary($jobPreferences->salary);
-
-      //подходящий ли город?
-      $query->selectIsGoodCity($jobPreferences->city, $jobPreferences->ready_move, $jobPreferences->readyRemote());
-
+      //todo sub query
       return $query->select(DB::raw("(is_good_position + is_good_employment_form + is_good_salary + is_good_city) as total_comfort"));
 
     } else {
