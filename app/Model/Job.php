@@ -135,9 +135,9 @@ class Job extends Model {
    */
   public function scopeSelectIsGoodPosition($query, $position) {
     if ($position) {
-      $query->select(DB::raw("if(jobs.position_id = {$position->id}, true, false) as is_good_position"));
+      $query->addSelect(DB::raw("if(jobs.position_id = {$position->id}, true, false) as is_good_position"));
     } else {
-      $query->select(DB::raw('false as is_good_position'));
+      $query->addSelect(DB::raw('null as is_good_position'));
     }
 
     return $query;
@@ -155,33 +155,27 @@ class Job extends Model {
    */
   public function scopeSelectIsGoodCity($query, $city, $readyMove = false, $readyRemote = false) {
 
-    /** @var EmploymentForm $remoteEmploymentForm */
-    $remoteEmploymentForm = EmploymentForm::where('alias', '=', EmploymentForm::REMOTE)->first();
-    if (!$remoteEmploymentForm) throw new Exception("remote employment form not found");
+    $orConditions = [];
 
-    $orConditions = [
-      "$readyMove",
-      "($readyRemote and jobs.employment_form_id = '{$remoteEmploymentForm->id}')",
-    ];
+    if ($readyRemote) {
+      /** @var EmploymentForm $remoteEmploymentForm */
+      $remoteEmploymentForm = EmploymentForm::where('alias', '=', EmploymentForm::REMOTE)->first();
+      if (!$remoteEmploymentForm) throw new Exception("remote employment form not found");
 
+      $orConditions[] = "(jobs.employment_form_id = '{$remoteEmploymentForm->id}')";
+    }
+
+    if ($readyMove) $orConditions[] = 'true'; //any city is good
     if ($city) $orConditions[] = "(jobs_cities.city_id = $city->id)";
 
-    $ifExpression = join(' or ', $orConditions);
-
-    $query->select(DB::raw("if($ifExpression, true, false) as is_good_city"));
+    if (count($orConditions)) {
+      $ifExpression = join(' or ', $orConditions);
+      $query->addSelect(DB::raw("if($ifExpression, true, false) as is_good_city"));
+    } else {
+      $query->addSelect(DB::raw("null as is_good_city"));
+    }
 
     return $query;
-  }
-
-  /**
-   * добавить к выборке поле has_salary
-   * зарплата считается указанной если указано хотябы одно поле из: salary_min или salary_max
-   *
-   * @param \Illuminate\Database\Eloquent\Builder $query
-   * @return \Illuminate\Database\Eloquent\Builder
-   */
-  public function scopeSelectHasSalary($query) {
-    return $query->select(DB::raw("if(jobs.salary_min or jobs.salary_max, true, false) as has_salary"));
   }
 
   /**
@@ -198,9 +192,9 @@ class Job extends Model {
         "(jobs.salary_min and jobs.salary_min >= $salary)",
         "(jobs.salary_max and jobs.salary_max >= $salary)",
       ]);
-      $query->select(DB::raw("if($ifExpression, true, false) as is_good_salary"));
+      $query->addSelect(DB::raw("if($ifExpression, true, false) as is_good_salary"));
     } else {
-      $query->select([DB::raw('FALSE'), 'is_good_salary']);
+      $query->addSelect(DB::raw('null as is_good_salary'));
     }
 
     return $query;
@@ -211,17 +205,17 @@ class Job extends Model {
    * форма занятости считается хорошей если она входит массив id-шников $employmentForms
    *
    * @param \Illuminate\Database\Eloquent\Builder $query
-   * @param \Illuminate\Support\Collection|\App\Model\EmploymentForm[] $employmentForms
+   * @param \Illuminate\Support\Collection|\App\Model\EmploymentForm[]|null $employmentForms
    * @return \Illuminate\Database\Eloquent\Builder
    */
   public function scopeSelectIsGoodEmploymentForm($query, $employmentForms) {
-    if ($employmentForms->count()) {
+    if (!is_null($employmentForms) && $employmentForms->count()) {
       $employmentFormsIds = $employmentForms->implode('id', ',');
       //todo если у работы не указана форма занятости - то тоже хорошая
       //todo если пустой массив $employmentForms - то тоже любая форма будет считаться хорошей
-      $query->select(DB::raw("if(find_in_set(jobs.employment_form_id, {$employmentFormsIds}), true, false) as is_good_employment_form"));
+      $query->addSelect(DB::raw("if(find_in_set(jobs.employment_form_id, {$employmentFormsIds}), true, false) as is_good_employment_form"));
     } else {
-      $query->select(DB::raw('false as is_good_employment_form'));
+      $query->addSelect(DB::raw('null as is_good_employment_form'));
     }
 
     return $query;
@@ -231,32 +225,49 @@ class Job extends Model {
    * добавить к выборке поле total_comfort
    * общий уровень комфорта высчитывается согласно предпочтениям
    *
-   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @param self $query
    * @param \App\Model\JobPreferences|null $jobPreferences
    * @return \Illuminate\Database\Eloquent\Builder
    */
   public function scopeSelectTotalComfort($query, $jobPreferences) {
 
+    /** @var Job $subQuery */
+    $subQuery = Job::query()->select('*');
+
     //подходящая ли должность?
-    $query->selectIsGoodPosition($jobPreferences->position);
+    $subQuery->selectIsGoodPosition($jobPreferences ? $jobPreferences->position : null);
 
     //подходящая ли форма занятости?
-    $query->selectIsGoodEmploymentForm($jobPreferences->employmentForms);
+    $subQuery->selectIsGoodEmploymentForm($jobPreferences ? $jobPreferences->employmentForms : null);
 
     //подходящая ли зарплата?
-    $query->selectIsGoodSalary($jobPreferences->salary);
+    $subQuery->selectIsGoodSalary($jobPreferences ? $jobPreferences->salary : null);
 
     //подходящий ли город?
-    $query->selectIsGoodCity($jobPreferences->city, $jobPreferences->ready_move, $jobPreferences->readyRemote());
+    $subQuery->selectIsGoodCity(
+      $jobPreferences ? $jobPreferences->city : null,
+      $jobPreferences ? $jobPreferences->ready_move : null,
+      $jobPreferences ? $jobPreferences->readyRemote() : null);
 
-    if ($jobPreferences) {
 
-      //todo sub query
-      return $query->select(DB::raw("(is_good_position + is_good_employment_form + is_good_salary + is_good_city) as total_comfort"));
+    $subQuery = $subQuery->toSql();
 
-    } else {
-      return $query->select(DB::raw("0 as total_comfort"));
-    }
+    $query
+      ->addSelect(['jobs.*', DB::raw("(is_good_position + is_good_employment_form + is_good_salary + is_good_city) as total_comfort")])
+      ->from(DB::raw("($subQuery) as jobs"));
+
+    return $query;
+  }
+
+  /**
+   * добавить к выборке поле has_salary
+   * зарплата считается указанной если указано хотябы одно поле из: salary_min или salary_max
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeSelectHasSalary($query) {
+    return $query->addSelect(DB::raw("if(jobs.salary_min or jobs.salary_max, true, false) as has_salary"));
   }
 
   /**
@@ -328,14 +339,6 @@ class Job extends Model {
    */
   public function scopeInternships($query) {
     return $query->where('is_internship', '=', true);
-  }
-
-  public function filters() {
-    return [
-      'description' => [
-        ['clear_style'],
-      ],
-    ];
   }
 
   public function rules() { //todo validation
