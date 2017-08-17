@@ -32,6 +32,7 @@
           {{ array_get($socialInfo, 'firstname') }}
           {{ array_get($socialInfo, 'lastname') }}
         </div>
+        {{--todo route--}}
         <div class="about-user-cancel"><a href="/signup/reset">{{ __('Отмена') }}</a></div>
       </div>
 
@@ -73,11 +74,18 @@
     </div>
 
     <div class="form-group">
-      <div class="form-check">
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" name="employer" {{ old('employer', $employer) ? ' checked' : '' }} id="employer">
-          {{ __('Я работодатель') }}
-        </label>
+      <div class="row">
+        <div class="col">
+          <div class="form-check mb-0">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="employer" {{ old('employer', $employer) ? ' checked' : '' }} id="employer">
+              {{ __('Я работодатель') }}
+            </label>
+          </div>
+        </div>
+        <div class="col col-auto">
+          <a href="{{ route('signin') }}">{{ __('У меня есть аккаунт') }}</a>
+        </div>
       </div>
     </div>
 
