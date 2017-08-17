@@ -2,7 +2,7 @@
 
 namespace App;
 
-class UserStatus {
+class UserJobStatus {
 
   const NOT_SEARCH = 'not_search';
   const SEARCH = 'search';
