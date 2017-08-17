@@ -223,8 +223,7 @@ class User extends Authenticatable {
   }
 
   public function recommendJobs($limit, array $exceptIds = []) {
-    $recommend = new Recommend($this);
-    return $recommend->jobs($limit, $exceptIds);
+    return recommend_jobs($this, $limit, $exceptIds);
   }
 
 }
