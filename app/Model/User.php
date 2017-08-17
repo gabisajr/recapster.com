@@ -42,6 +42,10 @@ class User extends Authenticatable {
     return $this->hasMany('App\Model\UserExam', 'user_id');
   }
 
+  public function skills() {
+    return $this->belongsToMany('App\Model\Skill');
+  }
+
   /**
    * The attributes that are mass assignable.
    *
