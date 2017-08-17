@@ -5,26 +5,31 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Model_City город
+ * App\Model\City
  *
- * @property int           $id
- * @property string        $alias
- * @property string        $title - название города
- * @property int           $vk_id - id города ВКонтакте
- *
- * ------------------- virtual -----------------------------
- * @property string        $of_city
- * @property string        $in_city
- *
- * ------------------- belongs to: -------------------------
- * @property Model_Country $country
- * @property int           $country_id
- *
- * @property Model_Region  $region
- * @property int           $region_id
- *
- * -------------------- has many: --------------------------
- * @property ORM           $universities
+ * @property int $id
+ * @property string|null $alias
+ * @property string $title название города
+ * @property int|null $country_id
+ * @property int|null $region_id
+ * @property int|null $vk_id id города ВКонтакте
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Company[] $companies
+ * @property-read \App\Model\Country|null $country
+ * @property-read \App\Model\Region|null $region
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\University[] $universities
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City hasActiveCompanies()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City whereAlias($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City whereCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City whereRegionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City whereVkId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City withActiveCompaniesCount()
+ * @mixin \Eloquent
  */
 class City extends Model {
 
