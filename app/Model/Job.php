@@ -76,6 +76,8 @@ use Mockery\Exception;
  */
 class Job extends Model {
 
+  use Approvable;
+
   public function position() {
     return $this->belongsTo('App\Model\Position');
   }
@@ -300,27 +302,6 @@ class Job extends Model {
     return $query->rightJoin('companies', function ($join) {
       $join->on('jobs.company_id', '=', 'companies.id')->where('companies.active', '=', true);
     })->select('jobs.*');
-  }
-
-  /**
-   * Scope a query to only jobs with specific status
-   *
-   * @param \Illuminate\Database\Eloquent\Builder $query
-   * @param string $status
-   * @return \Illuminate\Database\Eloquent\Builder
-   */
-  public function scopeStatus($query, $status) {
-    return $query->where('status', '=', $status);
-  }
-
-  /**
-   * Scope a query to only approved jobs
-   *
-   * @param \Illuminate\Database\Eloquent\Builder $query
-   * @return \Illuminate\Database\Eloquent\Builder
-   */
-  public function scopeApproved($query) {
-    return $query->status(Status::APPROVED);
   }
 
   /**
