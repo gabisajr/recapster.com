@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Status;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -85,6 +86,27 @@ class Review extends Model {
       'foreign_key' => 'for_id',
     ],
   ];
+
+  /**
+   * Scope a query to only reviews with specific status
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @param string $status
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeStatus($query, $status) {
+    return $query->where('status', '=', $status);
+  }
+
+  /**
+   * Scope a query to only approved reviews
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeApproved($query) {
+    return $query->status(Status::APPROVED);
+  }
 
   public function rules() { //todo validation
     return [
