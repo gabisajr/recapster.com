@@ -98,6 +98,10 @@ class Company extends Model {
     return $this->belongsTo('App\Model\User', 'updated_user_id');
   }
 
+  public function subscribers() {
+    return $this->morphMany('App\Model\Subscription', 'subscriptions');
+  }
+
   /**
    * Scope a query to only include active companies.
    *
