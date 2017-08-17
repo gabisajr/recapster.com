@@ -8,6 +8,7 @@ use DB;
 use Mockery\Exception;
 
 
+
 /**
  * App\Model\Job
  *
@@ -47,6 +48,7 @@ use Mockery\Exception;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job ofCompany($company)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job selectHasSalary()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job selectIsGoodCity($city, $readyMove = false, $readyRemote = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job selectIsGoodEmploymentForm($employmentForms)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job selectIsGoodPosition($position)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job selectIsGoodSalary($salary)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job status($status)
@@ -166,7 +168,7 @@ class Job extends Model {
 
     $ifExpression = join(' or ', $orConditions);
 
-    $query->select(DB::expr("if($ifExpression, true, false) as is_good_city"));
+    $query->select(DB::raw("if($ifExpression, true, false) as is_good_city"));
 
     return $query;
   }
@@ -196,9 +198,28 @@ class Job extends Model {
         "(jobs.salary_min and jobs.salary_min >= $salary)",
         "(jobs.salary_max and jobs.salary_max >= $salary)",
       ]);
-      $query->select(DB::expr("if($ifExpression, true, false) as is_good_salary"));
+      $query->select(DB::raw("if($ifExpression, true, false) as is_good_salary"));
     } else {
-      $query->select([DB::expr('FALSE'), 'is_good_salary']);
+      $query->select([DB::raw('FALSE'), 'is_good_salary']);
+    }
+
+    return $query;
+  }
+
+  /**
+   * добавить к выборке поле is_good_employment
+   * форма занятости считается хорошей если она входит массив id-шников $employmentForms
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @param \Illuminate\Support\Collection|\App\Model\EmploymentForm[] $employmentForms
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeSelectIsGoodEmploymentForm($query, $employmentForms) {
+    if ($employmentForms->count()) {
+      $employmentFormsIds = $employmentForms->implode('id', ',');
+      $query->select(DB::raw("if(find_in_set(jobs.employment_form_id, {$employmentFormsIds}), true, false) as is_good_employment"));
+    } else {
+      $query->select(DB::raw('false as is_good_employment'));
     }
 
     return $query;
@@ -373,7 +394,7 @@ class Job extends Model {
       //подкючаем компании
       ->join('company', 'LEFT')->on('job.company_id', '=', 'company.id')
       //определяем поле сортировки уровня зарплаты
-      ->select([DB::expr('IF(job.salary_max, job.salary_max, job.salary_min)'), 'salary_order']);
+      ->select([DB::raw('IF(job.salary_max, job.salary_max, job.salary_min)'), 'salary_order']);
 
     //выборка похожих вакансий (по профессии)
     $query->and_where('job.position_id', '=', $this->position_id);
@@ -382,18 +403,18 @@ class Job extends Model {
     $query->and_where('job.id', '<>', $this->id);
 
     if ($curr_user) {
-      $is_applied_expr = DB::expr("(SELECT COUNT(ja.id) FROM job_applications ja WHERE ja.job_id = job.id AND ja.user_id = :curr_user_id)");
+      $is_applied_expr = DB::raw("(SELECT COUNT(ja.id) FROM job_applications ja WHERE ja.job_id = job.id AND ja.user_id = :curr_user_id)");
       $query->select([$is_applied_expr, 'applied']);
       $query->and_where($is_applied_expr, '=', false); //выбираем только те, на которые я еще не отликался
     } else {
-      $query->select([DB::expr("FALSE"), 'applied']);
+      $query->select([DB::raw("FALSE"), 'applied']);
     }
 
     //является избранной, для авторизованных
     if ($curr_user) {
-      $query->select([DB::expr("(SELECT COUNT(*) FROM faves_jobs fj WHERE fj.job_id = job.id AND fj.user_id = :curr_user_id)"), 'is_fave']);
+      $query->select([DB::raw("(SELECT COUNT(*) FROM faves_jobs fj WHERE fj.job_id = job.id AND fj.user_id = :curr_user_id)"), 'is_fave']);
     } else {
-      $query->select([DB::expr("FALSE"), 'is_fave']);
+      $query->select([DB::raw("FALSE"), 'is_fave']);
     }
 
     //сортировка
