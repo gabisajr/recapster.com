@@ -48,6 +48,7 @@ use Mockery\Exception;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job selectHasSalary()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job selectIsGoodCity($city, $readyMove = false, $readyRemote = false)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job selectIsGoodPosition($position)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job selectIsGoodSalary($salary)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job status($status)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereApplyType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Job whereCompanyId($value)
@@ -175,11 +176,32 @@ class Job extends Model {
    * зарплата считается указанной если указано хотябы одно поле из: salary_min или salary_max
    *
    * @param \Illuminate\Database\Eloquent\Builder $query
-
    * @return \Illuminate\Database\Eloquent\Builder
    */
   public function scopeSelectHasSalary($query) {
     return $query->select(DB::raw("if(jobs.salary_min or jobs.salary_max, true, false) as has_salary"));
+  }
+
+  /**
+   * добавить к выборке поле is_good_salary
+   * зарплата считается указанной если указано хотябы одно поле из: salary_min или salary_max
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @param float|null $salary
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeSelectIsGoodSalary($query, $salary) {
+    if ($salary) {
+      $ifExpression = $this->join(' or ', [
+        "(jobs.salary_min and jobs.salary_min >= $salary)",
+        "(jobs.salary_max and jobs.salary_max >= $salary)",
+      ]);
+      $query->select(DB::expr("if($ifExpression, true, false) as is_good_salary"));
+    } else {
+      $query->select([DB::expr('FALSE'), 'is_good_salary']);
+    }
+
+    return $query;
   }
 
   /**
