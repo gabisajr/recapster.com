@@ -3,8 +3,8 @@
    * @var \App\Model\User $user
    * @var Model_Job_Preferences $job_preferences
    * @var Model_Experience[] $experiences
-   * @var Model_User_Skill[] $user_skills
-   * @var Model_User_Lang[] $user_langs
+   * @var Model_User_Skill[] $userSkills
+   * @var Model_User_Lang[] $userLangs
    * @var Model_Exam[] $exams
    * @var Model_Company[] $subscriptions
    * @var Model_Education[] $educations
@@ -26,7 +26,7 @@
           <div class="col-xs-8 summary-value">{{ $user->status_title }}</div>
         </li>
 
-        @if (in_array($user->status, [UserStatus::READY, UserStatus::SEARCH]))
+        @if (in_array($user->job_status, [\App\UserJobStatus::READY, \App\UserJobStatus::SEARCH]))
           <li class="row">
             <div class="col-xs-4 summary-label">{{ __('Желаемое вознаграждение') }}</div>
             <div class="col-xs-8 list-value">@php
@@ -46,7 +46,7 @@
                   $companies_count = companies_count($experiences_count);
                   echo $period ? $period : $companies_count;
                 @endphp</a>
-            @elseif ($is_me)
+            @elseif ($user->isMe())
               <a href="/edit/experience">{{ __('Добавить') }}</a>
             @else
               {{ __('Не указан') }}
@@ -64,7 +64,7 @@
                   '{{ date('y', mktime(null, null, null, 1, 1, $education->end_year)) }}
                 @endif
               </a>
-            @elseif ($is_me)
+            @elseif ($user->isMe())
               {{--todo route--}}
               <a href="/edit/education">{{ __('Добавить') }}</a>
             @else
@@ -73,14 +73,14 @@
           </div>
         </li>
 
-        @if ($count = count($user_skills))
+        @if ($count = count($userSkills))
           <li class="row">
             <div class="col-xs-4 summary-label">{{ __('Навыки') }}</div>
             <div class="col-xs-8 summary-value"><a href="#skills">{{ skills_count($count) }}</a></div> {{--todo create helper--}}
           </li>
         @endif
 
-        @if ($count = count($user_langs))
+        @if ($count = count($userLangs))
           <li class="row">
             <div class="col-xs-4 summary-label">{{ __('Владение языками') }}</div>
             <div class="col-xs-8 summary-value"><a href="#langs">{{ langs_count($count) }}</a></div> {{--todo create helper--}}
