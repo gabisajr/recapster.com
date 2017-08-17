@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 class Skill extends Model {
 
   public function users() {
-    return $this->belongsToMany('App\Model\User');
+    return $this->belongsToMany('App\Model\User', 'users_skills');
   }
 
   public function rules() { //todo validation
