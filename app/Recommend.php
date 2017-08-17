@@ -35,18 +35,23 @@ class Recommend {
       $query->andWhereNotIn('companies.id', $exceptIds);
     }
 
+    //todo algorithm: recommend companies by city, country, industries etc
+
     $companies = $query
       ->active()
       ->where('logo_id', 'IS NOT', null)
       ->where('rating', '<>', 0)
       ->where(function ($query) {
-        $query->where('reviews_count', '>', 0)
-          ->orWhere('salaries_count', '>', 0)
-          ->orWhere('interviews_count', '>', 0)
-          ->orWhere('jobs_count', '>', 0)
-          ->orWhere('internship_count', '>', 0)
-          ->orWhere('images_count', '>', 0)
-          ->orWhere('followers_count', '>', 0);
+
+        $query
+          ->whereHas('reviews', function ($query) { $query->approved(); })
+          ->orWhereHas('salaries', function ($query) { $query->approved(); })
+          ->orWhereHas('interviews', function ($query) { $query->approved(); })
+          ->orWhereHas('jobs', function ($query) { $query->approved(); })
+          ->orWhereHas('images', function ($query) { $query->approved(); })
+          //  ->orWhere('followers_count', '>', 0) //todo
+        ;
+
       })
       ->limit($limit)
       ->orderBy(DB::raw('RAND()'))
