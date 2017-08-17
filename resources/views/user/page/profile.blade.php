@@ -43,3 +43,5 @@
     @endif
   </div>
 @endsection
+
+@section('page_js', 'user/profile')
