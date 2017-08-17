@@ -26,7 +26,7 @@
   $btnHtml = null;
   if (count($buttons)) {
     $btnHtml .= "<div class='buttons_wrapper clear'>";
-    foreach ($buttons as $button) $btnHtml .= $button;
+    $btnHtml .= join('', $buttons);
     $btnHtml .= "</div>";
   }
 
@@ -79,7 +79,7 @@
         </div>
       </div>
 
-      <div class="visible-xs marg-top clear hidden-print">{!! $btnHtml !!}</div>
+      <div class="hidden-xs-up marg-top clear hidden-print">{!! $btnHtml !!}</div>
 
     </aside>
   </div>
