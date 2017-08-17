@@ -56,6 +56,7 @@ use Auth;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereCountryId($value)
  * @property string|null $job_status статус - готовность к работе
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereJobStatus($value)
+ * @property-read \App\Model\JobPreferences $jobPreferences
  */
 class User extends Authenticatable {
 
@@ -103,6 +104,10 @@ class User extends Authenticatable {
 
   public function city() {
     return $this->belongsTo('App\Model\City');
+  }
+
+  public function jobPreferences() {
+    return $this->hasOne('App\Model\JobPreferences');
   }
 
   /**
