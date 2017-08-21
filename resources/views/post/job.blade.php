@@ -42,18 +42,18 @@
             $job_cities = $job->cities()->get(); //todo load with cities
             if (count($job_cities) == 1) {
               $city = $job_cities[0];
-              $href = "/search" . URL::query(['type' => 'jobs', 'city' => $city->id]);
+              $href = '#'; // "/search" . URL::query(['type' => 'jobs', 'city' => $city->id]);
               $parts[] = "<a href='{$href}'>{$city->title}</a>";
             }
 
             if ($job->is_internship) {
-              $href = "/search" . URL::query(['type' => 'jobs', 'job_type' => 'internship']);
+              $href = '#'; // "/search" . URL::query(['type' => 'jobs', 'job_type' => 'internship']);
               $text = __('Стажировка');
               $parts[] = "<a href='{$href}'>{$text}</a>";
             }
 
             if ($job->employmentForm) {
-              $href = "/search" . URL::query(['type' => 'jobs', 'employment' => $job->employment->alias]);
+              $href = '#';// "/search" . URL::query(['type' => 'jobs', 'employment' => $job->employment->alias]);
               $parts[] = "<a href='{$href}'>{$job->employment->title}</a>";
             }
 

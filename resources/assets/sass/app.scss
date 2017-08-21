@@ -170,15 +170,7 @@ img {
   height: $header-height;
   box-shadow: 0 1px 0 0 $border-color;
   margin: 0 0 25px 0;
-  &-row {
-    display: table;
-    width: 100%;
-  }
-  &-col {
-    display: table-cell;
-    height: $header-height;
-    vertical-align: middle;
-  }
+  flex-shrink: 0;
   nav {
     > .-item {
       height: $header-height;
@@ -894,7 +886,6 @@ body[data-logged="1"] {
   position: relative;
   border: $border-color solid;
   border-width: 0 1px 1px 1px;
-  margin-bottom: 12px;
   font-size: 0;
   white-space: nowrap;
   &-company {
@@ -3521,6 +3512,42 @@ menu#profile-more {
 }
 
 .company-profile {
+  $grid-gap: 12px;
+  display: -ms-grid;
+  display: grid;
+  grid-gap: $grid-gap;
+  -ms-grid-columns: 1fr $grid-gap 2fr $grid-gap 1fr;
+  -ms-grid-rows: auto $grid-gap auto;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+          "aside header header"
+          "aside content right";
+  &-aside {
+    -ms-grid-column: 1;
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 3;
+    grid-area: aside;
+  }
+  &-header {
+    -ms-grid-column: 3;
+    -ms-grid-column-span: 3;
+    grid-area: header;
+  }
+  &-content {
+    -ms-grid-row: 3;
+    -ms-grid-column: 3;
+    grid-area: content;
+  }
+  &-left {
+    display: none;
+  }
+  &-right {
+    -ms-grid-row: 3;
+    -ms-grid-column: 5;
+    grid-area: right;
+    border: 1px solid red;
+  }
   &-images {
     .add-photos {
       font-size: 13px;

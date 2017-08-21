@@ -15,7 +15,7 @@ define(['jquery', 'getImgRealSize', 'keyCodes', 'jquery.easing', 'jquery.transfo
 
     //init
     $.ajax({
-      url: '/tmpl/modal/media-viewer',
+      url: '/tmpl/modal/media-viewer', //todo stop here: add route, then edit user self profile
       success: function (html) {
 
         viewer = $(html);

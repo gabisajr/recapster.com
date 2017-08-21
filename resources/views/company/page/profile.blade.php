@@ -10,7 +10,7 @@
   $description = nl2br($company->description);
 @endphp
 
-@extends('company.layout.base')
+@extends('company.layout.base-new')
 
 @section('center')
 
