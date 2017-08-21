@@ -94,7 +94,7 @@ class Handler extends ExceptionHandler {
         break;
 
       default:
-        $route = route('login');
+        $route = route('signin');
         break;
     }
 
