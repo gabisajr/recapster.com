@@ -226,4 +226,19 @@ class User extends Authenticatable {
     return recommend_jobs($this, $limit, $exceptIds);
   }
 
+  /**
+   * @param User|Company $object
+   * @return bool
+   */
+  public function subscribedOn($object) {
+
+    if ($object instanceof Company) {
+      return (bool)$this->subscriptions()->where('object_type', '=', 'company')->where('object_id', '=', $object->id)->count();
+    } elseif ($object instanceof User) {
+      return (bool)$this->subscriptions()->where('object_type', '=', 'user')->where('object_id', '=', $object->id)->count();
+    }
+
+    return false;
+  }
+
 }
