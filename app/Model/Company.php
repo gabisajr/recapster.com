@@ -312,7 +312,7 @@ class Company extends Model {
   //  return parent::save($validation);
   //}
   //
-  //public function delete() {
+  //public function delete() { //todo observer
   //
   //  /** @var ORM $item */
   //
