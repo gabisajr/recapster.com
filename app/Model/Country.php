@@ -5,19 +5,24 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Model_Country страна
+ * App\Model\Country
  *
- * @property int    $id
- * @property string $title      - название страны
- * @property string $iso_code   - ISO 3166-1 (Alpha-2) https://vk.com/dev/country_codes
- * @property int    $vk_id      - id страны ВКонтакте
- *
- * -------------------- virtual ----------------------------
- * @property string $of_country - родительный падеж название страны
- *
- * ------------------- has many ----------------------------
- * @property ORM    $cities     - города
- * @property ORM    $regions    - регионы страны (области, штаты, губернии)
+ * @property int $id
+ * @property string $title
+ * @property string|null $iso_code ISO 3166-1 alpha-2
+ * @property int|null $vk_id id страны ВКонтакте
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\City[] $cities
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Region[] $regions
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Country cIS()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Country whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Country whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Country whereIsoCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Country whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Country whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Country whereVkId($value)
+ * @mixin \Eloquent
  */
 class Country extends Model {
 
@@ -53,39 +58,41 @@ class Country extends Model {
   //  return parent::get($column);
   //}
   //
-  //public function delete() {
+  //public function delete() { //todo observer
   //  foreach ($this->cities->find_all() as $city) $city->delete();
   //  foreach ($this->regions->find_all() as $region) $region->delete();
   //
   //  return parent::delete();
   //}
 
-  /** страны СНГ */
-  public function cis() {
+  /**
+   * Scope a query to only countries from CIS Union
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeCIS($query) {
 
-    $cis_codes = [
-      'KZ', //Казахстан
-      'RU', //Россия
-      'UA', //Украина
-      'AZ', //Азербайджан
-      'AM', //Армения
-      'BY', //Белоруссия
-      'KG', //Киргизия
-      'MD', //Молдавия
-      'TJ', //Таджикистан
-      'TM', //Туркмения
-      'UZ', //Узбекистан
+    $cisCodes = [
+      'KZ', //Kazakhstan
+      'RU', //Russia
+      'UA', //Ukraine
+      'AZ', //Azerbaijan
+      'AM', //Armenia
+      'BY', //Belarus
+      'KG', //Kyrgyzstan
+      'MD', //Moldova
+      'TJ', //Tajikistan
+      'TM', //Turkmenistan
+      'UZ', //Uzbekistan
     ];
 
     $order = [];
-    foreach ($cis_codes as $code) $order[] = "'{$code}'";
+    foreach ($cisCodes as $code) $order[] = "'{$code}'";
     $order = implode(',', $order);
 
-    return ORM::factory($this->object_name())
-      ->where('iso_code', 'IN', $cis_codes)
-      ->order_by(DB::expr("field(iso_code, {$order})"))
-      ->order_by('title')
-      ->find_all();
+    return $query->whereIn('countries.iso_code', $cisCodes)
+      ->orderByRaw("FIELD(countries.iso_code, {$order})");
   }
 
 }
