@@ -20,44 +20,50 @@ use Auth;
  * @property string|null $username
  * @property string $password
  * @property int $sex пол
+ * @property int|null $position_id должность или профессия пользователя
+ * @property string|null $position_title должность или профессия пользователя (без привязки)
+ * @property int|null $country_id id страны
+ * @property int|null $city_id id города
+ * @property string|null $job_status статус - готовность к работе
+ * @property int|null $birth_day
+ * @property int|null $birth_month
+ * @property string|null $birth_year
  * @property string|null $remember_token
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \App\Model\Image $avatar
+ * @property-read \App\Model\City|null $city
+ * @property-read \App\Model\Country|null $country
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\UserEducation[] $educations
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\UserExam[] $exams
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\UserExperience[] $experiences
+ * @property-read \App\Model\JobPreferences $jobPreferences
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Lang[] $langs
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read \App\Model\Position|null $position
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Skill[] $skills
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Subscription[] $subscribers
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Subscription[] $subscriptions
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User search($search)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereBirthDay($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereBirthMonth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereBirthYear($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereCityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereCountryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereFirstname($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereJobStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereLastname($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User wherePositionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User wherePositionTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereSex($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereUsername($value)
  * @mixin \Eloquent
- * @property int|null $position_id должность или профессия пользователя
- * @property string|null $position_title должность или профессия пользователя (без привязки)
- * @property-read \App\Model\Position|null $position
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User wherePositionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User wherePositionTitle($value)
- * @property int|null $city_id id города
- * @property-read \App\Model\City|null $city
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereCityId($value)
- * @property int|null $country_id id страны
- * @property-read \App\Model\Country|null $country
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereCountryId($value)
- * @property string|null $job_status статус - готовность к работе
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereJobStatus($value)
- * @property-read \App\Model\JobPreferences $jobPreferences
  */
 class User extends Authenticatable {
 
