@@ -61,7 +61,7 @@ use Auth;
  */
 class User extends Authenticatable {
 
-  use Notifiable;
+  use Notifiable, Positionable;
 
   public function avatar() {
     return $this->belongsTo('App\Model\Image');
@@ -93,10 +93,6 @@ class User extends Authenticatable {
 
   public function subscribers() {
     return $this->morphMany('App\Model\Subscription', 'subscriptions');
-  }
-
-  public function position() {
-    return $this->belongsTo('App\Model\Position');
   }
 
   public function country() {
