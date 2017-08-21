@@ -104,7 +104,7 @@ Route::group(['prefix' => 'company', 'namespace' => 'Company', 'middleware' => '
   Route::get('{company}', ['as' => 'company.profile', 'uses' => 'ProfileController@index']);
 
   //job page
-  Route::get('{company}/job/{position}/{id}', ['as' => 'job', 'uses' => 'JobController@showJobPage']);
+  Route::get('{company}/job/{id}/{position}', ['as' => 'job-with-position', 'uses' => 'JobController@showJobPage']);
   Route::get('{company}/job/{id}', ['as' => 'job', 'uses' => 'JobController@showJobPage']);
 
 });
