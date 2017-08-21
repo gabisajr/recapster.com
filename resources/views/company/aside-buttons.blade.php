@@ -4,7 +4,7 @@
   @php
     /** @var \App\Model\User $currUser */
     $currUser = Auth::getUser();
-    $subscribed = $currUser && $currUser->subscribedOn($company); //is_company_subscribed
+    $subscribed = $currUser && $currUser->subscribedOn($company);
 
     $cssClass = 'btn btn-block btn-subscribe btn-subscribe-company';
     if ($subscribed) $cssClass .= ' btn-success';
