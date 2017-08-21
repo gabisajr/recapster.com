@@ -368,7 +368,7 @@ class Job extends Model {
   //public function get($column) {
   //  switch ($column) {
   //    case 'similar_url':
-  //      return $this->url . '/similar';
+  //      return $this->url . '/similar'; //todo add similarUrl method
   //      break;
   //  }
   //  return parent::get($column);
