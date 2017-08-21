@@ -63,6 +63,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
 });
 
+//templates
+Route::get('tmpl/{filepath}', ['as' => 'tmpl', 'uses' => 'TmplController@template'])
+  ->where('filepath', '([a-zA-Z-_]+\/?)+') # some/dir/path
+;
+
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
 //search
