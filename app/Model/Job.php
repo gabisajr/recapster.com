@@ -379,10 +379,11 @@ class Job extends Model {
     if (!$this->company) return "#";
     if (!$this->company->active) return "#";
 
-    $url = "/{$this->company->alias}/job";
-    if ($this->position) $url .= "/{$this->position->alias}";
-    $url .= "/{$this->id}";
-    return url($url);
+    if ($this->position) {
+      return route('job-with-position', ['company' => $this->company->alias, 'job' => $this->id, 'position' => $this->position->alias]);
+    } else {
+      return route('job', ['company' => $this->company->alias, 'job' => $this->id]);
+    }
   }
 
   public function noHtmlDescription() {
