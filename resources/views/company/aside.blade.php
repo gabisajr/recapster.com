@@ -20,9 +20,7 @@
         <div class="logo-wrapper">
           <img src="{{ logo_big($company, 640) }}" class="logo" alt="{{ $company->title }}">
         </div>
-        <div class="badge-right visible-xs">
-          <?=$rating?>
-        </div>
+        <div class="badge-right hidden-xs-up">{!! $rating !!}</div>
       </div>
 
       <div class="hidden-xs">{!! $btnHtml !!}</div>
@@ -40,9 +38,11 @@
         @endif
       </div>
 
+      {{--todo remove duplication rating, use css grid--}}
       <div class="hidden-xs marg-top-sm marg-bot">{!! $rating !!}</div>
 
-      <div class="visible-xs marg-top">{!! $btnHtml !!}</div>
+      {{--todo remove duplication buttons, use css grid--}}
+      <div class="hidden-xs-up marg-top">{!! $btnHtml !!}</div>
 
     </aside>
   </div>
