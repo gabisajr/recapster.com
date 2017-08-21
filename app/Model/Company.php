@@ -157,7 +157,7 @@ class Company extends Model {
    * Scope a query to only include active companies.
    *
    * @param \Illuminate\Database\Eloquent\Builder $query
-   * @param int|City                              $city
+   * @param int|City $city
    * @return \Illuminate\Database\Eloquent\Builder
    */
   public function scopeCity($query, $city) {
@@ -202,7 +202,7 @@ class Company extends Model {
    * Scope a query to only companies, which title or alias like $search string.
    *
    * @param \Illuminate\Database\Eloquent\Builder $query
-   * @param  string                               $search
+   * @param  string $search
    * @return \Illuminate\Database\Eloquent\Builder
    */
   public function scopeSearch($query, $search) {
@@ -371,9 +371,11 @@ class Company extends Model {
 
   public function url(string $section = "profile") {
     if (!$this->active) return '#';
-    $url = url("/{$this->alias}/");
+    return route('company.profile', ['company' => $this->alias]);
+
+    //todo use other routes for company page sections
     $section = mb_strtolower($section);
-    if ($section && $section != 'profile') $url .= "{$section}/";
+    if ($section && $section != 'profile') $url .= "/{$section}/";
     return $url;
   }
 
@@ -515,7 +517,7 @@ class Company extends Model {
     /**
      * подсчет только среди обобренных отзывов
      *
-     * @var $votes_count    - Общее количество голосов: "Да", "Нет", не голосовавших - не учитываем
+     * @var $votes_count - Общее количество голосов: "Да", "Нет", не голосовавших - не учитываем
      * @var $positive_count - Количество голосов "Да"
      */
 
@@ -550,7 +552,7 @@ class Company extends Model {
     /**
      * подсчет только среди обобренных отзывов
      *
-     * @var $votes_count    - Общее количество голосов: "За", "Против", "Нейтралы", не голосовавших - не учитываем
+     * @var $votes_count - Общее количество голосов: "За", "Против", "Нейтралы", не голосовавших - не учитываем
      * @var $positive_count - Количество голосов "За"
      */
 
@@ -588,7 +590,7 @@ class Company extends Model {
 
   /**
    * @param Model_User $user
-   * @param array      $data_arr
+   * @param array $data_arr
    * @return Model_Image[]
    */
   public function add_images(Model_User $user, array $data_arr = []) {
@@ -604,7 +606,7 @@ class Company extends Model {
 
   /**
    * @param Model_User $user
-   * @param array      $values
+   * @param array $values
    * @return Model_Image|null
    */
   public function add_image(Model_User $user, Array $values = []) {
