@@ -55,6 +55,7 @@ class ProfileController extends Controller {
     //$this->styles[] = CSS::AWESOME_BOOTSTRAP_CHECKBOX;
 
     return view('company.page.profile', [
+      'title'   => $company->title,
       'company' => $company,
       'review'  => $review,
     ]);
