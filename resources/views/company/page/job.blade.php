@@ -9,8 +9,6 @@
 
 @extends('company.layout.job')
 
-@section('title'){{ $job->title }}@endsection
-
 @section('center')
   <div class="panel">
     <div class="panel-body page-post">
@@ -84,8 +82,8 @@
           <div class="gag-title p text-muted">{{ __('Авторизуйтесь') }}</div>
           <div class="gag-text p small text-muted">{{ __('Откликаться на вакансии могут только зарегистрированные пользователи.') }}</div>
           <div class="btns">
-            <a href="/signin" class="btn btn-primary open-signin-modal">{{ __('Войдите') }}</a>
-            <a href="/signup" class="btn btn-primary open-signup-modal">{{ __('Зарегистрируйтесь') }}</a>
+            <a href="{{ route('signin') }}" class="btn btn-primary open-signin-modal">{{ __('Войдите') }}</a>
+            <a href="{{ route('signup') }}" class="btn btn-primary open-signup-modal">{{ __('Зарегистрируйтесь') }}</a>
           </div>
         </div>
 
