@@ -199,7 +199,6 @@ class User extends Authenticatable {
   }
 
   public function age() {
-    //todo create db fields
     $birthYear = (int)$this->birth_year;
     $birthDay = (int)$this->birth_day;
     $birthMonth = (int)$this->birth_month;
