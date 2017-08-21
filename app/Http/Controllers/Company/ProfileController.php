@@ -48,10 +48,8 @@ class ProfileController extends Controller {
     //
     //$layout = new Layout_Company($this->company, $page);
     //
-    //
-    //$this->template->title = $this->company->title;
     //$this->template->content = $layout;
-    //$this->main_js = '/js/company/profile.js';
+    //$this->main_js = '/js/company/profile.js'; //todo add url
     //$this->styles[] = CSS::AWESOME_BOOTSTRAP_CHECKBOX;
 
     return view('company.page.profile', [
