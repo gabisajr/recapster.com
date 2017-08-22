@@ -11,11 +11,10 @@ define(['jquery', 'i18n', 'browser', 'fileupload', 'autocomplete', 'select2'], f
   (function () {
     var $avatar = $form.find('img.avatar')
       , $wrapper = $avatar.closest('.wrapper')
-      , $loader = $('<div class="panel-loader"><img src="/images/loading.svg" class="loader"></div>').appendTo($wrapper).hide()
-      , path = $form.find('input[name="avatar"]');
+      , $loader = $('<div class="panel-loader"><img src="/images/loading.svg" class="loader"></div>').appendTo($wrapper).hide();
 
     $form.find('input#avatar').fileupload({
-      url: '/user/edit/uploadAvatar',
+      url: '/user/avatar/upload',
       beforeSend: function () {
         $loader.fadeIn();
       },
@@ -23,11 +22,7 @@ define(['jquery', 'i18n', 'browser', 'fileupload', 'autocomplete', 'select2'], f
         $loader.fadeOut();
       },
       done: function (e, data) {
-        console.log(data);
-        if (data.result.success) {
-          path.val(data.result.path);
-          $avatar.attr('src', data.result.path);
-        }
+        $avatar.attr('src', data.result);
       }
     });
 
