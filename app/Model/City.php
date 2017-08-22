@@ -130,7 +130,7 @@ class City extends Model {
     $city = ORM::factory('City', ['alias' => $alias]);
     $request->city = $city;
 
-    if (!empty($alias)) return $city->loaded();
+    if (!empty($alias)) return $city->exists;
 
     return null;
   }
@@ -142,11 +142,10 @@ class City extends Model {
    */
   public function titleRegardToMe() { //todo camelCase
 
-    if (!$this->loaded()) return "<em class='text-muted'>(" . __('нет') . ")</em>";
+    if (!$this->exists) return "<em class='text-muted'>(" . __('нет') . ")</em>";
 
-    /** @var Model_User $curr_user */
-    $curr_user = Auth::instance()->get_user();
-    if ($curr_user && $curr_user->country->id == $this->country->id) {
+    $currUser = \Auth::user();
+    if ($currUser && $currUser->country->id == $this->country->id) {
       $title = __($this->title);
     } else {
       $title = __($this->title) . ", " . __($this->country->title);
