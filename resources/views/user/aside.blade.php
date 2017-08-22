@@ -61,6 +61,7 @@
         </div>
         <div class="badge-right">
 
+          {{--todo move this button to bottom for mobile view--}}
           <div class="hidden-xs hidden-print">{!! $btnHtml !!}</div>
 
           <h1 class="profile-aside-title">
@@ -77,8 +78,6 @@
 
         </div>
       </div>
-
-      {{--todo move settings button to bottom for mobile view--}}
 
     </aside>
   </div>
