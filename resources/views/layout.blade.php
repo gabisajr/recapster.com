@@ -19,9 +19,6 @@
 # fancybox
 //  echo HTML::style('/vendor/fancybox/source/jquery.fancybox.css') . PHP_EOL;
 //
-//  # jquery ui
-//  echo HTML::style('/vendor/jquery-ui-1.11.4/jquery-ui.css') . PHP_EOL;
-//
 //  # fontawesome
 //  echo HTML::style('/vendor/font-awesome-4.5.0/css/font-awesome.min.css') . PHP_EOL;
 //
