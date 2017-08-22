@@ -52,8 +52,13 @@ define(['jquery', 'autosize', 'caretEnd', 'select2', 'autocomplete', 'tagEditor'
       url: "/position/search",
       cache: true,
       processResults: function (data) {
+        data = data.map(function (position) {
+          position.text = position.title;
+          delete position.title;
+          return position;
+        });
         return {
-          results: data.items
+          results: data
         };
       }
     },
