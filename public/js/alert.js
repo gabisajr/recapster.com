@@ -1,0 +1,1 @@
+$(function(){$(document).on("click",".alert .close-alert",function(){$(this).closest(".alert").fadeOut(function(){$(this).remove()})}),setTimeout(function(){$(".alert.alert-autoclose").fadeOut(function(){$(this).remove()})},3e3)});

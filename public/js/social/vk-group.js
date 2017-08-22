@@ -1,0 +1,1 @@
+define(["VK"],function(o){var e=document.getElementById("vk-group").dataset.groupId;e&&o.Widgets.Group("vk-group",{redesign:1,mode:3,width:"280.5",height:"400",color1:"FFFFFF",color2:"000000",color3:"5E81A8"},e)});

@@ -1,0 +1,1 @@
+define(["jquery","review-form"],function(e,i){var r=e("head").data("username");i(e(".review-form"),{},function(){location.href="/"+r+"/activity"})});

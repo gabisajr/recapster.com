@@ -1,0 +1,1 @@
+define("i18n",["jquery","String"],function(n){return function(e,r){var i=e;return r&&n.each(r,function(n,e){i=i.replaceAll(n,e)}),i}});

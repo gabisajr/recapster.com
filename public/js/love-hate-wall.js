@@ -1,0 +1,1 @@
+require(["/js/common.js","helper/util"],function(){require(["jquery","getAbsoluteUrl","module/tabs"],function(t,e){t(".love-hate-wall .tab").on("tab_active",function(){var a=t(this).hasClass("vk")?"vk":"facebook";t(".tab."+a).not(this).not(".active").click(),t.post("/prefersocial",{social:a}),history.replaceState(null,document.title,e("/love-hate-wall?tab="+a))})})});

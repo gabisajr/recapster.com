@@ -1,0 +1,1 @@
+define(["search"],function(){});

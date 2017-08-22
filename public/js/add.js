@@ -1,0 +1,1 @@
+define(["jquery","add-form","browser"],function(a,o,d){var e=a("head").data("username"),f=a("form#add-form");f.addClass("focus"),d.mobile||f.find(":input.title").focus(),o(f,function(){location.href="/"+e+"/activity"})});

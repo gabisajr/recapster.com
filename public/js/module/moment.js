@@ -1,0 +1,1 @@
+define(["/vendor/moment.js"],function(e){var n=document.getElementsByTagName("html")[0].getAttribute("lang");return window.lang=n,e.locale(n),e});

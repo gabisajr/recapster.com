@@ -1,0 +1,1 @@
+define("getAbsoluteUrl",function(){var e;return function(n){return e||(e=document.createElement("a")),e.href=n,e.href}});

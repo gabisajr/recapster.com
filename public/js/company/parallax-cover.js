@@ -1,0 +1,1 @@
+define(["jquery"],function(o){function e(){var e=r.offset().top,t=o(document).scrollTop(),c=t>e?(t-e)/2:0;n.css("transform","translate(0px, "+c+"px)")}var r=o(".company-page-cover.with-cover-img"),n=r.find("img.cover-img");r.length&&(r.on("updateParallax",e),o(window).resize(e),o(document).scroll(e).trigger("scroll"))});

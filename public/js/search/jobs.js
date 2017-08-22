@@ -1,0 +1,1 @@
+define(["jquery","search"],function(t){t(document).on("click",".fave-job .btn-fave",function(e){e.preventDefault();var o=t(this).prop("disable",!0).closest(".fave-job"),n=o.data("id"),a=o.closest(".panel"),f=a.find(".total");o.fadeOut(function(){o.remove()}),t.post("/job/fave/"+n,function(t){f.text("("+t.total+")"),t.total||a.fadeOut(function(){a.remove()})})})});

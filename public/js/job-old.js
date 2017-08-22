@@ -1,0 +1,1 @@
+require(["/js/common.js"],function(){require(["modal/job-apply"]),require(["jquery","diagram/circle"],function(r){r(".circle-diagram").each(function(){r(this).circleDiagram()})}),require(["jquery","diagram/sector"],function(r){r(".sector-diagram").each(function(){r(this).sectorDiagram()})})});

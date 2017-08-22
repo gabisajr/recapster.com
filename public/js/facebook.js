@@ -1,0 +1,1 @@
+define(["facebook_sdk"],function(n){var e=document.querySelector('meta[property="fb:app_id"]').content;return window.fbAsyncInit=function(){n.init({appId:e,xfbml:!0,version:"v2.5"})},n});

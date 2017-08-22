@@ -1,0 +1,1 @@
+define(["jquery","modal/media-viewer","subscribe"],function(i,e){i(".company-aside").find(".logo").click(function(){e.open(this,{duration:500})})});

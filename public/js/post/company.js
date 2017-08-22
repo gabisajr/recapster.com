@@ -1,0 +1,1 @@
+define(["jquery","post"],function(n,t){n.fn.extend({companyPost:function(){return this.length&&t.mobileGo(this),this}})});

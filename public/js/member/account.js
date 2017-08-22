@@ -1,0 +1,1 @@
+require(["/js/common.js"],function(){require(["jquery"],function(e){e('.show-form[data-target="#change-email-form"]').click(function(){setTimeout(function(){e("#change-email-form").find('input[name="new_email"]').focus()},0)})}),require(["modal/remove-account"])});

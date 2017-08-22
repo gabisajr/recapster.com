@@ -1,0 +1,1 @@
+define(["jquery","i18n"],function(o,c){return o(document).on("click",".close-modal",function(){o.fancybox.close()}),{close:'<button class="btn-modal-close" title="'+c("Закрыть (Esc)")+'"><i class="icon modal-close">×</i></button>'}});

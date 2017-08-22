@@ -1,0 +1,1 @@
+define(["jquery"],function(e){e('input[type="checkbox"][name="answered"]').change(function(){e(this).is(":checked")&&(e(this).closest("form").find('input[type="checkbox"][name="answered"]').prop("checked",!1),e(this).prop("checked",!0))})});

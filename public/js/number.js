@@ -1,0 +1,1 @@
+Number.prototype.formatMoney=function(t,a,e){t=isNaN(t=Math.abs(t))?2:t,a=void 0==a?".":a,e=void 0==e?",":e;var s,r=this,o=r<0?"-":"",i=parseInt(r=Math.abs(+r||0).toFixed(t))+"";return s=(s=i.length)>3?s%3:0,o+(s?i.substr(0,s)+e:"")+i.substr(s).replace(/(\d{3})(?=\d)/g,"$1"+e)+(t?a+Math.abs(r-i).toFixed(t).slice(2):"")};
