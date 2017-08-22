@@ -19,7 +19,7 @@ requirejs.config({
     fancytree: '/lib/fancytree/jquery.fancytree-all.min',
     'fancytree-glyph': '/lib/fancytree/src/jquery.fancytree.glyph',
     'jquery-ui': '/lib/jquery-ui-1.11.4/jquery-ui.min',
-    'jquery.ui.widget': '/lib/jquery.ui.widget',
+    'jquery.ui.widget': '/lib/jquery.ui.widget.min',
     'perfect-scrollbar': '/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min',
     tagEditor: '/lib/jquery-tag-editor/jquery.tag-editor.min',
     'jquery-caret': '/lib/jquery-tag-editor/jquery.caret.min',
