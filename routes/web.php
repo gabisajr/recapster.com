@@ -117,14 +117,16 @@ Route::group(['prefix' => 'company', 'namespace' => 'Company', 'middleware' => '
 });
 
 //private area for user editing
-Route::group(['prefix' => 'user/edit', 'namespace' => 'User', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => 'auth'], function () {
 
-  //personal
-  Route::get('personal', ['as' => 'user.edit.personal', 'uses' => 'EditController@showPersonalForm']);
-  Route::post('personal', ['as' => 'user.edit.personal', 'uses' => 'EditController@storePersonal']);
+  //edit
+  Route::group(['prefix' => 'edit', 'namespace' => 'Edit'], function () {
+    Route::get('personal', ['as' => 'user.edit.personal', 'uses' => 'PersonalController@showForm']);
+    Route::post('personal', ['as' => 'user.edit.personal', 'uses' => 'PersonalController@store']);
+  });
 
   //upload avatar
-  Route::post('uploadAvatar', ['as' => 'user.edit.uploadAvatar', 'uses' => 'EditController@uploadAvatar']);
+  Route::post('avatar/upload', ['as' => 'user.avatar.upload', 'uses' => 'AvatarController@upload']);
 
 });
 
