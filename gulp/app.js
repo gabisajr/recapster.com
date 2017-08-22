@@ -18,7 +18,7 @@ gulp.task('app-styles', function () {
     .pipe(sass()['on']('error', sass.logError))
     .pipe(autoprefixer())
     .pipe(concat('app.min.css'))
-    .pipe(cleanCSS())
+    .pipe(cleanCSS({level: {1: {specialComments: 0}}}))
     .pipe(gulp.dest('public/css'))
     .pipe(livereload())
     ;
