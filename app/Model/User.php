@@ -28,6 +28,7 @@ use Auth;
  * @property int|null $birth_day
  * @property int|null $birth_month
  * @property string|null $birth_year
+ * @property string|null $about
  * @property string|null $remember_token
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
@@ -45,6 +46,7 @@ use Auth;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Subscription[] $subscribers
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Subscription[] $subscriptions
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User search($search)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereAbout($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereBirthDay($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereBirthMonth($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereBirthYear($value)
