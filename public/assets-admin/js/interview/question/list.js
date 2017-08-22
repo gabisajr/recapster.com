@@ -1,0 +1,1 @@
+define(["jquery","i18n","/js/admin/entity-list.js"],function(t,e){t("#interviews-list").entityList({removeUrl:"/admin/interview_question/remove",sortable:!1,removeQuestion:e("Вы действительно хотите удалить вопрос собеседования :title с сайта",{":title":'<strong class="text-nowrap">"{title}"</strong>'})})});

@@ -1,0 +1,1 @@
+define(["jquery","initTiny","autocomplete"],function(i,o){o();var t=i("form#experience-form");t.find("input#company").autocompleteCompany(),t.find("input#position").autocompletePosition(),t.find("input#city").autocompleteCity()});

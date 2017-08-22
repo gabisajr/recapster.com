@@ -1,0 +1,1 @@
+define(["jquery","i18n","/js/admin/entity-list.js"],function(t,e){t("#countries-list").entityList({removeUrl:"/admin/country/remove",sortable:!1,removeQuestion:e("Вы действительно хотите удалить страну :title с сайта",{":title":'<strong class="text-nowrap">&laquo;{title}&raquo;</strong>'})})});

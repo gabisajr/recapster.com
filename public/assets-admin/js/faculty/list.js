@@ -1,0 +1,1 @@
+define(["jquery","i18n","/js/admin/entity-list.js"],function(t,e){t("#faculty-list").entityList({removeUrl:"/admin/faculty/remove",sortable:!1,removeQuestion:e("Вы действительно хотите удалить факультет :title с сайта",{":title":'<strong class="text-nowrap">&laquo;{title}&raquo;</strong>'})})});

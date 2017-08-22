@@ -1,0 +1,1 @@
+define(["jquery","i18n","/js/admin/entity-list.js"],function(t,e){t("#salaries-list").entityList({removeUrl:"/admin/salary/remove",sortable:!1,removeQuestion:e("Вы действительно хотите удалить зарплату :title с сайта",{":title":'<strong class="text-nowrap">"{title}"</strong>'})})});

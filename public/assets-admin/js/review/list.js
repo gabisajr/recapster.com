@@ -1,0 +1,1 @@
+define(["jquery","i18n","/js/admin/entity-list.js"],function(e,t){e("#reviews-list").entityList({removeUrl:"/admin/review/remove",sortable:!1,removeQuestion:t("Вы действительно хотите удалить отзыв :title с сайта",{":title":'<strong class="text-nowrap">"{title}"</strong>'})})});
