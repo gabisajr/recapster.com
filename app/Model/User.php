@@ -16,6 +16,7 @@ use Auth;
  * @property int $id
  * @property string $firstname
  * @property string|null $lastname
+ * @property int|null $avatar_id
  * @property string $email
  * @property string|null $username
  * @property string $password
@@ -32,7 +33,7 @@ use Auth;
  * @property string|null $remember_token
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read \App\Model\Image $avatar
+ * @property-read \App\Model\Image|null $avatar
  * @property-read \App\Model\City|null $city
  * @property-read \App\Model\Country|null $country
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\UserEducation[] $educations
@@ -47,6 +48,7 @@ use Auth;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Subscription[] $subscriptions
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User search($search)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereAbout($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereAvatarId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereBirthDay($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereBirthMonth($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereBirthYear($value)
