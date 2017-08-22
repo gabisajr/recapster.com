@@ -9,8 +9,7 @@
   $buttons = [];
 
   if ($user->isMe()) {
-    $text = __('Панель управления');
-    $buttons[] = "<a class='btn btn-info btn-block' href='/edit'>{$text}</a>";
+    $buttons[] = '<a class="btn btn-info btn-block" href="'. route('user.edit.personal') .'">' . __('Панель управления') . '</a>';
   } else {
     $subscribed = $currUser && $currUser->is_user_subscribed($user);
     $class = $subscribed ? ' btn-success' : null;

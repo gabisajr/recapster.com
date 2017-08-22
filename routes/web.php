@@ -80,6 +80,8 @@ Route::group(['namespace' => 'Search'], function () {
 Route::get('position/search', ['as' => 'position.search', 'uses' => 'PositionController@search']);
 Route::get('company/search', ['as' => 'company.search', 'uses' => 'CompaniesController@search']);
 
+Route::post('country/cities', ['as' => 'country.cities', 'uses' => 'CountryController@cities']);
+
 //user auth
 Route::group(['namespace' => 'Auth'], function () {
 
@@ -114,10 +116,20 @@ Route::group(['prefix' => 'company', 'namespace' => 'Company', 'middleware' => '
 
 });
 
+//private area for user editing
+Route::group(['prefix' => 'user/edit', 'namespace' => 'User', 'middleware' => 'auth'], function () {
+
+  //personal
+  Route::get('personal', ['as' => 'user.edit.personal', 'uses' => 'EditController@showPersonalForm']);
+  Route::post('personal', ['as' => 'user.edit.personal', 'uses' => 'EditController@storePersonal']);
+
+  //upload avatar
+  Route::post('uploadAvatar', ['as' => 'user.edit.uploadAvatar', 'uses' => 'EditController@uploadAvatar']);
+
+});
+
 //user
 Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => 'load.user'], function () {
-
   //user profile page
   Route::get('{username}', ['as' => 'user.profile', 'uses' => 'ProfileController@index']);
-
 });

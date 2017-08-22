@@ -1,4 +1,4 @@
-define(['jquery', 'i18n', 'autosize', 'browser', 'fileupload', 'selectpicker', 'autocomplete'], function ($, __, autosize, browser) {
+define(['jquery', 'i18n', 'browser', 'fileupload', 'autocomplete', 'select2'], function ($, __) {
 
   var $form = $('form#edit-personal-form')
     , $submit = $form.find('.btn-submit')
@@ -7,33 +7,26 @@ define(['jquery', 'i18n', 'autosize', 'browser', 'fileupload', 'selectpicker', '
     , $city = $form.find(':input#city')
     , $status = $form.find(':input#status');
 
-  $form.find('select').selectpicker();
-  if (browser.mobile) $form.find('select').selectpicker('mobile');
-
-  autosize($form.find('textarea'));
-
   //загрузка аватарки
   (function () {
-    var avatar = $form.find('img.avatar')
-      , wrapper = avatar.closest('.wrapper')
-      , loader = $('<div class="panel-loader"><img src="/images/loading.svg" class="loader"></div>').appendTo(wrapper).hide()
+    var $avatar = $form.find('img.avatar')
+      , $wrapper = $avatar.closest('.wrapper')
+      , $loader = $('<div class="panel-loader"><img src="/images/loading.svg" class="loader"></div>').appendTo($wrapper).hide()
       , path = $form.find('input[name="avatar"]');
 
     $form.find('input#avatar').fileupload({
-      url: '/upload/photo',
+      url: '/user/edit/uploadAvatar',
       beforeSend: function () {
-        loader.fadeIn();
-        $submit.prop('disabled', true);
-        $.post('/upload/remove', {path: path.val()});
+        $loader.fadeIn();
       },
       complete: function () {
-        loader.fadeOut();
-        $submit.prop('disabled', false);
+        $loader.fadeOut();
       },
       done: function (e, data) {
+        console.log(data);
         if (data.result.success) {
           path.val(data.result.path);
-          avatar.attr('src', data.result.path);
+          $avatar.attr('src', data.result.path);
         }
       }
     });
@@ -51,18 +44,31 @@ define(['jquery', 'i18n', 'autosize', 'browser', 'fileupload', 'selectpicker', '
     }
   });
 
-  //при смене страны подгружаем список городов //todo live search
+  $country.select2({
+    placeholder: __("Выберите страну")
+  }).on('select2:opening', function () {
+    $(this).data('select2').$dropdown.find(':input.select2-search__field').attr('placeholder', __('Начните набирать') + '…');
+  });
+
+  $city.select2({
+    placeholder: __("Выберите город")
+  }).on('select2:opening', function () {
+    $(this).data('select2').$dropdown.find(':input.select2-search__field').attr('placeholder', __('Начните набирать') + '…');
+  });
+
+  //при смене страны подгружаем список городов
   $country.change(function () {
     var countryId = $(this).val();
     $.ajax({
-      url: '/country/cities/' + countryId,
-      type: 'POST',
+      url: '/country/cities',
+      data: {country: countryId},
+      type: 'post',
       success: function (cities) {
         var options = '<option value="">' + __('Город') + '</option>';
         $.each(cities, function (index, city) {
           options += '\n<option value="' + city.id + '">' + city.title + '</option>';
         });
-        $city.html(options).selectpicker('refresh');
+        $city.html(options);
       }
     })
   });

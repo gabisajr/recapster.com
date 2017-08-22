@@ -1,114 +1,96 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php
 
-class Controller_User_Edit extends Controller_Base {
+namespace App\Http\Controllers\User;
 
-  public function before() {
-    parent::before();
-    if (!Auth::instance()->logged_in()) HTTP::redirect('/signin');
-  }
+use App\Http\Controllers\Controller;
+use App\Model\Country;
+use App\Model\Image;
+use App\Model\User;
+use App\Regex;
+use App\UserJobStatus;
+use Auth;
+use Illuminate\Support\Collection;
+use Illuminate\Http\Request;
 
-  public function action_personal() {
+class EditController extends Controller {
 
-    $errors = [];
-    $user = $this->curr_user;
+  public function showPersonalForm() {
 
-    $avatar = $this->request->post('avatar');
-    $firstname = Arr::get($_POST, 'firstname', $user->firstname);
-    $lastname = Arr::get($_POST, 'lastname', $user->lastname);
-    $patronymic = Arr::get($_POST, 'patronymic', $user->patronymic);
-    $position = Arr::get($_POST, 'position', $user->position->loaded() ? $user->position->title : $user->position_title);
-    $status = Arr::get($_POST, 'status', $user->status);
-    $username = Arr::get($_POST, 'username', $user->username);
-    $sex = Arr::get($_POST, 'sex', $user->sex);
-    $birth_day = Arr::get($_POST, 'birth_day', $user->birth_day);
-    $birth_month = Arr::get($_POST, 'birth_month', $user->birth_month);
-    $birth_year = Arr::get($_POST, 'birth_year', $user->birth_year);
-    $country_id = Arr::get($_POST, 'country', $user->country_id);
-    $city_id = Arr::get($_POST, 'city', $user->city_id);
-    $about = Arr::get($_POST, 'about', $user->about);
+    /** @var User $user */
+    $user = Auth::user();
+    $countries = Country::get();
 
-    if ($this->request->method() == Request::POST) {
 
-      $validation = Validation::factory($_POST)
-        ->rule('firstname', 'not_empty')
-        ->rule('lastname', 'not_empty')
-        ->rules('username', [
-          ['not_empty'],
-          ['Valid::max_length', [':value', 30]],
-          ['Valid::regex', [':value', Regex::USERNAME]],
-          [[$user, 'unique'], ['username', ':value']],
-        ]);
-
-      if ($validation->check()) {
-        $user->firstname = $firstname;
-        $user->lastname = $lastname;
-        $user->patronymic = $patronymic;
-        $user->username = $username;
-        $user->position_title = $position;
-        $user->status = $status;
-        $user->sex = $sex;
-        $user->birth_day = $birth_day;
-        $user->birth_month = $birth_month;
-        $user->birth_year = $birth_year;
-        $user->country_id = $country_id;
-        $user->city_id = $city_id;
-        $user->about = $about;
-        $user->save();
-        $user->save_upload_avatar();
-
-        $alert = new Alert_Success(__('Личная информация сохранена'));
-        Session::instance()->set(Session::ALERT, $alert);
-        HTTP::redirect('/edit/personal');
-
-      } else {
-        $errors = $validation->errors('models/user');
-      }
-
+    if ($user && $user->country) {
+      $cities = $user->country->cities()->orderBy('title')->get();
+    } else {
+      $cities = new Collection([]);
     }
 
-    $statuses = UserStatus::get_statuses();
-
-    $countries = ORM::factory('Country')->cis();
-    $cities = $this->curr_user->country->cities->order_by('city.title')->find_all();
-
-    $view = View::factory('edit/personal', [
-      'errors'      => $errors,
-      'user'        => $user,
-      'avatar'      => $avatar,
-      'firstname'   => $firstname,
-      'lastname'    => $lastname,
-      'patronymic'  => $patronymic,
-      'position'    => $position,
-      'username'    => $username,
-      'sex'         => $sex,
-      'birth_day'   => $birth_day,
-      'birth_month' => $birth_month,
-      'birth_year'  => $birth_year,
-      'countries'   => $countries,
-      'cities'      => $cities,
-      'country_id'  => $country_id,
-      'city_id'     => $city_id,
-      'about'       => $about,
-      'statuses'    => $statuses,
-      'status'      => $status,
+    return view('user.edit.personal', [
+      'title'          => __('Редактирование личной информации'),
+      'user'           => $user,
+      'countries'      => $countries,
+      'cities'         => $cities,
+      'statuses'       => UserJobStatus::getStatuses(),
+      'editMenuActive' => 'personal',
     ]);
-
-    $is_edit_home = ($this->request->url() == '/edit');
-
-    $layout = View::factory('edit/layout', [
-      'user'             => $user,
-      'content'          => $view,
-      'edit_menu_active' => 'personal',
-      'is_edit_home'     => $is_edit_home,
-    ]);
-
-    $this->template->title = __('Редактирование личной информации');
-    $this->template->content = $layout;
-    $this->main_js = '/js/edit/personal.js';
-    $this->styles[] = CSS::AWESOME_BOOTSTRAP_CHECKBOX;
   }
 
-  public function action_contacts() {
+  public function storePersonal(Request $request) {
+
+    $usernameRegex = Regex::USERNAME;
+
+    $user = Auth::getUser();
+
+    $this->validate($request, [
+      'firstname' => "required",
+      'lastname'  => "required",
+      'username'  => "required|max:30|regex:$usernameRegex|unique:users,username,$user->id",
+    ]);
+
+    $user->firstname = $request->input('firstname');
+    $user->lastname = $request->input('lastname');
+    //$user->patronymic = $request->input('patronymic');
+    $user->username = $request->input('username');
+    $user->position_title = $request->input('position');
+    $user->job_status = $request->input('job_status');
+    $user->sex = $request->input('sex');
+    $user->birth_day = $request->input('birth_day');
+    $user->birth_month = $request->input('birth_month');
+    $user->birth_year = $request->input('birth_year');
+    $user->country_id = $request->input('country');
+    $user->city_id = $request->input('city');
+    $user->about = $request->input('about');
+    $user->save();
+    //$user->save_upload_avatar();
+
+    return redirect(route('user.edit.personal'))->with('success', true);
+  }
+
+  public function uploadAvatar(Request $request) {
+    $user = Auth::user();
+    $avatarFile = $request->file('avatar');
+    $path = null;
+    if ($avatarFile) {
+      $path = $avatarFile->store('avatars', 'public');
+
+      //create new image
+      $avatar = new Image();
+      $avatar->path = $path;
+      $avatar->disk = "public";
+      $avatar->save();
+
+      //update user avatar
+      if ($user->avatar) $user->avatar->delete();
+      $user->avatar()->associate($avatar);
+      $user->save();
+
+    }
+    return $path;
+  }
+
+  public function contacts() {
     $errors = [];
     $user = $this->curr_user;
 
@@ -156,7 +138,7 @@ class Controller_User_Edit extends Controller_Base {
     $this->main_js = '/js/edit/contacts.js';
   }
 
-  public function action_tel() {
+  public function tel() {
     if ($this->request->method() != Request::POST) {
       throw new HTTP_Exception_404;
     }
@@ -190,7 +172,7 @@ class Controller_User_Edit extends Controller_Base {
 
   }
 
-  public function action_education() {
+  public function education() {
 
     if ($this->request->is_ajax() && $this->request->method() == Request::POST) {
 
@@ -274,7 +256,7 @@ class Controller_User_Edit extends Controller_Base {
 
   }
 
-  public function action_experience() {
+  public function experience() {
 
     $user = $this->curr_user;
 
@@ -372,7 +354,7 @@ class Controller_User_Edit extends Controller_Base {
 
   }
 
-  public function action_skills() {
+  public function skills() {
 
     $user = $this->curr_user;
 
@@ -465,7 +447,7 @@ class Controller_User_Edit extends Controller_Base {
     $this->main_js = '/js/edit/skills.js';
   }
 
-  public function action_exams() {
+  public function exams() {
 
     if ($this->request->is_ajax() && $this->request->method() == Request::POST) {
 

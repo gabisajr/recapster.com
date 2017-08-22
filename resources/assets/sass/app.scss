@@ -1,4 +1,7 @@
 @import "media-queries";
+@import "bootstrap-4/functions";
+@import "bootstrap-4/mixins";
+@import "bootstrap-4/variables";
 @import "mixin";
 //@import "upsell";
 //@import "icons"; //todo gulp sprite
@@ -21,10 +24,11 @@
 @import "animation/zoomOut";
 @import "keyframes";
 @import "autocomplete";
-@import "bootstrap-custom";
 @import "typography";
 @import "post";
 @import "media-viewer";
+
+$grid-gap: 12px;
 
 html, body, main {
   height: 100%;
@@ -81,6 +85,15 @@ a, .link {
       text-decoration: none;
     }
   }
+}
+
+a:link,
+button,
+input[type="button"],
+input[type="submit"],
+input[type="image"],
+.pointer {
+  cursor: pointer
 }
 
 button[type="submit"].link, input[type="submit"].link {
@@ -612,7 +625,6 @@ body[data-logged="1"] {
 }
 
 .blackout:after {
-  background-image: -webkit-linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.74));
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.74));
   bottom: 0;
   content: '';
@@ -866,9 +878,7 @@ body[data-logged="1"] {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0);
-    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .46));
-    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .46));
+    background: rgba(0, 0, 0, 0) linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .46));
   }
   &.no-cover-img:after {
     content: none;
@@ -3512,7 +3522,6 @@ menu#profile-more {
 }
 
 .company-profile {
-  $grid-gap: 12px;
   display: -ms-grid;
   display: grid;
   grid-gap: $grid-gap;
@@ -3520,9 +3529,7 @@ menu#profile-more {
   -ms-grid-rows: auto $grid-gap auto;
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: auto;
-  grid-template-areas:
-          "aside header header"
-          "aside content right";
+  grid-template-areas: "aside header header" "aside content right";
   &-aside {
     -ms-grid-column: 1;
     -ms-grid-row: 1;
@@ -4161,6 +4168,9 @@ menu#profile-more {
       }
     }
   }
+  .avatar-desc {
+    font-size: 13px;
+  }
   hr {
     margin-top: 2em;
     margin-bottom: 2em;
@@ -4171,6 +4181,9 @@ menu#profile-more {
   .job-search-settings {
     display: inline-block;
     margin-top: 5px;
+  }
+  .birthday-inputs {
+    @include row-gutter(10px);
   }
 }
 
@@ -4687,6 +4700,44 @@ menu#profile-more {
       path.flag {
         fill: #f44336;
       }
+    }
+  }
+}
+
+.edit-layout {
+
+  //grid for IE
+  display: -ms-grid;
+  -ms-grid-columns: 1fr $grid-gap 2fr $grid-gap 1fr;
+  -ms-grid-rows: auto;
+  display: grid;
+  grid-gap: $grid-gap;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "left content right";
+
+  &-aside {
+    -ms-grid-column: 1;
+    grid-area: left;
+  }
+  &-content {
+    -ms-grid-column: 3;
+    grid-area: content;
+  }
+  &-right {
+    -ms-grid-column: 5;
+    grid-area: right;
+  }
+}
+
+//select 2 custom
+.select2-container--default {
+  .select2-selection--single {
+    height: $input-height;
+    border-radius: $input-border-radius;
+    border-color: $input-border-color;
+    .select2-selection__rendered {
+      line-height: $input-height;
     }
   }
 }
