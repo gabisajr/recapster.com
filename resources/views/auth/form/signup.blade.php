@@ -57,20 +57,20 @@
     @endif
 
 
-    <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
+    <div class="form-group">
       <label hidden><input type="email" name="email" hidden></label>
-      <input type="email" name="email" placeholder="{{ __('Email адрес') }}" class="form-control" autocomplete="off" value="{{ old('email', $email) }}">
-      <div class="form-control-feedback">{{ $errors->first('email') }}</div>
+      <input type="email" name="email" placeholder="{{ __('Email адрес') }}" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" autocomplete="off" value="{{ old('email', $email) }}">
+      <div class="invalid-feedback">{{ $errors->first('email') }}</div>
     </div>
 
-    <div class="form-group{{ $errors->has('password') ?  ' has-danger' : '' }}">
-      <input type="password" name="password" placeholder="{{ __('Пароль') }}" class="form-control" autocomplete="off">
-      <div class="form-control-feedback">{{ $errors->first('password') }}</div>
+    <div class="form-group">
+      <input type="password" name="password" placeholder="{{ __('Пароль') }}" class="form-control{{ $errors->has('password') ?  ' is-invalid' : '' }}" autocomplete="off">
+      <div class="invalid-feedback">{{ $errors->first('password') }}</div>
     </div>
 
-    <div class="form-group{{ $errors->has('password_confirm') ? ' has-danger' : '' }}">
-      <input type="password" name="password_confirmation" placeholder="{{ __('Повторите пароль') }}" class="form-control" autocomplete="off">
-      <div class="text-danger">{{ $errors->first('password_confirm') }}</div>
+    <div class="form-group">
+      <input type="password" name="password_confirmation" placeholder="{{ __('Повторите пароль') }}" class="form-control{{ $errors->has('password_confirm') ? ' is-invalid' : '' }}" autocomplete="off">
+      <div class="invalid-feedback">{{ $errors->first('password_confirm') }}</div>
     </div>
 
     <div class="form-group">
