@@ -72,7 +72,7 @@ class Image extends Model {
   public function fit(int $width, int $height) {
     if (!$this->exists) return $this;
 
-    if (!file_exists(public_path($this->path))) return $this;
+    if (!$this->fileExists()) return $this;
 
     if ($width <= 0) {
       throw new Exception('Ширина должна быть больше 0');
@@ -101,7 +101,7 @@ class Image extends Model {
     if ($ormImage) return $ormImage->optimise();
 
     //создаем копию, задаем размеры и сохраняем в файловую систему
-    $path = public_path($this->path);
+    $path = $this->realPath();
 
     /** @var InterventionImage $image */
     $image = ImageManager::instance()->make($path);
@@ -114,7 +114,7 @@ class Image extends Model {
     $ext = mb_strtolower(pathinfo($this->path, PATHINFO_EXTENSION));
     $name = pathinfo($this->path, PATHINFO_FILENAME);
     $newPath = "{$dir}/{$name}-{$modifier}.{$ext}";
-    $image->save(public_path($newPath));
+    $image->save($this->realPath($newPath));
 
     //сохраняем ресайзнутую картинку в базу
     $ormImage = new self;
@@ -131,11 +131,12 @@ class Image extends Model {
     return file_exists($this->realPath());
   }
 
-  public function realPath() {
+  public function realPath($path = null) {
+    if (is_null($path)) $path = $this->path;
     if ($this->disk) {
-      return storage_path("app/$this->disk/$this->path");
+      return storage_path("app/$this->disk/$path");
     } else {
-      return public_path($this->path);
+      return public_path($path);
     }
   }
 
@@ -190,14 +191,7 @@ class Image extends Model {
     $ext = mb_strtolower(pathinfo($this->path, PATHINFO_EXTENSION));
     $name = pathinfo($this->path, PATHINFO_FILENAME);
     $newPath = "{$dir}/{$name}-{$modifier}.{$ext}";
-
-    if ($this->disk) {
-      $savepath = storage_path("app/$this->disk/$newPath");
-    } else {
-      $savepath = public_path($newPath);
-    }
-
-    $image->save($savepath);
+    $image->save($this->realPath($newPath));
 
     //сохраняем ресайзнутую картинку в базу
     $ormImage = new self;
