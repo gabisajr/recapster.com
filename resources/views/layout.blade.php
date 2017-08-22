@@ -29,8 +29,6 @@
 //  echo HTML::style('/vendor/jquery.powertip-1.2.0/jquery.powertip.min.css') . PHP_EOL;
     ?>
 
-{{--<link rel="stylesheet" href="{{ asset('lib/bootstrap/bootstrap.min.css') }}">--}}
-
 <?
 //  # bootstrap select
 //  echo HTML::style('/vendor/bootstrap/bootstrap-select/css/bootstrap-select.min.css') . PHP_EOL;
@@ -39,6 +37,12 @@
 //  if (isset($styles) && is_array($styles)) foreach ($styles as $style) echo HTML::style($style) . PHP_EOL;
 
 ?>
+<script>
+  window.app = {
+    csrfToken: '{{ csrf_token() }}',
+    name: '{{ config('app.name') }}'
+  };
+</script>
 <link rel="stylesheet" href="{{ asset('/css/app.min.css') }}">
 </head>
 <body class="@yield('body_class')" data-logged="{{ Auth::check() }}">
