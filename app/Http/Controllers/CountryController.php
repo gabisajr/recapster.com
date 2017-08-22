@@ -35,7 +35,7 @@ class CountryController extends Controller {
       //$cities = $query->execute()->as_array();
     }
 
-    return $cities->toJson();
+    return response()->json($cities);
   }
 
 }
