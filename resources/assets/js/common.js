@@ -29,8 +29,6 @@ requirejs.config({
     fileupload: '/lib/jquery-file-upload/js/jquery.fileupload',
     jcrop: '/lib/jcrop/jquery.Jcrop.min',
     module: ('/js/module'),
-    selectpicker: '/lib/bootstrap/bootstrap-select/js/i18n/defaults-ru_RU.min',
-    'bootstrap-select': '/lib/bootstrap/bootstrap-select/js/bootstrap-select.min',
     bootstrap: '/lib/bootstrap-4.0.0-alpha.6/js/bootstrap.min',
     Tether: '/lib/tether.min',
     'bootstrap-switch': '/lib/bootstrap/bootstrap-switch.min',
@@ -46,7 +44,8 @@ requirejs.config({
     enquire: '/lib/enquire.min',
     'jquery-touchSwipe': '/lib/jquery.touchSwipe.min',
     'jquery.transform2d': '/lib/jquery.transform2d',
-    'jquery.easing': '/lib/jquery.easing.min'
+    'jquery.easing': '/lib/jquery.easing.min',
+    select2: '/lib/select2/js/select2.min'
   },
 
   //not AMD modules
@@ -96,12 +95,6 @@ requirejs.config({
     jcrop: {
       deps: ['jquery']
     },
-    selectpicker: {
-      deps: ['bootstrap-select']
-    },
-    'bootstrap-select': {
-      deps: ['jquery', 'bootstrap']
-    },
     'bootstrap-switch': {
       deps: ['bootstrap']
     },
@@ -112,6 +105,9 @@ requirejs.config({
       deps: ['jquery']
     },
     'jquery.transform2d': {
+      deps: ['jquery']
+    },
+    'jquery.ui.widget': {
       deps: ['jquery']
     }
   }
