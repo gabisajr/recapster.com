@@ -121,8 +121,14 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => 'auth']
 
   //edit
   Route::group(['prefix' => 'edit', 'namespace' => 'Edit'], function () {
+
+    //personal
     Route::get('personal', ['as' => 'user.edit.personal', 'uses' => 'PersonalController@showForm']);
     Route::post('personal', ['as' => 'user.edit.personal', 'uses' => 'PersonalController@store']);
+
+    //contacts
+    Route::get('contacts', ['as' => 'user.edit.contacts', 'uses' => 'ContactsController@showForm']);
+
   });
 
   //upload avatar
