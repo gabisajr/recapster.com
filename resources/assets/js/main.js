@@ -1,7 +1,7 @@
 define(['jquery', 'String'], function ($) {
 
-  requirejs(['Tether'], function (Tether) {
-    window.Tether = Tether;
+  requirejs(['Popper'], function (Popper) {
+    window.Popper = Popper;
     requirejs(['bootstrap']);
   });
 
