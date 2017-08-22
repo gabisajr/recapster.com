@@ -1,10 +1,10 @@
 requirejs(['jquery', 'bootstrap', 'jquery-ui', 'highlight'], function ($) {
 
-  var header = $('#header')
-    , search = header.find('.header-search')
-    , q = search.find(':input.q');
+  var $header = $('#header')
+    , $search = $header.find('.header-search')
+    , $q = $search.find(':input.q');
 
-  q.autocomplete({
+  if ($q.length) $q.autocomplete({
     source: function (request, response) {
       $.ajax({
         type: 'POST',
