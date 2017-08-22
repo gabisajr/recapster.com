@@ -20,7 +20,7 @@ class ImageObserver {
       $child->delete();
     }
 
-    File::delete(public_path($image->path));
+    File::delete($image->realPath());
   }
 
 }
