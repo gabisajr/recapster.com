@@ -28,14 +28,14 @@
       <span class="center">{{ __('или') }}</span>
     </div>
 
-    <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
-      <input type="email" name="email" placeholder="{{ __('Email адрес') }}" class="form-control" autocomplete="off" value="{{ old('email') }}">
-      <div class="form-control-feedback">{{ $errors->first('email') }}</div>
+    <div class="form-group">
+      <input type="email" name="email" placeholder="{{ __('Email адрес') }}" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" autocomplete="off" value="{{ old('email') }}">
+      <div class="invalid-feedback">{{ $errors->first('email') }}</div>
     </div>
 
-    <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
-      <input type="password" name="password" placeholder="{{ __('Пароль') }}" class="form-control" autocomplete="off">
-      <div class="form-control-feedback">{{ $errors->first('password') }}</div>
+    <div class="form-group">
+      <input type="password" name="password" placeholder="{{ __('Пароль') }}" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" autocomplete="off">
+      <div class="invalid-feedback">{{ $errors->first('password') }}</div>
     </div>
 
     <div class="form-group">
