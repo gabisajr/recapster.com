@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Exception;
 use ImageOptimizer\OptimizerFactory;
 use Intervention\Image\Image as InterventionImage;
+use Storage;
 
 /**
  * App\Model\Image
@@ -19,18 +20,22 @@ use Intervention\Image\Image as InterventionImage;
  * @property int|null $parent_id
  * @property int $optimised картинка оптимизирована
  * @property string|null $modifier модификатор
+ * @property string $status статус фотографии: approved - одобрена, pending - в ожинании, rejected - отконена
+ * @property string|null $disk storage disk name
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Image[] $childs
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image approved()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image status($status)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image whereDisk($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image whereHeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image whereModifier($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image whereOptimised($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image whereParentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image wherePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Image whereWidth($value)
  * @mixin \Eloquent
@@ -46,7 +51,7 @@ class Image extends Model {
   /** сохраняем оригинальные размеры */
   public function saveSizes() {
     if ($this->exists && (is_null($this->width) || is_null($this->height))) {
-      $path = public_path($this->path);
+      $path = $this->realPath();
       if (file_exists($path)) {
         $image = ImageManager::instance()->make($path);
         $this->width = $image->width();
@@ -122,10 +127,23 @@ class Image extends Model {
     return $ormImage->optimise();
   }
 
+  public function fileExists() {
+    return file_exists($this->realPath());
+  }
+
+  public function realPath() {
+    if ($this->disk) {
+      return storage_path("app/$this->disk/$this->path");
+    } else {
+      return public_path($this->path);
+    }
+  }
+
   public function resize(int $width = null, int $height = null) {
     if (!$this->exists) return $this;
 
-    if (!file_exists(public_path($this->path))) return $this;
+    //check image file exists
+    if (!$this->fileExists()) return $this;
 
     if (is_null($width) && is_null($height)) throw new Exception("Хотябы один из параметров width и height должен быть числом");
 
@@ -158,7 +176,7 @@ class Image extends Model {
     if ($ormImage) return $ormImage->optimise();
 
     //создаем копию, задаем размеры и сохраняем в файловую систему
-    $path = public_path($this->path);
+    $path = $this->realPath();
 
     /** @var InterventionImage $image */
     $image = ImageManager::instance()->make($path);
@@ -172,7 +190,14 @@ class Image extends Model {
     $ext = mb_strtolower(pathinfo($this->path, PATHINFO_EXTENSION));
     $name = pathinfo($this->path, PATHINFO_FILENAME);
     $newPath = "{$dir}/{$name}-{$modifier}.{$ext}";
-    $image->save(public_path($newPath));
+
+    if ($this->disk) {
+      $savepath = storage_path("app/$this->disk/$newPath");
+    } else {
+      $savepath = public_path($newPath);
+    }
+
+    $image->save($savepath);
 
     //сохраняем ресайзнутую картинку в базу
     $ormImage = new self;
@@ -181,6 +206,7 @@ class Image extends Model {
     $ormImage->height = $image->height();
     $ormImage->modifier = $modifier;
     $ormImage->parent_id = $this->id;
+    $ormImage->disk = $this->disk;
     $ormImage->save();
     return $ormImage->optimise();
   }
@@ -202,8 +228,7 @@ class Image extends Model {
       ]);
       $optimizer = $factory->get();
 
-      $filepath = public_path($this->path);
-      $optimizer->optimize($filepath);
+      $optimizer->optimize($this->realPath());
 
       $this->optimised = true;
       $this->save();
@@ -214,6 +239,13 @@ class Image extends Model {
 
   public function isPending() {
     return $this->status == Status::PENDING;
+  }
+
+  public function url() {
+    if ($this->disk) {
+      return Storage::disk($this->disk)->url($this->path);
+    }
+    return $this->path;
   }
 
 }
