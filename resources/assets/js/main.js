@@ -7,6 +7,12 @@ define(['jquery', 'String'], function ($) {
 
   requirejs(['header']);
 
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': window.app.csrfToken
+    }
+  });
+
   //<editor-fold desc="tooltips">
   $(document).ready(function () {
     //todo use bootstrap 4 tooltips http://v4-alpha.getbootstrap.com/components/tooltips/
