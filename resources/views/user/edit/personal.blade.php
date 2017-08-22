@@ -102,7 +102,7 @@
 
         {{--пол--}}
         <div class="form-group row">
-          <label class="col-sm-3 col-form-label">{{ __('Пол') }}</label>
+          <div class="col-sm-3">{{ __('Пол') }}</div>
           <div class="col-sm-8">
 
             <div class="form-check form-check-inline">
