@@ -4,10 +4,9 @@
   font-size: $base-font-size;
   text-align: left;
   max-width: 100%;
-  .ui-menu-item {
-    display: block;
-    padding-top: 10px;
-    padding-bottom: 10px;
+  .ui-menu-item-wrapper {
+    padding-top: 6px;
+    padding-bottom: 6px;
     line-height: 1;
     &:after {
       content: "";
