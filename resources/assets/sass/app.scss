@@ -4741,3 +4741,9 @@ menu#profile-more {
     }
   }
 }
+
+.auth-form {
+  .social-btns {
+    @include row-gutter(10px);
+  }
+}

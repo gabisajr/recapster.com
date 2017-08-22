@@ -10,14 +10,16 @@
     <h1 class="auth-form-title">{{ __('Вход') }}</h1>
     <p class="auth-form-subtitle">{{ __('Войдите с помощью учетной записи в других сервисах') }}</p>
 
-    <div class="row">
-      <div class="col-sm-6">
-        {{--todo route--}}
-        <a class="btn btn-block btn-vk btn-vk-login" href="/vkauth"><i class="fa fa-vk"></i> {{ __('Войти через ВКонтакте') }}</a>
-      </div>
-      <div class="col-sm-6">
-        {{--todo route--}}
-        <a class="btn btn-block btn-fb" href="/fbauth"><i class="fa fa-facebook"></i> {{ __('Войти через Facebook') }}</a>
+    <div class="social-btns">
+      <div class="row">
+        <div class="col col-sm-6">
+          {{--todo route--}}
+          <a class="btn btn-block btn-vk btn-vk-login" href="/vkauth"><i class="fa fa-vk"></i> {{ __('Войти через ВКонтакте') }}</a>
+        </div>
+        <div class="col col-sm-6">
+          {{--todo route--}}
+          <a class="btn btn-block btn-fb" href="/fbauth"><i class="fa fa-facebook"></i> {{ __('Войти через Facebook') }}</a>
+        </div>
       </div>
     </div>
 
