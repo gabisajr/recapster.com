@@ -3,92 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Model\Country;
-use App\Model\Image;
-use App\Model\User;
-use App\Regex;
-use App\UserJobStatus;
-use Auth;
-use Illuminate\Support\Collection;
+
 use Illuminate\Http\Request;
 
 class EditController extends Controller {
-
-  public function showPersonalForm() {
-
-    /** @var User $user */
-    $user = Auth::user();
-    $countries = Country::get();
-
-
-    if ($user && $user->country) {
-      $cities = $user->country->cities()->orderBy('title')->get();
-    } else {
-      $cities = new Collection([]);
-    }
-
-    return view('user.edit.personal', [
-      'title'          => __('Редактирование личной информации'),
-      'user'           => $user,
-      'countries'      => $countries,
-      'cities'         => $cities,
-      'statuses'       => UserJobStatus::getStatuses(),
-      'editMenuActive' => 'personal',
-    ]);
-  }
-
-  public function storePersonal(Request $request) {
-
-    $usernameRegex = Regex::USERNAME;
-
-    $user = Auth::getUser();
-
-    $this->validate($request, [
-      'firstname' => "required",
-      'lastname'  => "required",
-      'username'  => "required|max:30|regex:$usernameRegex|unique:users,username,$user->id",
-    ]);
-
-    $user->firstname = $request->input('firstname');
-    $user->lastname = $request->input('lastname');
-    //$user->patronymic = $request->input('patronymic');
-    $user->username = $request->input('username');
-    $user->position_title = $request->input('position');
-    $user->job_status = $request->input('job_status');
-    $user->sex = $request->input('sex');
-    $user->birth_day = $request->input('birth_day');
-    $user->birth_month = $request->input('birth_month');
-    $user->birth_year = $request->input('birth_year');
-    $user->country_id = $request->input('country');
-    $user->city_id = $request->input('city');
-    $user->about = $request->input('about');
-    $user->save();
-    //$user->save_upload_avatar();
-
-    return redirect(route('user.edit.personal'))->with('success', true);
-  }
-
-  public function uploadAvatar(Request $request) {
-    $user = Auth::user();
-    $avatarFile = $request->file('avatar');
-    $path = null;
-    if ($avatarFile) {
-      $path = $avatarFile->store('avatars', 'public');
-
-      //create new image
-      $avatar = new Image();
-      $avatar->path = $path;
-      $avatar->disk = "public";
-      $avatar->save();
-
-      //update user avatar
-      if ($user->avatar) $user->avatar->delete();
-      $user->avatar()->associate($avatar);
-      $user->save();
-
-    }
-    return $path;
-  }
 
   public function contacts() {
     $errors = [];
