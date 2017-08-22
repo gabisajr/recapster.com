@@ -8,7 +8,7 @@ define(['jquery', 'jquery-ui', 'highlight'], function ($) {
           $.ajax({
             type: 'POST',
             dataType: 'json',
-            url: '/autocomplete/position',
+            url: '/autocomplete/positions',
             data: {filter: request.term},
             success: response
           });
