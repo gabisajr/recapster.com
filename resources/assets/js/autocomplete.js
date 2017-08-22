@@ -6,17 +6,25 @@ define(['jquery', 'jquery-ui', 'highlight'], function ($) {
         minLength: 1,
         source: function (request, response) {
           $.ajax({
-            type: 'POST',
             dataType: 'json',
-            url: '/autocomplete/positions',
-            data: {filter: request.term},
-            success: response
+            url: '/position/search',
+            data: {q: request.term},
+            success: function (positions) {
+              positions = positions.map(function (position) {
+                position.label = position.title;
+                delete position.title;
+                return position;
+              });
+              return response(positions);
+            }
           });
         }
       });
 
       this.autocomplete("instance")._renderItem = function (ul, position) {
-        return $('<li class="small">').append(position.label).highlight(this.term).appendTo(ul);
+        var $li = $('<li><div>' + position.label + '</div></li>');
+        $li.highlight(this.term);
+        return $li.appendTo(ul);
       };
 
       return this;
