@@ -11,37 +11,39 @@
 @extends('user.layout')
 
 @section('user-content')
-  <div class="user-profile" data-show-welcome="{{ $showWelcome }}">
-    @include('user.page.profile.intro')
 
-    @if (!$emptyProfile || $user->isMe())
+  {{--todo use data-show-welcome--}}
+  <div data-show-welcome="{{ $showWelcome }}"></div>
 
-      <div class="panel">
-        <div class="panel-body">
+  @include('user.page.profile.intro')
 
-          @include('user.page.profile.about')
-          @include('user.page.profile.experience')
-          @include('user.page.profile.education')
+  @if (!$emptyProfile || $user->isMe())
 
-          {{--Навыки и языки--}}
-          @if (count($userSkills) || count($userLangs))
+    <div class="panel">
+      <div class="panel-body">
 
-            {{--todo add views--}}
-            @include('user.page.profile.skills')
-            @include('user.page.profile.langs')
+        @include('user.page.profile.about')
+        @include('user.page.profile.experience')
+        @include('user.page.profile.education')
 
-          @elseif ($user->isMe())
-            @include('user.gag.skills')
-          @endif
+        {{--Навыки и языки--}}
+        @if (count($userSkills) || count($userLangs))
 
-          @include('user.page.profile.exams')
-          @include('user.page.profile.subscriptions')
+          {{--todo add views--}}
+          @include('user.page.profile.skills')
+          @include('user.page.profile.langs')
 
-        </div>
+        @elseif ($user->isMe())
+          @include('user.gag.skills')
+        @endif
+
+        @include('user.page.profile.exams')
+        @include('user.page.profile.subscriptions')
+
       </div>
+    </div>
 
-    @endif
-  </div>
+  @endif
 @endsection
 
 @section('page_js', 'user/profile')

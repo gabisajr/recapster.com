@@ -4408,6 +4408,29 @@ menu#profile-more {
 }
 
 .user-profile {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: $grid-gap;
+  -ms-grid-columns: 1fr $grid-gap 2fr $grid-gap 1fr;
+  -ms-grid-rows: auto $grid-gap auto;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "aside content right";
+  &-aside {
+    -ms-grid-column: 1;
+    -ms-grid-row: 1;
+    grid-area: aside;
+  }
+  &-content {
+    -ms-grid-column: 3;
+    -ms-grid-row: 1;
+    grid-area: content;
+  }
+  &-right {
+    -ms-grid-column: 5;
+    -ms-grid-row: 1;
+    grid-area: right;
+  }
   .panel-body {
     @media (min-width: $screen-sm-min) {
       padding: 25px;
