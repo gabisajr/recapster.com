@@ -3,7 +3,9 @@
 <head>
 <script>
   window.app = {
-    username: '{{ Auth::check() ? Auth::getUser()->username : "" }}'
+    username: '{{ Auth::check() ? Auth::getUser()->username : "" }}',
+    csrfToken: '{{ csrf_token() }}',
+    name: '{{ config('app.name') }}'
   }
 </script>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -34,12 +36,6 @@
 //  if (isset($styles) && is_array($styles)) foreach ($styles as $style) echo HTML::style($style) . PHP_EOL;
 
 ?>
-<script>
-  window.app = {
-    csrfToken: '{{ csrf_token() }}',
-    name: '{{ config('app.name') }}'
-  };
-</script>
 <link rel="stylesheet" href="{{ asset('/css/app.min.css') }}">
 </head>
 <body class="@yield('body_class')" data-logged="{{ Auth::check() }}">
