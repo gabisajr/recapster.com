@@ -231,3 +231,25 @@ function recommend_companies($user, $limit, $exceptIds) {
   $recommend = new \App\Recommend($user);
   return $recommend->companies($limit, $exceptIds);
 }
+
+function protect_tel($tel) {
+
+  $nbsp = \App\HTMLMnemonics::NON_BREAKING_SPACE;
+
+  if (preg_match('/^(\+?\d)(\d)\d{7}(\d{2})$/', $tel, $matches)) {
+    return "{$matches[1]}{$nbsp}{$matches[2]}**$nbsp***{$nbsp}**{$nbsp}{$matches[3]}";
+  }
+
+  return null;
+
+}
+
+function protect_email($email) {
+  if ($email) {
+    $first_char = $email[0];
+    $end = substr($email, strpos($email, '@'));
+    return "{$first_char}***$end";
+  }
+
+  return null;
+}
