@@ -5,29 +5,33 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Model_University
- * @property int           $id
- * @property string        $alias
- * @property string        $title         - название учебного заведения
- * @property string        $site          - сайт учебного заведения
- * @property int           $vk_id         - идентификатотор учебного заведения ВКонтакте
+ * App\Model\University
  *
- * ------------------ virtual: -----------------------------------------
- * @property string        $url           - ссылка на профиль
- * @property string        $of_university - родительный падеж названия университета
- *
- * ------------------ belongs to: ---------------------------------------
- * @property Model_Country $country       - страна, где находится вуз
- * @property int           $country_id
- *
- * @property Model_City    $city          - город, где находится заведение
- * @property int           $city_id
- *
- * @property Model_Image   $logo          - логотип
- * @property int           $logo_id
- *
- * ------------------ has many: -----------------------
- * @property ORM           $faculties     - факультеты
+ * @property int $id
+ * @property string $alias
+ * @property string $title
+ * @property string $site
+ * @property int|null $country_id
+ * @property int|null $city_id
+ * @property int|null $logo_id
+ * @property int|null $vk_id id университета ВКонтакте
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Model\City|null $city
+ * @property-read \App\Model\Country|null $country
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Faculty[] $faculties
+ * @property-read \App\Model\Image|null $logo
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereAlias($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereCityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereLogoId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereSite($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereVkId($value)
+ * @mixin \Eloquent
  */
 class University extends Model {
 
