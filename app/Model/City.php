@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Model\Region|null $region
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\University[] $universities
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City hasActiveCompanies()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City ofCountry($country)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City whereAlias($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City whereCountryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City whereCreatedAt($value)
@@ -73,6 +74,30 @@ class City extends Model {
         $query->active();
       },
     ]);
+  }
+
+  /**
+   * Scope a query to only cities, which are locate in $country
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @param int|Country $country
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeOfCountry($query, $country) {
+    $countryId = null;
+    if ($country instanceof Country) {
+      $countryId = $country->id;
+    } elseif (is_numeric($country)) {
+      $countryId = $country;
+    } else {
+      error_log("invalid country argument: value '$country', needs Country or int");
+    }
+
+    if ($countryId) {
+      $query->where('cities.country_id', '=', $countryId);
+    }
+
+    return $query;
   }
 
   public function filters() {
