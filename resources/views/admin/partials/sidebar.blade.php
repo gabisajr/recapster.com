@@ -1,4 +1,4 @@
-<aside>
+<aside class="text-white bg-dark">
   <div class="aside-menu">
 
     {{--todo routes--}}
