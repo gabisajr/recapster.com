@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\City[] $cities
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Region[] $regions
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\University[] $universities
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Country cIS()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Country whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Country whereId($value)
@@ -32,6 +33,10 @@ class Country extends Model {
 
   public function cities() {
     return $this->hasMany('App\Model\City', 'country_id');
+  }
+
+  public function universities() {
+    return $this->hasMany('App\Model\University', 'country_id');
   }
 
   public function rules() { //todo validation
