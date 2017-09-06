@@ -25,6 +25,10 @@ use Auth;
  * @property string|null $position_title должность или профессия пользователя (без привязки)
  * @property int|null $country_id id страны
  * @property int|null $city_id id города
+ * @property string|null $skype
+ * @property string|null $instagram
+ * @property string|null $twitter
+ * @property string|null $site
  * @property string|null $job_status статус - готовность к работе
  * @property int|null $birth_day
  * @property int|null $birth_month
@@ -58,6 +62,7 @@ use Auth;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereFirstname($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereInstagram($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereJobStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereLastname($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User wherePassword($value)
@@ -65,6 +70,9 @@ use Auth;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User wherePositionTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereSex($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereSite($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereSkype($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereTwitter($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\User whereUsername($value)
  * @mixin \Eloquent
