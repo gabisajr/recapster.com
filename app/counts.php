@@ -85,6 +85,13 @@ function users_count($count) {
   return __("нет пользователей");
 }
 
+function universities_count($count) {
+  if ($count) {
+    return $count . ' ' . getNumEnding($count, [__('университет'), __('университета'), __('университетов')]);
+  }
+  return __("нет университетов");
+}
+
 //"Найдено 10 компаний"
 function found_companies($count) {
 
