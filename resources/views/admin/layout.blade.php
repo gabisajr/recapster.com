@@ -13,6 +13,7 @@
 @include('admin.partials.sidebar')
 <main>
   <div class="container-fluid pt-3 pb-5">
+    @include('admin.partials.message')
     @yield('content')
   </div>
 </main>
