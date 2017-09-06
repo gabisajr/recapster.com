@@ -128,6 +128,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => 'auth']
 
     //contacts
     Route::get('contacts', ['as' => 'user.edit.contacts', 'uses' => 'ContactsController@showForm']);
+    Route::post('contacts', ['as' => 'user.edit.contacts', 'uses' => 'ContactsController@store']);
 
   });
 
