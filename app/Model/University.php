@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Model\Country|null $country
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Faculty[] $faculties
  * @property-read \App\Model\Image|null $logo
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University ofCity($city)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereAlias($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereCityId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereCountryId($value)
@@ -49,6 +50,32 @@ class University extends Model {
 
   public function faculties() {
     return $this->hasMany('App\Model\Faculty', 'university_id');
+  }
+
+  /**
+   * Scope a query to only universities, which are locate in $city
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @param int|City $city
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeOfCity($query, $city) {
+
+    $cityId = null;
+
+    if ($city instanceof City) {
+      $cityId = $city->id;
+    } elseif (is_numeric($city)) {
+      $cityId = $city;
+    } else {
+      error_log("invalid country argument: value '$city', needs City or int");
+    }
+
+    if ($cityId) {
+      $query->where('universities.city_id', '=', $cityId);
+    }
+
+    return $query;
   }
 
   public function rules() { //todo validation
