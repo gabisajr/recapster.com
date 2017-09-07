@@ -92,6 +92,13 @@ function universities_count($count) {
   return __("нет университетов");
 }
 
+function faculties_count($count) {
+  if ($count) {
+    return $count . ' ' . getNumEnding($count, [__('факультет'), __('факультета'), __('факультетов')]);
+  }
+  return __("нет факультетов");
+}
+
 //"Найдено 10 компаний"
 function found_companies($count) {
 
