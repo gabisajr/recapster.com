@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $slug
  * @property string $title
+ * @property string|null $abbreviation
  * @property string $site
  * @property int|null $country_id
  * @property int|null $city_id
@@ -22,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Faculty[] $faculties
  * @property-read \App\Model\Image|null $logo
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University ofCity($city)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereAbbreviation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereCityId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereCountryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereCreatedAt($value)
