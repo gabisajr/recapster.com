@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * App\Model\University
  *
  * @property int $id
- * @property string $alias
+ * @property string $slug
  * @property string $title
  * @property string $site
  * @property int|null $country_id
@@ -22,13 +22,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Faculty[] $faculties
  * @property-read \App\Model\Image|null $logo
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University ofCity($city)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereAlias($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereCityId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereCountryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereLogoId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereSite($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\University whereVkId($value)
@@ -86,8 +86,8 @@ class University extends Model {
       'city_id'    => [
         ['not_empty'],
       ],
-      'alias'      => [
-        [[$this, 'unique'], ['alias', ':value']],
+      'slug'      => [
+        [[$this, 'unique'], ['slug', ':value']],
       ],
       'title'      => [
         ['not_empty'],
@@ -105,7 +105,7 @@ class University extends Model {
 //  public function get($column) {
 //    switch ($column) {
 //      case 'url':
-////        return "http://$_SERVER[HTTP_HOST]/edu/{$this->alias}/"; //todo
+////        return "http://$_SERVER[HTTP_HOST]/edu/{$this->slug}/"; //todo
 //        return $this->site;
 //        break;
 //      case 'of_university':
