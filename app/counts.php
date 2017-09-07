@@ -99,6 +99,13 @@ function faculties_count($count) {
   return __("нет факультетов");
 }
 
+function chairs_count($count) {
+  if ($count) {
+    return $count . ' ' . getNumEnding($count, [__('кафедра'), __('кафедры'), __('кафедр')]);
+  }
+  return __("нет кафедр");
+}
+
 //"Найдено 10 компаний"
 function found_companies($count) {
 
