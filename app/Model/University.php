@@ -70,7 +70,7 @@ class University extends Model {
     } elseif (is_numeric($city)) {
       $cityId = $city;
     } else {
-      error_log("invalid country argument: value '$city', needs City or int");
+      error_log("invalid city argument: value '$city', needs City or int");
     }
 
     if ($cityId) {
