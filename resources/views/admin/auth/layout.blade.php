@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <meta charset="utf-8">
-<link rel="shortcut icon" href="/favicon.ico?v=2" type="image/x-icon">
+<link rel="shortcut icon" href="{{ asset('/favicon.ico?v=2') }}" type="image/x-icon">
 <title>@yield('title')</title>
 <link rel="stylesheet" href="{{ asset('assets-admin/css/lukas-admin.min.css') }}" type="text/css">
 </html>
