@@ -36,6 +36,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class University extends Model {
 
+  use Morpherable;
+
   public function country() {
     return $this->belongsTo('App\Model\Country');
   }
@@ -78,38 +80,11 @@ class University extends Model {
     return $query;
   }
 
-  public function rules() { //todo validation
-    return [
-      'country_id' => [
-        ['not_empty'],
-      ],
-      'city_id'    => [
-        ['not_empty'],
-      ],
-      'slug'      => [
-        [[$this, 'unique'], ['slug', ':value']],
-      ],
-      'title'      => [
-        ['not_empty'],
-        [[$this, 'unique'], ['title', ':value']],
-      ],
-      'site'       => [
-        [[$this, 'unique'], ['site', ':value']],
-      ],
-      'vk_id'      => [
-        [[$this, 'unique'], ['vk_id', ':value']],
-      ],
-    ];
-  }
-
 //  public function get($column) {
 //    switch ($column) {
 //      case 'url':
 ////        return "http://$_SERVER[HTTP_HOST]/edu/{$this->slug}/"; //todo
 //        return $this->site;
-//        break;
-//      case 'of_university':
-//        return I18n::$lang == 'ru' ? Morpher::inflect($this->title, 'Р') : $this->title;
 //        break;
 //    }
 //    return parent::get($column);
