@@ -39,4 +39,13 @@ trait Morpherable {
     return $this->{$field};
   }
 
+  /**
+   * местный падеж: Где?
+   * @param string $field
+   * @return string
+   */
+  public function in(string $field) {
+    return $this->about($field);
+  }
+
 }
