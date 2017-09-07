@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{ asset('assets-admin/css/lukas-admin.min.css') }}" type="text/css">
 </html>
 <body>
-<main class="d-flex h-100 flex-column">
+<main class="d-flex h-100 flex-column m-0">
   <div id="page-wrapper" class="d-flex flex-column align-items-center justify-content-center pt-5 pb-5">
 
     <div class="container">
