@@ -100,4 +100,15 @@ class Country extends Model {
       ->orderByRaw("FIELD(countries.iso_code, {$order})");
   }
 
+  /**
+   * склоненеие родительный падеж
+   * @return string
+   */
+  public function ofCompany() {
+    if (\App::isLocale('ru')) {
+      Morpher::inflect($this->title, 'Р');
+    }
+    return $this->title;
+  }
+
 }
