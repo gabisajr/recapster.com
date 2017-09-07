@@ -104,7 +104,7 @@ class Country extends Model {
    * склоненеие родительный падеж
    * @return string
    */
-  public function ofCompany() {
+  public function ofCountry() {
     if (\App::isLocale('ru')) {
       Morpher::inflect($this->title, 'Р');
     }
