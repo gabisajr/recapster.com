@@ -1,4 +1,4 @@
-var gulp = require('gulp')
+let gulp = require('gulp')
   , sass = require('gulp-sass')
   , concat = require('gulp-concat')
   , cleanCSS = require('gulp-clean-css')
