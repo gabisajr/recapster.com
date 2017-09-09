@@ -5,22 +5,29 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Model_Education_Status - статус обучения (специалист, бакалавр, магистр...)
- * @property int    $id
- * @property string $title - название
- * @property int    $sort
- * @property string $created_at
- * @property string $updated_at
+ * App\Model\EducationStatus
+ *
+ * @property int $id
+ * @property string $title
+ * @property int $sort
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EducationStatus whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EducationStatus whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EducationStatus whereSort($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EducationStatus whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EducationStatus whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class EducationStatus extends Model {
 
-  public function rules() { //todo validation
-    return [
-      'title' => [
-        ['not_empty'],
-        [[$this, 'unique'], ['title', ':value']],
-      ],
-    ];
-  }
+  //public function rules() { //todo validation
+  //  return [
+  //    'title' => [
+  //      ['not_empty'],
+  //      [[$this, 'unique'], ['title', ':value']],
+  //    ],
+  //  ];
+  //}
 
 }
