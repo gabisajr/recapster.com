@@ -4,7 +4,6 @@ var gulp = require('gulp')
   , cleanCSS = require('gulp-clean-css')
   , rename = require('gulp-rename')
   , livereload = require('gulp-livereload')
-  , uglify = require('gulp-uglify')
   , autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('admin-styles', function () {
@@ -28,20 +27,6 @@ gulp.task('admin-styles', function () {
     ;
 });
 
-gulp.task('admin-scripts', function () {
-  return gulp.src('resources/assets-admin/js/**/*.js')
-    .pipe(uglify())
-    .on('error', swallowError)
-    .pipe(gulp.dest('public/assets-admin/js'))
-    .pipe(livereload())
-    ;
-});
-
-function swallowError(error) {
-  console.error(error.toString());
-  this.emit('end');
-}
-
 gulp.task('admin-ckeditor-style', function () {
   return gulp.src('resources/assets-admin/sass/ckeditor.scss')
     .pipe(sass()['on']('error', sass.logError))
@@ -56,8 +41,7 @@ gulp.task('admin-ckeditor-style', function () {
 module.exports = function () {
   gulp.watch('resources/assets-admin/sass/lukas-admin.scss', ['admin-styles']);
   gulp.watch('resources/assets-admin/sass/ckeditor.scss', ['admin-ckeditor-style']);
-  gulp.watch('resources/assets-admin/js/**/*.js', ['admin-scripts']);
 
   // force run
-  gulp.run(['admin-styles', 'admin-scripts', 'admin-ckeditor-style']);
+  gulp.run(['admin-styles', 'admin-ckeditor-style']);
 };
