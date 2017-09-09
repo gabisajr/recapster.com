@@ -27,6 +27,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Country extends Model {
 
+  use Morpherable;
+
   public function regions() {
     return $this->hasMany('App\Model\Region', 'country_id');
   }
@@ -54,15 +56,6 @@ class Country extends Model {
     ];
   }
 
-  //public function get($column) {
-  //  switch ($column) {
-  //    case 'of_country':
-  //      return I18n::$lang == 'ru' ? Morpher::inflect($this->title, 'Р') : $this->title;
-  //      break;
-  //  }
-  //  return parent::get($column);
-  //}
-  //
   //public function delete() { //todo observer
   //  foreach ($this->cities->find_all() as $city) $city->delete();
   //  foreach ($this->regions->find_all() as $region) $region->delete();
@@ -105,10 +98,7 @@ class Country extends Model {
    * @return string
    */
   public function ofCountry() {
-    if (\App::isLocale('ru')) {
-      Morpher::inflect($this->title, 'Р');
-    }
-    return $this->title;
+    return $this->of('title');
   }
 
 }

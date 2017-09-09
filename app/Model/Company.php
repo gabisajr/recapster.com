@@ -93,6 +93,8 @@ use App;
  */
 class Company extends Model {
 
+  use Morpherable;
+
   public function ceo() {
     return $this->hasOne('App\Model\Ceo', 'company_id');
   }
@@ -348,21 +350,15 @@ class Company extends Model {
   //}
 
   public function ofCompany() {
-    if (App::isLocale('ru')) {
-      Morpher::inflect($this->title, 'Р');
-    }
-    return $this->title;
+    return $this->of('title');
   }
 
   public function forCompany() {
-    return $this->ofCompany();
+    return $this->for('title');
   }
 
   public function aboutCompany() {
-    if (App::isLocale('ru')) {
-      return Morpher::inflect($this->title, 'П');
-    }
-    return $this->title;
+    return $this->about('title');
   }
 
   public function inCompany() {

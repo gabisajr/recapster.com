@@ -45,6 +45,26 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
   Route::post('position/store', ['as' => 'admin.position.store', 'uses' => 'PositionsController@store']);
   Route::post('position/delete', ['as' => 'admin.position.delete', 'uses' => 'PositionsController@delete']);
 
+  //universities vocabulary
+  Route::get('universities/countries', ['as' => 'admin.universities.countries', 'uses' => 'UniversitiesController@countries']);
+  Route::get('universities/cities/{country_id}', ['as' => 'admin.universities.cities', 'uses' => 'UniversitiesController@cities']);
+  Route::get('universities', ['as' => 'admin.universities', 'uses' => 'UniversitiesController@universities']);
+  Route::get('university/create', ['as' => 'admin.university.create', 'uses' => 'UniversitiesController@create']);
+  Route::get('university/edit/{id}', ['as' => 'admin.university.edit', 'uses' => 'UniversitiesController@edit']);
+  Route::post('university/store', ['as' => 'admin.university.store', 'uses' => 'UniversitiesController@store']);
+
+  //faculties stuff
+  Route::get('faculties', ['as' => 'admin.faculties', 'uses' => 'FacultiesController@faculties']);
+  Route::get('faculty/create', ['as' => 'admin.faculty.create', 'uses' => 'FacultiesController@create']);
+  Route::get('faculty/edit/{id}', ['as' => 'admin.faculty.edit', 'uses' => 'FacultiesController@edit']);
+  Route::post('faculty/store', ['as' => 'admin.faculty.store', 'uses' => 'FacultiesController@store']);
+
+  //chairs stuff
+  Route::get('chairs', ['as' => 'admin.chairs', 'uses' => 'ChairsController@chairs']);
+  Route::get('chair/create', ['as' => 'admin.chair.create', 'uses' => 'ChairsController@create']);
+  Route::get('chair/edit/{id}', ['as' => 'admin.chair.edit', 'uses' => 'ChairsController@edit']);
+  Route::post('chair/store', ['as' => 'admin.chair.store', 'uses' => 'ChairsController@store']);
+
   //users
   Route::get('users', ['as' => 'admin.users', 'uses' => 'UsersController@list']);
   Route::get('user/accounts/{id}', ['as' => 'admin.user.accounts', 'uses' => 'UsersController@accounts']);
@@ -129,6 +149,10 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => 'auth']
     //contacts
     Route::get('contacts', ['as' => 'user.edit.contacts', 'uses' => 'ContactsController@showForm']);
     Route::post('contacts', ['as' => 'user.edit.contacts', 'uses' => 'ContactsController@store']);
+
+    //education
+    Route::get('education', ['as' => 'user.edit.education', 'uses' => 'EducationController@showForm']);
+    Route::post('education', ['as' => 'user.edit.education', 'uses' => 'EducationController@store']);
 
   });
 

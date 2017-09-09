@@ -26,7 +26,7 @@
         </div>
         <div class="input-group">
           <span class="input-group-addon" id="alias-addon"><samp>{{ config('app.url') }}/salary/</samp></span>
-          <input pattern="{{ \App\Regex::INPUT_PATTERN_ALIAS }}" aria-describedby="alias-addon" class="form-control"
+          <input pattern="{{ \App\Regex::INPUT_PATTERN_SLUG }}" aria-describedby="alias-addon" class="form-control"
                  name="alias" placeholder="{{ __('Маленькие символы латинского алфавита и -') }}" value="{{ old('alias', $position->alias) }}"
                  autocomplete="off">
         </div>

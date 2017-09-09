@@ -153,12 +153,12 @@ class CompanyController extends AdminController {
     /** @var Company $company */
     $company = Company::findOrNew($request->input('id'));
 
-    $aliasRegex = Regex::ALIAS;
+    $slugRegex = Regex::SLUG;
 
     $this->validate($request, [
       'title' => "required|unique:companies,title,$company->id",
       'site'  => "required|url|active_url",
-      'alias' => "required|max:32|regex:$aliasRegex|unique:companies,alias,$company->id",
+      'alias' => "required|max:32|regex:$slugRegex|unique:companies,alias,$company->id", //todo rename slug
     ]);
 
     $is_new = !$company->exists;

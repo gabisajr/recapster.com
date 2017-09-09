@@ -1,11 +1,11 @@
-@import "mixins";
-
-body {
-
-}
+@import "../../assets/sass/mixin";
 
 .text-muted {
   color: #9c9c9c !important;
+}
+
+html {
+  font-size: 14px;
 }
 
 html, body, main {
@@ -13,7 +13,6 @@ html, body, main {
 }
 
 body {
-  font-size: 14px;
 }
 
 h4 {
@@ -51,41 +50,29 @@ small, .small {
   z-index: 1;
 }
 
-:root {
-  --aside-width: 200px;
-}
-
 aside {
-  width: var(--aside-width);
+  width: 200px;
   padding: 1rem;
   height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
   a {
     color: inherit;
   }
-}
-
-main {
-  margin-left: var(--aside-width);
 }
 
 .aside-menu {
   list-style: none;
   padding: 0;
   margin: 0 -1rem;
-  $aside-menu-link-active: #607d8b;
   a {
     display: block;
     padding: 10px;
     &:hover, &:focus {
       text-decoration: none;
       color: inherit;
-      background: rgba($aside-menu-link-active, 0.4);
+      background: rgba(180, 180, 180, 0.4);
     }
     &.active {
-      background: $aside-menu-link-active;
+      background: #607d8b;
       color: #fff;
     }
   }
@@ -93,7 +80,7 @@ main {
 
 .model-images {
   margin-top: 15px;
-  @include row-gap(10px);
+  //@include row-gap(10px); //todo replace by bootsrrap 4 mixins
   .col {
     margin-bottom: 10px;
   }
@@ -518,9 +505,13 @@ input.date {
   max-width: 200px;
 }
 
+img.logo {
+  object-fit: cover;
+}
+
 .avatar {
   @include aspect-ratio-img;
-  background: #ccc url(/assets-admin/images/avatar.svg) no-repeat bottom;
+  background: #ccc url(/images/avatar.svg) no-repeat bottom;
   width: 30px;
   background-size: 85%;
   overflow: hidden;
@@ -533,7 +524,7 @@ input.date {
 .report {
   background: rgba(96, 125, 139, 0.14);
   &-images {
-    @include row-gap(1rem);
+    //@include row-gap(1rem); //todo bootstrap 4 mixins
     img {
       display: block;
       border-radius: .25rem;
@@ -654,7 +645,7 @@ a.dotted {
     height: 100%;
   }
   .play {
-    background: url("/assets-admin/images/play-button.svg") no-repeat center;
+    background: url("/assets-admin/play-button.svg") no-repeat center;
     background-size: contain;
     width: 64px;
     height: 64px;
@@ -666,7 +657,7 @@ a.dotted {
     transition: transform .1s ease-out;
   }
   .delete {
-    background: url("/assets-admin/images/clear-button.svg") no-repeat center;
+    background: url("/assets-admin/clear-button.svg") no-repeat center;
     background-size: contain;
     width: 20px;
     height: 20px;
@@ -690,27 +681,12 @@ a.dotted {
   height: 400px;
 }
 
-i.loader {
-  background: url("/assets-admin/images/loader.svg") no-repeat center;
-  background-size: contain;
-  width: 16px;
-  height: 16px;
-  display: none;
-  pointer-events: none;
-  user-select: none;
+.select2-container .select2-selection--single {
+  height: calc(2.25rem + 2px);
 }
 
-#skills-table {
-  .loader {
-    display: inline-block;
-    margin-left: 1rem;
-    opacity: 0;
-  }
-}
-
-.resume-item {
-  label.form-control-label {
-    width: 80px;
-    font-weight: bold;
+.has-danger {
+  .form-control-label {
+    color: inherit;
   }
 }

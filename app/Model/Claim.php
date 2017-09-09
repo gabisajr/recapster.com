@@ -103,14 +103,14 @@ class Model_Claim extends ORM {
 
       case 'interview':
         $title = __('Жалоба на собеседование :of_position в компанию :company', [
-          ':of_position' => I18n::$lang == 'ru' ? Morpher::inflect($object->position->title, 'Р') : __($object->position->title),
+          ':of_position' => I18n::$lang == 'ru' ? Morpher::inflect($object->position->title, 'Р') : __($object->position->title), //todo Morpherable
           ':company'     => $object->company->title,
         ]);
         break;
 
       case 'interview_question':
         $title = __('Жалоба к вопросу на собеседование :of_position в компанию :company', [
-          ':of_position' => I18n::$lang == 'ru' ? Morpher::inflect($object->interview->position->title, 'Р') : __($object->interview->position->title),
+          ':of_position' => I18n::$lang == 'ru' ? Morpher::inflect($object->interview->position->title, 'Р') : __($object->interview->position->title), //todo Morpherable
           ':company'     => $object->interview->company->title,
         ]);
         break;

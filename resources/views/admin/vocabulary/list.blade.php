@@ -13,5 +13,5 @@
   <a class="btn btn-primary" href="/admin/morpher/list" role="button">{{ __('Склонятор') }}</a>{{--todo route--}}
   <a class="btn btn-primary" href="/admin/industry/list" role="button">{{ __('Виды деятельности') }}</a>{{--todo route--}}
   <a class="btn btn-primary" href="/admin/country/list" role="button">{{ __('Города и страны') }}</a>{{--todo route--}}
-  <a class="btn btn-primary" href="/admin/university/countries" role="button">{{ __('Университеты (учебные заведения)') }}</a>{{--todo route--}}
+  <a class="btn btn-primary" href="{{ route('admin.universities.countries') }}" role="button">{{ __('Университеты (учебные заведения)') }}</a>{{--todo route--}}
 @endsection

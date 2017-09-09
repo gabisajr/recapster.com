@@ -34,6 +34,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class City extends Model {
 
+  use Morpherable;
+
   public function country() {
     return $this->belongsTo('App\Model\Country');
   }
@@ -133,39 +135,12 @@ class City extends Model {
     ];
   }
 
-  //public function get($column) {
-  //  switch ($column) {
-  //    case 'of_city':
-  //      return I18n::$lang == 'ru' ? Morpher::inflect($this->title, 'Р') : $this->title;
-  //      break;
-  //    case 'in_city':
-  //      return I18n::$lang == 'ru' ? Morpher::inflect($this->title, 'П') : $this->title;
-  //      break;
-  //  }
-  //  return parent::get($column);
-  //}
-
-  //public static function exists($id) {
-  //  return ORM::factory('City', $id)->loaded();
-  //}
-
-  public static function route_filter_alias($route, $params, $request) {
-
-    $alias = Arr::get($params, 'city_alias');
-    $city = ORM::factory('City', ['alias' => $alias]);
-    $request->city = $city;
-
-    if (!empty($alias)) return $city->exists;
-
-    return null;
-  }
-
   /**
    * название относительно меня
    * Если я живу в той же стране что и город - тогда мне пойдет:
    * "Астана", а если я в другой стране, тогда "Астана, Казахстан"
    */
-  public function titleRegardToMe() { //todo camelCase
+  public function titleRegardToMe() {
 
     if (!$this->exists) return "<em class='text-muted'>(" . __('нет') . ")</em>";
 
