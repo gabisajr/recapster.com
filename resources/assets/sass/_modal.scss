@@ -123,8 +123,7 @@
 }
 
 .signup-modal {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px 0;
   $gap: 30px;
   .container-fluid {
     padding-left: $gap;
@@ -155,6 +154,7 @@
 }
 
 #signin-modal {
+  padding: 0;
   .panel#signin-form {
     margin-bottom: 0;
     padding: 0;
