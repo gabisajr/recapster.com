@@ -46,15 +46,4 @@ class Chair extends Model {
     return $query;
   }
 
-  //public function rules() { //todo validation
-  //  return [
-  //    'title' => [
-  //      ['not_empty'],
-  //    ],
-  //    'vk_id' => [
-  //      [[$this, 'unique'], ['vk_id', ':value']],
-  //    ],
-  //  ];
-  //}
-
 }
