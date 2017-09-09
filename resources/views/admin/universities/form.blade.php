@@ -60,7 +60,7 @@
       {{--abbreviation--}}
       <div class="form-group">
         <label class="control-label" for="abbreviation">{{ __('Аббривиатура') }}</label>
-        <input class="form-control form-control-sm{{ $errors->has('abb') ? ' is-invalid' : '' }}" name="abbreviation" value="{{ old('abbreviation', $university->abbreviation) }}" id="abbreviation" autocomplete="off">
+        <input class="form-control form-control-sm{{ $errors->has('abbreviation') ? ' is-invalid' : '' }}" name="abbreviation" value="{{ old('abbreviation', $university->abbreviation) }}" id="abbreviation" autocomplete="off">
         <div class="invalid-feedback">{{ $errors->first('abbreviation') }}</div>
       </div>
 
