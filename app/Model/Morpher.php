@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Exception;
 
 /**
  * Class Morpher - таблица склонений по падежам
