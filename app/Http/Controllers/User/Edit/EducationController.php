@@ -13,7 +13,7 @@ class EducationController extends Controller {
     $educations = $user->educations()->get();
 
     return view('user.edit.education', [
-      'title'          => __('Образование'),
+      'title'          => __('My education'),
       'user'           => $user,
       'educations'     => $educations,
       'editMenuActive' => 'education',
