@@ -1,4 +1,4 @@
-var gulp = require('gulp')
+let gulp = require('gulp')
   , livereload = require('gulp-livereload');
 
 gulp.task('default', function () {
