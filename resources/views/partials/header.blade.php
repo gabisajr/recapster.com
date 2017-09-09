@@ -58,8 +58,7 @@
 
         @else
           <nav class="page-header-nav pull-right">
-            {{--todo routes--}}
-            <a class="-item" href="/signin">{{ __('Вход') }}</a>
+            <a class="-item open-signin-modal" href="{{ route('signin') }}">{{ __('Вход') }}</a>
             <div class="-item signup"><a href="{{ route('signup') }}" class="btn btn-success btn-sm btn-signup open-signup-modal">{{ __('Регистрация') }}</a></div>
           </nav>
         @endif
