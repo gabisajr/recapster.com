@@ -58,19 +58,6 @@ class Faculty extends Model {
     return $query;
   }
 
-  //todo validation
-  //public function rules() {
-  //  return [
-  //    'university_id' => [
-  //      ['not_empty'],
-  //    ],
-  //    'title'         => [
-  //      ['not_empty'],
-  //      //todo unique title in one university
-  //    ],
-  //  ];
-  //}
-
   ////todo observer
   //public function delete() {
   //
