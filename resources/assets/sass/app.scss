@@ -833,17 +833,6 @@ body[data-logged="1"] {
   }
 }
 
-.modal {
-  #social-btns {
-    .-col {
-      width: 100%;
-      + .-col {
-        margin-top: 1em;
-      }
-    }
-  }
-}
-
 .company-page-cover {
   $aspect-ratio: 10 / 3;
   position: relative;
