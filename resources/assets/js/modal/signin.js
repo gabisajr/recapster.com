@@ -1,30 +1,21 @@
-define(['jquery'], function ($) {
+import $ from 'jquery';
+import 'fancybox';
 
-  $('.open-signin-modal').click(signin);
+export function open (e) {
 
-  function signin(e) {
-    e && e.preventDefault && e.preventDefault();
+  e && e.preventDefault && e.preventDefault();
+  e && e.stopPropagation && e.stopPropagation();
 
-    var winWidth = $(window).width();
-    if (winWidth < 767) {
-      return window.location.href = '/signin';
-    }
-
-    console.log('openModal');
-    require(['modal', 'fancybox'], function (modal) {
-      $.fancybox.open({
-        type: 'ajax',
-        href: '/tmpl/modal/signin',
-        padding: 0,
-        fitToView: true,
-        helpers: {
-          overlay: {locked: false}
-        },
-        tpl: {closeBtn: modal.close}
-      });
-    });
+  let winWidth = $(window).width();
+  if (winWidth < 767) {
+    return window.location.href = '/signin';
   }
 
-  return signin;
+  $.fancybox.open({
+    type: 'ajax',
+    src: '/tmpl/modal/signin',
+    padding: 0
+  });
+}
 
-});
+$('.open-signin-modal').click(open);

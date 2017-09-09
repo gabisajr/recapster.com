@@ -1,30 +1,24 @@
-require(['jquery', 'modal', 'fancybox'], function ($, modal) {
+import $ from 'jquery';
+import 'fancybox';
 
-  function open(e) {
+export function open (e) {
 
-    e.preventDefault && e.preventDefault();
-    e.stopPropagation && e.stopPropagation();
+  e && e.preventDefault && e.preventDefault();
+  e && e.stopPropagation && e.stopPropagation();
 
-    if ($(window).width() > 770) {
+  console.log(1);
 
-      $.fancybox.open({
-        type: 'ajax',
-        padding: 0,
-        fitToView: false,
-        href: '/tmpl/modal/signup',
-        helpers: {
-          overlay: {locked: false}
-        },
-        tpl: {closeBtn: modal.close}
-      });
-    } else {
-      window.location.href = '/signup';
-    }
+  if ($(window).width() > 770) {
 
+    $.fancybox.open({
+      type: 'ajax',
+      src: '/tmpl/modal/signup',
+      padding: 0
+    });
+  } else {
+    window.location.href = '/signup';
   }
 
-  $('.open-signup-modal').click(open);
+}
 
-  return open;
-
-});
+$('.open-signup-modal').click(open);
