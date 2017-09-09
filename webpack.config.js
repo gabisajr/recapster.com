@@ -28,6 +28,7 @@ module.exports = {
     alias: {
       bootstrap: 'bootstrap.min.js',
       'modal-signup': './modal/signup.js',
+      'modal-signin': './modal/signin.js',
       fancybox: 'fancybox-3.0/jquery.fancybox.js'
     }
   },
