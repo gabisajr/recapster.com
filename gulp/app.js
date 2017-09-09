@@ -3,7 +3,6 @@ var gulp = require('gulp')
   , cleanCSS = require('gulp-clean-css')
   , concat = require('gulp-concat')
   , livereload = require('gulp-livereload')
-  , uglify = require('gulp-uglify')
   , autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('app-styles', function () {
