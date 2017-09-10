@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property string $title
- * @property string $alias альяс для ссылки
+ * @property string $slug альяс для ссылки
  * @property int $salaries_count количество одобренных зарплат
  * @property int $reviews_count количество одобренных отзывов
  * @property int $interviews_count количество одобренных собеседований
@@ -21,13 +21,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Review[] $reviews
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Salary[] $salaries
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Position search($search)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Position whereAlias($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Position whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Position whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Position whereInterviewsCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Position whereJobsCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Position whereReviewsCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Position whereSalariesCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Position whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Position whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Position whereUpdatedAt($value)
  * @mixin \Eloquent
@@ -51,7 +51,7 @@ class Position extends Model {
   }
 
   /**
-   * Scope a query to only include positions whose title or alias likes as $search
+   * Scope a query to only include positions whose title or slug likes as $search
    *
    * @param \Illuminate\Database\Eloquent\Builder $query
    * @param  string $search
@@ -59,7 +59,7 @@ class Position extends Model {
    */
   public function scopeSearch($query, $search) {
     return $query->where('title', 'LIKE', "%$search%")
-      ->orWhere('alias', 'LIKE', "%$search%");
+      ->orWhere('slug', 'LIKE', "%$search%");
   }
 
   //public function get($column) {
@@ -73,21 +73,10 @@ class Position extends Model {
 
   public function filters() {
     return [
-      'alias' => [
+      'slug' => [
         ['mb_strtolower'], //todo filter
       ],
     ];
-  }
-
-  public static function route_filter_alias($route, $params, $request) {
-
-    $alias = Arr::get($params, 'position_alias');
-    $position = ORM::factory('Position', ['alias' => $alias]);
-    $request->position = $position;
-
-    if (!empty($alias)) return $position->loaded();
-
-    return null;
   }
 
 }
