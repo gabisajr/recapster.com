@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * App\Model\City
  *
  * @property int $id
- * @property string|null $alias
+ * @property string|null $slug
  * @property string $title название города
  * @property int|null $country_id
  * @property int|null $region_id
@@ -21,11 +21,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\University[] $universities
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City hasActiveCompanies()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City ofCountry($country)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City whereAlias($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City whereCountryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City whereRegionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\City whereVkId($value)
