@@ -111,7 +111,6 @@ return [
   'schemas'               => [
     'default' => [
       'query'    => [
-        'users'  => 'App\GraphQL\Query\UsersQuery',
         'cities' => 'App\GraphQL\Query\CitiesQuery',
       ],
       'mutation' => [
@@ -137,7 +136,6 @@ return [
    * ]
    */
   'types'                 => [
-    'User' => 'App\GraphQL\Type\UserType',
     'City' => 'App\GraphQL\Type\CityType',
   ],
 
