@@ -17,18 +17,6 @@
 <meta name="msapplication-tap-highlight" content="no"/>
 @yield('page_meta')
 <?
-
-# fancybox
-//  echo HTML::style('/vendor/fancybox/source/jquery.fancybox.css') . PHP_EOL;
-//
-//  # fontawesome
-//  echo HTML::style('/vendor/font-awesome-4.5.0/css/font-awesome.min.css') . PHP_EOL;
-//
-//  # jquery.powertip-1.2.0
-//  echo HTML::style('/vendor/jquery.powertip-1.2.0/jquery.powertip.min.css') . PHP_EOL;
-    ?>
-
-<?
 //  # bootstrap select
 //  echo HTML::style('/vendor/bootstrap/bootstrap-select/css/bootstrap-select.min.css') . PHP_EOL;
 //
@@ -54,9 +42,8 @@
   @include('partials.footer')
 </main>
 
-
-<script src="/lib/require.js"></script>
-<script>requirejs(['/js/common.js'], function () { require(['/js/main.js', '@yield('page_js')']) })</script>
+<script src="/dist/js/common.bundle.js"></script>
+@yield('scripts')
 
 @if(config('app.env') == 'production')
   {{--todo replace by google tag manager--}}

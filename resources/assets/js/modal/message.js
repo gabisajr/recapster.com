@@ -1,39 +1,44 @@
-define('showMessageModal', ['jquery', 'tplModalClose', 'fancybox'], function ($, tplModalClose) {
+import $ from 'jquery';
 
-  var $modal = $('.modal#message-modal');
+// define('showMessageModal', ['jquery', 'tplModalClose', 'fancybox'], function ($, tplModalClose) {
+//
+//
+//
+// });
 
-  var $open = $('.open-message-modal').fancybox({
-    padding: 0,
-    fitToView: false,
-    closeBtn: true,
-    helpers: {
-      overlay: {locked: false}
-    },
-    tpl: {closeBtn: tplModalClose}
-  });
 
-  function showMessageModal(message, title) {
-    if (!message) return;
+let $modal = $('.modal#message-modal');
 
-    if (title) {
-      $modal.find('.modal-header').show().find('.modal-title').text(title);
-    } else {
-      $modal.find('.modal-header').hide();
-    }
+let $open = $('.open-message-modal').fancybox({
+  padding: 0,
+  fitToView: false,
+  closeBtn: true,
+  helpers: {
+    overlay: {locked: false}
+  },
+  tpl: {closeBtn: tplModalClose}
+});
 
-    $modal.find('.message').html(message);
+function showMessageModal(message, title) {
+  if (!message) return;
 
-    $open.click();
+  if (title) {
+    $modal.find('.modal-header').show().find('.modal-title').text(title);
+  } else {
+    $modal.find('.modal-header').hide();
   }
 
-  //показать модально окно с сообщением сразу, если пришло с сервера
-  $(document).ready(function () {
-    var title = $modal.find('.modal-header .modal-title').text()
-      , message = $modal.find('.message').html();
+  $modal.find('.message').html(message);
 
-    if (message) showMessageModal(message, title);
-  });
+  $open.click();
+}
 
-  return showMessageModal;
+//показать модально окно с сообщением сразу, если пришло с сервера
+$(document).ready(function () {
+  let title = $modal.find('.modal-header .modal-title').text()
+    , message = $modal.find('.message').html();
 
+  if (message) showMessageModal(message, title);
 });
+
+export default showMessageModal;

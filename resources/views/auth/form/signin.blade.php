@@ -1,8 +1,5 @@
 @php
-  /**
-   * @var array  $errors
-   * @var string $email
-   */
+   if(!isset($errors)) $errors = new \Illuminate\Support\ViewErrorBag();
 @endphp
 <form class="panel auth-form" method="post" id="signin-form" action="{{ route('signin') }}">
   {{ csrf_field() }}

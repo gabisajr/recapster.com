@@ -4760,3 +4760,9 @@ menu#profile-more {
     @include row-gutter(10px);
   }
 }
+
+.education-form {
+  .education-period {
+    @include row-gutter(10px);
+  }
+}
