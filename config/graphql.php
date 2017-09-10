@@ -111,7 +111,9 @@ return [
   'schemas'               => [
     'default' => [
       'query'    => [
-        'cities' => 'App\GraphQL\Query\CitiesQuery',
+        'cities'       => 'App\GraphQL\Query\CitiesQuery',
+        'universities' => 'App\GraphQL\Query\UniversitiesQuery',
+        'faculties'    => 'App\GraphQL\Query\FacultiesQuery',
       ],
       'mutation' => [
 
@@ -136,7 +138,9 @@ return [
    * ]
    */
   'types'                 => [
-    'City' => 'App\GraphQL\Type\CityType',
+    'City'       => 'App\GraphQL\Type\CityType',
+    'University' => 'App\GraphQL\Type\UniversityType',
+    'Faculty'    => 'App\GraphQL\Type\FacultyType',
   ],
 
   /*
