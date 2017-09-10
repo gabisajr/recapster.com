@@ -5,7 +5,7 @@ namespace App\GraphQL\Query;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Query;
-use App\Model\Faculty;
+use App\Model\Chair;
 
 class ChairsQuery extends Query {
 
@@ -26,7 +26,8 @@ class ChairsQuery extends Query {
 
   public function resolve($root, $args) {
 
-    $query = Faculty::query();
+    /** @var Chair $query */
+    $query = Chair::query();
 
     //фильтр по id
     if ($id = array_get($args, 'id')) {
