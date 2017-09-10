@@ -17,6 +17,7 @@
     "graphql.js": "^0.4.18",
     "i18n-webpack-plugin": "^1.0.0",
     "jquery": "^3.2.1",
+    "jquery-ui": "^1.12.1",
     "lodash": "^4.17.4",
     "popper.js": "^1.12.5",
     "select2": "^4.0.3",
