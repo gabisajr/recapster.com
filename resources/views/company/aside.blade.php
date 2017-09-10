@@ -41,9 +41,6 @@
       {{--todo remove duplication rating, use css grid--}}
       <div class="hidden-xs marg-top-sm marg-bot">{!! $rating !!}</div>
 
-      {{--todo remove duplication buttons, use css grid--}}
-      <div class="hidden-xs-up marg-top">{!! $btnHtml !!}</div>
-
     </aside>
   </div>
 </div>
