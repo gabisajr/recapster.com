@@ -97,8 +97,7 @@ Route::group(['namespace' => 'Search'], function () {
 });
 
 //fast search
-Route::get('position/search', ['as' => 'position.search', 'uses' => 'PositionController@search']);
-Route::get('company/search', ['as' => 'company.search', 'uses' => 'CompaniesController@search']);
+Route::get('company/search', ['as' => 'company.search', 'uses' => 'CompaniesController@search']); //todo GraphQL
 
 Route::post('country/cities', ['as' => 'country.cities', 'uses' => 'CountryController@cities']);
 
