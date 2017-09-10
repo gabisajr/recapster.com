@@ -8,7 +8,7 @@ let gulp = require('gulp')
 gulp.task('app-styles', function () {
   return gulp.src([
     'resources/assets/sass/bootstrap-4/bootstrap.scss',
-    'public/lib/select2/css/select2.min.css',
+    'node_modules/select2/dist/css/select2.min.css',
     'public/lib/jquery-ui-1.12.1/jquery-ui.min.css',
     'public/lib/fancyBox-3.0/jquery.fancybox.min.css',
     'resources/assets/sass/font-awesome-4.7.0/font-awesome.scss',
