@@ -38,6 +38,9 @@ class FacultiesQuery extends Query {
       $query->ofUniversity($university);
     }
 
+    //default order
+    $query->orderBy('title');
+
     return $query->get();
   }
 
