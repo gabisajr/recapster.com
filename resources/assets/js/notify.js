@@ -1,18 +1,20 @@
 /**
- * Доступные форматы вызова:
+ * Available use cases:
  *
- * notify.error("Текст ошибки")
- * notify.error("Заголовок", "Текст ошибки")
- * notify.error({title: "Заголовок", text: "Текст ошибки"})
- * notify.error({text: "Текст ошибки", title: "Заголовок"})
- * notify.error({text: "Текст ошибки"})
+ * notify.error("Error text")
+ * notify.error("Title", "Error text")
+ * notify.error({title: "Title", text: "Error text"})
+ * notify.error({text: "Error text"})
  *
- * таже можно в любом из выше приведенных примеров заменить:
+ * The same can be replaced in any of the above examples:
  * notify.error -> notify.success
  */
 
 import 'pnotify/dist/pnotify.css';
 import 'pnotify/dist/pnotify.brighttheme.css';
+import 'pnotify/dist/pnotify.buttons.css';
+import 'pnotify/dist/pnotify.buttons';
+
 import PNotify from 'pnotify';
 
 export default {
@@ -23,7 +25,10 @@ export default {
       title: title,
       text: text,
       type: 'success',
-      closer: '<i class="fa fa-times"></i>'
+      buttons: {
+        closer: true,
+        sticker: false //ugly
+      }
     });
   },
 
@@ -32,7 +37,11 @@ export default {
     new PNotify({
       title: title,
       text: text,
-      type: 'error'
+      type: 'error',
+      buttons: {
+        closer: true,
+        sticker: false //ugly
+      }
     });
   }
 
