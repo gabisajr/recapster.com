@@ -157,6 +157,9 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => 'auth']
   //upload avatar
   Route::post('avatar/upload', ['as' => 'user.avatar.upload', 'uses' => 'AvatarController@upload']);
 
+  //delete user education item
+  Route::post('education/delete', ['as' => 'user.education.delete', 'uses' => 'Edit\EducationController@delete']);
+
 });
 
 //user
