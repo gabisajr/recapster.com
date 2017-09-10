@@ -111,6 +111,7 @@ return [
   'schemas'               => [
     'default' => [
       'query'    => [
+        'countries'    => 'App\GraphQL\Query\CountriesQuery',
         'cities'       => 'App\GraphQL\Query\CitiesQuery',
         'universities' => 'App\GraphQL\Query\UniversitiesQuery',
         'faculties'    => 'App\GraphQL\Query\FacultiesQuery',
@@ -123,23 +124,8 @@ return [
     ],
   ],
 
-  /*
-   * The types available in the application. You can access them from the
-   * facade like this: GraphQL::type('user')
-   *
-   * Example:
-   *
-   * 'types' => [
-   *     'user' => 'App\GraphQL\Type\UserType'
-   * ]
-   *
-   * or without specifying a key (it will use the ->name property of your type)
-   *
-   * 'types' =>
-   *     'App\GraphQL\Type\UserType'
-   * ]
-   */
   'types'                 => [
+    'Country'   => 'App\GraphQL\Type\CountryType',
     'City'       => 'App\GraphQL\Type\CityType',
     'University' => 'App\GraphQL\Type\UniversityType',
     'Faculty'    => 'App\GraphQL\Type\FacultyType',
