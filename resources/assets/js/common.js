@@ -123,15 +123,6 @@ define('keyCodes', {
   LEFT: 37
 });
 
-define('caretEnd', ['jquery'], function ($) {
-  return function () {
-    var input = $(this)
-      , val = input.val();
-    input.val('');
-    input.val(val);
-  }
-});
-
 define('getImgRealSize', function () {
   return function (imgSrc, callback) {
     var newImg = new Image();
