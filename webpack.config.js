@@ -1,14 +1,15 @@
 'use strict';
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
+const LANG = process.env.LANG || 'en';
 const webpack = require('webpack');
+const I18nPlugin = require('i18n-webpack-plugin');
+const languageConfig = require(__dirname + '/resources/lang/' + LANG + '.json');
 
 module.exports = {
 
   context: __dirname + '/resources/assets/js',
   entry: {
-
-    main: './main.js',
 
     //user personal info
     'edit-education': './edit/education.js',
@@ -39,6 +40,10 @@ module.exports = {
       'window.jQuery': 'jquery',
       Popper: ['popper.js', 'default'],
     }),
+    new I18nPlugin(languageConfig),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'common'
+    })
   ],
 
   watch: NODE_ENV === 'development',
