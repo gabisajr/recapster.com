@@ -11,7 +11,10 @@ module.exports = {
   context: __dirname + '/resources/assets/js',
   entry: {
 
+    home: './home',
+
     //user personal info
+    'edit-personal': './edit/personal.js',
     'edit-education': './edit/education.js',
   },
 
@@ -19,6 +22,15 @@ module.exports = {
     path: __dirname + '/public/dist/js',
     filename: '[name].bundle.js',
     publicPath: "/dist/js/"
+  },
+
+  module: {
+    loaders: [
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      }
+    ]
   },
 
   resolve: {
@@ -30,8 +42,10 @@ module.exports = {
       bootstrap: 'bootstrap.min.js',
       'modal-signup': './modal/signup.js',
       'modal-signin': './modal/signin.js',
-      fancybox: 'fancybox-3.0/jquery.fancybox.js'
-    }
+      fancybox: 'fancybox-3.0/jquery.fancybox.js',
+      fileupload: 'jquery-file-upload-9.19.0/js/jquery.fileupload.js',
+    },
+    extensions: ['.js', '.css']
   },
 
   plugins: [
@@ -39,6 +53,7 @@ module.exports = {
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
       Popper: ['popper.js', 'default'],
+      graphql: 'graphql.js'
     }),
     new I18nPlugin(languageConfig),
     new webpack.optimize.CommonsChunkPlugin({
