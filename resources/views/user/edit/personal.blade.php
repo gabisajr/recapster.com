@@ -221,3 +221,7 @@
 @endsection
 
 @section('page_js', 'edit/personal')
+
+@section('scripts')
+  <script src="/dist/js/edit-personal.bundle.js"></script>
+@endsection
