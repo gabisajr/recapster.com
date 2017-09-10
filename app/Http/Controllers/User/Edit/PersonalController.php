@@ -62,7 +62,6 @@ class PersonalController extends Controller {
     $user->city_id = $request->input('city');
     $user->about = $request->input('about');
     $user->save();
-    //$user->save_upload_avatar();
 
     return redirect(route('user.edit.personal'))->with('success', true);
   }
