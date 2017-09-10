@@ -6,8 +6,6 @@ import autosize from 'autosize';
 import buildSelectOptions from '../buildSelectOptions';
 import notify from '../notify';
 
-notify.success("Ваше образование успешно сохранено");
-
 let $form = $('form#education-form')
   , $list = $form.find('.education-list');
 
@@ -55,7 +53,7 @@ $form.submit(function (e) {
     success: function (res) {
       if (res.success) {
         window.scrollTo(0, 0);
-        notify.success("Ваше образование успешно сохранено");
+        notify.success(__("Your education successfully saved"));
       }
     }
   });
