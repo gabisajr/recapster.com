@@ -2,6 +2,7 @@
 
 namespace App\GraphQL\Type;
 
+use GraphQL;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Type as GraphQLType;
 
@@ -14,17 +15,20 @@ class CityType extends GraphQLType {
 
   public function fields() {
     return [
-      'id'    => [
+      'id'           => [
         'type'        => Type::nonNull(Type::int()),
         'description' => 'The id of the city',
       ],
-      'slug'  => [
+      'slug'         => [
         'type'        => Type::string(),
         'description' => 'The unique city name in lower case in English',
       ],
-      'title' => [
+      'title'        => [
         'type'        => Type::string(),
         'description' => 'Title of the city in the real world',
+      ],
+      'universities' => [
+        'type' => Type::listOf(GraphQL::type('University')),
       ],
     ];
   }
