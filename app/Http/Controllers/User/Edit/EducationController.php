@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User\Edit;
 
 use App\Http\Controllers\Controller;
+use App\Model\University;
+use App\Model\UserEducation;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -22,65 +24,51 @@ class EducationController extends Controller {
 
   public function store(Request $request) {
 
-    $errors = [];
-    $success = true;
+    $arrEducation = $request->input('education', []);
+    $arrId = array_get($arrEducation, 'id', []);
+    $arrUniversityId = array_get($arrEducation, 'university', []);
+    $arrFacultyId = array_get($arrEducation, 'faculty', []);
+    $arrChairId = array_get($arrEducation, 'chair', []);
+    $arrEduForm = array_get($arrEducation, 'educationForm', []);
+    $arrEduStatus = array_get($arrEducation, 'educationStatus', []);
+    $arrStartYear = array_get($arrEducation, 'startYear', []);
+    $arrEndYear = array_get($arrEducation, 'endYear', []);
+    $arrText = array_get($arrEducation, 'text', []);
 
-    $educations_data = Arr::get($_POST, 'education', []);
-    $arr_id = Arr::get($educations_data, 'id', []);
-    $arr_university = Arr::get($educations_data, 'university', []);
-    $arr_faculty = Arr::get($educations_data, 'faculty', []);
-    $arr_chair = Arr::get($educations_data, 'chair', []);
-    $arr_edu_form = Arr::get($educations_data, 'edu_form', []);
-    $arr_status = Arr::get($educations_data, 'status', []);
-    $arr_start_year = Arr::get($educations_data, 'start_year', []);
-    $arr_end_year = Arr::get($educations_data, 'end_year', []);
-    $arr_has_text = Arr::get($educations_data, 'has_text', []);
-    $arr_text = Arr::get($educations_data, 'text', []);
+    foreach ($arrId as $key => $id) {
 
-    foreach ($arr_id as $key => $id) {
+      /** @var UserEducation $education */
+      $education = UserEducation::findOrNew($id);
 
-      /** @var Model_Education $education */
-      $education = ORM::factory('Education', $id);
-      $university = ORM::factory('University', Arr::get($arr_university, $key));
-
-      if ($university->loaded()) {
-
-        $has_text = (boolean)Arr::get($arr_has_text, $key);
-
-        $education->university = $university;
-        $education->user = $this->curr_user;
-        $education->start_year = Arr::get($arr_start_year, $key);
-        $education->end_year = Arr::get($arr_end_year, $key);
-        $education->faculty_id = Arr::get($arr_faculty, $key);
-        $education->chair_id = Arr::get($arr_chair, $key);
-        $education->edu_form_id = Arr::get($arr_edu_form, $key);
-        $education->status_id = Arr::get($arr_status, $key);
-        $education->text = $has_text ? Arr::get($arr_text, $key) : null;
-        try {
-          $education->save();
-        } catch (ORM_Validation_Exception $e) {
-          $success = false;
-          $errors[$key] = $e->errors('models');
-        }
-
-      } elseif ($education->loaded()) {
-        $education->delete();
+      //set university for new education object
+      if (!$education->exists) {
+        /** @var University $university */
+        $university = University::find(array_get($arrUniversityId, $key));
+        if (!$university) continue; //not save education for unknown university
+        $education->university_id = $university->id;
+        $education->user_id = Auth::getUser()->id;
       }
 
+      $education->start_year = array_get($arrStartYear, $key);
+      $education->end_year = array_get($arrEndYear, $key);
+      $education->faculty_id = array_get($arrFacultyId, $key);
+      $education->chair_id = array_get($arrChairId, $key);
+      $education->edu_form_id = array_get($arrEduForm, $key);
+      $education->status_id = array_get($arrEduStatus, $key);
+      $education->text = array_get($arrText, $key);
+      $education->save();
+
     }
 
-    $response = ['success' => $success];
-    if (count($errors)) $response['errors'] = $errors;
+    return ['success' => true];
 
-    $this->auto_render = false;
-    $this->response->body(json_encode($response))->headers('Content-Type', 'application/json; charset=utf-8');
+  }
 
-    if ($success) {
-      Session::instance()->alert(new Alert_Success('Данные сохранены'));
-    }
-
-    return;
-
+  public function delete(Request $request) {
+    $educationId = $request->input('id');
+    $userId = Auth::getUser()->id;
+    $education = UserEducation::where(['id' => $educationId, 'user_id' => $userId])->first();
+    if ($education) $education->delete();
   }
 
 }
