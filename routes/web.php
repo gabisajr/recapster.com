@@ -98,8 +98,7 @@ Route::group(['namespace' => 'Search'], function () {
 
 //fast search
 Route::get('company/search', ['as' => 'company.search', 'uses' => 'CompaniesController@search']); //todo GraphQL
-
-Route::post('country/cities', ['as' => 'country.cities', 'uses' => 'CountryController@cities']);
+Route::post('country/cities', ['as' => 'country.cities', 'uses' => 'CountryController@cities']); //todo GraphQL
 
 //user auth
 Route::group(['namespace' => 'Auth'], function () {
