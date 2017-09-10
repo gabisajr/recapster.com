@@ -11,10 +11,14 @@
     <header class="panel-header hidden-xs">{{ __('Высшее образование') }}</header>
     <div class="panel-body">
 
-      <form class="form-horizontal education-form" method="post" role="form" id="education-form" action="{{ route('user.edit.education') }}" enctype="multipart/form-data">
+      <form class="education-form" method="post" role="form" id="education-form" action="{{ route('user.edit.education') }}" enctype="multipart/form-data">
         <div class="education-list">
           @if ($educations->count())
-            @each('user.edit.education.item', $educations, 'education')
+
+            @foreach($educations as $index => $education)
+              @include('user.edit.education.item')
+            @endforeach
+
           @else
             @include('user.edit.education.item', ['index' => 0])
           @endif
@@ -35,4 +39,6 @@
   </div>
 @endsection
 
-@section('page_js', 'edit/education')
+@section('scripts')
+  <script src="/dist/js/edit-education.bundle.js"></script>
+@endsection
