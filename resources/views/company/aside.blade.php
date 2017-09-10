@@ -1,9 +1,6 @@
 @php
   /**
    * @var \App\Model\Company $company
-   * @var Model_User         $curr_user
-   * @var View               $info
-   * @var array              $buttons
    */
 
   $rating = view('partials.mark-widget', ['rating' => $company->rating, 'show_number' => true])->render();
@@ -20,7 +17,6 @@
         <div class="logo-wrapper">
           <img src="{{ logo_big($company, 640) }}" class="logo" alt="{{ $company->title }}">
         </div>
-        <div class="badge-right hidden-xs-up">{!! $rating !!}</div>
       </div>
 
       <div class="hidden-xs">{!! $btnHtml !!}</div>
@@ -38,7 +34,7 @@
         @endif
       </div>
 
-      {{--todo remove duplication rating, use css grid--}}
+      {{--use css grid: to move up near the logo--}}
       <div class="hidden-xs marg-top-sm marg-bot">{!! $rating !!}</div>
 
     </aside>
