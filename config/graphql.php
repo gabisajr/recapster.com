@@ -114,6 +114,7 @@ return [
         'cities'       => 'App\GraphQL\Query\CitiesQuery',
         'universities' => 'App\GraphQL\Query\UniversitiesQuery',
         'faculties'    => 'App\GraphQL\Query\FacultiesQuery',
+        'chairs'       => 'App\GraphQL\Query\ChairsQuery',
       ],
       'mutation' => [
 
@@ -141,6 +142,7 @@ return [
     'City'       => 'App\GraphQL\Type\CityType',
     'University' => 'App\GraphQL\Type\UniversityType',
     'Faculty'    => 'App\GraphQL\Type\FacultyType',
+    'Chair'      => 'App\GraphQL\Type\ChairType',
   ],
 
   /*
