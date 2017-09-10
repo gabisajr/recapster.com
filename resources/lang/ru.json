@@ -7,5 +7,7 @@
   "Choose your country": "Выберите страну",
   "Choose your city": "Выберите город",
   "Start typing": "Начните набирать",
-  "City": "Город"
+  "City": "Город",
+  "Success": "Готово",
+  "Error": "Ошибка"
 }
