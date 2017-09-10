@@ -1,161 +1,202 @@
-define(['jquery', 'i18n', 'powertip', 'autosize', 'caretEnd', 'selectpicker'], function ($, __, powertip, autosize, caretEnd) {
+import '../main';
+import $ from 'jquery';
+import 'select2';
+import caretEnd from '../caretEnd';
+import autosize from 'autosize';
+import buildSelectOptions from '../buildSelectOptions';
+import notify from '../notify';
 
-  var form = $('form#education-form')
-    , list = form.find('.education-list');
+notify.success("Ваше образование успешно сохранено");
 
-  form.find('.education-form-group').each(function () { eduGroup($(this)) });
+let $form = $('form#education-form')
+  , $list = $form.find('.education-list');
 
-  //добавить еще образование
-  form.find('.add-education').click(function (e) {
-    e.preventDefault();
-    var newIndex = form.find('.education-form-group').length;
-    $.post('/tmpl/edit/education/form-group', {index: newIndex}, function (tmpl) {
-      list.append(eduGroup($(tmpl)));
-    });
-  });
-
-  //удалить образование
-  form.on('click', '.group-delete', function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-    $(this).closest('.group').remove();
-    $.post('/education/delete', $(this).data());
-  });
-
-  form.submit(function (e) {
-    e.preventDefault();
-
-    var submit = form.find('[type="submit"]');
-
-    $.ajax({
-      url: form.attr('action'),
-      data: form.serialize(),
-      type: form.attr('method'),
-      beforeSend: function () {
-        submit.prop('disabled', true);
-      },
-      complete: function () {
-        submit.prop('disabled', false);
-      },
-      success: function (res) {
-        if (res.success) {
-          window.scrollTo(0, 0);
-          window.location.reload();
-        }
-      }
-    });
-  });
-
-  function buildOptions(items, female) {
-    var empty = female ? __('Не выбрана') : __('Не выбран')
-      , options = '<option value="">' + empty + '</option>';
-    $.each(items, function (index, item) {
-      options += '\n<option value="' + item.id + '">' + item.title + '</option>'
-    });
-    return options;
-  }
-
-  function setEmpty() { $(arguments).each(function () { $(this).val('').html('').selectpicker('refresh') }) }
-
-  function show() { $(arguments).each(function () { $(this).show() }) }
-
-  function hide() { $(arguments).each(function () { $(this).hide() }) }
-
-  function eduGroup(group) {
-    group.find('select').selectpicker();
-    powertip(group.find('.powertip'));
-
-    var country = group.find('select.country')
-      , city = group.find('select.city')
-      , university = group.find('select.university')
-      , faculty = group.find('select.faculty')
-      , chair = group.find('select.chair')
-      , edu_form = group.find('select.edu_form')
-      , status = group.find('select.status')
-      , start_year = group.find('select.start_year')
-      , end_year = group.find('select.end_year')
-      , has_text = group.find('input.has_text')
-      , text = group.find('textarea.text');
-
-    var rCity = city.closest('.form-group')
-      , rUniversity = university.closest('.form-group')
-      , rFaculty = faculty.closest('.form-group')
-      , rChair = chair.closest('.form-group')
-      , rEduForm = edu_form.closest('.form-group')
-      , rStatus = status.closest('.form-group')
-      , rPeriod = start_year.closest('.form-group')
-      , rText = group.find('.text-group')
-      , textWrapper = group.find('.text-wrapper');
-
-    //выбор страны
-    country.change(function () {
-      setEmpty(city, university, faculty, chair);
-      hide(rUniversity, rFaculty, rChair, rEduForm, rStatus, rPeriod, rText);
-
-      var countryId = $(this).val();
-      if (!countryId) rCity.hide();
-      $.get('/country/cities/' + countryId, {hasUniversity: true}, function (items) {
-        city.html(buildOptions(items)).selectpicker('refresh');
-        items.length ? rCity.show() : rCity.hide();
-      });
-    });
-
-    //выбор города
-    city.change(function () {
-      setEmpty(university, faculty, chair);
-      hide(rFaculty, rChair, rEduForm, rStatus, rPeriod, rText);
-
-      var cityId = $(this).val();
-      if (!cityId) rUniversity.hide();
-      $.post('/city/universities/' + cityId, function (items) {
-        university.html(buildOptions(items)).selectpicker('refresh');
-        items.length ? rUniversity.show() : rUniversity.hide();
-      });
-    });
-
-    //выбор университета
-    university.change(function () {
-      setEmpty(faculty, chair);
-      hide(rChair);
-
-      var universityId = $(this).val();
-
-      universityId ?
-        show(rEduForm, rStatus, rPeriod, rText) :
-        hide(rFaculty, rEduForm, rStatus, rPeriod, rText);
-
-      $.post('/university/faculties/' + universityId, function (items) {
-        faculty.html(buildOptions(items)).selectpicker('refresh');
-        items.length ? rFaculty.show() : rFaculty.hide();
-      });
-    });
-
-    //выбор факультета
-    faculty.change(function () {
-      setEmpty(chair);
-      var facultyId = $(this).val();
-      if (!facultyId)rChair.hide();
-      $.post('/faculty/chairs/' + facultyId, function (items) {
-        chair.html(buildOptions(items, true)).selectpicker('refresh');
-        items.length ? rChair.show() : rChair.hide();
-      });
-    });
-
-    text.focus(caretEnd);
-    autosize(text);
-
-    //переклчить видимость текста
-    has_text.change(function () {
-      var checked = $(this).is(':checked');
-      if (checked) {
-        textWrapper.show();
-        text.focus();
-      } else {
-        textWrapper.hide();
-      }
-    });
-
-    return group;
-  }
-
+$form.find('.education-form-group').each(function () {
+  initEducationItem($(this))
 });
+
+//добавить еще образование
+$form.find('.add-education').click(function (e) {
+  e.preventDefault();
+  let newIndex = $form.find('.education-form-group').length;
+  $.get('/tmpl/user/edit/education/item', {index: newIndex}, function (tmpl) {
+    let $eduGroup = $(tmpl);
+    $list.append($eduGroup);
+    initEducationItem($eduGroup);
+  });
+});
+
+//удалить образование
+$form.on('click', '.group-delete', function (e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  let $delete = $(this);
+  $delete.tooltip('dispose');
+  $delete.closest('.group').remove();
+  $.post('/user/education/delete', $delete.data());
+});
+
+$form.submit(function (e) {
+  e.preventDefault();
+
+  let submit = $form.find('[type="submit"]');
+
+  $.ajax({
+    url: $form.attr('action'),
+    data: $form.serialize(),
+    type: $form.attr('method'),
+    beforeSend: function () {
+      submit.prop('disabled', true);
+    },
+    complete: function () {
+      submit.prop('disabled', false);
+    },
+    success: function (res) {
+      if (res.success) {
+        window.scrollTo(0, 0);
+        notify.success("Ваше образование успешно сохранено");
+      }
+    }
+  });
+});
+
+function setEmpty() {
+  $(arguments).each(function () {
+    $(this).val('').html('');
+  })
+}
+
+function show() {
+  $(arguments).each(function () {
+    $(this).show();
+    $(this).find('select').select2({width: 'resolve'})
+  });
+}
+
+function hide() { $(arguments).each(function () { $(this).hide() }) }
+
+function initEducationItem($group) {
+
+  $group.find('select').select2();
+  $('[data-toggle="tooltip"]').tooltip();
+
+  let $country = $group.find('select.country')
+    , $city = $group.find('select.city')
+    , $university = $group.find('select.university')
+    , $faculty = $group.find('select.faculty')
+    , $chair = $group.find('select.chair')
+    , $eduForm = $group.find('select.edu_form')
+    , $eduStatus = $group.find('select.status')
+    , $startYear = $group.find('select.start_year')
+    , $cbHasText = $group.find('input.has_text')
+    , $text = $group.find('textarea.text');
+
+  // form groups
+  let $gCity = $city.closest('.form-group')
+    , $gUniversity = $university.closest('.form-group')
+    , $gFaculty = $faculty.closest('.form-group')
+    , $gChair = $chair.closest('.form-group')
+    , $gEduForm = $eduForm.closest('.form-group')
+    , $gStatus = $eduStatus.closest('.form-group')
+    , $gPeriod = $startYear.closest('.form-group')
+    , $gText = $group.find('.text-group')
+    , $textWrapper = $group.find('.text-wrapper');
+
+  //on change county lazy load cities from this country which has one or more universities
+  $country.change(function () {
+    setEmpty($city, $university, $faculty, $chair);
+    hide($gUniversity, $gFaculty, $gChair, $gEduForm, $gStatus, $gPeriod, $gText);
+
+    let countryId = parseInt($(this).val());
+    if (!countryId) $gCity.hide();
+
+    let cities = graphql("/graphql")(`query { cities (country: ${countryId}, hasUniversities: true) {id, title} }`);
+    cities().then(data => {
+      let cities = data.cities;
+
+      cities.length ? $gCity.show() : $gCity.hide();
+
+      $city
+        .html(buildSelectOptions(cities))
+        .select2({width: 'resolve'});
+    });
+  });
+
+  //on change city load universities from the city
+  $city.change(function () {
+    setEmpty($university, $faculty, $chair);
+    hide($gFaculty, $gChair, $gEduForm, $gStatus, $gPeriod, $gText);
+
+    let cityId = parseInt($(this).val());
+    if (!cityId) $gUniversity.hide();
+
+    let universities = graphql("/graphql")(`query { universities (city: ${cityId}) {id, title} }`);
+    universities().then(data => {
+      let universities = data.universities;
+
+      universities.length ? $gUniversity.show() : $gUniversity.hide();
+
+      $university
+        .html(buildSelectOptions(universities))
+        .select2({width: 'resolve'});
+    });
+
+  });
+
+  //on change university load his faculties
+  $university.change(function () {
+    setEmpty($faculty, $chair);
+    hide($gChair);
+
+    let universityId = parseInt($(this).val());
+
+    universityId ?
+      show($gEduForm, $gStatus, $gPeriod, $gText) :
+      hide($gFaculty, $gEduForm, $gStatus, $gPeriod, $gText);
+
+    let faculties = graphql('/graphql')(`query { faculties (university: ${universityId}) {id, title} }`);
+    faculties().then(data => {
+      let faculties = data.faculties;
+
+      faculties.length ? $gFaculty.show() : $gFaculty.hide();
+
+      $faculty.html(buildSelectOptions(faculties))
+        .select2({width: 'resolve'});
+
+    });
+  });
+
+  //on change faculty load load his chairs (departments)
+  $faculty.change(function () {
+    setEmpty($chair);
+    let facultyId = parseInt($(this).val());
+    if (!facultyId) $gChair.hide();
+
+    let chairs = graphql('/graphql')(`query { chairs (faculty: ${facultyId}) {id, title} }`);
+    chairs().then(data => {
+      let chairs = data.chairs;
+      chairs.length ? $gChair.show() : $gChair.hide();
+
+      $chair.html(buildSelectOptions(chairs))
+        .select2({width: 'resolve'});
+
+    });
+  });
+
+  $text.focus(caretEnd);
+  autosize($text);
+
+  //переклчить видимость текста
+  $cbHasText.change(function () {
+    let checked = $(this).is(':checked');
+    if (checked) {
+      $textWrapper.show();
+      $text.focus();
+    } else {
+      $textWrapper.hide();
+    }
+  });
+
+  return $group;
+}
