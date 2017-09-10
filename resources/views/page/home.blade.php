@@ -56,3 +56,7 @@
     </div>
   </div>
 @endsection
+
+@section('scripts')
+  <script src="{{ asset('/dist/js/home.bundle.js') }}"></script>
+@endsection
