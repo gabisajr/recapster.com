@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 class CountryController extends Controller {
 
   // get cities from country
-  public function cities(Request $request) {
+  public function cities(Request $request) { //todo GraphQL
 
     $cities = new Collection([]);
 
