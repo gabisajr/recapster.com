@@ -14,8 +14,7 @@
     @endif
     <h3 class="user-profile-block-title">{{ __('Образование') }}</h3>
     @foreach ($educations as $education)
-      {{--todo stop here: use blade--}}
-      echo new Post_Education($education);
+      @include('user.page.profile.education-item')
     @endforeach
   </section>
 @elseif ($user->isMe())
