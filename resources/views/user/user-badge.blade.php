@@ -8,7 +8,7 @@
     <a href="{{ $user->url() }}"><img src="{{ avatar($user) }}" class="user-badge-avatar"></a>
   </div>
   <div class="user-badge-right">
-    <h1 class="user-badge-title"><a href="{{ $user->profile_url }}">{{ $user->fullname() }}</a></h1>
+    <h1 class="user-badge-title"><a href="{{ $user->url() }}">{{ $user->fullname() }}</a></h1>
     <div class="user-badge-text blue-gray">
       @if ($positionTitle = $user->positionTitle())
         {{ $positionTitle }}<br>
