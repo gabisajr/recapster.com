@@ -1,7 +1,7 @@
 @php
   /**
-   * @var \Illuminate\Support\Collection $users
-   * @var string                         $search - Поисковая фраза
+   * @var \Illuminate\Support\Collection|\App\Model\User[] $users
+   * @var string $search - Поисковая фраза
    */
 @endphp
 
@@ -111,7 +111,7 @@
               @endif
             </small>
             <br>
-            <em class="small">{{ $user->status_title }}</em>
+            <em class="small">{{ $user->job }}</em>
           </td>
           <!--//</editor-fold>--!>
 
