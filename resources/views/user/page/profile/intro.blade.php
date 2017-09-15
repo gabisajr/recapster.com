@@ -26,7 +26,7 @@
           <div class="col col-8 summary-value">{{ $user->jobStatusTitle() }}</div>
         </li>
 
-        @if (in_array($user->job_status, [\App\UserJobStatus::READY, \App\UserJobStatus::SEARCH]))
+        @if (in_array($user->job_status, [\App\UserJobStatus::PASSIVE, \App\UserJobStatus::ACTIVE]))
           <li class="row">
             <div class="col col-4 summary-label">{{ __('Желаемое вознаграждение') }}</div>
             <div class="col col-8 list-value">@php

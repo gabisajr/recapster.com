@@ -231,7 +231,7 @@ class User extends Authenticatable {
   }
 
   public function jobStatusTitle() {
-    $status = $this->status ? $this->job_status : UserJobStatus::NOT_SEARCH;
+    $status = $this->status ? $this->job_status : UserJobStatus::NOT_LOOKING;
     return array_get(UserJobStatus::getStatuses(), $status);
   }
 

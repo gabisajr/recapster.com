@@ -96,7 +96,7 @@
             <div class="invalid-feedback">{{ $errors->first('job_status') }}</div>
             {{--todo route--}}
             <a href="/settings/search" target="_blank" class="job-search-settings"
-               style="{{ $user->job_status == \App\UserJobStatus::NOT_SEARCH ? 'display:  none;' : '' }}">{{ __('Настройки поиска работы') }}</a>
+               style="{{ $user->job_status == \App\UserJobStatus::NOT_LOOKING ? 'display:  none;' : '' }}">{{ __('Настройки поиска работы') }}</a>
           </div>
         </div>
 

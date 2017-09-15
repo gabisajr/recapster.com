@@ -71,7 +71,7 @@
           <p class="blue-gray base-info">{!! $baseInfo !!}</p>
 
           {{--статус готовности к работе--}}
-          @if (in_array($user->job_status, [\App\UserJobStatus::READY, \App\UserJobStatus::SEARCH]))
+          @if (in_array($user->job_status, [\App\UserJobStatus::PASSIVE, \App\UserJobStatus::ACTIVE]))
             <div class='status'>{{ $user->jobStatusTitle() }}</div>
           @endif
           {{--/статус готовности к работе--}}
