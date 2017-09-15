@@ -111,7 +111,7 @@
               @endif
             </small>
             <br>
-            <em class="small">{{ $user->job }}</em>
+            <em class="small">{{ $user->jobStatusTitle() }}</em>
           </td>
           <!--//</editor-fold>--!>
 
