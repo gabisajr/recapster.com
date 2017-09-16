@@ -2,7 +2,7 @@
   /**
    * @var \App\Model\User $user
    * @var Model_Job_Preferences $job_preferences
-   * @var Model_Experience[] $experiences
+   * @var \App\Model\UserExperience[] $experiences
    * @var Model_User_Skill[] $userSkills
    * @var Model_User_Lang[] $userLangs
    * @var Model_Exam[] $exams
@@ -42,12 +42,12 @@
           <div class="col col-8 list-value">
             @if ($experiences_count = count($experiences))
               <a href="#experience">@php
-                  $period = total_period($experiences); //todo create helper
+                  $period = total_period($experiences);
                   $companies_count = companies_count($experiences_count);
                   echo $period ? $period : $companies_count;
                 @endphp</a>
             @elseif ($user->isMe())
-              <a href="/edit/experience">{{ __('Добавить') }}</a>
+              <a href="{{ route('user.edit.experience') }}">{{ __('Добавить') }}</a>
             @else
               {{ __('Не указан') }}
             @endif
