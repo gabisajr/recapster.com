@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App;
+use DateTime;
 
 /**
  * Trait Periodable
@@ -21,7 +22,7 @@ trait Periodable {
 
       //начало
       if ($this->start_month) {
-        $res .= Month::text($this->start_month) . ' ';
+        $res .= $this->monthName($this->start_month) . ' ';
       }
       $res .= $this->start_year;
       $res .= " – ";
@@ -71,6 +72,11 @@ trait Periodable {
     }
 
     return $res;
+  }
+
+  private function monthName($monthNum) {
+    $time = mktime(0, 0, 0, $monthNum, 1);
+    return date('F', $time);
   }
 
 }
