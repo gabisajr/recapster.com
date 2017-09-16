@@ -1,6 +1,6 @@
 <?php
 
-function getNumEnding($number, $endingArray) {
+function getNumEnding(int $number, array $endingArray) {
   $number = $number % 100;
   if ($number >= 11 && $number <= 19) {
     $ending = $endingArray[2];
@@ -23,7 +23,7 @@ function getNumEnding($number, $endingArray) {
 }
 
 //N видов деятельности
-function industries_count($count) {
+function industries_count(int $count): string {
   if ($count) {
     $text = __(':count :industries', [
       ':count'      => $count,
@@ -36,70 +36,70 @@ function industries_count($count) {
   return $text;
 }
 
-function photos_count($count) {
+function photos_count(int $count): string {
   if ($count) {
     return $count . ' ' . getNumEnding($count, [__('фотография'), __('фотографии'), __('фотографий')]);
   }
   return __("нет фотографий");
 }
 
-function jobs_count($count) {
+function jobs_count(int $count): string {
   if ($count) {
     return $count . ' ' . getNumEnding($count, [__('вакансия'), __('вакансии'), __('вакансий')]);
   }
   return __("нет вакансий");
 }
 
-function reviews_count($count) {
+function reviews_count(int $count): string {
   if ($count) {
     return $count . ' ' . getNumEnding($count, [__('отзыв'), __('отзыва'), __('отзывов')]);
   }
   return __("нет отзывов");
 }
 
-function positions_count($count) {
+function positions_count(int $count): string {
   if ($count) {
     return $count . ' ' . getNumEnding($count, [__('профессия'), __('профессии'), __('профессий')]);
   }
   return __("нет профессий");
 }
 
-function cities_count($count) {
+function cities_count(string $count): string {
   if ($count) {
     return $count . ' ' . getNumEnding($count, [__('город'), __('города'), __('городов')]);
   }
   return __("нет городов");
 }
 
-function companies_count($count) {
+function companies_count(int $count): string {
   if ($count) {
     return $count . ' ' . getNumEnding($count, [__('компания'), __('компании'), __('компаний')]);
   }
   return __("нет компаний");
 }
 
-function users_count($count) {
+function users_count(int $count): string {
   if ($count) {
     return $count . ' ' . getNumEnding($count, [__('пользователь'), __('пользователя'), __('пользователей')]);
   }
   return __("нет пользователей");
 }
 
-function universities_count($count) {
+function universities_count(int $count): string {
   if ($count) {
     return $count . ' ' . getNumEnding($count, [__('университет'), __('университета'), __('университетов')]);
   }
   return __("нет университетов");
 }
 
-function faculties_count($count) {
+function faculties_count(int $count): string {
   if ($count) {
     return $count . ' ' . getNumEnding($count, [__('факультет'), __('факультета'), __('факультетов')]);
   }
   return __("нет факультетов");
 }
 
-function chairs_count($count) {
+function chairs_count(int $count): string {
   if ($count) {
     return $count . ' ' . getNumEnding($count, [__('кафедра'), __('кафедры'), __('кафедр')]);
   }
@@ -114,7 +114,7 @@ function years_count(int $count): string {
 }
 
 //"Найдено 10 компаний"
-function found_companies($count) {
+function found_companies(int $count): string {
 
   if ($count) {
     $text = __(':found :count :companies', [
@@ -130,7 +130,7 @@ function found_companies($count) {
 }
 
 //"Найдено 10 вакансий"
-function found_jobs($count) {
+function found_jobs(int $count): string {
 
   if ($count) {
     $text = __(':found :count :jobs', [
