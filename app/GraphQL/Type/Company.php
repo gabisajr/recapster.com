@@ -64,6 +64,9 @@ class Company extends GraphQLType {
       'tel'             => [
         'type' => Type::string(),
       ],
+      'confirmed'       => [
+        'type' => Type::boolean(),
+      ],
     ];
   }
 
