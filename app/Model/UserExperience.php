@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 /**
  * App\Model\UserExperience
@@ -140,22 +141,21 @@ class UserExperience extends Model {
   //  return parent::save($validation);
   //}
 
-  /** @return Model_Review */
-  public function get_review() {
+  public function getReview() {
 
-    /** @var Model_User $curr_user */
-    $curr_user = Auth::instance()->get_user();
+    $user = Auth::getUser();
 
-    $query = ORM::factory('Review')
-      ->where('review.company_id', '=', $this->company->id)
-      ->and_where('review.user_id', '=', $this->user->id)
-      ->order_by('review.added', 'DESC');
+    $query = Review::query()
+      ->ofCompany($this->company)
+      ->ofUser($this->user)
+      ->latest();
 
-    if (!$curr_user || ($curr_user->id != $this->user->id)) {
-      $query->and_where('review.status', '=', Status::APPROVED);
+    if (!$user || ($user->id != $this->user->id)) {
+      $query->approved();
     }
 
-    $review = $query->find();
+    /** @var Review $review */
+    $review = $query->first();
 
     return $review;
   }
