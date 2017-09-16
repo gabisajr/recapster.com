@@ -191,7 +191,7 @@ class Company extends Model {
    * @param bool $occurrenceOrder - order result companies by search string's first occurrence index
    * @return \Illuminate\Database\Eloquent\Builder
    */
-  public function scopeSearch($query, $search, boolean $occurrenceOrder = true) {
+  public function scopeSearch($query, $search, $occurrenceOrder = true) {
 
     $query->select('*');
 
