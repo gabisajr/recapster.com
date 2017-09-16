@@ -31,54 +31,6 @@ class AutocompleteController extends Controller {
     $this->response->headers('Content-Type', 'application/json; charset=utf-8');
   }
 
-  public function action_company() {
-
-    /** @var Model_Company[] $companies */
-    $companies = [];
-
-    if (!empty($this->filter)) {
-
-      $query = ORM::factory('Company')
-        ->select([DB::expr("POSITION('{$this->filter}' IN company.title)"), 'found_position'])
-        ->or_where_open()
-        ->where('title', 'LIKE', "%$this->filter%")
-        ->or_where('alias', 'LIKE', "%$this->filter%")
-        ->or_where('site', 'LIKE', "%$this->filter%")
-        ->or_where_close()
-        ->and_where('active', '=', true)
-        ->order_by('found_position');
-
-      //фильтр подтверждена / нет
-      if (isset($_POST['confirmed'])) {
-        $confirmed = (boolean)$_POST['confirmed'];
-        $query->and_where('confirmed', '=', $confirmed);
-      }
-
-      $companies = $query->limit($this->limit)->find_all();
-    }
-
-    $use_link = (boolean)Arr::get($_POST, 'use_link');
-    $admin_link = (boolean)Arr::get($_POST, 'admin_link');
-
-    $arr = [];
-    foreach ($companies as $company) {
-
-      $html = View::factory('autocomplete/company', [
-        'company'    => $company,
-        'use_link'   => $use_link,
-        'admin_link' => $admin_link,
-      ])->render();
-
-      $arr[] = [
-        'label' => $company->title,
-        'html'  => $html,
-      ];
-    }
-
-    $this->response->body(json_encode($arr));
-
-  }
-
   public function action_user() {
 
     /** @var Model_User[] $users */
