@@ -22,7 +22,7 @@ trait Periodable {
 
       //начало
       if ($this->start_month) {
-        $res .= $this->monthName($this->start_month) . ' ';
+        $res .= __($this->monthName($this->start_month)) . ' ';
       }
       $res .= $this->start_year;
       $res .= " – ";
