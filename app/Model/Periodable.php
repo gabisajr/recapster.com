@@ -14,4 +14,36 @@ use App;
  */
 trait Periodable {
 
+  /**
+   * @return null|string
+   */
+  function period_interval() {
+    $res = null;
+    if ($start_year = $this->start_year) {
+
+      $start_month = $this->start_month ? $this->start_month : 1;
+      $start = new DateTime("{$start_year}-{$start_month}-01");
+
+      if ($end_year = $this->end_year) {
+        $end_month = $this->end_month ? $this->end_month : 1;
+        $end = new DateTime("{$end_year}-{$end_month}-01");
+      } else {
+        $end = new DateTime();
+      }
+
+      $interval = $start->diff($end);
+
+      $years = $interval->format('%y');
+      $months = $interval->format('%m');
+
+      $parts = [];
+      if ($years) $parts[] = years_count($years);
+      if ($months) $parts[] = months_count($months);
+      $res = implode(' ', $parts);
+
+    }
+
+    return $res;
+  }
+
 }
