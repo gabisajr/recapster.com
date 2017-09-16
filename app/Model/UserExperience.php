@@ -158,4 +158,8 @@ class UserExperience extends Model {
     return $review;
   }
 
+  public function getCompanyTitle() {
+    return $this->company ? $this->company->title : $this->company_title;
+  }
+
 }
