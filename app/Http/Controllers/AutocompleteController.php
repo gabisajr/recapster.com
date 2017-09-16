@@ -79,32 +79,6 @@ class AutocompleteController extends Controller {
 
   }
 
-  public function action_city() {
-
-    /** @var Model_City[] $cities */
-    $cities = [];
-
-    if (!empty($this->filter)) {
-      $cities = ORM::factory('City')
-        ->select([DB::expr("POSITION('{$this->filter}' IN city.title)"), 'found_position'])
-        ->where('title', 'LIKE', "%$this->filter%")
-        ->or_where('alias', 'LIKE', "%$this->filter%")
-        ->order_by('found_position')
-        ->limit($this->limit)
-        ->find_all();
-    }
-
-    $arr = [];
-    foreach ($cities as $city) {
-      $arr[] = [
-        'label' => $city->title,
-        'html'  => View::factory('autocomplete/city', ['city' => $city])->render(),
-      ];
-    }
-
-    $this->response->body(json_encode($arr));
-  }
-
   //<editor-fold desc="должность">
   public function positions(Request $request) {
 
