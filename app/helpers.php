@@ -294,3 +294,34 @@ function total_period($periods) {
 
   return $parts;
 }
+
+/**
+ * @param \App\Model\UserEducation|\App\Model\UserExperience $period
+ * @return string
+ */
+function period($period): string {
+
+  $res = "";
+  if ($period->start_year) {
+
+    //начало
+    if ($period->start_month) {
+      $res .= Month::text($period->start_month) . ' ';
+    }
+    $res .= $period->start_year;
+    $res .= " – ";
+
+
+    //конец
+    if ($period->end_year) {
+      if ($period->end_month) {
+        $res .= Month::text($period->end_month) . ' ';
+      }
+      $res .= $period->end_year;
+    } else {
+      $res .= __('по настоящее время');
+    }
+  }
+
+  return $res;
+}
