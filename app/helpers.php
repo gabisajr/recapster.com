@@ -253,3 +253,44 @@ function protect_email($email) {
 
   return null;
 }
+
+/**
+ * @param \App\Model\UserEducation[]|\App\Model\UserExperience[] $periods
+ * @return string
+ */
+function total_period($periods) {
+  $e = new DateTime('00:00');
+  $f = clone $e;
+
+  foreach ($periods as $period) {
+
+    if ($start_year = $period->start_year) {
+
+
+      $start_month = $period->start_month ? $period->start_month : 1;
+      $start = new DateTime("{$start_year}-{$start_month}-01");
+
+      if ($end_year = $period->end_year) {
+        $end_month = $period->end_month ? $period->end_month : 1;
+        $end = new DateTime("{$end_year}-{$end_month}-01");
+      } else {
+        $end = new DateTime();
+      }
+
+      $interval = $start->diff($end);
+      $e->add($interval);
+    }
+
+  }
+
+  $years = (int)$f->diff($e)->format("%y");
+  $months = (int)$f->diff($e)->format("%m");
+
+  $parts = [];
+  if ($years) $parts[] = years_count($years);
+  if ($months) $parts[] = months_count($months);
+  $parts = implode(' ', $parts);
+
+
+  return $parts;
+}
