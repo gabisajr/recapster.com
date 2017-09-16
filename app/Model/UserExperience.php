@@ -70,9 +70,6 @@ class UserExperience extends Model {
 
   //public function rules() { //todo validation
   //  return [
-  //    'company_title' => [
-  //      [[$this, 'need_company_title'], [':value', ':validation', ':field']],
-  //    ],
   //    'start_month'   => [
   //      ['not_future_month', [$this->start_year, ':value']],
   //    ],
