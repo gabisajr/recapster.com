@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Status;
+use Log;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -100,7 +101,7 @@ class Review extends Model {
     if ($companyId) {
       return $query->where('company_id', '=', $companyId);
     } else {
-      error_log("invalid company argument: value '$company', needs Company or int");
+      Log::warning("invalid company argument: needs Company or int", ['company' => $company]);
     }
 
     return $query;
