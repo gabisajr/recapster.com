@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Status;
 use Log;
+use Auth;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -431,6 +432,11 @@ class Review extends Model {
     $activity->save();
 
     return $this;
+  }
+
+  public function isMy(): bool {
+    if (!Auth::check()) return false;
+    return Auth::getUser()->id == $this->user->id;
   }
 
 }
