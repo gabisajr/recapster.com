@@ -1,9 +1,9 @@
 @php
   /**
    * @var \App\Model\User $user
-   * @var \App\Model\UserExperience[] $experiences
+   * @var \Illuminate\Support\Collection|\App\Model\UserExperience[] $experiences
    */
-  $experiences_count = count($experiences);
+  $experiences_count = $experiences->count();
 @endphp
 
 @if ($experiences_count)
@@ -14,8 +14,7 @@
     <h3 class="user-profile-block-title">{{ __('Опыт работы') }}</h3>
 
     @foreach ($experiences as $experience)
-      {{--todo use blade--}}
-      echo new Post_Experience($experience);
+      @include('user.page.profile.experience-item')
     @endforeach
 
   </section>
