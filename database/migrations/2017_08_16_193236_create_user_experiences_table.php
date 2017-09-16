@@ -30,12 +30,12 @@ class CreateUserExperiencesTable extends Migration {
       $table->foreign('city_id')->references('id')->on('cities')->onDelete('set null')->onUpdate('cascade');
 
       //период (начало)
-      $table->addColumn('tinyInteger', 'start_month', ['lenght' => 2, 'comment' => 'начало работы, месяц', 'unsigned' => true]);
-      $table->addColumn('tinyInteger', 'start_year', ['lenght' => 4, 'comment' => 'начало работы, год', 'unsigned' => true]);
+      $table->addColumn('tinyInteger', 'start_month', ['lenght' => 2, 'comment' => 'начало работы, месяц', 'unsigned' => true, 'nullable' => true]);
+      $table->addColumn('tinyInteger', 'start_year', ['lenght' => 4, 'comment' => 'начало работы, год', 'unsigned' => true, 'nullable' => true]);
 
       //период (окончание)
-      $table->addColumn('tinyInteger', 'end_month', ['lenght' => 2, 'comment' => 'окончание работы, месяц', 'unsigned' => true]);
-      $table->addColumn('tinyInteger', 'end_year', ['lenght' => 4, 'comment' => 'окончание работы, год', 'unsigned' => true]);
+      $table->addColumn('tinyInteger', 'end_month', ['lenght' => 2, 'comment' => 'окончание работы, месяц', 'unsigned' => true, 'nullable' => true]);
+      $table->addColumn('tinyInteger', 'end_year', ['lenght' => 4, 'comment' => 'окончание работы, год', 'unsigned' => true, 'nullable' => true]);
 
       $table->boolean('is_current')->default(false)->comment("работает по настоящее время");
       $table->boolean('is_internship')->nullable()->comment("является ли стажировкой");
