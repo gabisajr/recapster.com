@@ -2,8 +2,6 @@
 
 namespace App\GraphQL\Type;
 
-use App\Model\Country;
-use GraphQL;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Type as GraphQLType;
 
