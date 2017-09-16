@@ -152,6 +152,10 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'middleware' => 'auth']
     Route::get('education', ['as' => 'user.edit.education', 'uses' => 'EducationController@showForm']);
     Route::post('education', ['as' => 'user.edit.education', 'uses' => 'EducationController@store']);
 
+    //experience
+    Route::get('experience', ['as' => 'user.edit.experience', 'uses' => 'ExperienceController@showForm']);
+    Route::post('experience', ['as' => 'user.edit.experience', 'uses' => 'ExperienceController@store']);
+
   });
 
   //upload avatar
