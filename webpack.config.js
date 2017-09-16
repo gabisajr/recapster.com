@@ -30,6 +30,16 @@ module.exports = {
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['babel-preset-es2015']
+          }
+        }
       }
     ]
   },
@@ -65,3 +75,16 @@ module.exports = {
   watch: NODE_ENV === 'development',
   devtool: 'source-map'
 };
+
+if (NODE_ENV === 'production') {
+  console.log('uglify js');
+  module.exports.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        drop_console: true,
+        unsafe: true
+      }
+    })
+  )
+}
