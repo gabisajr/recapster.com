@@ -5,9 +5,8 @@ namespace App\Model;
 use App\Status;
 use Illuminate\Database\Eloquent\Model;
 
-
 /**
- * App\Model\Review - Отзыв о работе в компании
+ * App\Model\Review
  *
  * @property int $id
  * @property int $company_id для какой компании отзыв
@@ -33,6 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Model\Stage|null $stage
  * @property-read \App\Model\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review approved()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review ofCompany($company)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review status($status)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review whereActiveEmployee($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review whereAnonym($value)
@@ -81,6 +81,29 @@ class Review extends Model {
 
   public function position() {
     return $this->belongsTo('App\Model\Position');
+  }
+
+  /**
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @param Company|int $company
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeOfCompany($query, $company) {
+
+    $companyId = null;
+    if ($company instanceof Company) {
+      $companyId = $company->id;
+    } elseif (is_numeric($company)) {
+      $companyId = $company;
+    }
+
+    if ($companyId) {
+      return $query->where('company_id', '=', $companyId);
+    } else {
+      error_log("invalid company argument: value '$company', needs Company or int");
+    }
+
+    return $query;
   }
 
   //todo morph relation
@@ -140,7 +163,7 @@ class Review extends Model {
 
   public function url() {
     if (!$this->company->active) return '#';
-    return "http://$_SERVER[HTTP_HOST]/{$this->company->alias}/review/{$this->id}";
+    return "http://$_SERVER[HTTP_HOST]/{$this->company->alias}/review/{$this->id}"; //todo route
   }
 
   /** @return Model_Activity */
