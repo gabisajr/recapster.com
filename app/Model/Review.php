@@ -34,6 +34,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Model\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review approved()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review ofCompany($company)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review ofUser($user)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review status($status)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review whereActiveEmployee($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Review whereAnonym($value)
@@ -102,6 +103,28 @@ class Review extends Model {
       return $query->where('company_id', '=', $companyId);
     } else {
       Log::warning("invalid company argument: needs Company or int", ['company' => $company]);
+    }
+
+    return $query;
+  }
+
+  /**
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   * @param User|int $user
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeOfUser($query, $user) {
+    $userId = null;
+    if ($user instanceof User) {
+      $userId = $user->id;
+    } elseif (is_numeric($user)) {
+      $userId = $user;
+    }
+
+    if ($userId) {
+      return $query->where('user_id', '=', $userId);
+    } else {
+      Log::warning("invalid user argument: needs User or int", ['user' => $user]);
     }
 
     return $query;
