@@ -14,6 +14,33 @@ use App;
  */
 trait Periodable {
 
+  function period(): string {
+
+    $res = "";
+    if ($this->start_year) {
+
+      //начало
+      if ($this->start_month) {
+        $res .= Month::text($this->start_month) . ' ';
+      }
+      $res .= $this->start_year;
+      $res .= " – ";
+
+
+      //конец
+      if ($this->end_year) {
+        if ($this->end_month) {
+          $res .= Month::text($this->end_month) . ' ';
+        }
+        $res .= $this->end_year;
+      } else {
+        $res .= __('по настоящее время');
+      }
+    }
+
+    return $res;
+  }
+
   /**
    * @return null|string
    */
