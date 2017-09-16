@@ -44,7 +44,7 @@ trait Periodable {
   /**
    * @return null|string
    */
-  function period_interval() {
+  function periodInterval() {
     $res = null;
     if ($start_year = $this->start_year) {
 
