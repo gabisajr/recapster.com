@@ -63,20 +63,27 @@ $.fn.extend({
     this.autocomplete({
       minLength: 2,
       source: function (request, response) {
-        $.ajax({
-          type: 'POST',
-          dataType: 'json',
-          url: '/autocomplete/city',
-          data: {filter: request.term},
-          success: response
+        let cities = graphql('/graphql')(`query { cities (search: "${request.term}") {id, title} }`);
+        cities().then(data => {
+          let cities = data.cities.map(function (city) {
+            city.label = city.title;
+            delete city.title;
+            return city;
+          });
+          return response(cities);
         });
       }
     });
 
-    this.autocomplete("instance")._renderItem = function (ul, item) {
-      let li = $(item.html);
-      li.find('.city-title').highlight(this.term);
-      return li.appendTo(ul);
+    this.autocomplete("instance")._renderItem = function (ul, city) {
+      let $li = $('<li><div>' + city.label + '</div></li>');
+      $li.highlight(this.term);
+      return $li.appendTo(ul);
+
+      //todo autocomplete cities with placemark
+      // let li = $(city.html);
+      // li.find('.city-title').highlight(this.term);
+      // return li.appendTo(ul);
     };
 
     return this;
