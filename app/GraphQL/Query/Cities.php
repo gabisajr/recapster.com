@@ -19,16 +19,16 @@ class Cities extends Query {
 
   public function args() {
     return [
-      'id'              => ['name' => 'id', 'type' => Type::int()],
-      'slug'            => ['name' => 'slug', 'type' => Type::string()],
-      'title'           => ['name' => 'title', 'type' => Type::string()],
-      'country'         => ['name' => 'country', 'type' => Type::int()],
-      'hasUniversities' => ['name' => 'hasUniversities', 'type' => Type::boolean()],
+      'id'              => ['name' => 'id', 'type' => Type::int(), 'description' => 'Get a city by id'],
+      'search'          => ['name' => 'search', 'type' => Type::string(), 'description' => 'Search city by title or slug'],
+      'country'         => ['name' => 'country', 'type' => Type::int(), 'description' => 'Get cities of country'],
+      'hasUniversities' => ['name' => 'hasUniversities', 'type' => Type::boolean(), 'description' => 'Get cities, which has one or more universities'],
     ];
   }
 
   public function resolve($root, $args) {
 
+    /** @var City $query */
     $query = City::query();
 
     //фильтр по id
@@ -36,9 +36,9 @@ class Cities extends Query {
       $query->where('id', '=', $id);
     }
 
-    //фильтр по slug
-    if ($slug = array_get($args, 'slug')) {
-      $query->where('slug', '=', $slug);
+    //фильтр по строке поиска
+    if ($search = array_get($args, 'search')) {
+      $query->search($search);
     }
 
     //фильтр по стране
