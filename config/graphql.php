@@ -111,12 +111,13 @@ return [
   'schemas'               => [
     'default' => [
       'query'    => [
-        'countries'    => 'App\GraphQL\Query\CountriesQuery',
-        'cities'       => 'App\GraphQL\Query\CitiesQuery',
-        'universities' => 'App\GraphQL\Query\UniversitiesQuery',
-        'faculties'    => 'App\GraphQL\Query\FacultiesQuery',
-        'chairs'       => 'App\GraphQL\Query\ChairsQuery',
-        'positions'    => 'App\GraphQL\Query\PositionsQuery',
+        \App\GraphQL\Query\Countries::class,
+        \App\GraphQL\Query\Cities::class,
+        \App\GraphQL\Query\Universities::class,
+        \App\GraphQL\Query\Faculties::class,
+        \App\GraphQL\Query\Chairs::class,
+        \App\GraphQL\Query\Positions::class,
+        \App\GraphQL\Query\Companies::class,
       ],
       'mutation' => [
 
@@ -124,13 +125,17 @@ return [
     ],
   ],
 
-  'types'                 => [
-    'Country'   => 'App\GraphQL\Type\CountryType',
-    'City'       => 'App\GraphQL\Type\CityType',
-    'University' => 'App\GraphQL\Type\UniversityType',
-    'Faculty'    => 'App\GraphQL\Type\FacultyType',
-    'Chair'      => 'App\GraphQL\Type\ChairType',
-    'Position'   => 'App\GraphQL\Type\PositionType',
+  'types'           => [
+    \App\GraphQL\Type\Country::class,
+    \App\GraphQL\Type\City::class,
+    \App\GraphQL\Type\University::class,
+    \App\GraphQL\Type\Faculty::class,
+    \App\GraphQL\Type\Chair::class,
+    \App\GraphQL\Type\Position::class,
+    \App\GraphQL\Type\CompanySize::class,
+    \App\GraphQL\Type\CompanyRevenue::class,
+    \App\GraphQL\Type\Company::class,
+    \App\GraphQL\Type\Image::class,
   ],
 
   /*
@@ -144,14 +149,14 @@ return [
    *     'locations' => []
    * ]
    */
-  'error_formatter'       => [\Folklore\GraphQL\GraphQL::class, 'formatError'],
+  'error_formatter' => [\Folklore\GraphQL\GraphQL::class, 'formatError'],
 
   /*
    * Options to limit the query complexity and depth. See the doc
    * @ https://github.com/webonyx/graphql-php#security
    * for details. Disabled by default.
    */
-  'security'              => [
+  'security'        => [
     'query_max_complexity'  => null,
     'query_max_depth'       => null,
     'disable_introspection' => false,

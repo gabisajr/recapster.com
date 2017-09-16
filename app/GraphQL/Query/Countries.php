@@ -7,7 +7,7 @@ use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Query;
 use App\Model\Country;
 
-class CountriesQuery extends Query {
+class Countries extends Query {
 
   protected $attributes = [
     'name' => 'countries',

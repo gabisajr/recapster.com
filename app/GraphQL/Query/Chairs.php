@@ -7,7 +7,7 @@ use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Query;
 use App\Model\Chair;
 
-class ChairsQuery extends Query {
+class Chairs extends Query {
 
   protected $attributes = [
     'name' => 'chairs',

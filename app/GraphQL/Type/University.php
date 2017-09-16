@@ -5,7 +5,7 @@ namespace App\GraphQL\Type;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Type as GraphQLType;
 
-class UniversityType extends GraphQLType {
+class University extends GraphQLType {
 
   protected $attributes = [
     'name'        => 'University',

@@ -5,7 +5,7 @@ namespace App\GraphQL\Type;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Type as GraphQLType;
 
-class ChairType extends GraphQLType {
+class Chair extends GraphQLType {
 
   protected $attributes = [
     'name' => 'Chair',

@@ -5,7 +5,7 @@ namespace App\GraphQL\Type;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Type as GraphQLType;
 
-class PositionType extends GraphQLType {
+class Position extends GraphQLType {
 
   protected $attributes = [
     'name' => 'Position',

@@ -5,31 +5,30 @@ namespace App\GraphQL\Query;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Query;
-use App\Model\City;
+use App\Model\University;
 
-class CitiesQuery extends Query {
+class Universities extends Query {
 
   protected $attributes = [
-    'name' => 'cities',
+    'name' => 'universities',
   ];
 
   public function type() {
-    return Type::listOf(GraphQL::type('City'));
+    return Type::listOf(GraphQL::type('University'));
   }
 
   public function args() {
     return [
-      'id'              => ['name' => 'id', 'type' => Type::int()],
-      'slug'            => ['name' => 'slug', 'type' => Type::string()],
-      'title'           => ['name' => 'title', 'type' => Type::string()],
-      'country'         => ['name' => 'country', 'type' => Type::int()],
-      'hasUniversities' => ['name' => 'hasUniversities', 'type' => Type::boolean()],
+      'id'      => ['name' => 'id', 'type' => Type::int()],
+      'slug'    => ['name' => 'slug', 'type' => Type::string()],
+      'city'    => ['name' => 'city', 'type' => Type::int()],
+      'country' => ['name' => 'country', 'type' => Type::int()],
     ];
   }
 
   public function resolve($root, $args) {
 
-    $query = City::query();
+    $query = University::query();
 
     //фильтр по id
     if ($id = array_get($args, 'id')) {
@@ -46,9 +45,9 @@ class CitiesQuery extends Query {
       $query->ofCountry($country);
     }
 
-    //города с университетами
-    if ($hasUniversities = array_get($args, 'hasUniversities')) {
-      $query->has('universities');
+    //фильтр по городу
+    if ($city = array_get($args, 'city')) {
+      $query->ofCity($city);
     }
 
     return $query->get();

@@ -5,37 +5,37 @@ namespace App\GraphQL\Query;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Query;
-use App\Model\Position;
+use App\Model\Faculty;
 
-class PositionsQuery extends Query {
+class Faculties extends Query {
 
   protected $attributes = [
-    'name' => 'positions',
+    'name' => 'faculties',
   ];
 
   public function type() {
-    return Type::listOf(GraphQL::type('Position'));
+    return Type::listOf(GraphQL::type('Faculty'));
   }
 
   public function args() {
     return [
-      'id'     => ['name' => 'id', 'type' => Type::int()],
-      'search' => ['name' => 'search', 'type' => Type::string()],
+      'id'         => ['name' => 'id', 'type' => Type::int()],
+      'university' => ['name' => 'university', 'type' => Type::int()],
     ];
   }
 
   public function resolve($root, $args) {
 
-    $query = Position::query();
+    $query = Faculty::query();
 
     //фильтр по id
     if ($id = array_get($args, 'id')) {
       $query->where('id', '=', $id);
     }
 
-    //фильтр по строке поиска
-    if ($search = array_get($args, 'search')) {
-      $query->search($search); //todo order by search entrance index
+    //фильтр по университету
+    if ($university = array_get($args, 'university')) {
+      $query->ofUniversity($university);
     }
 
     //default order
