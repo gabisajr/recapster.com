@@ -52,7 +52,7 @@ $form.submit(function (e) {
     },
     error: function (res) {
       let errors = res.responseJSON.errors;
-      // console.log(errors);
+
       $list.find('.experience-form-group').each(function () {
         $(this).find(':input').each(function () {
           let key = this.name
@@ -68,6 +68,9 @@ $form.submit(function (e) {
 
         });
       });
+
+      //todo scroll up to first error
+
     },
     success: function () {
       window.scrollTo(0, 0);
