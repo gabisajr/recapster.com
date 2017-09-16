@@ -14,10 +14,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $company_id id компании
  * @property string|null $city_title название города (без привязки)
  * @property int|null $city_id id города
- * @property int|null $start_month начало работы, месяц
- * @property string|null $start_year начало работы, год
- * @property int|null $end_month окончание работы, месяц
- * @property string|null $end_year окончание работы, год
  * @property int $is_current работает по настоящее время
  * @property int|null $is_internship является ли стажировкой
  * @property string|null $text обязанности и достижения
@@ -48,6 +44,8 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  */
 class UserExperience extends Model {
+
+  use Periodable;
 
   public function position() {
     return $this->belongsTo('App\Model\Position');
