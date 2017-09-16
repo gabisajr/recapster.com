@@ -38,10 +38,14 @@ class EducationController extends Controller {
     foreach ($arrId as $key => $id) {
 
       /** @var UserEducation $education */
-      $education = UserEducation::findOrNew($id);
+      $education = UserEducation::query()
+        ->where('id', '=', $id)
+        ->where('user_id', '=', Auth::getUser()->id)
+        ->first();
 
       //set university for new education object
-      if (!$education->exists) {
+      if (!$education) {
+        $education = new UserEducation();
         /** @var University $university */
         $university = University::find(array_get($arrUniversityId, $key));
         if (!$university) continue; //not save education for unknown university
