@@ -5,14 +5,21 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class CompanySize размер компании, кол-во сотрудников
+ * App\Model\CompanySize - размер компании, кол-во сотрудников
  *
- * @property int             id
- * @property string          alias
- * @property string          employees_count - количество работников: '100-200'
- * @property string          title           - вернет 100-200 работников (virtual)
- * @property int             sort
- * @property Model_Company[] companies
+ * @property int $id
+ * @property string $slug
+ * @property string|null $employees_count
+ * @property int $sort
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\CompanySize whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\CompanySize whereEmployeesCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\CompanySize whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\CompanySize whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\CompanySize whereSort($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\CompanySize whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class CompanySize extends Model {
 
