@@ -113,6 +113,13 @@ function years_count(int $count): string {
   return __("0 лет");
 }
 
+function months_count(int $count): string {
+  if ($count) {
+    return $count . ' ' . getNumEnding($count, [__('месяц'), __('месяца'), __('месяцев')]);
+  }
+  return __("0 месяцев");
+}
+
 //"Найдено 10 компаний"
 function found_companies(int $count): string {
 
