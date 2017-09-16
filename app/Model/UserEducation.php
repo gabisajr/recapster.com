@@ -47,6 +47,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class UserEducation extends Model {
 
+  use Periodable;
+
   public function user() {
     return $this->belongsTo('App\Model\User');
   }
