@@ -6,7 +6,7 @@ use GraphQL;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Type as GraphQLType;
 
-class CityType extends GraphQLType {
+class City extends GraphQLType {
 
   protected $attributes = [
     'name'        => 'City',
