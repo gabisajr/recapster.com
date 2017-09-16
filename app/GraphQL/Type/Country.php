@@ -2,12 +2,12 @@
 
 namespace App\GraphQL\Type;
 
-use App\Model\Country;
+use App\Model\Country as CountryModel;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Type as GraphQLType;
 
-class CountryType extends GraphQLType {
+class Country extends GraphQLType {
 
   protected $attributes = [
     'name'        => 'Country',
@@ -34,7 +34,7 @@ class CountryType extends GraphQLType {
         'args'        => [
           'id' => ['name' => 'id', 'type' => Type::int()],
         ],
-        'resolve'     => function (Country $country, $args) {
+        'resolve'     => function (CountryModel $country, $args) {
           $query = $country->cities();
           if ($id = array_get($args, 'id')) {
             $query->where('id', '=', $id);
