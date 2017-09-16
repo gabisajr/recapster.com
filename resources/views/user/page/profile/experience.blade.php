@@ -9,8 +9,7 @@
 @if ($experiences_count)
   <section class="user-profile-block" id="experience">
     @if ($user->isMe())
-      {{--todo route--}}
-      <a href="/edit/experience" class="pencil hidden-print" title="{{ __('Редактировать') }}"></a>
+      <a href="{{ route('user.edit.experience') }}" class="pencil hidden-print" title="{{ __('Редактировать') }}"></a>
     @endif
     <h3 class="user-profile-block-title">{{ __('Опыт работы') }}</h3>
 
