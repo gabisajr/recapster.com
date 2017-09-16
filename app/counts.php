@@ -106,6 +106,13 @@ function chairs_count($count) {
   return __("нет кафедр");
 }
 
+function years_count(int $count): string {
+  if ($count) {
+    return $count . ' ' . getNumEnding($count, [__('год'), __('года'), __('лет')]);
+  }
+  return __("0 лет");
+}
+
 //"Найдено 10 компаний"
 function found_companies($count) {
 
