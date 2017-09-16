@@ -294,3 +294,14 @@ function total_period($periods) {
 
   return $parts;
 }
+
+function pretty_link(string $link): string {
+
+  //remove protocol
+  $link = preg_replace('/^\S+\:\/\//', '', $link);
+
+  //remove ending slash
+  $link = preg_replace('/\/$/', '', $link);
+
+  return $link;
+}
