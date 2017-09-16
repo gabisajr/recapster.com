@@ -34,7 +34,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class City extends Model {
 
-  use Morpherable;
+  use Morpherable, Searchable;
 
   public function country() {
     return $this->belongsTo('App\Model\Country');
