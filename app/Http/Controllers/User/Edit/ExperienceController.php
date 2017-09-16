@@ -24,15 +24,17 @@ class ExperienceController extends Controller {
   public function store(Request $request) {
 
     $this->validate($request, [
+      'experience.companyTitle.*'  => 'required|string',
       'experience.positionTitle.*' => 'required|string',
       'experience.cityTitle.*'     => 'required|string',
       'experience.startMonth.*'    => 'required',
       'experience.startYear.*'     => 'required',
     ], [
+      'experience.companyTitle.*.required'  => __('Укажите название компании/организации'),
       'experience.positionTitle.*.required' => __("Укажите должность на которой вы работали"),
       'experience.cityTitle.*.required'     => __("Укажите город в котором вы работали"),
       'experience.startMonth.*.required'    => __("Укажите месяц начала работы"),
-      'experience.startYear.*.required'    => __("Укажите год начала работы"),
+      'experience.startYear.*.required'     => __("Укажите год начала работы"),
     ]);
 
     //todo validation
