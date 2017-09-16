@@ -7,11 +7,11 @@ use DB;
 trait Searchable {
 
   /**
-   * Scope a query to only cities, which title or slug like $search string.
+   * Scope a query to only objects, which title or slug like $search string.
    *
    * @param \Illuminate\Database\Eloquent\Builder $query
    * @param  string $search
-   * @param bool $occurrenceOrder - order result cities by search string's first occurrence index
+   * @param bool $occurrenceOrder - order result objects by search string's first occurrence index
    * @return \Illuminate\Database\Eloquent\Builder
    */
   public function scopeSearch($query, $search, $occurrenceOrder = true) {
