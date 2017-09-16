@@ -34,6 +34,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Position extends Model {
 
+  use Searchable;
+
   public function jobs() {
     return $this->hasMany('App\Model\Job');
   }
@@ -48,18 +50,6 @@ class Position extends Model {
 
   public function salaries() {
     return $this->hasMany('App\Model\Salary');
-  }
-
-  /**
-   * Scope a query to only include positions whose title or slug likes as $search
-   *
-   * @param \Illuminate\Database\Eloquent\Builder $query
-   * @param  string $search
-   * @return \Illuminate\Database\Eloquent\Builder
-   */
-  public function scopeSearch($query, $search) {
-    return $query->where('title', 'LIKE', "%$search%")
-      ->orWhere('slug', 'LIKE', "%$search%");
   }
 
   //public function get($column) {
