@@ -166,4 +166,8 @@ class UserExperience extends Model {
     return $this->position ? $this->position->title : $this->position_title;
   }
 
+  public function getCityTitle() {
+    return $this->city ? $this->city->title : $this->city_title;
+  }
+
 }
