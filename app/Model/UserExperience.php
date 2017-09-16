@@ -5,114 +5,113 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Model_Experience - Опыт работы
- * @property int            $id
- * @property boolean        $is_internship  - является ли стажировкой
- * @property int            $start_month    - начало работы, месяц
- * @property int            $start_year     - начало работы, год
- * @property int            $end_month      - окончание работы, месяц
- * @property int            $end_year       - окончание работы, год
- * @property boolean        $is_current     - работает по настоящее время
- * @property string         $text           - обязанности и достижения
+ * App\Model\UserExperience
  *
- * ------------------- belongs to: ---------------------------------------
- * @property Model_Position $position       - должность
- * @property int            $position_id
- * @property string         $position_title - название должности (без привязки)
- *
- * @property Model_Company  $company        - компания
- * @property int            $company_id
- * @property string         $company_title  - название компании (без привязки)
- *
- * @property Model_City     $city
- * @property int            $city_id
- * @property string         $city_title     - название города (без привязки)
- *
- * @property Model_User     $user           - пользователь
- * @property int            $user_id
- *
+ * @property int $id
+ * @property string|null $position_title название должности (без привязки)
+ * @property int|null $position_id id должности
+ * @property string|null $company_title название компании (без привязки)
+ * @property int|null $company_id id компании
+ * @property string|null $city_title название города (без привязки)
+ * @property int|null $city_id id города
+ * @property int|null $start_month начало работы, месяц
+ * @property string|null $start_year начало работы, год
+ * @property int|null $end_month окончание работы, месяц
+ * @property string|null $end_year окончание работы, год
+ * @property int $is_current работает по настоящее время
+ * @property int|null $is_internship является ли стажировкой
+ * @property string|null $text обязанности и достижения
+ * @property int $user_id id пользователя
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Model\City|null $city
+ * @property-read \App\Model\Company|null $company
+ * @property-read \App\Model\Position|null $position
+ * @property-read \App\Model\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\UserExperience whereCityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\UserExperience whereCityTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\UserExperience whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\UserExperience whereCompanyTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\UserExperience whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\UserExperience whereEndMonth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\UserExperience whereEndYear($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\UserExperience whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\UserExperience whereIsCurrent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\UserExperience whereIsInternship($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\UserExperience wherePositionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\UserExperience wherePositionTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\UserExperience whereStartMonth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\UserExperience whereStartYear($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\UserExperience whereText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\UserExperience whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\UserExperience whereUserId($value)
+ * @mixin \Eloquent
  */
 class UserExperience extends Model {
 
-  //todo relations
-  protected $_belongs_to = [
-    'position' => [
-      'model'       => 'Position',
-      'foreign_key' => 'position_id',
-    ],
-    'company'  => [
-      'model'       => 'Company',
-      'foreign_key' => 'company_id',
-    ],
-    'city'     => [
-      'model'       => 'City',
-      'foreign_key' => 'city_id',
-    ],
-    'user'     => [
-      'model'       => 'User',
-      'foreign_key' => 'user_id',
-    ],
-  ];
-
-  public function filters() {
-    return [
-      true => [
-        ['trim'],
-        ['strip_tags'],
-        [function ($value) {
-          return (!$value) ? null : $value;
-        }],
-      ],
-    ];
+  public function position() {
+    return $this->belongsTo('App\Model\Position');
   }
 
-  public function rules() {
-    return [
-      'company_title' => [
-        [[$this, 'need_company_title'], [':value', ':validation', ':field']],
-      ],
-      'start_month'   => [
-        ['not_future_month', [$this->start_year, ':value']],
-      ],
-      'start_year'    => [
-        ['not_future_year'],
-      ],
-      'end_month'     => [
-        ['not_future_month', [$this->end_year, ':value']],
-
-        //проверяем чтобы месяц окончания был не меньше месяца начала работы
-        [function ($end_month, Validation $validation, $field) {
-          if ($this->start_year && $this->end_year && ($this->start_year == $this->end_year) && $this->start_month && $end_month && ($end_month < $this->start_month)) {
-            $validation->error($field, 'invalid');
-          }
-        }, [':value', ':validation', ':field']],
-
-      ],
-      'end_year'      => [
-        ['not_future_year'],
-
-        //проверяем чтобы год окончания работы не превышал год начала работы
-        [function ($end_year, Validation $validation, $field) {
-          if ($end_year && ($end_year < $this->start_year)) {
-            $validation->error($field, 'invalid');
-          }
-        }, [':value', ':validation', ':field']],
-
-      ],
-    ];
+  public function company() {
+    return $this->belongsTo('App\Model\Company');
   }
 
-  public function need_end($end_value, Validation $validation, $field) {
-    if (!$this->is_current && !$end_value) {
-      $validation->error($field, 'not_empty');
-    }
+  public function city() {
+    return $this->belongsTo('App\Model\City');
   }
 
-  public function need_company_title($company_title, Validation $validation, $field) {
-    if (!$this->company->loaded() && !$company_title) {
-      $validation->error($field, 'not_empty');
-    }
+  public function user() {
+    return $this->belongsTo('App\Model\User');
   }
+
+  //public function rules() { //todo validation
+  //  return [
+  //    'company_title' => [
+  //      [[$this, 'need_company_title'], [':value', ':validation', ':field']],
+  //    ],
+  //    'start_month'   => [
+  //      ['not_future_month', [$this->start_year, ':value']],
+  //    ],
+  //    'start_year'    => [
+  //      ['not_future_year'],
+  //    ],
+  //    'end_month'     => [
+  //      ['not_future_month', [$this->end_year, ':value']],
+  //
+  //      //проверяем чтобы месяц окончания был не меньше месяца начала работы
+  //      [function ($end_month, Validation $validation, $field) {
+  //        if ($this->start_year && $this->end_year && ($this->start_year == $this->end_year) && $this->start_month && $end_month && ($end_month < $this->start_month)) {
+  //          $validation->error($field, 'invalid');
+  //        }
+  //      }, [':value', ':validation', ':field']],
+  //
+  //    ],
+  //    'end_year'      => [
+  //      ['not_future_year'],
+  //
+  //      //проверяем чтобы год окончания работы не превышал год начала работы
+  //      [function ($end_year, Validation $validation, $field) {
+  //        if ($end_year && ($end_year < $this->start_year)) {
+  //          $validation->error($field, 'invalid');
+  //        }
+  //      }, [':value', ':validation', ':field']],
+  //
+  //    ],
+  //  ];
+  //}
+
+  //public function need_end($end_value, Validation $validation, $field) {
+  //  if (!$this->is_current && !$end_value) {
+  //    $validation->error($field, 'not_empty');
+  //  }
+  //}
+  //
+  //public function need_company_title($company_title, Validation $validation, $field) {
+  //  if (!$this->company->loaded() && !$company_title) {
+  //    $validation->error($field, 'not_empty');
+  //  }
+  //}
 
   //public function save(Validation $validation = null) {
   //
