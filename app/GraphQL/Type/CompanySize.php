@@ -16,7 +16,7 @@ class CompanySize extends GraphQLType {
       'id'              => [
         'type' => Type::nonNull(Type::int()),
       ],
-      'alias'           => [
+      'slug'           => [
         'type' => Type::nonNull(Type::string()),
       ],
       'employees_count' => [
