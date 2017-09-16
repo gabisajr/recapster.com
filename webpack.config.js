@@ -16,6 +16,7 @@ module.exports = {
     //user personal info
     'edit-personal': './edit/personal.js',
     'edit-education': './edit/education.js',
+    'edit-experience': './edit/experience.js',
   },
 
   output: {
