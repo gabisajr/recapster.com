@@ -103,7 +103,7 @@
         @if ($user->site)
           <li class="row">
             <div class="col col-4 summary-label">{{ __('Веб-сайт') }}</div>
-            <div class="col col-8 summary-value"><a href="{{ $user->site }}" target="_blank">{{ $user->site }}</a></div>
+            <div class="col col-8 summary-value"><a href="{{ $user->site }}" target="_blank">{{ pretty_link($user->site) }}</a></div>
           </li>
         @endif
 
