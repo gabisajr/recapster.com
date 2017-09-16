@@ -33,20 +33,27 @@ $.fn.extend({
     this.autocomplete({
       minLength: 2,
       source: function (request, response) {
-        $.ajax({
-          type: 'POST',
-          dataType: 'json',
-          url: '/autocomplete/company',
-          data: {filter: request.term, use_link: params.use_link, admin_link: params.admin_link},
-          success: response
+        let companies = graphql('/graphql')(`query { companies (search: "${request.term}") {id, title} }`);
+        companies().then(data => {
+          let companies = data.companies.map(function (company) {
+            company.label = company.title;
+            delete company.title;
+            return company;
+          });
+          return response(companies);
         });
       }
     });
 
-    this.autocomplete("instance")._renderItem = function (ul, item) {
-      let li = $(item.html);
-      li.find('.title').highlight(this.term);
-      return li.appendTo(ul);
+    this.autocomplete("instance")._renderItem = function (ul, company) {
+      let $li = $('<li><div>' + company.label + '</div></li>');
+      $li.highlight(this.term);
+      return $li.appendTo(ul);
+
+      //todo autocomplete companies with logo
+      // let li = $(company.html);
+      // li.find('.title').highlight(this.term);
+      // return li.appendTo(ul);
     };
 
     return this;
