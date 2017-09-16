@@ -16,7 +16,7 @@ class LoadCompany {
   public function handle($request, Closure $next) {
 
     $alias = $request->route('company');
-    $company = Company::where('alias', '=', $alias)->firstOrFail();
+    $company = Company::where('slug', '=', $alias)->firstOrFail();
     $request->company = $company;
 
     return $next($request);
