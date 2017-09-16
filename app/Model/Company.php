@@ -76,7 +76,7 @@ use App;
  */
 class Company extends Model {
 
-  use Morpherable;
+  use Morpherable, Searchable;
 
   public function ceo() {
     return $this->hasOne('App\Model\Ceo', 'company_id');
@@ -181,36 +181,6 @@ class Company extends Model {
    */
   public function scopeNotActive($query) {
     return $query->where('active', '=', false)->orWhere('active', '=', null);
-  }
-
-  /**
-   * Scope a query to only companies, which title or slug like $search string.
-   *
-   * @param \Illuminate\Database\Eloquent\Builder $query
-   * @param  string $search
-   * @param bool $occurrenceOrder - order result companies by search string's first occurrence index
-   * @return \Illuminate\Database\Eloquent\Builder
-   */
-  public function scopeSearch($query, $search, $occurrenceOrder = true) {
-
-    $query->select('*');
-
-    //search
-    $query->where('title', 'LIKE', "%$search%")
-      ->orWhere('slug', 'LIKE', "%$search%");
-
-    if ($occurrenceOrder) {
-      //fill search string's first occurrence position
-      $query->addSelect(\DB::raw("LEAST(
-                                          POSITION('{$search}' in slug), 
-                                          POSITION('{$search}' in title)
-                                        ) AS so_position"));
-
-      //order by occurrence position
-      $query->orderBy('so_position');
-    }
-
-    return $query;
   }
 
   /**
