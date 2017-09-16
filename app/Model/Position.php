@@ -34,7 +34,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Position extends Model {
 
-  use Searchable;
+  use Searchable, Morpherable;
 
   public function jobs() {
     return $this->hasMany('App\Model\Job');
@@ -51,15 +51,6 @@ class Position extends Model {
   public function salaries() {
     return $this->hasMany('App\Model\Salary');
   }
-
-  //public function get($column) {
-  //  switch ($column) {
-  //    case 'of_position':
-  //      return I18n::$lang == 'ru' ? Morpher::inflect($this->title, 'Р') : $this->title;
-  //      break;
-  //  }
-  //  return parent::get($column);
-  //}
 
   public function filters() {
     return [
