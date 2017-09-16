@@ -5,12 +5,11 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use App;
 
-
 /**
  * App\Model\Company
  *
  * @property int $id
- * @property string $alias
+ * @property string $slug
  * @property string $title
  * @property float $rating
  * @property int|null $created_user_id
@@ -26,14 +25,6 @@ use App;
  * @property string|null $description описание компании
  * @property int $confirmed подтвержденый аккаунт
  * @property int $active активированая компания
- * @property int $reviews_count количество активных отзывов
- * @property int $salaries_count количество активных зарплат
- * @property int $interviews_count количество активных собеседований
- * @property int $jobs_count количество вакансий
- * @property int $internship_count количество стажировок
- * @property int $benefits_count количество активных приемуществ
- * @property int $images_count количество активных фотографий
- * @property int $followers_count количество подписчиков
  * @property string|null $tel телефон
  * @property int|null $vk_group_id id группы ВКонтакте
  * @property \Carbon\Carbon|null $created_at
@@ -61,29 +52,21 @@ use App;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company search($search)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company unconfirmed()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereAlias($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereBenefitsCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereConfirmed($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereCoverId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereCreatedUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereFollowersCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereFoundationYear($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereHqCityId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereImagesCount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereInternshipCount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereInterviewsCount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereJobsCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereLogoId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereRating($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereRevenueId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereReviewsCount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereSalariesCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereShortDesc($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereSite($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereSizeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereTel($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Company whereUpdatedAt($value)
@@ -201,7 +184,7 @@ class Company extends Model {
   }
 
   /**
-   * Scope a query to only companies, which title or alias like $search string.
+   * Scope a query to only companies, which title or slug like $search string.
    *
    * @param \Illuminate\Database\Eloquent\Builder $query
    * @param  string $search
@@ -209,7 +192,7 @@ class Company extends Model {
    */
   public function scopeSearch($query, $search) {
     return $query->where('title', 'LIKE', "%$search%")
-      ->orWhere('alias', 'LIKE', "%$search%");
+      ->orWhere('slug', 'LIKE', "%$search%");
   }
 
   /**
@@ -367,7 +350,7 @@ class Company extends Model {
 
   public function url(string $section = "profile") {
     if (!$this->active) return '#';
-    return route('company.profile', ['company' => $this->alias]);
+    return route('company.profile', ['company' => $this->slug]);
 
     //todo use other routes for company page sections
     $section = mb_strtolower($section);
@@ -486,21 +469,6 @@ class Company extends Model {
     $this->followers_count = $this->followers->where('user.confirmed', '=', true)->count_all();
     return $this->save();
   }
-
-  public static function route_filter_alias($route, $params, $request) {
-
-    $alias = Arr::get($params, 'company_alias');
-    $company = ORM::factory('Company', ['alias' => $alias, 'active' => true]);
-    $request->company = $company;
-
-    if (!empty($alias)) return $company->loaded();
-
-    return null;
-  }
-
-  //public static function exist($id) {
-  //  return ORM::factory('Company', $id)->loaded();
-  //}
 
   /**
    * сколько процентов рекомендуют друзьям из проголосовавших
