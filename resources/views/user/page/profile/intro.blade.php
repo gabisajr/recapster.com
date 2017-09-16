@@ -65,8 +65,7 @@
                 @endif
               </a>
             @elseif ($user->isMe())
-              {{--todo route--}}
-              <a href="/edit/education">{{ __('Добавить') }}</a>
+              <a href="{{ route('user.edit.education') }}">{{ __('Добавить') }}</a>
             @else
               {{ __('Не указано') }}
             @endif
