@@ -40,5 +40,5 @@
 @endsection
 
 @section('scripts')
-  <script src="/dist/js/edit-education.bundle.js"></script>
+  <script src="{{ asset('/dist/js/edit-education.bundle.js') }}"></script>
 @endsection
