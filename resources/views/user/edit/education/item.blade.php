@@ -4,9 +4,9 @@
    * @var int $index
    * @var \App\Model\User $user
    */
-  if (!isset($education) || !$education || !$education->exists) $education = new \App\Model\UserEducation();
-  if(!isset($user)) $user = Auth::getUser();
-  if(!isset($index)) $index = request()->input('index', 0);
+  $education = $education ?? new \App\Model\UserEducation();
+  $user = $user ?? Auth::getUser();
+  $index = $index ?? request()->input('index', 0);
 
 
   /** @var \Illuminate\Support\Collection|\App\Model\Country[] $countries */
